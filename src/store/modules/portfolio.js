@@ -1,6 +1,6 @@
 
 const state = {
-    funds: 0,
+    funds: 10000,
     stocks: []
 }
 
@@ -11,6 +11,7 @@ const mutations = { // mutations -> listens to triggers to update state
                                                                                 // find() er en metode for arrays, return true/false
             if (record) {
                 record.quantity += quantity
+                state.funds -= quantity * stockPrice
             }else {
                 state.stocks.push({
                     id: stockId,

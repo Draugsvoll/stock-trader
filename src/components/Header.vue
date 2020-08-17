@@ -12,8 +12,8 @@
                 </ul>
             </nav>
                 <ul class="nav_links two">
-                    <li> <a @click="saveData" href="#"><p id="item" >Save</p></a></li>
-                    <li> <a @click="loadData" href="#"><p id="item" >Load</p></a></li>
+                    <li> <button @click="saveData" href="#">Save</button></li>
+                    <li> <button @click="loadData" href="#">Load</button></li>
                     <li> <a href="#"><p id="item" @click="updatePrices">Update Prices</p></a></li>
                     <li class="item">Funds: {{ funds |  currency }}</li>
                 </ul>
@@ -49,7 +49,6 @@
                 const data= {
                     funds: this.$store.getters.funds,
                     stockPortfolio: this.$store.getters.stockPortfolio,
-                    stocks: this.$store.getters.stocks
                 }
                 // accessing vue-resource i main.js
                 this.$http.put('data.json', data) // need .json work
@@ -126,12 +125,13 @@ li, a, button{
 }
 
 button{
-    padding: 9px 25px;
-    background-color: rgb(47, 126, 245, 1);
+    padding: 6px 10px;
+    background-color: rgb(41, 95, 177);
     border:none;
-    border-radius: 50px;
+    border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease 0s;
+    outline: none;
 }
 
 button:hover{

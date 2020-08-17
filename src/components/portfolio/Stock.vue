@@ -27,6 +27,7 @@
                                 <!-- {{ insufficientQuantity ? 'Not enough' : 'Sell' }} alternativ feil håndtering-->
                                 </button>
                                 <!-- add disabled attribute to button if conditions met -->
+                                
                     </div>
                 </div>
             </div>
@@ -57,17 +58,8 @@ export default {
             } 
             this.placeSellOrder(order) // bruker sellStock metoden fra mapAction ^
             //this.$store.sellStock(order) kunne brukt denne istedenfor this.placeSellOrder(order)
-                // UPDATE DATABASE WITH SAVE
-                const data= {
-                        funds: this.$store.getters.funds,
-                        stockPortfolio: this.$store.getters.stockPortfolio,
-                        stocks: this.$store.getters.stocks
-                    }
-                    // accessing vue-resource i main.js
-                    this.$http.put('data.json', data) // need .json work
-        }//sell
-
-    },
+        }
+    },//methods
     computed: { // access to Store.js
         insufficientQuantity() {
             return this.quantity > this.stock.quantity // this.stock er stock fra props

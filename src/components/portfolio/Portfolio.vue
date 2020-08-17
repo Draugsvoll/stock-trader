@@ -12,7 +12,6 @@
 <script>
 import Stock from './Stock'
 import {mapGetters} from 'vuex'
-import {mapActions} from 'vuex'
 
 export default {
 /* hente data uten map()
@@ -28,17 +27,12 @@ computed: {
     computed: {
         ...mapGetters({
             stocks: 'stockPortfolio'
-        }),
-        ...mapActions({
-            fetchData: 'loadData'
         })
     },
+
+
     components: {
         appStock: Stock
-    },
-    created() {
-        console.log('hei')
-        this.$store.dispatch('loadData')
     }
 
 }
