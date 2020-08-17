@@ -14,7 +14,7 @@
                 <ul class="nav_links two">
                     <li> <button @click="saveData" href="#">Save</button></li>
                     <li> <button @click="loadData" href="#">Load</button></li>
-                    <li> <a href="#"><p id="item" @click="updatePrices">Update Prices</p></a></li>
+                    <li> <button @click="updatePrices">Update Prices</button></li>
                     <li class="item">Funds: {{ funds |  currency }}</li>
                 </ul>
                 <!-- <a class="cta" href="#"><button>Log Out</button></a> -->
@@ -68,11 +68,8 @@
 * {
     font-family: 'Montserrat', sans-serif;
     font-size: 22px;
+}
 
-}
-#item {
-    font-size: 22px;
-}
 .item {
     margin-left: 20px;
 
@@ -91,11 +88,6 @@ li, a, button{
 
 }
 
-
-.two {
-    margin: 3px 0px 0 0;
-    padding:0;
-}
 
     header{
     display: flex;
@@ -121,7 +113,7 @@ li, a, button{
 }
 
 .nav_links li a:hover{
-    color: rgb(198, 204, 224);
+    color: rgb(149, 162, 207);
 }
 
 button{
@@ -135,7 +127,7 @@ button{
 }
 
 button:hover{
-    background-color: rgb(47, 126, 245, 0.8);
+    background-color: rgba(37, 90, 158, 0.8);
 }
 
     ul {
