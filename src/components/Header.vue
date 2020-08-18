@@ -64,7 +64,7 @@
 
 
 <style scoped>
-@media only screen and (max-width: 407px) {
+/* @media only screen and (max-width: 407px) {
 
 #two {
     margin-top: 40px;
@@ -83,6 +83,16 @@
 #save {
     margin-top: 90px;
 }
+} */
+
+@media only screen and (max-width: 659px) {
+
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
 }
 
 .item {

@@ -51,7 +51,7 @@ html, body{
 }
 
 .page-container {
-  min-height: 78vh;
+  min-height: 77.8vh;
 
 }
 
