@@ -11,6 +11,7 @@
                     <router-link to="/" tag="li"><a>Home</a></router-link>
                 </ul>
             </nav>
+            
                 <ul class="nav_links" id="two" >
                     <li> <button id="save" @click="saveData" href="#">Save</button></li>
                     <li> <button @click="loadData" href="#">Load</button></li>
