@@ -2,7 +2,7 @@
   <div class="app-container">
         <app-header></app-header>
 
-      <div class="">
+      <div class="page-container">
         <transition name="slide">
           <router-view></router-view>
         </transition>
@@ -44,13 +44,9 @@ html, body{
   padding:0;
 }
 
-.app-container {
-
-}
 
 .page-container {
-  /* min-height: 66.8vh; */
-
+  min-height: 350px;
 }
 
 
