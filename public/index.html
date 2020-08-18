@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <link rel="stylesheet" href="style.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
 	    rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <title>Stock Trader AS</title>
@@ -14,9 +15,35 @@
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div id="app">
- 
+    <div class="wrapper">
+      <div id="app">
+  
+      </div>
+      <div class="push"></div>
     </div>
-    <!-- built files will be auto injected -->
+
+        <footer>
+          <div class="footer-container">
+            <div class="column">
+              <div class="footer-headline">Contact: </div>
+              <div>Phone: 999 99 999</div>
+              <div>Email: Trader@trade.com</div>
+            </div>
+            <div class="column">
+              <div class="footer-headline">Visit Us: </div>
+              <div>Silicon Valley, CA</div>
+              <div>125th Street</div>
+            </div>
+            <div class="column">
+              <div class="footer-headline">Need Help?</div>
+              <div><a href="#">Submit Form</a></div>
+              <div><a href="#">Chatbox</a></div>
+            </div>
+          </div>
+          <!-- Copyright -->
+        <div class="copyright">© 2020 Copyright | Stock Trader AS</div>
+        <!-- Copyright -->
+        </footer>
+
   </body>
 </html>

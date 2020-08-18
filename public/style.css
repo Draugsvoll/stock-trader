@@ -1,0 +1,60 @@
+html, body {
+    height: 100%;
+    margin: 0;
+  }
+
+  .wrapper {
+    min-height: 100%;
+    margin-bottom: -200px;
+  
+    /* Equal to height of footer */
+    /* But also accounting for potential margin-bottom of last child */
+  }
+
+  .push{
+      height: 200px;
+  }
+  
+  footer{
+    background-color: rgb(33, 46, 75);
+    color:white;
+    min-height: 200px;
+  }
+
+  .copyright {
+      display: flex;
+      justify-content: center;
+  }
+
+  .footer-container {
+      display: inline-flex;
+      justify-content: space-evenly;
+      width:100%;
+      flex-wrap: wrap;
+  }
+
+
+
+
+
+
+
+  /* NOT IMPORTANT */
+
+  .footer-headline {
+    font-size: 25px;
+}
+
+  .column {
+      margin:25px;
+      
+  }
+
+  @media only screen and (max-width: 605px) {
+    .footer-container {
+        display: inline-flex;
+        justify-content: start;
+        width:100%;
+        flex-wrap: wrap;
+    }
+  }

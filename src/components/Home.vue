@@ -2,8 +2,8 @@
     <div class="box">
                                 <!-- apply the currency filter -->
         <p><b>Available Funds:</b> <br>{{ funds | currency }}</p>
-        <div class=""><b>SAVE-button:<br> </b>Saves your current portfolio to a database (Firebase)</div><br>
-        <div class=""><b>LOAD-button:<br></b>Loads your last saved portfolio from database</div><br>
+        <div class=""><b>SAVE button:<br> </b>Saves your current portfolio to a database (Firebase)</div><br>
+        <div class=""><b>LOAD button:<br></b>Loads your last saved portfolio from database</div><br>
 
         <div><b>INFO: </b><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
              Suspendisse sed nisi lacus sed viverra tellus in hac habitasse. Semper auctor neque vitae tempus quam pellentesque nec nam. 
@@ -44,7 +44,7 @@ export default {
     text-align: justify;
     max-width: 1200px;
     color: rgb(44, 51, 92);
-
+    margin-top: 20px;
     }
 
 

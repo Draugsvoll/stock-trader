@@ -1,13 +1,12 @@
 <template>
-  <div id="app-container">
+  <div class="app-container">
         <app-header></app-header>
 
-      <div class="page-container">
+      <div class="">
         <transition name="slide">
           <router-view></router-view>
         </transition>
       </div>
-        <app-footer></app-footer>
   </div>
 </template>
 <!-- TEMPLATE -->
@@ -16,12 +15,10 @@
 <!-- SCRIPT -->
 <script>
 import Header from "./components/Header";
-import Footer from "./components/Footer";
 
 export default {
   components: {
     appHeader: Header,
-    appFooter: Footer
   },
   created() {
     this.$store.dispatch("initStocks"); // access to Store.js and it's methods from Main.js
@@ -39,12 +36,12 @@ export default {
   
 * {
     font-family: 'Montserrat', sans-serif;
-    
+    outline: none;
 }
+
 html, body{
-  min-height: 100vh;
+  height: 100%;
   padding:0;
-  margin:0;
 }
 
 .app-container {
@@ -52,7 +49,7 @@ html, body{
 }
 
 .page-container {
-  min-height: 66.8vh;
+  /* min-height: 66.8vh; */
 
 }
 
@@ -67,9 +64,7 @@ html, body{
   height: 20rem;
 }
 
-.wrapper {
-  padding-bottom: 250px;
-}
+
 
 .slide-enter-active {
   animation: slide-in 200ms ease-out forwards;
