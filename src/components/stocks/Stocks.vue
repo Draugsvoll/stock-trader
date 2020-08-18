@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="box">
         <h1>Available Stocks: </h1>
         <app-stock v-for="stock in stocks" :stock="stock" :key="stock.id"></app-stock>
                                                            <!-- sender stock til stock as props -->
@@ -23,3 +23,14 @@ export default {
 }
 
 </script>
+
+<style scoped>
+h1 {
+    padding: 20px;
+}
+
+.box {
+    color: rgb(44, 51, 92);
+
+}
+</style>

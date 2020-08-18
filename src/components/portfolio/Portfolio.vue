@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="box">
         <h1>My Stocks: </h1>
         <app-stock v-for="stock in stocks" :stock="stock" :key="stock.id"></app-stock>
                                                     <!-- pass stock as stock to props -->
@@ -37,3 +37,15 @@ computed: {
 
 }
 </script>
+
+
+<style  scoped>
+
+*{
+    color: rgb(44, 51, 92);
+
+}
+.box {
+padding: 20px;
+}
+</style>

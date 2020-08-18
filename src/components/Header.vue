@@ -65,17 +65,14 @@
 
 <style scoped>
 
-* {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 22px;
-}
+
 
 .item {
     margin-left: 20px;
+    font-size: 26px;
 
 }
 li, a, button{
-    font-family: 'Montserrat', sans-serif;
     color:white;
     
 }
@@ -83,7 +80,6 @@ li, a, button{
 .nav_links li a{
     text-decoration: none;
     color:white;
-    font-family: 'Montserrat', sans-serif;
     font-size: 30px;
 
 }
@@ -124,6 +120,9 @@ button{
     cursor: pointer;
     transition: all 0.3s ease 0s;
     outline: none;
+    margin:5px;
+    font-size: 22px;
+
 }
 
 button:hover{

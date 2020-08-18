@@ -2,8 +2,8 @@
          <div class="col-sm-4 col-md-2" id="body-box">
             <div class="panel panel-success" id=stock-box>
                 <div class="panel-heading">
-                    <h3 class="panel-title">  
-                        {{ stock.name }} Google<br>
+                    <h3 class="panel-title stock-title">  
+                        <span>{{ stock.name }}</span><br>
                         <!-- henter stock fra modules -> portfolio -->
                         <small>Price: {{ stock.price }}$ | Quantity: {{ stock.quantity }}</small> 
                     </h3>
@@ -71,26 +71,19 @@ export default {
 
 
 <style  scoped>
-    #stock-box {
-        margin: 10 10 10 0px;
-        border-radius: 10px;
-        min-width: 250px
-    }
-
-    .panel-body {
+  .panel-body {
         display: inline !important;
+
     }
 
-
-#stock {
+    #stock {
     display: inline-flex !important;
-
 }
-
 #body-box {
     display: inline-flex;
     padding: 0;
-    margin-right: 30px;
+    margin:20px 20px 20px 0;
+
 }
 
 #btn {

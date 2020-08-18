@@ -12,7 +12,7 @@
                         <input  id="quantity"
                                 type="number"
                                 class=form-control
-                                placeholder="Quantity"
+                                placeholder="0"
                                 v-model.number="quantity"
                                 >
                     </div>
@@ -46,7 +46,8 @@ export default {
                 const order = {
                     stockId: this.stock.id,
                     stockPrice: this.stock.price,
-                    quantity: this.quantity
+                    quantity: this.quantity,
+                    stockName: this.stock.name
                 }
                 this.$store.dispatch('buyStock', order) // bruker buyStock action ifra Store.js
                 this.quantity = 0
@@ -59,18 +60,11 @@ export default {
 
 
 <style  scoped>
-    #stock-box {
-        margin: 10px 10 10 0;
-        border-radius: 10px;
-        min-width: 240px;
-        min-width: 241px;
-
-    }
 
     .panel-body {
         display: inline !important;
-    }
 
+    }
 
 #stock {
     display: inline-flex !important;
@@ -79,6 +73,8 @@ export default {
 #body-box {
     display: inline-flex;
     padding: 0;
+    margin:20px;
+
 }
 
 #btn {

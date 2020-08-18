@@ -5,7 +5,7 @@ const state = {
 }
 
 const mutations = { // mutations -> listens to triggers to update state
-    'BUY_STOCK'(state, {stockId, quantity, stockPrice}) {   // disse data kommer fra en ORDER i Stock.vue
+    'BUY_STOCK'(state, {stockId, quantity, stockPrice, stockName}) {   // disse data kommer fra en ORDER i Stock.vue
         if ( (quantity*stockPrice) < state.funds)   {
             const record = state.stocks.find(element => element.id == stockId)  // sjekker om vi allerede har denne akjsen og vil 'appende' til portfolio 
                                                                                 // find() er en metode for arrays, return true/false
@@ -15,7 +15,8 @@ const mutations = { // mutations -> listens to triggers to update state
             }else {
                 state.stocks.push({
                     id: stockId,
-                    quantity: quantity
+                    quantity: quantity,
+                    name: stockName
                 })
             state.funds -= quantity * stockPrice
             }
@@ -56,7 +57,8 @@ stockPortfolio(state) {
             return {
                 id: stock.id,
                 quantity: stock.quantity,
-                price: record.price
+                price: record.price,
+                name: stock.name
             }
         })
     },
