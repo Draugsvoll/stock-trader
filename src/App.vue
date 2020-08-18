@@ -1,7 +1,8 @@
 <template>
   <div id="app-container">
-      <div class="page-container">
         <app-header></app-header>
+
+      <div class="page-container">
         <transition name="slide">
           <router-view></router-view>
         </transition>
@@ -51,7 +52,7 @@ html, body{
 }
 
 .page-container {
-  min-height: 77.8vh;
+  min-height: 66.8vh;
 
 }
 
