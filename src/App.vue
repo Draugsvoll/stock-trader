@@ -1,11 +1,12 @@
 <template>
-  <div id="container">
-    <app-header></app-header>
-    <transition name="slide">
-      <router-view></router-view>
-    </transition>
-  
-  <app-footer></app-footer>
+  <div id="app-container">
+      <div class="page-container">
+        <app-header></app-header>
+        <transition name="slide">
+          <router-view></router-view>
+        </transition>
+      </div>
+        <app-footer></app-footer>
   </div>
 </template>
 <!-- TEMPLATE -->
@@ -32,13 +33,41 @@ export default {
 
 <!-- STYLE -->
 <style>
-  
-body {
-}
 
+
+  
 * {
     font-family: 'Montserrat', sans-serif;
     
+}
+html, body{
+  min-height: 100vh;
+  padding:0;
+  margin:0;
+}
+
+.app-container {
+
+}
+
+.page-container {
+  min-height: 78vh;
+
+}
+
+
+
+.footer {
+  width: 100%;
+  background-color: rgb(33, 46, 75);
+  color: white;
+  text-align: center;
+  
+  height: 20rem;
+}
+
+.wrapper {
+  padding-bottom: 250px;
 }
 
 .slide-enter-active {

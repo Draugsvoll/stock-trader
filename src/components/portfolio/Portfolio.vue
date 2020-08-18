@@ -46,6 +46,7 @@ computed: {
 
 }
 .box {
-padding: 20px;
+    padding: 20px;
+
 }
 </style>

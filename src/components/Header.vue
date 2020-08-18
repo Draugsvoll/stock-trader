@@ -11,8 +11,8 @@
                     <router-link to="/" tag="li"><a>Home</a></router-link>
                 </ul>
             </nav>
-                <ul class="nav_links two">
-                    <li> <button @click="saveData" href="#">Save</button></li>
+                <ul class="nav_links" id="two" >
+                    <li> <button id="save" @click="saveData" href="#">Save</button></li>
                     <li> <button @click="loadData" href="#">Load</button></li>
                     <li> <button @click="updatePrices">Update Prices</button></li>
                     <li class="item">Funds: {{ funds |  currency }}</li>
@@ -64,8 +64,26 @@
 
 
 <style scoped>
+@media only screen and (max-width: 407px) {
 
+#two {
+    margin-top: 40px;
+}
+}
 
+@media only screen and (max-width: 367px) {
+
+#two {
+    margin-top: 70px;
+}
+}
+
+@media only screen and (max-width: 352px) {
+
+#save {
+    margin-top: 90px;
+}
+}
 
 .item {
     margin-left: 20px;

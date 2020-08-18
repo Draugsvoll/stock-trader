@@ -1,6 +1,5 @@
 <template>
     <div class="box">
-        <h1>Home</h1>
                                 <!-- apply the currency filter -->
         <p><b>Available Funds:</b> <br>{{ funds | currency }}</p>
         <div class=""><b>SAVE-button:<br> </b>Saves your current portfolio to a database (Firebase)</div><br>
