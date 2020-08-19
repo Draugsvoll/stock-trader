@@ -58,6 +58,7 @@ export default {
             } 
             this.placeSellOrder(order) // bruker sellStock metoden fra mapAction ^
             //this.$store.sellStock(order) kunne brukt denne istedenfor this.placeSellOrder(order)
+            this.quantity = 0
         }
     },//methods
     computed: { // access to Store.js

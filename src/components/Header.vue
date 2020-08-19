@@ -11,7 +11,7 @@
                     <router-link to="/" tag="li"><a>Home</a></router-link>
                 </ul>
             </nav>
-            
+                <h1>Stock Trader AS</h1>
                 <ul class="nav_links" id="two" >
                     <li> <button id="save" @click="saveData" href="#">Save</button></li>
                     <li> <button @click="loadData" href="#">Load</button></li>
@@ -96,10 +96,13 @@ header {
 
 }
 
-.item {
-    margin-left: 20px;
-    font-size: 26px;
+h1 {
+    color:white;
+}
 
+.item {
+    margin-left: 10px;
+    font-size: 26px;
 }
 li, a, button{
     color:white;
@@ -119,7 +122,7 @@ li, a, button{
     justify-content: space-between;
     align-items: center;
     background-color: rgb(33, 46, 75);
-    padding: 20px 3%;
+    padding: 20px 2%;
     font-size: 30px;
 
     }
@@ -149,7 +152,7 @@ button{
     cursor: pointer;
     transition: all 0.3s ease 0s;
     outline: none;
-    margin:5px;
+    margin:3px;
     font-size: 22px;
 
 }

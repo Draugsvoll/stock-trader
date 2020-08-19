@@ -1,6 +1,7 @@
 <template>
     <div class="box">
         <h1>My Stocks: </h1>
+        <h3 :class="{empty: stocks!=''}">  You don't have any stocks</h3>
         <app-stock v-for="stock in stocks" :stock="stock" :key="stock.id"></app-stock>
                                                     <!-- pass stock as stock to props -->
 
@@ -21,7 +22,6 @@ computed: {
     }
 },
 */
-
 
 //hente data MED map
     computed: {
@@ -47,6 +47,10 @@ computed: {
 }
 .box {
     padding: 20px;
+}
 
+.empty{
+visibility: collapse;
+margin-bottom: -40px;
 }
 </style>

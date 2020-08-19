@@ -1,5 +1,6 @@
 <template>
     <div class="box">
+        <h1>Stock Trader AS</h1>
                                 <!-- apply the currency filter -->
         <p><b>Available Funds:</b> <br>{{ funds | currency }}</p>
         <div class=""><b>SAVE button:<br> </b>Saves your current portfolio to a database (Firebase)</div><br>
@@ -47,6 +48,9 @@ export default {
     margin-top: 20px;
     }
 
+h1 {
+    margin-bottom: 30px;
+}
 
 
 </style>

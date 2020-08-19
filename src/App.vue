@@ -1,11 +1,10 @@
 <template>
   <div class="app-container">
         <app-header></app-header>
-
-      <div class="page-container">
-        <transition name="slide">
-          <router-view></router-view>
-        </transition>
+        <div class="page-container">
+          <transition name="slide">
+            <router-view></router-view>
+          </transition>
       </div>
   </div>
 </template>
@@ -47,6 +46,9 @@ html, body{
 
 .page-container {
   min-height: 350px;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-bottom: 25px;
 }
 
 

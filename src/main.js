@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 
-// vue-resources
+// vue-resources for Http-requests
 import VueResource from 'vue-resource'
 Vue.use(VueResource)
 Vue.http.options.root = 'https://ove-stock-trader.firebaseio.com/'
