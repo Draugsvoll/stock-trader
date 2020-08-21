@@ -84,7 +84,7 @@ export default {
     display: inline-flex;
     padding: 0;
     margin:20px 25px 20px 0;
-    
+    color: rgb(37, 43, 78);
     border-radius: 8px;
 }
 

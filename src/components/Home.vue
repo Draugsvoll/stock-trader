@@ -43,7 +43,7 @@ export default {
     padding: 20px;
     text-align: justify;
     max-width: 1200px;
-    color: rgb(44, 51, 92);
+    color: rgb(37, 43, 78);
     margin-top: 20px;
     }
 

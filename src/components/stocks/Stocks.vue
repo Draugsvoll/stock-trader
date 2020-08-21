@@ -29,7 +29,7 @@ h1 {
     padding: 20px;
 }
 
-.box {
+* {
         color: rgb(19, 23, 48);
 }
 </style>
