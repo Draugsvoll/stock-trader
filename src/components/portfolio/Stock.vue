@@ -83,13 +83,19 @@ export default {
 #body-box {
     display: inline-flex;
     padding: 0;
-    margin:20px 20px 20px 0;
-
+    margin:20px 25px 20px 0;
+    
+    border-radius: 8px;
 }
 
 #btn {
-    background: rgb(15, 65, 158);
+    background: rgb(29, 56, 90);
     border: 1px solid black;
+    margin-left: 10px;
+}
+
+h3 span {
+    font-style: oblique;
 }
 
 </style>

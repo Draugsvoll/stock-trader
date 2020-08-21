@@ -4,7 +4,6 @@
         <h3 :class="{empty: stocks!=''}">  You don't have any stocks</h3>
         <app-stock v-for="stock in stocks" :stock="stock" :key="stock.id"></app-stock>
                                                     <!-- pass stock as stock to props -->
-
     </div>
 </template>
 
@@ -42,7 +41,7 @@ computed: {
 <style  scoped>
 
 *{
-    color: rgb(44, 51, 92);
+    color: rgb(19, 23, 48);
 
 }
 .box {

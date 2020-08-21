@@ -52,26 +52,23 @@ html, body{
 }
 
 
-
 .footer {
   width: 100%;
   background-color: rgb(33, 46, 75);
   color: white;
   text-align: center;
-  
   height: 20rem;
 }
 
 
 
+/* SLIDES */
 .slide-enter-active {
-  animation: slide-in 200ms ease-out forwards;
+  animation: slide-in 350ms ease-out forwards;
 }
-
 /* .slide-leave-active {
     animation: slide-out 200ms ease-out forwards;
   } */
-
 @keyframes slide-in {
   from {
     transform: translateY(-30px);
@@ -82,9 +79,6 @@ html, body{
     opacity: 1;
   }
 }
-
-
-
 /* @keyframes slide-out {
     from {
       transform: translateY(0);

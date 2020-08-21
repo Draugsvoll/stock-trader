@@ -74,12 +74,16 @@ export default {
     display: inline-flex;
     padding: 0;
     margin:20px;
-
 }
 
 #btn {
-    background: rgb(15, 65, 158);
+    background: rgb(29, 56, 90);
     border: 1px solid black;
+    margin-left: 10px;
+}
+
+h3 {
+    font-style: oblique;
 }
 
 </style>

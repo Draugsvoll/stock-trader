@@ -112,7 +112,6 @@ li, a, button{
     text-decoration: none;
     color:white;
     font-size: 30px;
-
 }
 
 
@@ -120,7 +119,8 @@ li, a, button{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(33, 46, 75);
+    /* background-color: rgb(33, 46, 75); */
+  background: linear-gradient(to right, rgb(27, 52, 83), rgb(15, 30, 49));
     padding: 20px 2%;
     font-size: 30px;
 
@@ -145,7 +145,7 @@ li, a, button{
 
 button{
     padding: 6px 10px;
-    background-color: rgb(41, 95, 177);
+        background-color: rgba(26, 52, 87, 1);
     border:none;
     border-radius: 10px;
     cursor: pointer;
@@ -157,7 +157,7 @@ button{
 }
 
 button:hover{
-    background-color: rgba(37, 90, 158, 0.8);
+    background-color: rgba(45, 73, 109, 0.8);
 }
 
     ul {

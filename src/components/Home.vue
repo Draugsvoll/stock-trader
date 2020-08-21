@@ -19,7 +19,6 @@
                diam. Sed turpis tincidunt id aliquet risus. Cursus metus aliquam eleifend mi in nulla. Amet volutpat consequat mauris nunc congue nisi. At lectus 
                urna duis convallis. Varius morbi enim nunc faucibus a pellentesque sit amet. Commodo ullamcorper a lacus vestibulum sed. Vitae congue eu consequat 
                ac felis donec et. Egestas congue quisque egestas diam in arcu cursus. Nec dui nunc mattis enim.</div>
-        
     </div>
 </template>
 

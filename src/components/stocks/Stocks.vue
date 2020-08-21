@@ -30,7 +30,6 @@ h1 {
 }
 
 .box {
-    color: rgb(44, 51, 92);
-
+        color: rgb(19, 23, 48);
 }
 </style>
