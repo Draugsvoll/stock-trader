@@ -37,6 +37,7 @@ export default {
 
 
 
+
 <style  scoped>
 .box{
     margin: 0 auto;
@@ -50,6 +51,4 @@ export default {
 h1 {
     margin-bottom: 30px;
 }
-
-
 </style>

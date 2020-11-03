@@ -34,7 +34,7 @@
 
 <script>
 export default {
-    props: ['stock'], // mottar stock fra Stocks, passeres som props
+    props: ['stock'], // mottar stock fra Stocks.vue, passeres som props
     data () {
         return {
             quantity: 0

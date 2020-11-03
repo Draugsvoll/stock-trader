@@ -12,15 +12,15 @@
 
 <script>
 import Header from "./components/Header";
-import axios from 'axios'
+//import axios from 'axios'
 
 export default {
   components: {
     appHeader: Header,
   },
   created() {
-    this.$store.dispatch("initStocks"); // access to Store.js and it's methods from Main.js
-    this.$store.dispatch('updatePrices')
+    //this.$store.dispatch("initStocks"); // access to Store.js and it's methods from Main.js
+    //this.$store.dispatch('updatePrices')
 
     // // QUERY A STOCK -> GET SYMBOL
     // const apiCall = {
@@ -57,30 +57,30 @@ export default {
   // });//single stock
 
 
-// GET MULTIPLE STOCKS
-      const stocks = 'AMD, IBM, AAPL, TSLA, AMZN'
-      const options = {
-      method: 'GET',
-      url: 'https://rapidapi.p.rapidapi.com/market/get-quotes',
-      params: {region: 'US', symbols: stocks},
-      headers: {
-          'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8',
-          'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
-      }};
-      axios.request(options).then(function (response) {
-          const returnedStocks = response.data.quoteResponse.result
-          console.log(returnedStocks)
-          // return array name+price of each stock
-          var stocksForPage = [ ]
-          returnedStocks.forEach( stock => {
-              console.log('Name: ', stock.shortName + ' Price: ', stock.regularMarketPrice)
-              const newStock = { name: stock.shortName, price: stock.regularMarketPrice}
-              stocksForPage.push(newStock)
-          });
-          console.log('stocks for page: ', stocksForPage)
-      }).catch(function (error) {
-          console.error(error)
-      });//multiple stocks
+// // GET MULTIPLE STOCKS
+//       const stocks = 'AMD, IBM, AAPL, TSLA, AMZN'
+//       const options = {
+//       method: 'GET',
+//       url: 'https://rapidapi.p.rapidapi.com/market/get-quotes',
+//       params: {region: 'US', symbols: stocks},
+//       headers: {
+//           'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8',
+//           'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
+//       }};
+//       axios.request(options).then(function (response) {
+//           const returnedStocks = response.data.quoteResponse.result
+//           console.log(returnedStocks)
+//           // return array name+price of each stock
+//           var stocksForPage = [ ]
+//           returnedStocks.forEach( stock => {
+//               console.log('Name: ', stock.shortName + ' Price: ', stock.regularMarketPrice)
+//               const newStock = { name: stock.shortName, price: stock.regularMarketPrice}
+//               stocksForPage.push(newStock)
+//           });
+//           console.log('stocks for page: ', stocksForPage)
+//       }).catch(function (error) {
+//           console.error(error)
+//       });//multiple stocks
 
 
   },//created
