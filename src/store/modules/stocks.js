@@ -1,31 +1,31 @@
-import stocks from '../../data/stocks'
-import axios from 'axios'
+// import stocks from '../../data/stocks'
+// import axios from 'axios'
 
-var newStocks = []
+ var stocks = []
 
-// GET MULTIPLE STOCKS
-const apiStocks = 'AMD, IBM, AAPL, TSLA, AMZN'
-const options = {
-method: 'GET',
-url: 'https://rapidapi.p.rapidapi.com/market/get-quotes',
-params: {region: 'US', symbols: apiStocks},
-headers: {
-    'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8',
-    'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
-}};
-axios.request(options).then(function (response) {
-    const returnedStocks = response.data.quoteResponse.result
-    console.log(returnedStocks)
-    // return array name+price of each stock
-    returnedStocks.forEach( stock => {
-        console.log('Name: ', stock.shortName + ' Price: ', stock.regularMarketPrice)
-        const newStock = { name: stock.shortName, price: stock.regularMarketPrice}
-        newStocks.push(newStock)
-    });
-    state.stocks = newStocks
-}).catch(function (error) {
-    console.error(error)
-});//multiple stocks
+// // GET MULTIPLE STOCKS
+// const apiStocks = 'AMD, IBM, AAPL, TSLA, AMZN'
+// const options = {
+// method: 'GET',
+// url: 'https://rapidapi.p.rapidapi.com/market/get-quotes',
+// params: {region: 'US', symbols: apiStocks},
+// headers: {
+//     'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8',
+//     'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
+// }};
+// axios.request(options).then(function (response) {
+//     const returnedStocks = response.data.quoteResponse.result
+//     console.log(returnedStocks)
+//     // return array name+price of each stock
+//     returnedStocks.forEach( stock => {
+//         console.log('Name: ', stock.shortName + ' Price: ', stock.regularMarketPrice)
+//         const newStock = { name: stock.shortName, price: stock.regularMarketPrice}
+//         newStocks.push(newStock)
+//     });
+//     state.stocks = newStocks
+// }).catch(function (error) {
+//     console.error(error)
+// });//multiple stocks
 
 const state = {
     stocks: []

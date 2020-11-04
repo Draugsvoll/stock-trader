@@ -3,19 +3,13 @@
           <!-- <img src=".././public/download.jpg" class="logo" height="80px"> -->
             <nav>
                 <ul class="nav_links">
-                    <!-- <li><a href="#">Home</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">About</a></li> -->
-                    <router-link to="/portfolio" tag="li"><a>Portfolio</a></router-link>
-                    <router-link to="/stocks" tag="li"><a>Stocks</a></router-link>
+                    <router-link to="/portfolio" tag="li"><a>Buy</a></router-link>
+                    <router-link to="/stocks" tag="li"><a>Rent</a></router-link>
+                    <router-link to="/NEEDROUTE" tag="li"><a>Sell</a></router-link>
                     <router-link to="/" tag="li"><a>Home</a></router-link>
                 </ul>
             </nav>
                 <ul class="nav_links" id="two" >
-                    <li> <button id="save" @click="saveData" href="#">Save</button></li>
-                    <li> <button @click="loadData" href="#">Load</button></li>
-                    <li> <button @click="updatePrices">Update Prices</button></li>
-                    <li class="item">Funds: {{ funds |  currency }}</li>
                 </ul>
                 <!-- <a class="cta" href="#"><button>Log Out</button></a> -->
         </header>
@@ -64,29 +58,8 @@
 
 
 <style scoped>
-/* @media only screen and (max-width: 407px) {
-
-#two {
-    margin-top: 40px;
-}
-}
-
-@media only screen and (max-width: 367px) {
-
-#two {
-    margin-top: 70px;
-}
-}
-
-@media only screen and (max-width: 352px) {
-
-#save {
-    margin-top: 90px;
-}
-} */
 
 @media only screen and (max-width: 659px) {
-
 header {
     display: flex;
     flex-direction: column;
@@ -96,7 +69,8 @@ header {
 }
 
 h1 {
-    color:white;
+  color: white;
+
 }
 
 .item {
@@ -104,13 +78,11 @@ h1 {
     font-size: 26px;
 }
 li, a, button{
-    color:white;
     
 }
 
 .nav_links li a{
     text-decoration: none;
-    color:white;
     font-size: 30px;
 }
 
@@ -120,10 +92,10 @@ li, a, button{
     justify-content: space-between;
     align-items: center;
     /* background-color: rgb(33, 46, 75); */
-  background: linear-gradient(to right, rgb(27, 52, 83), rgb(15, 30, 49));
     padding: 20px 2%;
     font-size: 30px;
-
+background-color: rgb(33, 46, 75);
+  color: white;
     }
 
 .logo{
@@ -137,15 +109,15 @@ li, a, button{
 
 .nav_links li a{
     transition: all 0.3s ease 0s;
+  color: white;
+
 }
 
 .nav_links li a:hover{
-    color: rgb(149, 162, 207);
 }
 
 button{
     padding: 6px 10px;
-        background-color: rgba(26, 52, 87, 1);
     border:none;
     border-radius: 10px;
     cursor: pointer;
@@ -153,7 +125,6 @@ button{
     outline: none;
     margin:3px;
     font-size: 22px;
-
 }
 
 button:hover{

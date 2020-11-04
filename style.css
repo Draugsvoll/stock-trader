@@ -1,13 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
-
-
 *{
     margin:0px;
     padding:0px;
 }
 
 li, a, button{
-    font-family: 'Montserrat', sans-serif;
     color: rgb(224, 235, 247)
 }
 
