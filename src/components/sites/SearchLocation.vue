@@ -3,12 +3,9 @@
         <h1>Searching: {{ searchTerm }}</h1>
         <div v-for="( property, index) in properties" :key="index"> {{ properties.rank }} 
             {{ property.address.city }}
-            {{ property.photos.href }}
-        <div v-for="(photo, index) in photos" :key="index">
-            {{ photo.href }}
+            <div><img alt="" v-bind:src=" property.photos[0].href " ></div>
         </div>
-            <!-- <div><img  v-bind:src="" ></div> -->
-        </div>
+        
     </div>
 </template>
 
@@ -25,7 +22,7 @@ export default {
             photos: [ ],
             realPhotos: [ ],
             properties: [
-                { address: { city: null, county: null }, photos: { href: 'asd' }}
+                { address: { city: null, county: null }, photos: [{ href: 'asd' }] }
              ]
         }
     },
@@ -53,12 +50,12 @@ export default {
                     const newResponse = response.data.properties
                     newResponse.forEach( property => {
                         properties.push(property)
-                        photos.push(property.photos[0])
+                        //photos.push(property.photos[0])
                     })
                     this.properties = properties
                     this.photos = photos
-                    console.log(this.properties)
-                    console.log(photos)
+                    console.log('PHOTO: ',this.properties[0].photos[0].href)
+                    //console.log(photos)
                 }).catch(function (error) {
                     console.error(error);
                 });//axios
@@ -90,7 +87,14 @@ export default {
         },
     },
     mounted () {
-                //this.queryLocationCodes()
+                this.queryLocationCodes()
     }
 }
 </script>
+
+
+<style scoped>
+img {
+    max-width: 750px;
+}
+</style>>
