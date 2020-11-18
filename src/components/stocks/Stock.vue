@@ -4,7 +4,9 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">  
                         {{ stock.name }}<br>
-                        <small>Price: {{ stock.price }}$</small>
+                        <small>Price: {{ stock.price }}$</small> <br>
+                        <small>Symbol: {{ stock.symbol }}</small> <br>
+                        <small>Change: {{ (stock.change).toFixed(2) }}$</small>
                     </h3>
                 </div>
                 <div class="panel-body" id="stock">
@@ -25,6 +27,7 @@
                                 >Buy</button>
                                 <!-- add disabled attribute to button if conditions met -->
                     </div>
+                    <button @click="moreInfo">Info</button>
                 </div>
             </div>
          </div>
@@ -52,6 +55,10 @@ export default {
                 this.$store.dispatch('buyStock', order) // bruker buyStock action ifra Store.js
                 this.quantity = 0
             }
+        },
+        moreInfo() {
+            const symbol = this.stock.symbol
+            console.log('symbol: ', )
         }
     }
 }

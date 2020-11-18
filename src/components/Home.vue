@@ -27,6 +27,7 @@
 
 <script>
 export default {
+  
     computed: {
         funds() {
             return this.$store.getters.funds

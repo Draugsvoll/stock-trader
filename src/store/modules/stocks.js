@@ -1,4 +1,4 @@
-import { get500, getTopGainers } from '../../data/stocksApi'
+import { get500, getTopGainers, getTrending } from '../../data/stocksApi'
 // import axios from 'axios'
 
 var initStocks = getTopGainers()
@@ -20,6 +20,12 @@ const mutations = {
     },
     'GET_500_STOCKS' (state) {
         state.stocks = get500()
+    },
+    'GET_TRENDING_STOCKS' (state) {
+        state.stocks = getTrending()
+    },
+    'GET_TOP_GAINERS_STOCKS' (state) {
+        state.stocks = getTopGainers()
     }
 }
 
@@ -32,6 +38,12 @@ const actions = {   // aviable actions on this site
     },
     get500Stocks: ({ commit }) => {
         commit('GET_500_STOCKS')
+    },
+    getTrendingStocks: ({ commit }) => {
+        commit('GET_TRENDING_STOCKS')
+    },
+    getTopGainersStocks: ({ commit }) => {
+        commit('GET_TOP_GAINERS_STOCKS')
     },
     updatePrices: ({ commit }) => {
         commit('UPDATE_PRICES')

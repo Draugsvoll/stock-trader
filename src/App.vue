@@ -12,6 +12,7 @@
 
 <script>
 import Header from "./components/Header";
+import axios from 'axios'
 //import axios from 'axios'
 
 export default {
@@ -81,6 +82,7 @@ export default {
 //       }).catch(function (error) {
 //           console.error(error)
 //       });//multiple stocks
+      
 
 
   },//created

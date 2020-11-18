@@ -1,8 +1,8 @@
 <template>
     <div class="box">
         <div class="btn-row">
-            <button>Popular</button>
-            <button>Top Gainers</button>
+            <button @click="getTrending">Trending</button>
+            <button @click="getTopGainers">Top Gainers</button>
             <button @click="get500Stocks">S&P 500</button>
         </div>
         <h2>Top Gainers</h2>
@@ -29,8 +29,14 @@ export default {
         }
     },
     methods: {
-            get500Stocks () {
-                this.$store.dispatch('get500Stocks')
+        get500Stocks () {
+            this.$store.dispatch('get500Stocks')
+        },
+        getTrending () {
+                this.$store.dispatch('getTrendingStocks')
+        },
+        getTopGainers () {
+                this.$store.dispatch('getTopGainersStocks')
         }
     }
 }
