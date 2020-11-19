@@ -1,24 +1,15 @@
 <template>
-  <header>
-          <!-- <img src=".././public/download.jpg" class="logo" height="80px"> -->
-            <nav>
-                <ul class="nav_links">
-                    <!-- <li><a href="#">Home</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">About</a></li> -->
-                    <router-link to="/portfolio" tag="li"><a>Portfolio</a></router-link>
-                    <router-link to="/stocks" tag="li"><a>Stocks</a></router-link>
-                    <router-link to="/" tag="li"><a>Home</a></router-link>
-                </ul>
-            </nav>
-                <ul class="nav_links" id="two" >
-                    <li> <button id="save" @click="saveData" href="#">Save</button></li>
-                    <li> <button @click="loadData" href="#">Load</button></li>
-                    <li> <button @click="updatePrices">Update Prices</button></li>
-                    <li class="item">Funds: {{ funds |  currency }}</li>
-                </ul>
-                <!-- <a class="cta" href="#"><button>Log Out</button></a> -->
-        </header>
+    <header>
+        <nav class="header-nav">
+            <a class="header-title" href="/">Mybrary</a>
+            <ul>
+                <li ><a href="/stocks">Stocks</a></li>
+                <li ><a href="/publicportfolios">portfolios</a></li>
+                <li ><a href="/news">News</a></li>
+                <li ><a href="/">unused</a></li>            
+            </ul>
+        </nav>
+    </header>
 </template>
 
 
@@ -64,106 +55,41 @@
 
 
 <style scoped>
-/* @media only screen and (max-width: 407px) {
-
-#two {
-    margin-top: 40px;
-}
-}
-
-@media only screen and (max-width: 367px) {
-
-#two {
-    margin-top: 70px;
-}
-}
-
-@media only screen and (max-width: 352px) {
-
-#save {
-    margin-top: 90px;
-}
-} */
-
-@media only screen and (max-width: 659px) {
-
 header {
+    color:yellow !important;
+    font-size: 22px;
+    height: 50px;
+    background: linear-gradient(to right, rgb(17, 36, 58), rgb(17, 33, 54));
+}
+.header-title {
+    text-decoration: none; 
+}
+
+.header-nav {
     display: flex;
-    flex-direction: column;
-    justify-content: start;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
 }
 
+.header-nav ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
 }
 
-h1 {
-    color:white;
+.header-nav li {
+    list-style: none;
 }
 
-.item {
-    margin-left: 10px;
-    font-size: 26px;
-}
-li, a, button{
-    color:white;
+.header-nav li a {
+    text-decoration: none;
+    padding-right: 2rem;
     
 }
 
-.nav_links li a{
-    text-decoration: none;
-    color:white;
-    font-size: 30px;
+.header-nav li a:hover, .header-title:hover {
 }
-
-
-    header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    /* background-color: rgb(33, 46, 75); */
-  background: linear-gradient(to right, rgb(27, 52, 83), rgb(15, 30, 49));
-    padding: 20px 2%;
-    font-size: 30px;
-
-    }
-
-.logo{
-    cursor:pointer;
-}
-
-.nav_links li{
-    display: inline-block;
-    padding: 0px 10px;
-}
-
-.nav_links li a{
-    transition: all 0.3s ease 0s;
-}
-
-.nav_links li a:hover{
-    color: rgb(149, 162, 207);
-}
-
-button{
-    padding: 6px 10px;
-        background-color: rgba(26, 52, 87, 1);
-    border:none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease 0s;
-    outline: none;
-    margin:3px;
-    font-size: 22px;
-
-}
-
-button:hover{
-    background-color: rgba(45, 73, 109, 0.8);
-}
-
-    ul {
-        padding: 0px
-    }
-    .cta {
-        font-size:20px
-    }
+  
 </style>

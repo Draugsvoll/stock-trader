@@ -5,6 +5,7 @@ import * as actions from './actions'
 
 // import modules
 import stocks from './modules/stocks'
+import news from './modules/news'
 import portfolio from './modules/portfolio'
 
 Vue.use(Vuex)
@@ -14,6 +15,7 @@ export default new Vuex.Store({
     actions: actions,
     modules: {  // add the modules from store
         stocks,
-        portfolio
+        portfolio,
+        // news
     }
 })

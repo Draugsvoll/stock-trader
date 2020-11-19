@@ -4,8 +4,16 @@
             <button @click="getTrending">Trending</button>
             <button @click="getTopGainers">Top Gainers</button>
             <button @click="get500Stocks">S&P 500</button>
+            <button @click="getPortfolios">Portfolios</button>
         </div>
         <h2>Top Gainers</h2>
+        <div class="tags">
+                <div class="tag name">Name</div>
+                <div class="tag">Market Price</div>
+                <div class="tag">Change</div>
+                <div class="tag">Symbol</div>
+                <div class="tag">Previous Close</div>
+        </div>
         <div class="stock-container">
             <app-stock v-for="stock in stocks" :stock="stock" :key="stock.id"></app-stock>
                                                                     <!-- sender stock til stock as props -->
@@ -17,13 +25,12 @@
 
 <script>
 import Stock from './Stock.vue'
-import { get500, getTopGainers } from '../../data/stocksApi'
 
 export default {
     components: {
         appStock: Stock
     },
-    computed: {     // computed to access getters
+    computed: {    
         stocks() {
             return this.$store.getters.stocks
         }
@@ -36,7 +43,11 @@ export default {
                 this.$store.dispatch('getTrendingStocks')
         },
         getTopGainers () {
-                this.$store.dispatch('getTopGainersStocks')
+            this.$store.dispatch('getTopGainersStocks')
+        }
+        ,
+        getPortfolios () {
+            this.$store.dispatch('getPortfolios')
         }
     }
 }
@@ -58,6 +69,20 @@ h2 {
     padding: 20px;
     margin:45px auto;
     justify-content: center;
+}
+.tags {
+    display: flex;
+}
+.tag {
+    font-weight: bolder;
+    font-size: 18px;
+    width:250px;
+}
+.name {
+    width:350px;
+}
+.stock-container {
+    width:100%; 
 }
 
 * {

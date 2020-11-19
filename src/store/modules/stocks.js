@@ -1,11 +1,14 @@
-import { get500, getTopGainers, getTrending } from '../../data/stocksApi'
+import { get500, getTopGainers, getTrending, getPortfolios, getNews } from '../../data/stocksApi'
 // import axios from 'axios'
 
-var initStocks = getTopGainers()
 
 const state = {
-    stocks: []
+    stocks: [],
+    portfolios: [],
+    articles: [ {headline: 'This is a headline'} ]
 }
+
+var initStocks = getTopGainers()
 state.stocks = initStocks
 
 
@@ -16,7 +19,7 @@ const mutations = {
     'UPDATE_PRICES' (state) {
         state.stocks.forEach(stock => {
             stock.price = Math.round(stock.price * (1 + Math.random() -0.45) ) 
-        });
+        })
     },
     'GET_500_STOCKS' (state) {
         state.stocks = get500()
@@ -26,6 +29,13 @@ const mutations = {
     },
     'GET_TOP_GAINERS_STOCKS' (state) {
         state.stocks = getTopGainers()
+    },
+    'GET_PORTFOLIOS' (state) {
+        state.portfolios = getPortfolios()
+    },
+    'GET_NEWS' (state) {
+        console.log('printer state articles fra mutation',state.articles)
+        state.articles = getNews()
     }
 }
 
@@ -48,11 +58,24 @@ const actions = {   // aviable actions on this site
     updatePrices: ({ commit }) => {
         commit('UPDATE_PRICES')
     }
+    ,
+    getPortfolios: ({ commit }) => {
+        commit('GET_PORTFOLIOS')
+    },
+    getNews: ({ commit }) => {
+        commit('GET_NEWS')
+    }
 }
 
 const getters = {
     stocks(state) {
         return state.stocks
+    },
+    portfolios (state) {
+        return state.portfolios
+    },
+    news(state) {
+        return state.articles
     }
 }
 
