@@ -95,7 +95,7 @@ export function getPortfolios () {
       axios.request(options).then(function (response) {
           response = response.data.finance.result[0].portfolios
           response.forEach( portfolio => {
-              const newPortfolio = { name: portfolio.name, id: portfolio.userId }
+              const newPortfolio = { name: portfolio.name, id: portfolio.userId, pfId: portfolio.pfId }
               portfolios.push(newPortfolio)
           })
       }).catch(function (error) {

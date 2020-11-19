@@ -10,6 +10,7 @@ export const routes = [
     { path: '/portfolio', component: Portfolio},
     { path: '/news', component: News},
     { path: '/publicportfolios', component: PublicPortfolios},
+    { path: '/publicportfolios/view/:id', component: ViewPortfolio},
     { path: '/viewportfolio', component: ViewPortfolio},
     { path: '/', component: Home},
     { path: '/stocks', component: Stocks}
