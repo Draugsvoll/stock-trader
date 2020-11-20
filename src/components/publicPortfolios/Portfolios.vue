@@ -6,7 +6,6 @@
         </div>
         <div class="portfolio-container">
             <app-stock v-for="portfolio in portfolios" :portfolio="portfolio" :key="portfolio.userId"></app-stock>
-                                                                    <!-- sender portfolio til portfolio as props -->
         </div>
     </div>
 </template>

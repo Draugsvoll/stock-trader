@@ -3,6 +3,7 @@
             <div class="portfolios">
                 <div class="info name"> {{ portfolio.name }}</div>
                 <div class="info name"> {{ portfolio.id }}</div>
+                <button @click="viewPortfolio(portfolio.id, portfolio.pfId)">View Portfolio</button>
             </div>
          </div>
 </template>
@@ -16,7 +17,9 @@ export default {
         }
     },
     methods: { 
-       
+       viewPortfolio (id, pfId) {
+           window.location.href = `/publicportfolios/view/${id}?pfId=${pfId}`
+       }
     }
 }
 </script>

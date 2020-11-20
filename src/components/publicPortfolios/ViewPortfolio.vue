@@ -1,13 +1,12 @@
 <template>
          <div class="container">
-             <h1>xxxxxx's Portfolio</h1>
             <div class="portfolio">
-                <h2> {{ portfolioId }}</h2>
-                <h2> {{ pfName }}</h2>
-                <div v-for="position in positions" :key="position.id">
+                <h2> {{ pfId }} </h2>
+                <div class="stocks" v-for="position in positions" :key="position.id">
                     {{ position.symbol }}
                     {{ position.price }}
-                    {{ position.quantity }}
+                    {{ position.name }}
+                    <button @click="viewStock(position.symbol)">View Stock</button>
                 </div>
             </div>
          </div>
@@ -21,45 +20,38 @@ export default {
     data () {
         return {
             portfolioId: this.$route.params.id,
-            portfolioName: '',
+            pfId: this.$route.query.pfId,    
             positions: [],
-            pfName: this.$route.query.pfName
         }
     },
     methods: { 
        getPortfolio () {
            var positions = []
-           var newPortfolioName = ''
            const options = {
             method: 'GET',
             url: 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-watchlist-detail',
-            params: {userId: this.portfolioId, pfId: 'the_berkshire_hathaway_portfolio'},
+            params: {userId: this.portfolioId, pfId: this.pfId},
             headers: {
                 'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8',
                 'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
             }
-            };
-
-            axios.request(options).then(function (response) {
-                console.log(response.data.finance.result[0].portfolios[0]);
-                response = response.data.finance.result[0].portfolios[0]
-                // get name
-                console.log(response.pfName)
-                newPortfolioName = response.pfName
-                // get positions
-                response = response.positions
-                response.forEach(position => {
-                    const newPosition = { symbol: position.symbol, price: position.lots[0].purchasePrice, quantity: position.lots[0].quantity }
-                    console.log('new position: ', newPosition)
-                    positions.push(newPosition)
-                }) // forEach
+            }
+            axios.request(options).then( response => {
+                var stocks = response.data.finance.result[0].quotes
+                console.log(stocks)
+                var newStocks = Object.entries(stocks)
+                newStocks.forEach( stock => {
+                    const newStock = { symbol: stock[0], name: stock[1].shortName, price: stock[1].regularMarketPrice}
+                    positions.push(newStock)
+                })
             }).catch(function (error) {
                 console.error(error);
             })//axios
-                this.portfolioName = newPortfolioName
                 this.positions = positions
-
-       } // get portfolio
+       }, // get portfolio
+       viewStock (symbol) {
+           console.log('view stock', symbol)
+       }
     },
     created () {
         this.getPortfolio()
@@ -80,7 +72,12 @@ h1,h2 {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width:1000px;
+    max-width:1000px;
+    margin:auto;
+    border:1px solid purple;
+}
+.stocks {
+    display: inline-flex;
     margin:auto;
 }
 
