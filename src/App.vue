@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-        <app-header></app-header>
+        <app-header2></app-header2>
         <div class="page-container">
           <transition name="slide">
             <router-view></router-view>
@@ -11,13 +11,15 @@
 
 
 <script>
-import Header from "./components/Header";
+// import Header from "./components/Header"
+import Header2 from "./components/Header2";
 import axios from 'axios'
 //import axios from 'axios'
 
 export default {
   components: {
-    appHeader: Header,
+    // appHeader: Header,
+    appHeader2: Header2,
   },
   created() {
     //this.$store.dispatch("initStocks"); // access to Store.js and it's methods from Main.js

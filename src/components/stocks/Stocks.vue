@@ -1,11 +1,15 @@
 <template>
     <div class="box">
+        {{ abcd }}
         <div class="btn-row">
             <button @click="getTrending">Trending</button>
             <button @click="getTopGainers">Top Gainers</button>
             <button @click="get500Stocks">S&P 500</button>
             <button @click="getPortfolios">Portfolios</button>
+            <button >Search</button>
         </div>
+        <input type="text" placeholder="search" v-model="searchField" >
+        <button @click="searchStock" >Search</button>
         <h2>Top Gainers</h2>
         <div class="tags">
                 <div class="tag name">Name</div>
@@ -25,14 +29,24 @@
 
 <script>
 import Stock from './Stock.vue'
+import axios from 'axios'
 
 export default {
+    data () {
+        return {
+            // search: this.$route.query.search,
+            searchField: 'apple'
+        }
+    },
     components: {
-        appStock: Stock
+        appStock: Stock,
     },
     computed: {    
         stocks() {
             return this.$store.getters.stocks
+        },
+        abcd() {
+            return this.$store.getters.abcd
         }
     },
     methods: {
@@ -48,6 +62,10 @@ export default {
         ,
         getPortfolios () {
             this.$store.dispatch('getPortfolios')
+        },
+        searchStock () {
+            const searchTerm = this.searchField
+            this.$store.dispatch('searchstocks', searchTerm)
         }
     }
 }

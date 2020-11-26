@@ -1,10 +1,12 @@
-import { get500, getTopGainers, getTrending, getPortfolios, getNews } from '../../data/stocksApi'
+import { get500, getTopGainers, getTrending, getPortfolios, getNews, searchStock, getSingleStock } from '../../data/stocksApi'
 // import axios from 'axios'
 
 
 const state = {
     stocks: [],
+    searchResult: [],
     portfolios: [],
+    abcd: 'value from the store',
     articles: [ {headline: 'This is a headline'} ]
 }
 
@@ -34,8 +36,12 @@ const mutations = {
         state.portfolios = getPortfolios()
     },
     'GET_NEWS' (state) {
-        console.log('printer state articles fra mutation',state.articles)
         state.articles = getNews()
+    },
+    'SEARCH_STOCK' (state, searchTerm) {
+        console.log('logging the functiono', searchStock(searchTerm))
+        // state.abcd = searchStock(searchTerm)
+        console.log('STATE ', state.abcd)     
     }
 }
 
@@ -64,6 +70,9 @@ const actions = {   // aviable actions on this site
     },
     getNews: ({ commit }) => {
         commit('GET_NEWS')
+    },
+    searchstocks: ({ commit }, searchTerm) => {
+        commit('SEARCH_STOCK', searchTerm)
     }
 }
 
@@ -76,6 +85,9 @@ const getters = {
     },
     news(state) {
         return state.articles
+    },
+    abcd(state) {
+        return state.abcd
     }
 }
 

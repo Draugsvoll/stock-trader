@@ -6,12 +6,15 @@
                 <div class="info"> {{ stock.change.toFixed(2) }}$</div>
                 <div class="info"> {{ stock.symbol }}</div>
                 <div class="info"> {{ stock.prevClose.toFixed(2) }}$</div>
+                <div class="btn"><button @click="viewStock(stock.symbol)">View</button></div>
             </div>
          </div>
 </template>
 
 
 <script>
+import axios from 'axios'
+
 export default {
     props: ['stock'], // mottar stock fra Stocks.vue, passeres som props
     data () {
@@ -33,8 +36,8 @@ export default {
                 this.quantity = 0
             }
         },
-        moreInfo() {
-            console.log('symbol: ', )
+        viewStock(stock) {
+           window.location.href = `/stocks/viewstock?symbol=${stock}`
         }
     }
 }
@@ -56,12 +59,16 @@ export default {
 }
 .info {
     width:250px;
+    padding:15px;
 }
 .name {
     width:350px;
     overflow: hidden;
     font-weight: 600;
 }
-
+.btn {
+    width: 50px;
+    height: 50px;
+}
 
 </style>

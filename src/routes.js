@@ -1,6 +1,7 @@
 import Portfolio from './components/portfolio/Portfolio'
 import PublicPortfolios from './components/publicPortfolios/Portfolios'
 import ViewPortfolio from './components/publicPortfolios/ViewPortfolio'
+import ViewStock from './components/stocks/ViewStock'
 import Stocks from './components/stocks/Stocks'
 import News from './components/news/News'
 import Home from './components/Home'
@@ -12,6 +13,8 @@ export const routes = [
     { path: '/publicportfolios', component: PublicPortfolios},
     { path: '/publicportfolios/view/:id', component: ViewPortfolio},
     { path: '/viewportfolio', component: ViewPortfolio},
+    { path: '/stocks/view/:id', component: ViewStock},
     { path: '/', component: Home},
-    { path: '/stocks', component: Stocks}
+    { path: '/stocks', component: Stocks},
+    { path: '/stocks/viewstock', component: ViewStock},
 ]

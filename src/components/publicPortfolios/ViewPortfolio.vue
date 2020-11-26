@@ -51,10 +51,31 @@ export default {
        }, // get portfolio
        viewStock (symbol) {
            console.log('view stock', symbol)
-       }
+       },
+       testApi () {
+           const options = {
+                method: 'POST',
+                url: 'https://colorme-ai.p.rapidapi.com/v1',
+                headers: {
+                    'content-type': 'application/x-www-form-urlencoded',
+                    'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8',
+                    'x-rapidapi-host': 'colorme-ai.p.rapidapi.com'
+                },
+                data: {
+                    image: 'http://dujye7n3e5wjl.cloudfront.net/photographs/1080-tall/time-100-influential-photos-lunch-atop-skyscraper-19.jpg'
+                }
+                };
+
+                axios.request(options).then(function (response) {
+                    console.log(response.data);
+                }).catch(function (error) {
+                    console.error(error);
+                });//axios
+       }//method
     },
     created () {
-        this.getPortfolio()
+        //this.getPortfolio()
+        this.testApi()
     }
 }
 </script>

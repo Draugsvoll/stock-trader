@@ -1,6 +1,56 @@
 import axios from 'axios'
 
-// GET S&P 500
+
+//* GET SEARCHES
+export function searchStock (searchTerm) {
+    var results = []
+    const options = {
+        method: 'GET',
+        url: 'https://yahoo-finance-low-latency.p.rapidapi.com/v6/finance/autocomplete',
+        params: {query: searchTerm, lang: 'en'},
+        headers: {
+            'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8',
+            'x-rapidapi-host': 'yahoo-finance-low-latency.p.rapidapi.com'
+        }}
+        axios.request(options).then(function (response) {
+            results = response.data
+            const symbols = results.ResultSet.Result[0].symbol
+            console.log('from api: ', symbols)
+            getSingleStock(symbols)
+        }).catch(function (error) {
+            console.error(error);
+        });
+}
+
+
+//* get single stock from search
+export function getSingleStock (searchTerm) {
+    var newStocks = []
+    const apiStocks = searchTerm
+    const options = {
+    method: 'GET',
+    url: 'https://rapidapi.p.rapidapi.com/market/get-quotes',
+    params: {region: 'US', symbols: apiStocks},
+    headers: {
+        'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8',
+        'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
+    }};
+    axios.request(options).then(function (response) {
+        const returnedStocks = response.data.quoteResponse.result
+        console.log(returnedStocks)
+        // return array name+price of each stock
+        returnedStocks.forEach( stock => {
+            const newStock = { name: stock.shortName, price: stock.regularMarketPrice, change: stock.regularMarketChange, symbol: stock.symbol, prevClose: stock.regularMarketPreviousClose}
+            newStocks.push(newStock)
+            console.log('from getsingle stock: ', newStock.name)
+        });
+        return newStocks.name
+    }).catch(function (error) {
+        console.error(error)
+    });// S&P 500
+ } // get500
+
+//* GET S&P 500
 export function get500 () {
     var newStocks = []
     const apiStocks = 'AMD, IBM, AAPL, TSLA, AMZN, MMM, CCL, KMX, CAT, IRM, SJM, ORLY, ORCL, VRSK, WYNN, ZBRA, UAL, UPS, ZTS, BA, BWA, DISCA, FTNT'
@@ -135,5 +185,7 @@ export default {
     get500,
     getTopGainers,
     getTrending,
-    getPortfolios
+    getPortfolios,
+    searchStock,
+    getSingleStock,
 }
