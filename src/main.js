@@ -25,7 +25,6 @@ const router = new VueRouter({
   mode: 'history', // adjust URLs
   routes
   // husk <router-view></router-view> i App.vue
-
 })
 
 

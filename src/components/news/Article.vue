@@ -42,6 +42,9 @@ export default {
 .content >>> img {
     max-width: 800px;
     max-height:600px;
+    padding:0;
+    margin:0;
+    object-fit: contain;
 }
 
 

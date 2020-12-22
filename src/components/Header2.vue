@@ -1,12 +1,12 @@
 <template>
      <header>
         <nav class="header-nav">
-            <a class="header-title" href="/">Mybrary</a>
+            <a class="header-title" href="/">Stocktrader</a>
             <ul>
                 <li ><a href="/stocks">Stocks</a></li>
-                <li ><a href="/publicportfolios">portfolios</a></li>
+                <li ><a href="/publicportfolios">Portfolios</a></li>
                 <li ><a href="/news">News</a></li>
-                <li ><a href="/">unused</a></li>            
+                <li ><a href="/">About</a></li>            
             </ul>
         </nav>
     </header>
@@ -21,6 +21,7 @@
     height: 50px;
     color:black;
     background: lightgrey;
+    font-size:1rem;
     /* background: linear-gradient(to right, rgb(17, 36, 58), rgb(17, 33, 54)); */
 }
 .header-title {
@@ -32,6 +33,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    padding-top:10px;
 }
 
 .header-nav ul {

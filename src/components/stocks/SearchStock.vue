@@ -1,6 +1,5 @@
 <template>
     <div class="box">
-        
         <div class="btn-row">
             <button @click="getTrending">Trending</button>
             <button @click="getTopGainers">Top Gainers</button>
@@ -8,28 +7,24 @@
             <button @click="getPortfolios">Portfolios</button>
         </div>
 
-        <div class="searchfield">
+        <h2>Search stock</h2>
+
+        <div class="searchField">
             <input type="text"  v-model="searchTerm" autofocus placeholder="Tesla">
             <button class="search" @click="getSymbol" >Search</button>
         </div>
         
-        <!-- <h2>Top Gainers</h2> -->
-        <h2> {{ type }} </h2>
-        <div class="tags" v-if="stocks != '' ">
+        <div class="tags">
                 <div class="tag name">Name</div>
-                <div class="tag">Change</div>
                 <div class="tag">Market Price</div>
-                <div class="tag">Prev. Close</div>
+                <div class="tag">Change</div>
                 <div class="tag">Symbol</div>
-                <div class="empty"><button @click="viewStock(stock.symbol)">View</button></div>
+                <div class="tag">Previous Close</div>
         </div>
 
         <div class="stock-container">
-            <transition-group name="slide" mode="in-out">
-                <app-stock v-for="(stock, index) in stocks" :stock="stock" :key="index"></app-stock>
-            </transition-group>
+            <app-stock v-for="stock in searchedStock" :stock="stock" :key="stock.id"></app-stock>
         </div>
-
     </div>
 </template>
 
@@ -43,37 +38,31 @@ export default {
     data () {
         return {
             searchTerm: '',
-            type: 'Top Gainers'
+            searchedStock: undefined
         }
     },
     components: {
         appStock: Stock,
     },
-    computed: {    
-        stocks() {
-            return this.$store.getters.stocks
-        },
-    },
     methods: {
+        searchStock () {
+            const searchTerm = this.searchField
+            this.$store.dispatch('searchstocks', searchTerm)
+        },
         get500Stocks () {
-            this.type = 'S&P 500'
             this.$store.dispatch('get500Stocks')
         },
         getTrending () {
-            this.type = 'Trending'
             this.$store.dispatch('getTrendingStocks')
         },
         getTopGainers () {
-            this.type = 'Top Gainers'
             this.$store.dispatch('getTopGainersStocks')
         }
         ,
         getPortfolios () {
-            this.$router.push('publicportfolios')
+            this.$store.dispatch('getPortfolios')
         },
         getSymbol () {
-            this.type = 'Searching for: ' + this.searchTerm
-            this.$store.dispatch('resetStocks')
             const ref = this
             var results = []
             const options = {
@@ -110,8 +99,7 @@ export default {
                 // return array name+price of each stock
                 returnedStocks.forEach( stock => {
                     const newStock = { name: stock.shortName, price: stock.regularMarketPrice, change: stock.regularMarketChange, symbol: stock.symbol, prevClose: stock.regularMarketPreviousClose}
-                    // searchedStock.push(newStock)
-                    ref.stocks.unshift(newStock)
+                    searchedStock.push(newStock)
                     console.log('from get single stock: ', newStock.name)
                 });
                 ref.searchedStock = searchedStock
@@ -119,32 +107,17 @@ export default {
                 console.error(error)
             });
         }
-    }
+    },
 }
-
 </script>
 
 <style scoped>
 .box {
     display: flex;
     flex-direction: column;
-    margin-bottom: 100px;
 }
 .btn-row {
     margin:25px auto;
-    width: 300px;
-    display:flex;
-    justify-content:stretch;
-}
-.btn-row button {
-    font-size: 0.8rem;
-    padding:9px 8px;
-    border:none;
-    border-bottom:1px solid black;
-    cursor: pointer;
-}
-.btn-row button:hover {
-    background:pink;
 }
 h2 {
     display: flex;
@@ -156,62 +129,31 @@ h2 {
     display: flex;
     justify-content: center;
     text-align: left;
-    max-width:630px;
-    margin:auto;
 }
 .tag {
     font-weight: bold;
-    font-size: 13px;
+    font-size: 12px;
     width:100px;
 }
 .name {
-    width:250px !important;
+    width:200px !important;
 }
-.searchfield {
-    display:flex;
-    margin:auto;
-    justify-content: center;
-    margin-top:100px;
+.tags {
+    margin-top:50px;
 }
-input {
-    width:200px;
-}
+
 * {
     color: rgb(19, 23, 48);
 }
 .empty {
     visibility: hidden;
 }
-.searchfield {
+.searchField {
+    display: inline-flex;
+    justify-content: center;
     margin:auto;
 }
-
-
-/* SLIDES */
-.slide-enter-active {
-  animation: slide-in 250ms ease-out forwards;
+input {
+    width:200px;
 }
- .slide-leave-active {
-    animation: slide-out 250ms ease-out forwards;
-  } 
-@keyframes slide-in {
-  from {
-    transform: translateY(100px);
-    opacity: 0.2;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
- @keyframes slide-out {
-    from {
-      transform: translateY(0);
-      opacity:1;
-    }
-    to {
-      transform: translateY(100px);
-      opacity: 0;
-    }
-  } 
 </style>

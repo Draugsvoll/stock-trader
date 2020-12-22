@@ -110,6 +110,7 @@ html, body{
   margin-left: 50px;
   margin-right: 50px;
   margin-bottom: 25px;
+  font-size:0.8rem;
 }
 
 .footer {
@@ -120,7 +121,9 @@ html, body{
   height: 20rem;
 }
 
-
+.footer-headline {
+  font-size:0.9rem;
+}
 
 /* SLIDES */
 .slide-enter-active {

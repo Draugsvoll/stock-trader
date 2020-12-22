@@ -19,9 +19,8 @@ html, body {
 }
 
 footer{
-  /* background-color: rgb(33, 46, 75); */
-  /* background: linear-gradient(to right, rgb(17, 36, 58), rgb(17, 33, 54)); */
   background:lightgrey;
+  font-size: 0.7rem;
   color:black;
   min-height: 180px;
 }

@@ -4,9 +4,9 @@ import { get500, getTopGainers, getTrending, getPortfolios, getNews, searchStock
 
 const state = {
     stocks: [],
+    searchedStock: ['owiegje'],
     searchResult: [],
     portfolios: [],
-    abcd: 'value from the store',
     articles: [ {headline: 'This is a headline'} ]
 }
 
@@ -39,10 +39,11 @@ const mutations = {
         state.articles = getNews()
     },
     'SEARCH_STOCK' (state, searchTerm) {
-        console.log('logging the functiono', searchStock(searchTerm))
-        // state.abcd = searchStock(searchTerm)
-        console.log('STATE ', state.abcd)     
-    }
+        state.searchedStock = searchStock(searchTerm)
+    },
+    'RESET_STOCKS' (state) {
+        state.stocks = []
+    },
 }
 
 const actions = {   // aviable actions on this site
@@ -73,6 +74,9 @@ const actions = {   // aviable actions on this site
     },
     searchstocks: ({ commit }, searchTerm) => {
         commit('SEARCH_STOCK', searchTerm)
+    },
+    resetStocks: ({ commit } ) => {
+        commit('RESET_STOCKS')
     }
 }
 
@@ -86,8 +90,8 @@ const getters = {
     news(state) {
         return state.articles
     },
-    abcd(state) {
-        return state.abcd
+    searchedStock(state) {
+        return state.searchedStock
     }
 }
 

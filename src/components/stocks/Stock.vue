@@ -1,11 +1,11 @@
 <template>
-         <div class="container">
+         <div class="container" >
             <div class="stock">
                 <div class="info name"> {{ stock.name }}</div>
+                <div class="info" :class="{green: stock.change > 0, red: stock.change < 0 }" > {{ stock.change.toFixed(2) }}$</div>
                 <div class="info"> {{ stock.price.toFixed(2) }}$</div>
-                <div class="info"> {{ stock.change.toFixed(2) }}$</div>
-                <div class="info"> {{ stock.symbol }}</div>
                 <div class="info"> {{ stock.prevClose.toFixed(2) }}$</div>
+                <div class="info"> {{ stock.symbol }}</div>
                 <div class="btn"><button @click="viewStock(stock.symbol)">View</button></div>
             </div>
          </div>
@@ -20,7 +20,7 @@ export default {
     data () {
         return {
             quantity: 0,
-            symbol: ''
+            symbol: '',
         }
     },
     methods: { 
@@ -38,7 +38,8 @@ export default {
         },
         viewStock(stock) {
            window.location.href = `/stocks/viewstock?symbol=${stock}`
-        }
+        },
+        
     }
 }
 </script>
@@ -48,27 +49,61 @@ export default {
 <style  scoped>
 *{
     /* border:1px solid purple; */
+    color:rgb(3, 3, 46);
 }
-.containier {
-    width:100%;
+.container {
+    border:1px solid rgb(214, 215, 216);
+    border-top:none;
+    max-width:630px;
+    padding-top:9px;
+    padding-bottom:7px;
+    padding-left:5px;
+    padding-right:5px;
 }
-
+.green {
+    color:green !important
+}
+.red {
+    color:red !important
+}
+.grey {
+    background:grey;
+}
 .stock {
+    justify-content: center;
     display: flex;
-    border:1px solid grey;
+    text-align: left;
+    max-width:630px;
 }
 .info {
-    width:250px;
-    padding:15px;
+    width:100px;
+    font-size: 0.75rem;
 }
 .name {
-    width:350px;
+    width:250px;
     overflow: hidden;
-    font-weight: 600;
+    font-size: 0.8rem;
 }
-.btn {
-    width: 50px;
-    height: 50px;
+.container:nth-child(odd) {
+  background-color: rgb(245, 246, 247);
 }
+.container:nth-child(1) {
+    border-top:1px solid rgb(214, 215, 216);
+}
+button {
+    border-radius:5px;
+    color:rgb(6, 6, 104);
+    border:1px solid rgb(4, 4, 110);
+    background:rgba(255,255,255, 0.1);
+    font-size:0.75rem;
+    cursor:pointer;
+    padding:2px 6px;
+    font-weight: 350;
+}
+button:hover {
+    background:rgb(5, 62, 128);
+    color:white;
+}
+
 
 </style>

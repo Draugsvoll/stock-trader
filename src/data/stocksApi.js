@@ -16,7 +16,7 @@ export function searchStock (searchTerm) {
             results = response.data
             const symbols = results.ResultSet.Result[0].symbol
             console.log('from api: ', symbols)
-            getSingleStock(symbols)
+            return getSingleStock(symbols)
         }).catch(function (error) {
             console.error(error);
         });
@@ -42,13 +42,14 @@ export function getSingleStock (searchTerm) {
         returnedStocks.forEach( stock => {
             const newStock = { name: stock.shortName, price: stock.regularMarketPrice, change: stock.regularMarketChange, symbol: stock.symbol, prevClose: stock.regularMarketPreviousClose}
             newStocks.push(newStock)
-            console.log('from getsingle stock: ', newStock.name)
+            console.log('from get single stock: ', newStock.name)
         });
-        return newStocks.name
+        return newStocks
     }).catch(function (error) {
         console.error(error)
-    });// S&P 500
- } // get500
+    });
+    return newStocks
+ }
 
 //* GET S&P 500
 export function get500 () {
@@ -138,7 +139,8 @@ export function getPortfolios () {
         url: 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-popular-watchlists',
         headers: {
           'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8',
-          'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
+          'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com',
+          'Access-Control-Allow-Origin': '*'
         }
       };
       
