@@ -93,6 +93,7 @@ export default {
         },
         buyStock() {
             const ref = this
+            var updatedFunds = 0
             const user = firebase.auth().currentUser.uid
             //* check funds
             axios.get(`https://ove-stock-trader.firebaseio.com/users/${user}/funds.json`)
@@ -101,8 +102,8 @@ export default {
                         const funds = response.data
                         const price = ref.buyPrice
                         if (funds > price) {
-                            console.log('you can afford')
-                            const updatedFunds = funds - price
+                            updatedFunds = funds - price
+                            console.log('you can afford, new funds are: ', updatedFunds)
                             firebase.database().ref(`users/${user}/funds/`).set(updatedFunds);
                         }
                     })
@@ -146,12 +147,22 @@ export default {
         sellStock2 () {
             const user = firebase.auth().currentUser.uid
             const newStockAmount = this.oldQuantity - this.quantity
-            if ( newStockAmount < 0) {
+            //* invalid amount
+            if ( newStockAmount < 0 || newStockAmount%1 != 0) {
                 console.log('invalid amount')
             }
             else {
-                Object.assign(this.currentStock, {quantity: newStockAmount})
+                var updatedFunds
+                 axios.get(`https://ove-stock-trader.firebaseio.com/users/${user}/funds.json`).then(resp => {
+                    const funds = resp.data
+                    updatedFunds = funds + this.buyPrice
+                    console.log('old funds: '. funds)
+                    console.log('updated funds: '. updatedFunds)
+                    Object.assign(this.currentStock, {quantity: newStockAmount})
                 firebase.database().ref(`users/${user}/portfolio/` + this.key).set(this.currentStock);
+                firebase.database().ref(`users/${user}/funds/`).set(updatedFunds);
+                })
+                
             }
         },
     },

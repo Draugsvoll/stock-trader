@@ -1,8 +1,7 @@
-import { get500, getTopGainers, getTrending, getPortfolios, getNews, searchStock, getSingleStock } from '../../data/stocksApi'
-// import axios from 'axios'
-
+import { get500, getTopGainers, getTrending, getPortfolios, getNews, searchStock, getSingleStock} from '../../data/stocksApi'
 
 const state = {
+    funds:-1,
     stocks: [],
     searchedStock: ['owiegje'],
     searchResult: [],
@@ -10,9 +9,9 @@ const state = {
     articles: [ {headline: 'This is a headline'} ]
 }
 
+//* initializing state
 var initStocks = getTopGainers()
 state.stocks = initStocks
-
 
 const mutations = {
     'INIT_STOCKS' (state, stocks) {
@@ -38,6 +37,9 @@ const mutations = {
     },
     'RESET_STOCKS' (state) {
         state.stocks = []
+    },
+    'SET_FUNDS' (state, funds) {
+        state.funds = funds
     },
 }
 
@@ -72,6 +74,9 @@ const actions = {   // aviable actions on this site
     },
     resetStocks: ({ commit } ) => {
         commit('RESET_STOCKS')
+    },
+    setFunds: ({ commit }, funds ) => {
+        commit('SET_FUNDS', funds)
     }
 }
 
@@ -87,6 +92,9 @@ const getters = {
     },
     searchedStock(state) {
         return state.searchedStock
+    },
+    funds(state) {
+        return state.funds
     }
 }
 

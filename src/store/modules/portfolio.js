@@ -62,7 +62,7 @@ stockPortfolio(state) {
             }
         })
     },
-    funds (state) {
+    oldFunds (state) {
         return state.funds
     }
 }

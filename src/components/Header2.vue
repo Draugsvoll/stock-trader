@@ -23,7 +23,11 @@ import axios from 'axios'
 export default {
     data () {
         return {
-            funds: 0,
+        }
+    },
+    computed: {
+        funds () {
+            return this.$store.getters.funds
         }
     },
     methods: {
@@ -35,10 +39,10 @@ export default {
        },
     },
     created () {
-        //* get funds from firebase
         const user = firebase.auth().currentUser.uid
         axios.get(`https://ove-stock-trader.firebaseio.com/users/${user}/funds.json`).then(resp => {
-              this.funds = resp.data.toLocaleString()
+              const funds = resp.data.toLocaleString()
+              this.$store.dispatch('setFunds', funds)
             })
 }
 }

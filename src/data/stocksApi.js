@@ -1,5 +1,11 @@
 import axios from 'axios'
+import firebase from 'firebase'
 
+ //* get funds from firebase
+ export function getFunds () {
+    
+ }
+ 
 
 //* GET SEARCHES
 export function searchStock (searchTerm) {
