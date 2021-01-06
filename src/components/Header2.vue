@@ -5,12 +5,31 @@
             <ul>
                 <li ><a href="/stocks">Stocks</a></li>
                 <li ><a href="/publicportfolios">Portfolios</a></li>
+                <li ><a href="/portfolio">My Portfolio</a></li>
                 <li ><a href="/news">News</a></li>
                 <li ><a href="/">About</a></li>            
+                <li @click="logout"><a >Logout</a></li>            
             </ul>
         </nav>
     </header>
 </template>
+
+
+<script scoped>
+import firebase from 'firebase'
+
+export default {
+    methods: {
+        logout () {
+           firebase.auth().signOut()
+            .then(resp => console.log(resp))
+            .catch(err => console.log(err))
+            window.location.href = `/login`
+       },
+    },
+    
+}
+</script>
 
 <style scoped>
 * {

@@ -18,11 +18,6 @@ const mutations = {
     'INIT_STOCKS' (state, stocks) {
         state.stocks = stocks
     },
-    'UPDATE_PRICES' (state) {
-        state.stocks.forEach(stock => {
-            stock.price = Math.round(stock.price * (1 + Math.random() -0.45) ) 
-        })
-    },
     'GET_500_STOCKS' (state) {
         state.stocks = get500()
     },

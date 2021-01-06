@@ -8,20 +8,20 @@
             <button @click="getPortfolios">Portfolios</button>
         </div>
 
-        <div class="searchfield">
+        <h2> {{ type }} </h2>
+
+          <div class="searchfield">
             <input type="text"  v-model="searchTerm" autofocus placeholder="Tesla">
             <button class="search" @click="getSymbol" >Search</button>
         </div>
-        
-        <!-- <h2>Top Gainers</h2> -->
-        <h2> {{ type }} </h2>
+
         <div class="tags" v-if="stocks != '' ">
-                <div class="tag name">Name</div>
-                <div class="tag">Change</div>
-                <div class="tag">Market Price</div>
-                <div class="tag">Prev. Close</div>
+                <div class="tag name" @click="sortByLetter">Name</div>
+                <div class="tag" @click="sortByChange">Change</div>
+                <div class="tag" @click="sortByPrice">Market Price</div>
+                <div class="tag" @click="sortByClose">Prev. Close</div>
                 <div class="tag">Symbol</div>
-                <div class="empty"><button @click="viewStock(stock.symbol)">View</button></div>
+                <div class="empty"><button >View</button></div>
         </div>
 
         <div class="stock-container">
@@ -43,7 +43,11 @@ export default {
     data () {
         return {
             searchTerm: '',
-            type: 'Top Gainers'
+            type: 'Top Gainers',
+            sortedByChange: false,
+            sortedByPrice: false,
+            sortedByClose: false,
+            sortedByLetter: false,
         }
     },
     components: {
@@ -55,6 +59,74 @@ export default {
         },
     },
     methods: {
+        sortByChange () {
+            if ( this.sortedByChange == false ) {
+                const sortedByChange = this.stocks.sort( (a, b) => {
+                if ( a.change < b.change ) return 1
+                return -1
+                })
+                this.stocks = sortedByChange
+            } 
+            else {
+                const sortedByChange = this.stocks.sort( (a, b) => {
+                if ( a.change > b.change ) return 1
+                return -1
+                })     
+                this.stocks = sortedByChange
+            }
+            this.sortedByChange = !this.sortedByChange
+        },
+        sortByPrice () {
+            if ( this.sortedByPrice == false ) {
+                const sortedByPrice = this.stocks.sort( (a, b) => {
+                if ( a.price < b.price ) return 1
+                return -1
+                })
+                this.stocks = sortedByPrice
+            } 
+            else {
+                const sortedByPrice = this.stocks.sort( (a, b) => {
+                if ( a.price > b.price ) return 1
+                return -1
+                })     
+                this.stocks = sortedByPrice
+            }
+            this.sortedByPrice = !this.sortedByPrice
+        },
+        sortByClose () {
+            if ( this.sortedByClose == false ) {
+                const sortedByClose = this.stocks.sort( (a, b) => {
+                if ( a.prevClose < b.prevClose ) return 1
+                return -1
+                })
+                this.stocks = sortedByClose
+            } 
+            else {
+                const sortedByClose = this.stocks.sort( (a, b) => {
+                if ( a.prevClose > b.prevClose ) return 1
+                return -1
+                })     
+                this.stocks = sortedByClose
+            }
+            this.sortedByClose = !this.sortedByClose
+        },
+        sortByLetter () {
+            if ( this.sortedByLetter == false ) {
+                const sortedByLetter = this.stocks.sort( (a, b) => {
+                if ( a.name.toLowerCase() < b.name.toLowerCase() ) return 1
+                return -1
+                })
+                this.stocks = sortedByLetter
+            } 
+            else {
+                const sortedByLetter = this.stocks.sort( (a, b) => {
+                if ( a.name.toLowerCase() > b.name.toLowerCase() ) return 1
+                return -1
+                })     
+                this.stocks = sortedByLetter
+            }
+            this.sortedByLetter = !this.sortedByLetter
+        },
         get500Stocks () {
             this.type = 'S&P 500'
             this.$store.dispatch('get500Stocks')
@@ -125,6 +197,9 @@ export default {
 </script>
 
 <style scoped>
+.stock-container {
+    margin:auto;
+}
 .box {
     display: flex;
     flex-direction: column;
@@ -149,7 +224,8 @@ export default {
 h2 {
     display: flex;
     padding: 20px;
-    margin:45px auto;
+    margin:0px auto;
+    margin-bottom:35px;
     justify-content: center;
 }
 .tags {
@@ -158,11 +234,14 @@ h2 {
     text-align: left;
     max-width:630px;
     margin:auto;
+    margin-top:55px;
+
 }
 .tag {
     font-weight: bold;
     font-size: 13px;
     width:100px;
+    cursor:pointer;
 }
 .name {
     width:250px !important;

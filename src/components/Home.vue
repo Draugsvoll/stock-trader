@@ -44,7 +44,7 @@ export default {
     margin: 0 auto;
     padding: 20px;
     text-align: justify;
-    max-width: 1200px;
+    width: 700px;
     color: rgb(37, 43, 78);
     margin-top: 20px;
     }

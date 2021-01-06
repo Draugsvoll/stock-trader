@@ -27,25 +27,36 @@ export default {
 
 <style  scoped>
 .article {
-    border:2px solid black;
-    margin:200px auto;
-    background:lightgrey;
+    border-radius:3px;
+    border:1px solid rgb(223, 224, 224);
+    margin:100px auto;
     padding: 50px;
+    max-width:700px;
+    box-shadow: rgba(162, 162, 168, 0.2) 0px 7px 29px 0px;
 }
 .headline {
-    font-size:35px;
+    font-size:24px;
     font-weight: bold;
+    margin-bottom:40px;
+    text-align: center;
 }
 .content {
-    max-width:1000px;
+    max-width:800px;
+}
+
+.content >>> figcaption {
+    font-size: 0.6rem;
+    
+}
+.content >>> p {
+    font-size: 0.75rem;
 }
 .content >>> img {
-    max-width: 800px;
-    max-height:600px;
+    max-width: 600px;
+    max-height:400px;
     padding:0;
     margin:0;
     object-fit: contain;
 }
-
 
 </style>

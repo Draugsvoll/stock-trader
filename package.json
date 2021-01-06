@@ -11,6 +11,7 @@
     "@vue/cli": "^4.5.8",
     "axios": "^0.21.0",
     "core-js": "^3.6.5",
+    "firebase": "^8.2.1",
     "vue": "^2.6.11",
     "vue-cli": "^2.9.6",
     "vue-resource": "^1.5.1",
@@ -39,7 +40,7 @@
       "parser": "babel-eslint"
     },
     "rules": {
-      "no-unused-vars": "off" 
+      "no-unused-vars": "off"
     }
   },
   "browserslist": [
