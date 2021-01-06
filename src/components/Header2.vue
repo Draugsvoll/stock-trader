@@ -3,12 +3,13 @@
         <nav class="header-nav">
             <a class="header-title" href="/">Stocktrader</a>
             <ul>
+                <li><a href="/">Funds: ${{ funds }} </a></li>
                 <li ><a href="/stocks">Stocks</a></li>
                 <li ><a href="/publicportfolios">Portfolios</a></li>
                 <li ><a href="/portfolio">My Portfolio</a></li>
                 <li ><a href="/news">News</a></li>
                 <li ><a href="/">About</a></li>            
-                <li @click="logout"><a >Logout</a></li>            
+                <li @click="logout"><a href="/login" >Logout</a></li>            
             </ul>
         </nav>
     </header>
@@ -17,8 +18,14 @@
 
 <script scoped>
 import firebase from 'firebase'
+import axios from 'axios'
 
 export default {
+    data () {
+        return {
+            funds: 0,
+        }
+    },
     methods: {
         logout () {
            firebase.auth().signOut()
@@ -27,7 +34,13 @@ export default {
             window.location.href = `/login`
        },
     },
-    
+    created () {
+        //* get funds from firebase
+        const user = firebase.auth().currentUser.uid
+        axios.get(`https://ove-stock-trader.firebaseio.com/users/${user}/funds.json`).then(resp => {
+              this.funds = resp.data.toLocaleString()
+            })
+}
 }
 </script>
 

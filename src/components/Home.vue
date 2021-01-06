@@ -1,12 +1,11 @@
 <template>
     <div class="box">
-        <h1>Stock Trader AS</h1>
+        <h2>Welcome, <br> <h1>{{ user }}</h1></h2>
                                 <!-- apply the currency filter -->
         <p><b>Available Funds:</b> <br>{{ funds | currency }}</p>
-        <div class=""><b>SAVE button:<br> </b>Saves your current portfolio to a database (Firebase)</div><br>
-        <div class=""><b>LOAD button:<br></b>Loads your last saved portfolio from database</div><br>
+        <div class=""><b>Info:<br> </b>Stocks are saved using Firebase, with a signed up user.</div><br>
 
-        <div><b>INFO: </b><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        <div><b>More Info: </b><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
              Suspendisse sed nisi lacus sed viverra tellus in hac habitasse. Semper auctor neque vitae tempus quam pellentesque nec nam. 
              Tellus integer feugiat scelerisque varius morbi enim. Egestas sed sed risus pretium. Mauris rhoncus aenean vel elit scelerisque 
              
@@ -26,13 +25,22 @@
 
 
 <script>
+import firebase from 'firebase'
 export default {
-  
+    data () {
+        return {
+            user:'',
+        }
+    },
     computed: {
         funds() {
             return this.$store.getters.funds
-        }
-    }
+        },
+    },
+    created () {
+                const currentUser = firebase.auth().currentUser.email
+                this.user = currentUser
+        },
 }
 </script>
 
@@ -50,6 +58,11 @@ export default {
     }
 
 h1 {
-    margin-bottom: 30px;
+    margin:0;
+    font-size: 1.8rem;
+    margin-bottom:45px;
+}
+h2 {
+    margin:0;
 }
 </style>

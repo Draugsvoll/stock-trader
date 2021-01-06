@@ -22,6 +22,7 @@
 <script>
 import Stock from '../stocks/Stock'
 import axios from 'axios'
+import firebase from 'firebase'
 
 export default {
     data () {
@@ -106,7 +107,8 @@ export default {
     created () {
 
         //* get portfolio
-        axios.get(`https://ove-stock-trader.firebaseio.com/users/portfolio.json`).then(response => {
+        const user = firebase.auth().currentUser.uid
+        axios.get(`https://ove-stock-trader.firebaseio.com/users/${user}/portfolio.json`).then(response => {
               console.log(response.data)
               const ref = this
               const resp = response.data

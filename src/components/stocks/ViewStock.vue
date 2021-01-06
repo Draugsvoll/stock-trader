@@ -4,7 +4,7 @@
         <div class="modal" v-if="showBuyModal">
                 <div class="modal-content">
                     Buy {{ this.quantity }} stocks of {{ stock.quoteType.longName }}? <br> <br>
-                    Total price: {{ testValue.toFixed(2) }}$
+                    Total price: {{ buyPrice.toFixed(2) }}$
                 </div>
                 <div class="button-row">
                     <button class="modal-button" @click="buyStock">Yes</button>
@@ -18,8 +18,8 @@
                 <p class="price"> ${{ stock.price.regularMarketPrice.raw.toFixed(2) }} </p>
                 <input type="number" v-model.number="quantity">
                 <button class="buy" @click="buyDialogue" >Buy</button>
-                <button class="sell" @click="sellStock2" :disabled="validQuantity">Sell</button>
-                <p v-if="this.oldQuantity > 0">You have {{ this.oldQuantity }} stocks</p>
+                <button class="sell" @click="sellStock2" >Sell</button>
+                <p class="smallName">You have {{ this.oldQuantity }} stocks. </p>
             </div>
         </div>
 
@@ -80,7 +80,7 @@ export default {
         validQuantity: function(){
             return false
         },
-        testValue () {
+        buyPrice () {
             return this.stock.price.regularMarketPrice.raw*this.quantity
         },
     },
@@ -92,8 +92,23 @@ export default {
             this.showBuyModal = true
         },
         buyStock() {
-            //* dont have stock in portfolio
+            const ref = this
+            const user = firebase.auth().currentUser.uid
+            //* check funds
+            axios.get(`https://ove-stock-trader.firebaseio.com/users/${user}/funds.json`)
+                    .then(function (response) {
+                        console.log('checking funds: ',response.data)
+                        const funds = response.data
+                        const price = ref.buyPrice
+                        if (funds > price) {
+                            console.log('you can afford')
+                            const updatedFunds = funds - price
+                            firebase.database().ref(`users/${user}/funds/`).set(updatedFunds);
+                        }
+                    })
             this.showBuyModal = true
+            //* dont have stock in portfolio
+            console.log('logging current stock: ', this.currentStock)
             if (this.currentStock.name == undefined) {
                 if (this.quantity % 1 == 0) {
                     const order = {
@@ -105,7 +120,8 @@ export default {
                         change: this.stock.price.regularMarketChange.raw
                     }
                     console.log(order)
-                    axios.post('https://ove-stock-trader.firebaseio.com/users/portfolio.json', order)
+                    console.log(user)
+                    axios.post(`https://ove-stock-trader.firebaseio.com/users/${user}/portfolio/.json`, order)
                     .then(function (response) {
                         console.log(response);
                     })
@@ -123,18 +139,19 @@ export default {
                         change: this.stock.price.regularMarketChange.raw
                     }
                 Object.assign(order, {quantity: newStockAmount})
-                firebase.database().ref('users/portfolio/' + this.key).set(order);
+                firebase.database().ref(`users/${user}/portfolio/` + this.key).set(order);
                 console.log('hadde fra før')
             }
         },
         sellStock2 () {
+            const user = firebase.auth().currentUser.uid
             const newStockAmount = this.oldQuantity - this.quantity
             if ( newStockAmount < 0) {
                 console.log('invalid amount')
             }
             else {
                 Object.assign(this.currentStock, {quantity: newStockAmount})
-                firebase.database().ref('users/portfolio/' + this.key).set(this.currentStock);
+                firebase.database().ref(`users/${user}/portfolio/` + this.key).set(this.currentStock);
             }
         },
     },
@@ -159,7 +176,8 @@ export default {
             });
 
             //* Check if stock in portfolio
-            axios.get(`https://ove-stock-trader.firebaseio.com/users/portfolio.json`).then(resp => {
+            const user = firebase.auth().currentUser.uid
+            axios.get(`https://ove-stock-trader.firebaseio.com/users/${user}/portfolio.json`).then(resp => {
               resp = resp.data
               const portfolioStocks = []
               for (let key in resp){
@@ -193,6 +211,9 @@ h2 {
     margin:0;
     padding:0;
     font-weight: 500;
+}
+.smallName {
+    font-size: 0.7rem;
 }
 .modal {
     background:white;
@@ -250,7 +271,7 @@ h2 {
 }
 .tag {
     font-weight: bold;
-    font-size: 0.75rem;
+    font-size: 0.71rem;
     width:100px;
 }
 .number {
