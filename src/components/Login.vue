@@ -12,7 +12,7 @@
                 <br>
                 <br>
                 <span>Password:</span>
-                <input v-model="password" type="text" name="password" placeholder="Password">
+                <input v-model="password" type="password" name="password" placeholder="Password">
                 <div class="btn">
                     <button @click="login">Login</button>
                     <button @click="signUp  ">Sign Up</button>

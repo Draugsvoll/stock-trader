@@ -1,5 +1,13 @@
 <template>
     <div class="box">
+
+                <GChart
+            type="PieChart"
+            :data="chartData2"
+            :options="chartOptions"
+        />
+
+        <h3>Total Stock Value: {{ totalStockValue }}</h3>
         <h1 class="headline">My Stocks: </h1>
         <div class="tags" v-if="stocks != '' ">
                 <div class="tag name" @click="sortByLetter">Name</div>
@@ -14,6 +22,7 @@
                 <app-stock v-for="(stock, index) in stocks" :stock="stock" :key="index"></app-stock>
             </transition-group>
         </div>
+
     </div>
 </template>
 
@@ -23,15 +32,32 @@
 import Stock from '../stocks/Stock'
 import axios from 'axios'
 import firebase from 'firebase'
+import { GChart } from 'vue-google-charts'
 
 export default {
     data () {
         return {
+            chartData: [
+                ['Stocks', 'Sales'],
+                ['TSLA', 500],
+                ['AMZN', 300],
+                ],
+            chartOptions: {
+            title: 'Asset Allocations',
+            is3D: true,
+            },
             stocks: [],
+            data: [],
+            totalStockValue: 0,
             sortedByChange: false,
             sortedByPrice: false,
             sortedByClose: false,
             sortedByLetter: false,
+        }
+    },
+    computed: {
+        chartData2() {
+            return this.$store.getters.chartData
         }
     },
     methods: {
@@ -117,25 +143,38 @@ export default {
                 newStocks.push(resp[key])
               }
               this.stocks = newStocks
-              console.log(newStocks)
+              console.log('logging stocks from portfolio', newStocks)
+              var chartData = [
+                        ['Stocks', 'Value'],
+                    ]
+              newStocks.forEach( stock => {
+                  var value = stock.price
+                  value *= stock.quantity
+                  chartData.push([stock.symbol, value])
+              })
+              this.$store.dispatch('setChartData', chartData)
+
               //* get updated prices
-              this.stocks.forEach( stock => {
-                var symbol = stock.symbol
-                const options = {
-                method: 'GET',
-                url: 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/get-detail',
-                params: {symbol: symbol, region: 'US'},
-                headers: {
-                    'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8',
-                    'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
-                }}
-                axios.request(options).then(function (response) {
-                    console.log(response.data.price.regularMarketPrice.raw);
-                    stock.price = response.data.price.regularMarketPrice.raw
-                }).catch(function (error) {
-                    console.error(error);
-                });
-            })
+              var totalStockValue = 0
+            //   this.stocks.forEach( stock => {
+            //     var symbol = stock.symbol
+            //     ref.totalStockValue += stock.price
+            //     ref.chartData.push(stock.symbol, stock.price*stock.quantity)
+            //     const options = {
+            //     method: 'GET',
+            //     url: 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/get-detail',
+            //     params: {symbol: symbol, region: 'US'},
+            //     headers: {
+            //         'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8',
+            //         'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
+            //     }}
+            //     axios.request(options).then(function (response) {
+            //         console.log(response.data.price.regularMarketPrice.raw);
+            //         stock.price = response.data.price.regularMarketPrice.raw
+            //     }).catch(function (error) {
+            //         console.error(error);
+            //     });
+            // })
             })
 
         //* update prices
@@ -143,7 +182,8 @@ export default {
         
   },    
     components: {
-        appStock: Stock
+        appStock: Stock,
+        GChart,
     }
 
 }

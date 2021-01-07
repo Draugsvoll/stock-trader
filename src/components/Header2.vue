@@ -41,7 +41,12 @@ export default {
     created () {
         const user = firebase.auth().currentUser.uid
         axios.get(`https://ove-stock-trader.firebaseio.com/users/${user}/funds.json`).then(resp => {
-              const funds = resp.data.toLocaleString()
+              var funds = resp.data.toLocaleString()
+              if ( funds == null) {
+                   firebase.database().ref(`users/${user}/funds/`).set(10000);
+                   funds = 10000
+                   console.log('funds fra header')
+              } 
               this.$store.dispatch('setFunds', funds)
             })
 }

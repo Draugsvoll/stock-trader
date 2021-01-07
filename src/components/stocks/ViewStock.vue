@@ -153,14 +153,26 @@ export default {
             }
             else {
                 var updatedFunds
+                const ref = this
                  axios.get(`https://ove-stock-trader.firebaseio.com/users/${user}/funds.json`).then(resp => {
                     const funds = resp.data
                     updatedFunds = funds + this.buyPrice
                     console.log('old funds: '. funds)
                     console.log('updated funds: '. updatedFunds)
                     Object.assign(this.currentStock, {quantity: newStockAmount})
-                firebase.database().ref(`users/${user}/portfolio/` + this.key).set(this.currentStock);
-                firebase.database().ref(`users/${user}/funds/`).set(updatedFunds);
+                    if ( newStockAmount < 1) {
+                        var dbRef = firebase.database().ref(`users/${user}/portfolio/${ref.key}`);
+                        dbRef.remove()
+                        .then(function() {
+                            console.log("Remove succeeded.")
+                        })
+                        .catch(function(error) {
+                            console.log("Remove failed: " + error.message)
+                        });
+                    } else {
+                        firebase.database().ref(`users/${user}/portfolio/` + this.key).set(this.currentStock);
+                    }
+                    firebase.database().ref(`users/${user}/funds/`).set(updatedFunds);
                 })
                 
             }

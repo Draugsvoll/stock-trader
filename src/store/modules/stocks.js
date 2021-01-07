@@ -1,7 +1,8 @@
 import { get500, getTopGainers, getTrending, getPortfolios, getNews, searchStock, getSingleStock} from '../../data/stocksApi'
 
 const state = {
-    funds:-1,
+    chartData: [],
+    funds:0,
     stocks: [],
     searchedStock: ['owiegje'],
     searchResult: [],
@@ -41,6 +42,9 @@ const mutations = {
     'SET_FUNDS' (state, funds) {
         state.funds = funds
     },
+    'SET_CHART' (state, chartData) {
+        state.chartData = chartData
+    },
 }
 
 const actions = {   // aviable actions on this site
@@ -77,6 +81,9 @@ const actions = {   // aviable actions on this site
     },
     setFunds: ({ commit }, funds ) => {
         commit('SET_FUNDS', funds)
+    },
+    setChartData: ({ commit }, chartData ) => {
+        commit('SET_CHART', chartData)
     }
 }
 
@@ -95,6 +102,9 @@ const getters = {
     },
     funds(state) {
         return state.funds
+    },
+    chartData(state){
+        return state.chartData
     }
 }
 
