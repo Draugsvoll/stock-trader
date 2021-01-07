@@ -1,14 +1,17 @@
 <template>
     <div class="box">
 
-                <GChart
-            type="PieChart"
-            :data="chartData2"
-            :options="chartOptions"
-        />
+             <div class="headline">
+                <h3>Total Stocks: ${{ totalStockValue.toFixed(2) }}</h3> 
+                <h3>Total Assets: ${{ totalAssets.toFixed(2) }}</h3>
+            </div>
 
-        <h3>Total Stock Value: {{ totalStockValue }}</h3>
-        <h1 class="headline">My Stocks: </h1>
+            <GChart
+                type="PieChart"
+                :data="chartData2"
+                :options="chartOptions"
+            />
+           
         <div class="tags" v-if="stocks != '' ">
                 <div class="tag name" @click="sortByLetter">Name</div>
                 <div class="tag" @click="sortByChange">Change</div>
@@ -29,7 +32,7 @@
 
 
 <script>
-import Stock from '../stocks/Stock'
+import PortfolioStock from '../stocks/PortfolioStock'
 import axios from 'axios'
 import firebase from 'firebase'
 import { GChart } from 'vue-google-charts'
@@ -37,14 +40,9 @@ import { GChart } from 'vue-google-charts'
 export default {
     data () {
         return {
-            chartData: [
-                ['Stocks', 'Sales'],
-                ['TSLA', 500],
-                ['AMZN', 300],
-                ],
             chartOptions: {
-            title: 'Asset Allocations',
-            is3D: true,
+                title: 'Asset Allocations',
+                is3D: true,
             },
             stocks: [],
             data: [],
@@ -58,6 +56,11 @@ export default {
     computed: {
         chartData2() {
             return this.$store.getters.chartData
+        },
+        totalAssets() {
+            var stocksValue = this.totalStockValue
+            var funds = this.$store.getters.funds
+            return  funds+stocksValue
         }
     },
     methods: {
@@ -134,6 +137,7 @@ export default {
 
         //* get portfolio
         const user = firebase.auth().currentUser.uid
+        var value = 0
         axios.get(`https://ove-stock-trader.firebaseio.com/users/${user}/portfolio.json`).then(response => {
               console.log(response.data)
               const ref = this
@@ -148,41 +152,36 @@ export default {
                         ['Stocks', 'Value'],
                     ]
               newStocks.forEach( stock => {
-                  var value = stock.price
+                  value = stock.price
                   value *= stock.quantity
-                  chartData.push([stock.symbol, value])
+                  chartData.push([stock.name, value])
               })
               this.$store.dispatch('setChartData', chartData)
 
               //* get updated prices
               var totalStockValue = 0
-            //   this.stocks.forEach( stock => {
-            //     var symbol = stock.symbol
-            //     ref.totalStockValue += stock.price
-            //     ref.chartData.push(stock.symbol, stock.price*stock.quantity)
-            //     const options = {
-            //     method: 'GET',
-            //     url: 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/get-detail',
-            //     params: {symbol: symbol, region: 'US'},
-            //     headers: {
-            //         'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8',
-            //         'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
-            //     }}
-            //     axios.request(options).then(function (response) {
-            //         console.log(response.data.price.regularMarketPrice.raw);
-            //         stock.price = response.data.price.regularMarketPrice.raw
-            //     }).catch(function (error) {
-            //         console.error(error);
-            //     });
-            // })
+              this.stocks.forEach( stock => {
+                var symbol = stock.symbol
+                ref.totalStockValue += (stock.price * stock.quantity)
+                const options = {
+                method: 'GET',
+                url: 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/get-detail',
+                params: {symbol: symbol, region: 'US'},
+                headers: {
+                    'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8',
+                    'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
+                }}
+                axios.request(options).then(function (response) {
+                    console.log(response.data.price.regularMarketPrice.raw);
+                    stock.price = response.data.price.regularMarketPrice.raw
+                }).catch(function (error) {
+                    console.error(error);
+                });
             })
-
-        //* update prices
-        const ref = this
-        
+            })
   },    
     components: {
-        appStock: Stock,
+        appStock: PortfolioStock,
         GChart,
     }
 
@@ -196,14 +195,20 @@ export default {
     color: rgb(19, 23, 48);
 
 }
+h3 {
+    margin:5px;
+}
 .headline {
     display:inline-flex;
+    flex-direction: column;
     margin:auto;
-    justify-content: center;
+    margin-top:50px;
+    max-width:300px;
 }
 .box {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     margin-bottom: 100px;
 }
 button {
@@ -231,5 +236,10 @@ margin-bottom: -40px;
     font-size: 13px;
     width:100px;
     cursor:pointer;
+}
+.charts {
+    max-width:1000px;
+    margin:auto auto;
+    text-align: center;
 }
 </style>

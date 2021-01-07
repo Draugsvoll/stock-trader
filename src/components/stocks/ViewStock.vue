@@ -95,12 +95,15 @@ export default {
             const ref = this
             var updatedFunds = 0
             const user = firebase.auth().currentUser.uid
+
             //* check funds
             axios.get(`https://ove-stock-trader.firebaseio.com/users/${user}/funds.json`)
                     .then(function (response) {
                         console.log('checking funds: ',response.data)
                         const funds = response.data
-                        const price = ref.buyPrice
+                        const price = ref.stock.price.regularMarketPrice.raw * ref.quantity
+                        console.log('logger prisen: ', ref.stock.price.regularMarketPrice.raw)
+                        console.log('logger quantity: ', ref.quantity)
                         if (funds > price) {
                             updatedFunds = funds - price
                             console.log('you can afford, new funds are: ', updatedFunds)
@@ -108,6 +111,7 @@ export default {
                         }
                     })
             this.showBuyModal = true
+
             //* dont have stock in portfolio
             console.log('logging current stock: ', this.currentStock)
             if (this.currentStock.name == undefined) {
@@ -118,7 +122,7 @@ export default {
                         quantity: this.quantity,
                         symbol: this.stock.symbol,
                         prevClose: this.stock.price.regularMarketPreviousClose.raw,
-                        change: this.stock.price.regularMarketChange.raw
+                        change: this.stock.price.regularMarketChange.raw,
                     }
                     console.log(order)
                     console.log(user)
@@ -126,18 +130,17 @@ export default {
                     .then(function (response) {
                         console.log(response);
                     })
-                    this.quantity = 0
                 }
             //* already have the stock
             } else {
-            const newStockAmount = this.oldQuantity + this.quantity
+                const newStockAmount = this.oldQuantity + this.quantity
                 const order = {
                         name: this.stock.quoteType.longName,
                         price: this.stock.price.regularMarketPrice.raw,
                         quantity: this.quantity,
                         symbol: this.stock.symbol,
                         prevClose: this.stock.price.regularMarketPreviousClose.raw,
-                        change: this.stock.price.regularMarketChange.raw
+                        change: this.stock.price.regularMarketChange.raw,
                     }
                 Object.assign(order, {quantity: newStockAmount})
                 firebase.database().ref(`users/${user}/portfolio/` + this.key).set(order);

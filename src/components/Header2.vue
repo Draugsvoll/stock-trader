@@ -3,7 +3,7 @@
         <nav class="header-nav">
             <a class="header-title" href="/">Stocktrader</a>
             <ul>
-                <li><a href="/">Funds: ${{ funds }} </a></li>
+                <li><a href="/">Funds: ${{ funds.toFixed(2).toLocaleString() }} </a></li>
                 <li ><a href="/stocks">Stocks</a></li>
                 <li ><a href="/publicportfolios">Portfolios</a></li>
                 <li ><a href="/portfolio">My Portfolio</a></li>
@@ -41,7 +41,7 @@ export default {
     created () {
         const user = firebase.auth().currentUser.uid
         axios.get(`https://ove-stock-trader.firebaseio.com/users/${user}/funds.json`).then(resp => {
-              var funds = resp.data.toLocaleString()
+              var funds = resp.data
               if ( funds == null) {
                    firebase.database().ref(`users/${user}/funds/`).set(10000);
                    funds = 10000
