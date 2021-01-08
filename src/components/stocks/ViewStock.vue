@@ -145,9 +145,7 @@ export default {
 
             //* dont have stock in portfolio
             console.log('logging current stock: ', this.currentStock)
-            if (this.currentStock.name == undefined) {
-                if (this.quantity % 1 == 0) {
-                    const order = {
+            const order = {
                         name: this.stock.quoteType.longName,
                         price: this.stock.price.regularMarketPrice.raw,
                         quantity: this.quantity,
@@ -155,6 +153,8 @@ export default {
                         prevClose: this.stock.price.regularMarketPreviousClose.raw,
                         change: this.stock.price.regularMarketChange.raw,
                     }
+            if (this.currentStock.name == undefined) {
+                if (this.quantity % 1 == 0) {
                     console.log(order)
                     console.log(user)
                     axios.post(`https://ove-stock-trader.firebaseio.com/users/${user}/portfolio/.json`, order)
@@ -162,21 +162,20 @@ export default {
                         console.log(response);
                     })
                 }
+            } 
             //* already have the stock
-            } else {
+            else {
                 const newStockAmount = this.oldQuantity + this.quantity
-                const order = {
-                        name: this.stock.quoteType.longName,
-                        price: this.stock.price.regularMarketPrice.raw,
-                        quantity: this.quantity,
-                        symbol: this.stock.symbol,
-                        prevClose: this.stock.price.regularMarketPreviousClose.raw,
-                        change: this.stock.price.regularMarketChange.raw,
-                    }
                 Object.assign(order, {quantity: newStockAmount})
                 firebase.database().ref(`users/${user}/portfolio/` + this.key).set(order);
                 console.log('hadde fra før')
             }
+            const date = new Date()
+            Object.assign(order, {timestamp: date})
+            axios.post(`https://ove-stock-trader.firebaseio.com/users/${user}/history/.json`, order)
+                    .then(function (response) {
+                        console.log(response);
+                    })
         },
         sellStock2 () {
             const user = firebase.auth().currentUser.uid

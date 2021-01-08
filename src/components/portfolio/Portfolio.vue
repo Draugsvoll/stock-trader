@@ -49,8 +49,9 @@
             </transition-group>
         </div>
 
-        <div class="history">
-            
+        <div class="history" v-for="purchase in history" :key=purchase.key>
+            <div> {{ purchase.name }} </div>
+            <div> {{ purchase.timestamp }} </div>
         </div>
 
     </div>
@@ -83,6 +84,7 @@ export default {
             stocks: [],
             data: [],
             totalStockValue: 0,
+            history: [],
             sortedByChange: false,
             sortedByPrice: false,
             sortedByClose: false,
@@ -179,13 +181,12 @@ export default {
         },
     },
     created () {
-
         //* get portfolio
         const user = firebase.auth().currentUser.uid
+        const ref = this
         var value = 0
         axios.get(`https://ove-stock-trader.firebaseio.com/users/${user}/portfolio.json`).then(response => {
               console.log(response.data)
-              const ref = this
               const resp = response.data
               const newStocks = []
               for (let key in resp){
@@ -210,26 +211,38 @@ export default {
 
               //* get updated prices
               var totalStockValue = 0
-              this.stocks.forEach( stock => {
-                var symbol = stock.symbol
-                ref.totalStockValue += (stock.price * stock.quantity)
-                ref.totalGains += (stock.change*stock.quantity)
-                const options = {
-                method: 'GET',
-                url: 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/get-detail',
-                params: {symbol: symbol, region: 'US'},
-                headers: {
-                    'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8',
-                    'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
-                }}
-                axios.request(options).then(function (response) {
-                    console.log(response.data.price.regularMarketPrice.raw);
-                    stock.price = response.data.price.regularMarketPrice.raw
-                }).catch(function (error) {
-                    console.error(error);
-                });
+            //   this.stocks.forEach( stock => {
+            //     var symbol = stock.symbol
+            //     ref.totalStockValue += (stock.price * stock.quantity)
+            //     ref.totalGains += (stock.change*stock.quantity)
+            //     const options = {
+            //     method: 'GET',
+            //     url: 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/get-detail',
+            //     params: {symbol: symbol, region: 'US'},
+            //     headers: {
+            //         'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8',
+            //         'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
+            //     }}
+            //     axios.request(options).then(function (response) {
+            //         console.log(response.data.price.regularMarketPrice.raw);
+            //         stock.price = response.data.price.regularMarketPrice.raw
+            //     }).catch(function (error) {
+            //         console.error(error);
+            //     });
+            // })
             })
-            })
+
+        //* get history
+        var history = []
+        axios.get(`https://ove-stock-trader.firebaseio.com/users/${user}/history.json`).then(resp => {
+            console.log(resp.data)
+            resp = resp.data
+            for (let key in resp){
+                history.push(resp[key])
+            }
+            ref.history = history
+            console.log('logger history: ', ref.history)
+        })
   },    
     components: {
         appStock: PortfolioStock,
