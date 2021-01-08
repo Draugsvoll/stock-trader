@@ -3,9 +3,9 @@
         <nav class="header-nav">
             <a class="header-title" href="/">Stocktrader</a>
             <ul>
-                <li><a href="/">Funds: ${{ funds.toFixed(2).toLocaleString() }} </a></li>
+                <li><a href="/">USD ${{ funds.toFixed(2) }} </a></li>
                 <li ><a href="/stocks">Stocks</a></li>
-                <li ><a href="/publicportfolios">Portfolios</a></li>
+                <!-- <li ><a href="/publicportfolios">Portfolios</a></li> -->
                 <li ><a href="/portfolio">My Portfolio</a></li>
                 <li ><a href="/news">News</a></li>
                 <li ><a href="/">About</a></li>            

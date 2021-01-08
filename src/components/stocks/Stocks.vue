@@ -5,7 +5,8 @@
             <button @click="getTrending">Trending</button>
             <button @click="getTopGainers">Top Gainers</button>
             <button @click="get500Stocks">S&P 500</button>
-            <button @click="getPortfolios">Portfolios</button>
+            <button @click="getFavourites">Favourites</button>
+            <!-- <button @click="getPortfolios">Portfolios</button> -->
         </div>
 
         <h2> {{ type }} </h2>
@@ -38,6 +39,7 @@
 <script>
 import Stock from './Stock.vue'
 import axios from 'axios'
+import firebase from 'firebase'
 
 export default {
     data () {
@@ -190,7 +192,23 @@ export default {
             }).catch(function (error) {
                 console.error(error)
             });
-        }
+        },
+        getFavourites () {
+            //* get portfolio
+            var favStocks = []
+            const user = firebase.auth().currentUser.uid
+            var value = 0
+            axios.get(`https://ove-stock-trader.firebaseio.com/users/${user}/favourites.json`).then(response => {
+                console.log(response.data)
+                const ref = this
+                const resp = response.data
+                for (let key in resp){
+                    favStocks.push(resp[key])
+                }
+                console.log('logging stocks from favourites', favStocks)
+                ref.$store.dispatch('setFavourites', favStocks)
+                })
+        },
     }
 }
 

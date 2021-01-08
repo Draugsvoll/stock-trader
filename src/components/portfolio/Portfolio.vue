@@ -1,16 +1,38 @@
 <template>
     <div class="box">
 
+            <p class="info">Markets open around 9:30 a.m Eastern Time (usa), <br> 
+            and 16:00 norwegian time</p>
+
              <div class="headline">
-                <h3>Total Stocks: ${{ totalStockValue.toFixed(2) }}</h3> 
-                <h3>Total Assets: ${{ totalAssets.toFixed(2) }}</h3>
+                 <div class="head">
+                    <h3>Stocks: ${{ totalStockValue.toFixed(2) }}</h3> 
+                 </div>
+                 <div class="head">
+                    <h3>Cash: ${{ funds.toFixed(2) }}</h3>
+                 </div>
+                <div class="head">
+                    <h3>Total Gains: {{ totalGains.toFixed(2) }}$</h3>
+                </div>
             </div>
 
-            <GChart
-                type="PieChart"
-                :data="chartData2"
-                :options="chartOptions"
-            />
+
+            <div class="charts">
+                <!-- PieChart -->
+                <GChart
+                    type="PieChart"
+                    :data="chartData2"
+                    :options="chartOptionsPie"
+                />
+
+                <!-- GainColumn -->
+                <GChart
+                    type="ColumnChart"
+                    :data="gainsData"
+                    :options="chartOptionsColumn"
+                />
+            </div>
+           
            
         <div class="tags" v-if="stocks != '' ">
                 <div class="tag name" @click="sortByLetter">Name</div>
@@ -20,10 +42,15 @@
                 <div class="tag">Symbol</div>
                 <div class="empty"><button>View</button></div>
         </div>
+
         <div class="stock-container">
             <transition-group name="slide" mode="in-out">
                 <app-stock v-for="(stock, index) in stocks" :stock="stock" :key="index"></app-stock>
             </transition-group>
+        </div>
+
+        <div class="history">
+            
         </div>
 
     </div>
@@ -40,10 +67,19 @@ import { GChart } from 'vue-google-charts'
 export default {
     data () {
         return {
-            chartOptions: {
-                title: 'Asset Allocations',
+            chartOptionsPie: {
+                title: 'Asset Allocation',
                 is3D: true,
+                'width':500,
+                'height':300,
             },
+            chartOptionsColumn: {
+                is3D: true,
+                'width':500,
+                'height':300,
+                title: 'Gains Percentage %'
+            },
+            totalGains: 0,
             stocks: [],
             data: [],
             totalStockValue: 0,
@@ -57,10 +93,19 @@ export default {
         chartData2() {
             return this.$store.getters.chartData
         },
-        totalAssets() {
-            var stocksValue = this.totalStockValue
-            var funds = this.$store.getters.funds
-            return  funds+stocksValue
+        gainsData () {
+            const ref = this
+            const gainsData = [
+                ['Stock', 'Gains'],
+            ]
+            this.stocks.forEach( stock => {
+                const gain = (stock.change/stock.price) * 100
+                gainsData.push([stock.name, gain])
+            })
+            return gainsData
+        },
+        funds() {
+            return this.$store.getters.funds
         }
     },
     methods: {
@@ -154,8 +199,13 @@ export default {
               newStocks.forEach( stock => {
                   value = stock.price
                   value *= stock.quantity
+                  value = value.toFixed(2)
+                  value = parseFloat(value)
                   chartData.push([stock.name, value])
               })
+              const funds = this.$store.getters.funds
+              chartData.push(['Cash Balance', funds])
+              console.log(chartData)
               this.$store.dispatch('setChartData', chartData)
 
               //* get updated prices
@@ -163,6 +213,7 @@ export default {
               this.stocks.forEach( stock => {
                 var symbol = stock.symbol
                 ref.totalStockValue += (stock.price * stock.quantity)
+                ref.totalGains += (stock.change*stock.quantity)
                 const options = {
                 method: 'GET',
                 url: 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/get-detail',
@@ -197,6 +248,13 @@ export default {
 }
 h3 {
     margin:5px;
+}
+.green {
+    color:green;
+}
+.info {
+    font-size: 0.65rem;
+    color:rgb(29, 28, 28);
 }
 .headline {
     display:inline-flex;
@@ -241,5 +299,7 @@ margin-bottom: -40px;
     max-width:1000px;
     margin:auto auto;
     text-align: center;
+    display: flex;
+    flex-wrap: wrap;
 }
 </style>

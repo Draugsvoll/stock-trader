@@ -1,5 +1,6 @@
 <template>
          <div class="container" >
+
             <div class="stock">
                 <!-- <div class="info name"> {{ stock.name }}</div>
                 <div class="info" :class="{green: stock.change > 0, red: stock.change < 0 }" > {{ stock.change.toFixed(2) }}$</div>
@@ -16,6 +17,7 @@
                 <div class="info"> {{ stock.symbol }}</div>
                 <div class="btn"><button @click="viewStock(stock.symbol)">View</button></div>
             </div>
+            
          </div>
 </template>
 

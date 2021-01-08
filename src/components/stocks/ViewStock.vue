@@ -19,6 +19,8 @@
                 <input type="number" v-model.number="quantity">
                 <button class="buy" @click="buyDialogue" >Buy</button>
                 <button class="sell" @click="sellStock2" >Sell</button>
+                <i @click="add" class="fas fa-heart icon" :class="{added: favourite }"></i>
+                <button class="notice" v-if="notice != null"> {{ notice }} </button>
                 <p class="smallName">You have {{ this.oldQuantity }} stocks. </p>
             </div>
         </div>
@@ -50,8 +52,6 @@
             <div> <p class="line"> {{ stock.assetProfile.adress1 }}</p>  </div>
             <div> <p class="line"> Phone: {{ stock.assetProfile.phone }}</p>  </div>
         </div>
-
-        
         
     </div>
 </template>
@@ -74,6 +74,8 @@ export default {
             key: '',
             showBuyModal: false,
             currentStock: {},
+            favourite: false,
+            notice: null,
         }
     },
     computed: {
@@ -90,6 +92,35 @@ export default {
         },
         buyDialogue () {
             this.showBuyModal = true
+        },
+        add () {
+            const user = firebase.auth().currentUser.uid
+            const ref = this
+            //* remove favourite
+            if ( this.favourite ) {
+                var dbRef = firebase.database().ref(`users/${user}/favourites/${ref.key}`);
+                dbRef.remove()
+                this.favourite = false
+                this.notice = 'Removed from Favourites'
+                setTimeout(() => {  this.notice = null }, 2500);
+            } 
+            //* add favourite
+            else {
+                    const favourite = {
+                        name: this.stock.quoteType.longName,
+                        price: this.stock.price.regularMarketPrice.raw,
+                        symbol: this.stock.symbol,
+                        prevClose: this.stock.price.regularMarketPreviousClose.raw,
+                        change: this.stock.price.regularMarketChange.raw,
+                    }
+                axios.post(`https://ove-stock-trader.firebaseio.com/users/${user}/favourites/.json`, favourite)
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    this.favourite = true
+                    this.notice = 'Added to Favourites'
+                    setTimeout(() => {  this.notice = null }, 2500);
+            }
         },
         buyStock() {
             const ref = this
@@ -182,7 +213,6 @@ export default {
         },
     },
     created () {
-        console.log(this.stock)
             // * GET STOCK
             const ref = this;
             const options = {
@@ -221,6 +251,23 @@ export default {
                   }
               })
             })
+
+            //* check if in favourites
+            axios.get(`https://ove-stock-trader.firebaseio.com/users/${user}/favourites.json`).then(resp => {
+              resp = resp.data
+              const favouriteStocks = []
+              for (let key in resp){
+                Object.assign(resp[key], {key: key})
+                favouriteStocks.push(resp[key])
+              }
+              ref.favouriteStocks = favouriteStocks
+              favouriteStocks.forEach( stock => {
+                  if ( stock.symbol == this.symbol ) {
+                      console.log('fins i favorites', stock.key)
+                      ref.favourite = true
+                  }
+              })
+            })
     }// created
 }
 </script>
@@ -237,6 +284,26 @@ h2 {
     margin:0;
     padding:0;
     font-weight: 500;
+}
+.added {
+    color:rgb(55, 57, 179) !important;
+}
+.icon {
+    cursor:pointer;
+    color:rgb(214, 208, 208);
+    margin:5px;
+}
+.icon:hover {
+        color:rgb(156, 183, 196);
+}
+.notice {
+    background:rgba(0,0,0,0);
+    border:none;
+    color:rgb(55, 57, 179);
+}
+.notice:hover {
+     color:rgb(55, 57, 179) !important;
+    background:none !important;
 }
 .smallName {
     font-size: 0.7rem;

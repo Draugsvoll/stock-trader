@@ -45,6 +45,9 @@ const mutations = {
     'SET_CHART' (state, chartData) {
         state.chartData = chartData
     },
+    'SET_FAVS' (state, favourites) {
+        state.stocks = favourites
+    },
 }
 
 const actions = {   // aviable actions on this site
@@ -84,6 +87,9 @@ const actions = {   // aviable actions on this site
     },
     setChartData: ({ commit }, chartData ) => {
         commit('SET_CHART', chartData)
+    },
+    setFavourites: ({ commit }, favourites ) => {
+        commit('SET_FAVS', favourites)
     }
 }
 
@@ -105,6 +111,9 @@ const getters = {
     },
     chartData(state){
         return state.chartData
+    },
+    favourites(state){
+        return state.favourites
     }
 }
 
