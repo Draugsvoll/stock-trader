@@ -1,9 +1,7 @@
 <template>
     <div class="box">
 
-            <p class="info">Markets open around 9:30 a.m Eastern Time (usa), <br> 
-            and 16:00 norwegian time</p>
-
+             <!-- VALUES -->
              <div class="headline">
                  <div class="head">
                     <h3>Stocks: ${{ totalStockValue.toFixed(2) }}</h3> 
@@ -16,7 +14,7 @@
                 </div>
             </div>
 
-
+            <!-- CHARTS  -->
             <div class="charts">
                 <!-- PieChart -->
                 <GChart
@@ -33,9 +31,12 @@
                 />
             </div>
            
-           
+         <!-- OPENING -->
+        <p class="opening">Markets open around 9:30 a.m Eastern Time (usa), and 16:00 norwegian time</p>
+
+        <!-- TAGS -->
         <div class="tags" v-if="stocks != '' ">
-                <div class="tag name" @click="sortByLetter">Name</div>
+                <div class="tag width" @click="sortByLetter">Name</div>
                 <div class="tag" @click="sortByChange">Change</div>
                 <div class="tag" @click="sortByPrice">Market Price</div>
                 <div class="tag" @click="sortByClose">Prev. Close</div>
@@ -43,20 +44,36 @@
                 <div class="empty"><button>View</button></div>
         </div>
 
+        <!-- STOCKS  -->
         <div class="stock-container">
             <transition-group name="slide" mode="in-out">
                 <app-stock v-for="(stock, index) in stocks" :stock="stock" :key="index"></app-stock>
             </transition-group>
         </div>
 
-        <div class="history" v-for="purchase in history" :key=purchase.key>
-            <div> {{ purchase.name }} </div>
-            <div> {{ purchase.timestamp }} </div>
+        <!-- PURCHASE HISTORY -->
+        <div class="history" v-for="(purchase, index) in history" :key=purchase.key>
+            <div class=history-tags v-if="index == 0">
+                <!-- tags -->
+                <div class="tags2" v-if="stocks != '' ">
+                    <div class="tag2 name" >Purchase History</div>
+                    <div class="tag2" >Quantity</div>
+                    <div class="tag2" >Price</div>
+                    <div class="tag2">Date</div>
+                    <div class="empty"><button>View</button></div>
+                </div>
+            </div>
+            <!-- PURCHASE HISTORY -->
+            <div class="history-container">
+                <div class="info name"> {{ purchase.name }} </div>
+                <div class="info"> {{ purchase.quantity }} </div>
+                <div class="info"> {{ purchase.price }} </div>
+                <div class="info"> {{ purchase.timestamp }} </div>
+            </div>
         </div>
 
     </div>
 </template>
-
 
 
 <script>
@@ -78,7 +95,7 @@ export default {
                 is3D: true,
                 'width':500,
                 'height':300,
-                title: 'Gains Percentage %'
+                title: 'Percentage Gains %'
             },
             totalGains: 0,
             stocks: [],
@@ -254,13 +271,38 @@ export default {
 
 
 <style  scoped>
-
+* {
+    /* border:1px solid black; */
+}
+.width {
+    width:175px !important;
+}
+.opening {
+    width:750px;
+    font-size: 0.55rem;
+    margin:auto;
+    margin-top:100px;
+    margin-bottom:-30px;
+}
+.info {
+    width:100px;
+    font-size: 0.65rem !important;
+    color: rgb(243, 240, 240);
+}
+.name {
+    width:175px !important;
+    overflow: hidden;
+}
 *{
     color: rgb(19, 23, 48);
-
+    /* border:1px solid black; */
 }
 h3 {
     margin:5px;
+    font-weight: 400;
+    width:750px;
+    display: flex;
+    
 }
 .green {
     color:green;
@@ -287,26 +329,59 @@ button {
 .stock-container {
     margin:auto;
 }
-.empty{
-visibility: collapse;
-margin-bottom: -40px;
+.history {
+    text-align: left;
+    width:750px;
+    margin:auto;
 }
-.name {
-    width:250px !important;
+.history-tags {
+    text-align: left;
+    margin-left:0;
+}
+.history-container {
+    border:1px solid rgb(214, 215, 216);
+    margin-top:50px;
+    width:750px;
+    
+    margin:auto;
+    display: flex;
+}
+.history:nth-child(odd) {
+  background-color: rgb(245, 246, 247);
+}
+
+.history-container:nth-child(1) {
+  border-top:none;
+}
+.empty{
+    visibility: collapse;
+    margin-bottom: -40px;
 }
 .tags {
     display: flex;
-    justify-content: center;
     text-align: left;
-    max-width:630px;
+    width:750px;
     margin:auto;
     margin-top:55px;
 }
+.tags2 {
+    display: flex;
+    text-align: left;
+    width:750px;
+    margin:auto;
+    margin-top:55px;
+    margin-left:0;
+}
 .tag {
-    font-weight: bold;
-    font-size: 13px;
+    font-size: 12px;
     width:100px;
     cursor:pointer;
+}
+.tag2 {
+    font-size: 12px;
+    width:100px;
+    cursor:pointer;
+    margin-left:0;
 }
 .charts {
     max-width:1000px;

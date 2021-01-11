@@ -1,11 +1,12 @@
 <template>
     <div class="box">
-        <h2>Welcome, <br> <h1>{{ user }}</h1></h2>
+        <h2>Welcome <i>{{ user }}</i></h2>
                                 <!-- apply the currency filter -->
-        <p><b>Available Funds:</b> <br>{{ funds | currency }}</p>
-        <div class=""><b>Info:<br> </b>Stocks are saved using Firebase, with a signed up user.</div><br>
+        <p><b class="info">Available Funds:</b> <br>{{ funds | currency }}</p>
+        <div class=""><b class="info">Info:<br> </b>Stocks, funds and purchase history is saved
+                                                    in a Firebase Database (with registered user).</div><br>
 
-        <div><b>More Info: </b><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        <div><b class="info">More Info: </b><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
              Suspendisse sed nisi lacus sed viverra tellus in hac habitasse. Semper auctor neque vitae tempus quam pellentesque nec nam. 
              Tellus integer feugiat scelerisque varius morbi enim. Egestas sed sed risus pretium. Mauris rhoncus aenean vel elit scelerisque 
              
@@ -24,7 +25,7 @@
 
 
 
-<script>
+<script scoped>
 import firebase from 'firebase'
 export default {
     data () {
@@ -53,16 +54,14 @@ export default {
     padding: 20px;
     text-align: justify;
     width: 700px;
-    color: rgb(37, 43, 78);
+    color: rgb(15, 17, 31);
+    font-size: 0.75rem;
     margin-top: 20px;
     }
-
-h1 {
-    margin:0;
-    font-size: 1.8rem;
-    margin-bottom:45px;
-}
 h2 {
-    margin:0;
+    margin:25px 0;
+}
+.info {
+    font-size: 0.85rem;
 }
 </style>

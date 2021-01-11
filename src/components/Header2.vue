@@ -55,15 +55,12 @@ export default {
 
 <style scoped>
 * {
-     color:black
+     color:white
  }
  header {
-    font-size: 22px;
-    height: 50px;
-    color:black;
-    background: lightgrey;
-    font-size:1rem;
-    /* background: linear-gradient(to right, rgb(17, 36, 58), rgb(17, 33, 54)); */
+    font-size:0.85rem;
+    padding:1.25rem;
+    background-color: #1f2c3a;
 }
 .header-title {
     text-decoration: none; 
@@ -73,8 +70,6 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
-    padding-top:10px;
 }
 
 .header-nav ul {
@@ -86,8 +81,11 @@ export default {
 
 .header-nav li {
     list-style: none;
+    align-items:center;
 }
-
+li:hover {
+    text-decoration: underline;
+}
 .header-nav li a {
     text-decoration: none;
     padding-right: 2rem;

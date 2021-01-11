@@ -2,20 +2,20 @@
     <div class="box">
         
         <div class="btn-row">
-            <button @click="getTrending">Trending</button>
-            <button @click="getTopGainers">Top Gainers</button>
-            <button @click="get500Stocks">S&P 500</button>
-            <button @click="getFavourites">Favourites</button>
+            <button :class="{active: type=='Trending'}"  @click="getTrending">Trending</button>
+            <button :class="{active: type=='Top Gainers'}" @click="getTopGainers">Top Gainers</button>
+            <button :class="{active: type=='S&P 500'}" @click="get500Stocks">S&P 500</button>
+            <button :class="{active: type=='Favourites'}" @click="getFavourites">Favourites</button>
             <!-- <button @click="getPortfolios">Portfolios</button> -->
         </div>
 
-        <h2> {{ type }} </h2>
-
-          <div class="searchfield">
-            <input type="text"  v-model="searchTerm" autofocus placeholder="Tesla">
+         <!-- SEARCH-FIELD -->
+        <div class="searchfield">
+            <input type="text"  v-model="searchTerm" autofocus placeholder="Any stock..">
             <button class="search" @click="getSymbol" >Search</button>
         </div>
 
+        <!-- TAGS -->
         <div class="tags" v-if="stocks != '' ">
                 <div class="tag name" @click="sortByLetter">Name</div>
                 <div class="tag" @click="sortByChange">Change</div>
@@ -25,6 +25,7 @@
                 <div class="empty"><button >View</button></div>
         </div>
 
+        <!-- STOCKS -->
         <div class="stock-container">
             <transition-group name="slide" mode="in-out">
                 <app-stock v-for="(stock, index) in stocks" :stock="stock" :key="index"></app-stock>
@@ -36,7 +37,7 @@
 
 
 
-<script>
+<script scoped>
 import Stock from './Stock.vue'
 import axios from 'axios'
 import firebase from 'firebase'
@@ -195,6 +196,7 @@ export default {
         },
         getFavourites () {
             //* get portfolio
+            this.type = 'Favourites'
             var favStocks = []
             const user = firebase.auth().currentUser.uid
             var value = 0
@@ -215,6 +217,17 @@ export default {
 </script>
 
 <style scoped>
+* {
+    /* border:1px solid black; */
+}
+.active {
+    background-color: #16416e !important;
+    color:white;
+    border:1px solid rgb(5, 36, 122) !important;
+}
+.active:hover {
+    color:white !important;
+}
 .stock-container {
     margin:auto;
 }
@@ -225,19 +238,26 @@ export default {
 }
 .btn-row {
     margin:25px auto;
-    width: 300px;
+    margin-top:50px;
     display:flex;
     justify-content:stretch;
 }
 .btn-row button {
-    font-size: 0.8rem;
-    padding:9px 8px;
+    font-size: 0.7rem;
+    padding:12px 0;
     border:none;
     border-bottom:1px solid black;
     cursor: pointer;
+    background:rgb(235, 237, 238);
+    width:110px;
 }
 .btn-row button:hover {
-    background:pink;
+    color:rgb(4, 38, 90);
+    border-bottom:1px solid rgb(2, 27, 65);
+    background:rgb(211, 215, 218);
+}
+::placeholder {
+    color:rgb(177, 185, 194);
 }
 h2 {
     display: flex;
@@ -248,39 +268,48 @@ h2 {
 }
 .tags {
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     text-align: left;
-    max-width:630px;
+    max-width:750px;
+    vertical-align: bottom;
+    height:fit-content;
     margin:auto;
-    margin-top:55px;
-
 }
 .tag {
-    font-weight: bold;
-    font-size: 13px;
+    display: flex;
+    text-align: left;
     width:100px;
-    cursor:pointer;
+    margin-top:55px;
+    height:fit-content;
 }
 .name {
-    width:250px !important;
+    width:175px !important;
 }
 .searchfield {
     display:flex;
-    margin:auto;
     justify-content: center;
-    margin-top:100px;
+    margin:25px auto;
+}
+.search {
+    background:#2b3f53;
+    border:none;
+    color:white;
+    font-size: 0.7rem;
+    cursor:pointer;
+    padding:0.5rem;
+    border-radius: 5px;
 }
 input {
     width:200px;
+    border:none;
+    border-bottom: 1px solid  #1f2c3a;
+    margin-right:10px;
 }
 * {
     color: rgb(19, 23, 48);
 }
 .empty {
     visibility: hidden;
-}
-.searchfield {
-    margin:auto;
 }
 
 
@@ -301,7 +330,7 @@ input {
     opacity: 1;
   }
 }
- @keyframes slide-out {
+ /* @keyframes slide-out {
     from {
       transform: translateY(0);
       opacity:1;
@@ -310,5 +339,5 @@ input {
       transform: translateY(100px);
       opacity: 0;
     }
-  } 
+  }  */
 </style>

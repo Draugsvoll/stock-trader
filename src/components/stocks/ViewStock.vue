@@ -345,7 +345,7 @@ h2 {
 .container {
     max-width:500px;
     margin:auto;
-    margin-top: 25px;
+    margin-top: 55px;
     border:1px solid rgb(206, 207, 207);
     border-radius:3px;
     padding:18px;

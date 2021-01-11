@@ -19,15 +19,19 @@ html, body {
 }
 
 footer{
-  background:lightgrey;
-  font-size: 0.7rem;
-  color:black;
+  background-color: #1f2c3a;
+  color:white;
   min-height: 180px;
+}
+.column {
+  font-size: 10px !important;
 }
 
 .copyright {
     display: flex;
     justify-content: center;
+    font-size: 0.65rem !important;
+    color:rgb(235, 241, 243) !important;
 }
 
 .footer-container {
@@ -36,8 +40,11 @@ footer{
     width:100%;
     flex-wrap: wrap;
 }
-
-
+.link {
+  margin:4px;
+  margin-left:0px;
+  color:rgb(230, 236, 238);
+}
 
 
 
@@ -46,11 +53,13 @@ footer{
 /* NOT IMPORTANT */
 
 .footer-headline {
-  font-size: 25px;
+  font-size: 14px !important; 
+  margin-bottom:5px;
+  margin-top:10px !important;
 }
 
 .column {
-    margin:25px;
+    margin:18px;
 }
 
 @media only screen and (max-width: 605px) {
