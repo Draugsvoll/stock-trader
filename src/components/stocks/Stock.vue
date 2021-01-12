@@ -84,12 +84,12 @@ export default {
 }
 .info {
     width:100px;
-    font-size: 0.65rem;
+    font-size: 0.75rem;
 }
 .name {
     width:175px;
     overflow: hidden;
-    font-size: 0.7rem;
+    font-size: 0.75rem;
 }
 button {
     border-radius:5px;

@@ -7,7 +7,9 @@
                 <div class="info" :class="{green: stock.change > 0, red: stock.change < 0 }" > {{ stock.change.toFixed(2) }}$</div>
                 <div class="info"> {{ stock.price.toFixed(2) }}$</div>
                 <div class="info"> {{ stock.prevClose.toFixed(2) }}$</div>
-                <div class="info"> {{ stock.symbol }}</div>
+                <div class="info smaller"> {{ stock.quantity }}</div>
+                <div class="info smaller" :class="{green: stock.change > 0, red: stock.change < 0 }"> {{ gains }}%</div>
+                <div class="info smaller"> {{ stock.symbol }}</div>
                 <div class="btn"><button @click="viewStock(stock.symbol)">View</button></div>
             </div>
             
@@ -45,9 +47,12 @@ export default {
     },
     computed: {
         gains () {
-            return (this.stock.change/this.stock.price) * 100
+            const change = this.stock.change
+            const prevClose = this.stock.prevClose
+            const gains = (change/prevClose) * 100
+            return gains.toFixed(2)
         }
-    }
+    },
 }
 </script>
 
@@ -63,7 +68,13 @@ export default {
     border:1px solid rgb(214, 215, 216);
     border-top:none;
     width:750px;
-    padding:5px 0;
+    padding-top: 9px;
+    padding-bottom: 7px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.smaller {
+    width:65px !important;
 }
 .green {
     color:green !important
@@ -77,16 +88,16 @@ export default {
 .stock {
     display: flex;
     text-align: left;
-    width:750px;
+    :750px;
 }
 .info {
     width:100px;
-    font-size: 0.65rem;
+    font-size: 12px;
 }
 .name {
     width:175px;
     overflow: hidden;
-    font-size: 0.7rem;
+    font-size: 12px;
 }
 .container:nth-child(odd) {
   background-color: rgb(245, 246, 247);

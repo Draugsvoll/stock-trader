@@ -1,19 +1,6 @@
 <template>
     <div class="box">
 
-             <!-- VALUES -->
-             <div class="headline">
-                 <div class="head">
-                    <h3>Stocks: ${{ totalStockValue.toFixed(2) }}</h3> 
-                 </div>
-                 <div class="head">
-                    <h3>Cash: ${{ funds.toFixed(2) }}</h3>
-                 </div>
-                <div class="head">
-                    <h3>Total Gains: {{ totalGains.toFixed(2) }}$</h3>
-                </div>
-            </div>
-
             <!-- CHARTS  -->
             <div class="charts">
                 <!-- PieChart -->
@@ -22,17 +9,24 @@
                     :data="chartData2"
                     :options="chartOptionsPie"
                 />
+            </div>
 
-                <!-- GainColumn -->
-                <GChart
-                    type="ColumnChart"
-                    :data="gainsData"
-                    :options="chartOptionsColumn"
-                />
+            <!-- VALUES -->
+             <div class="headline">
+                 <div class="head">
+                    <h3> <span class="value">Stocks:</span> {{ totalStockValue | currency }}</h3> 
+                 </div>
+                 <div class="head">
+                    <h3><span class="value">Cash:</span> {{ funds | currency }}</h3>
+                 </div>
+                <div class="head">
+                    <h3> <span class="value">Total Gains:</span> <span class="total-gains" :class="{green: totalGains > 0, red: totalGains < 0 }"> {{ totalGains | currency }}</span></h3>
+                </div>
             </div>
            
          <!-- OPENING -->
         <p class="opening">Markets open around 9:30 a.m Eastern Time (usa), and 16:00 norwegian time</p>
+        <h2>Stocks</h2>
 
         <!-- TAGS -->
         <div class="tags" v-if="stocks != '' ">
@@ -40,7 +34,8 @@
                 <div class="tag" @click="sortByChange">Change</div>
                 <div class="tag" @click="sortByPrice">Market Price</div>
                 <div class="tag" @click="sortByClose">Prev. Close</div>
-                <div class="tag">Symbol</div>
+                <div class="tag smaller">Quantity</div>
+                <div class="tag smaller">Gains</div>
                 <div class="empty"><button>View</button></div>
         </div>
 
@@ -51,14 +46,25 @@
             </transition-group>
         </div>
 
+        <div class="column">
+                <!-- GainColumn -->
+                <GChart
+                    type="ColumnChart"
+                    :data="gainsData"
+                    :options="chartOptionsColumn"
+                />
+        </div>
+
         <!-- PURCHASE HISTORY -->
-        <div class="history" v-for="(purchase, index) in history" :key=purchase.key>
+        <h2>Trading History</h2>
+        <div class="history" v-for="(purchase, index) in history" :key=purchase.id>
             <div class=history-tags v-if="index == 0">
                 <!-- tags -->
                 <div class="tags2" v-if="stocks != '' ">
                     <div class="tag2 name" >Purchase History</div>
                     <div class="tag2" >Quantity</div>
                     <div class="tag2" >Price</div>
+                    <div class="tag2" >Total Price</div>
                     <div class="tag2">Date</div>
                     <div class="empty"><button>View</button></div>
                 </div>
@@ -68,7 +74,8 @@
                 <div class="info name"> {{ purchase.name }} </div>
                 <div class="info"> {{ purchase.quantity }} </div>
                 <div class="info"> {{ purchase.price }} </div>
-                <div class="info"> {{ purchase.timestamp }} </div>
+                <div class="info"> {{ purchase.price * purchase.quantity }} </div>
+                <div class="info date"> {{ purchase.timestamp }} </div>
             </div>
         </div>
 
@@ -88,13 +95,12 @@ export default {
             chartOptionsPie: {
                 title: 'Asset Allocation',
                 is3D: true,
-                'width':500,
-                'height':300,
+                'width':1000,
+                'height':450,
             },
             chartOptionsColumn: {
-                is3D: true,
-                'width':500,
-                'height':300,
+                'width':750,
+                'height':400,
                 title: 'Percentage Gains %'
             },
             totalGains: 0,
@@ -228,25 +234,25 @@ export default {
 
               //* get updated prices
               var totalStockValue = 0
-            //   this.stocks.forEach( stock => {
-            //     var symbol = stock.symbol
-            //     ref.totalStockValue += (stock.price * stock.quantity)
-            //     ref.totalGains += (stock.change*stock.quantity)
-            //     const options = {
-            //     method: 'GET',
-            //     url: 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/get-detail',
-            //     params: {symbol: symbol, region: 'US'},
-            //     headers: {
-            //         'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8',
-            //         'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
-            //     }}
-            //     axios.request(options).then(function (response) {
-            //         console.log(response.data.price.regularMarketPrice.raw);
-            //         stock.price = response.data.price.regularMarketPrice.raw
-            //     }).catch(function (error) {
-            //         console.error(error);
-            //     });
-            // })
+              this.stocks.forEach( stock => {
+                var symbol = stock.symbol
+                ref.totalStockValue += (stock.price * stock.quantity)
+                ref.totalGains += (stock.change * stock.quantity)
+                const options = {
+                method: 'GET',
+                url: 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/get-detail',
+                params: {symbol: symbol, region: 'US'},
+                headers: {
+                    'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8',
+                    'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
+                }}
+                // axios.request(options).then(function (response) {
+                //     console.log(response.data.price.regularMarketPrice.raw);
+                //     stock.price = response.data.price.regularMarketPrice.raw
+                // }).catch(function (error) {
+                //     console.error(error);
+                // });
+            })
             })
 
         //* get history
@@ -274,6 +280,23 @@ export default {
 * {
     /* border:1px solid black; */
 }
+
+h2 {
+    margin:auto;
+    margin-top:75px;
+}
+.smaller {
+    width:65px !important;
+} 
+.green {
+    color:green;
+}
+.red {
+    color:red;
+}
+.date {
+    width:175px !important;
+}
 .width {
     width:175px !important;
 }
@@ -281,12 +304,14 @@ export default {
     width:750px;
     font-size: 0.55rem;
     margin:auto;
-    margin-top:100px;
+    z-index:1;
+    margin-top:25px;
     margin-bottom:-30px;
 }
 .info {
     width:100px;
-    font-size: 0.65rem !important;
+    font-size: 12px !important;
+    padding:8px 0;
     color: rgb(243, 240, 240);
 }
 .name {
@@ -300,31 +325,31 @@ export default {
 h3 {
     margin:5px;
     font-weight: 400;
-    width:750px;
     display: flex;
-    
 }
 .green {
     color:green;
 }
 .info {
-    font-size: 0.65rem;
+    font-size: 12px;
     color:rgb(29, 28, 28);
 }
 .headline {
-    display:inline-flex;
-    flex-direction: column;
+    display: flex;
     margin:auto;
-    margin-top:50px;
-    max-width:300px;
+    margin-top:-60px;
+    z-index:1;
+    width:750px;
+    font-size:1rem;
+    justify-content: space-between;
+}
+.head {
 }
 .box {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-bottom: 100px;
-}
-button {
 }
 .stock-container {
     margin:auto;
@@ -341,12 +366,14 @@ button {
 .history-container {
     border:1px solid rgb(214, 215, 216);
     margin-top:50px;
-    width:750px;
-    
     margin:auto;
     display: flex;
+    padding-top: 9px;
+    padding-bottom: 7px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
-.history:nth-child(odd) {
+.history:nth-child(even) {
   background-color: rgb(245, 246, 247);
 }
 
@@ -370,17 +397,16 @@ button {
     width:750px;
     margin:auto;
     margin-top:55px;
-    margin-left:0;
+    margin-left:5px;
 }
 .tag {
-    font-size: 12px;
+    font-size:0.75rem;
     width:100px;
     cursor:pointer;
 }
 .tag2 {
-    font-size: 12px;
+    font-size:0.75rem;
     width:100px;
-    cursor:pointer;
     margin-left:0;
 }
 .charts {
@@ -389,5 +415,15 @@ button {
     text-align: center;
     display: flex;
     flex-wrap: wrap;
+}
+span {
+}
+.column {
+    width:700px;
+    margin:auto;
+    margin-top:50px;
+}
+.value {
+    font-size: 18px !important;
 }
 </style>

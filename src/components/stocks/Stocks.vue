@@ -281,6 +281,7 @@ h2 {
     width:100px;
     margin-top:55px;
     height:fit-content;
+    font-size:0.75rem;
 }
 .name {
     width:175px !important;
@@ -296,7 +297,7 @@ h2 {
     color:white;
     font-size: 0.7rem;
     cursor:pointer;
-    padding:0.5rem;
+    padding:0.5rem 0.65rem;
     border-radius: 5px;
 }
 input {
@@ -318,7 +319,7 @@ input {
   animation: slide-in 250ms ease-out forwards;
 }
  .slide-leave-active {
-    animation: slide-out 250ms ease-out forwards;
+    animation: slide-out 0ms ease-out forwards;
   } 
 @keyframes slide-in {
   from {
@@ -330,14 +331,14 @@ input {
     opacity: 1;
   }
 }
- /* @keyframes slide-out {
+ @keyframes slide-out {
     from {
       transform: translateY(0);
       opacity:1;
     }
     to {
-      transform: translateY(100px);
+      transform: translateY(0);
       opacity: 0;
     }
-  }  */
+  } 
 </style>

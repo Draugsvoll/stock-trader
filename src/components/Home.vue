@@ -1,9 +1,11 @@
 <template>
     <div class="box">
-        <h2>Welcome <i>{{ user }}</i></h2>
+        <h2>Welcome, <i>{{ user }}</i></h2>
+        <img src="../assets/profile.png" alt="" width="120"> <br>
+        <input type="file" @change="onFileSelected">
                                 <!-- apply the currency filter -->
         <p><b class="info">Available Funds:</b> <br>{{ funds | currency }}</p>
-        <div class=""><b class="info">Info:<br> </b>Stocks, funds and purchase history is saved
+        <div class=""><b class="info">Info:<br> </b>Stocks, funds and trade history are saved
                                                     in a Firebase Database (with registered user).</div><br>
 
         <div><b class="info">More Info: </b><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -33,6 +35,11 @@ export default {
             user:'',
         }
     },
+    methods: {
+        onFileSelected (event) {
+            console.log(event)
+        }
+    },
     computed: {
         funds() {
             return this.$store.getters.funds
@@ -60,8 +67,14 @@ export default {
     }
 h2 {
     margin:25px 0;
+    margin-bottom:0;
 }
 .info {
-    font-size: 0.85rem;
+    font-size: 0.95rem;
+}
+img {
+    margin:0;
+    margin-bottom:-25px;
+    margin-left:-15px;
 }
 </style>

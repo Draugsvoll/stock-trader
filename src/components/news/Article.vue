@@ -28,7 +28,7 @@ export default {
 <style  scoped>
 .article {
     border-radius:3px;
-    border:1px solid rgb(223, 224, 224);
+    border:1px solid #1f2c3a;
     margin:100px auto;
     padding: 50px;
     max-width:700px;
@@ -46,7 +46,6 @@ export default {
 
 .content >>> figcaption {
     font-size: 0.6rem;
-    
 }
 .content >>> p {
     font-size: 0.75rem;

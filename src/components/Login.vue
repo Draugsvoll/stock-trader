@@ -1,30 +1,19 @@
 <template>
     <div class="outer-container">
-        <div class="container">
-        </div>
-        <div class="container overlay">
-        <!-- <div class="logo"></div> -->
-        <!-- <img src="../../assets/logo2.png" alt="" width="250"> -->
+            <div class="img">
+                <img src="../assets/logo3.png" alt="" width="60">
+            </div>
             <div class="form">
-                <span>Username:</span>
-                <input v-model="email" type="text" name="username" placeholder="Username">
-                <br>
-                <br>
-                <br>
-                <span>Password:</span>
+                <input v-model="email" type="text" name="username" placeholder="Email" autofocus >
                 <input v-model="password" type="password" name="password" placeholder="Password">
                 <div class="btn">
                     <button @click="login">Login</button>
                     <button @click="signUp  ">Sign Up</button>
                 </div>
-                <br>
-                <br>
                 <div> 
-                    Continue as
-                    <button class="test" @click="loginAsTest">Test User</button>
+                    <p class="testuser">Continue as<button class="test" @click="loginAsTest">Test User</button></p> 
                 </div>
             </div>
-        </div>
     </div>
     
 </template>
@@ -46,31 +35,29 @@ export default {
             firebase.auth().signInWithEmailAndPassword('test_user@gmail.com', 'pass123')
                 .then( resp => {
                     console.log(resp)
-                    window.location.href = `/about`
+                    window.location.href = `/`
                 })
                 .catch( err => {
                     alert('Wrong username/password' + err)
                 })
         },
         signUp () {
-            console.log('her')
             firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
                 .then(response => {
                     console.log(response)
-                    window.location.href = `/about`
+                    window.location.href = `/`
                 })
                 .catch(function(error) {
-                // Handle Errors here.
+                    alert('Invalid username/password format')
               var errorCode = error.code;
               var errorMessage = error.message;
             });
         },
         login () {
-            console.log('her')
             firebase.auth().signInWithEmailAndPassword(this.email, this.password)
                 .then( resp => {
                     console.log(resp)
-                    window.location.href = `/about`
+                    window.location.href = `/`
                 })
                 .catch( err => {
                     alert('Wrong username/password' + err)
@@ -85,22 +72,24 @@ export default {
 /* .logo {
     background-image: url('../../assets/logo.png');
 } */
+* {
+    /* border:1px solid black; */
+}
+.testuser{
+    color:black;
+}
 .outer-container {
-    position:relative;
+    padding-top:70px;
 }
 .container {
+    position:absolute;
     padding:0;
-    height:500px;
-    width:500px;
     position: absolute;
     background-size: cover;
     z-index: 9;
 }
-.form {
-    background:rgba(0,0,0,0.85);
-}
-.overlay {
-    background:rgba(0, 3, 16, 0.1);
+.testuser {
+    font-size: 0.7rem;
 }
 .test {
     background:rgba(0,0,0,0);
@@ -109,22 +98,38 @@ export default {
     color: lightblue;
     cursor:pointer;
     text-decoration: underline;
-}
-.btn {
+    font-size: 0.65rem;
 }
 .form {
     padding:4rem 6rem;
+    width:250px;
     margin:0 auto;
     display: flex;
     flex-direction: column;
+    background: rgba(0,0,0,0);
+}
+.img {
+    margin:auto;
+    width:60px;
+    margin-bottom:-30px;
 }
 img {
     margin:0 auto;
 }
 input {
     margin: 0.5rem 0;
+    padding:0.3rem;
+    width:250px;
+    font-size:0.75rem;
 }
 button {
     margin:auto;
+    background-color: #1f2c3a;
+    border:none;
+    font-size: 0.7rem;
+    padding:0.5rem;
+    color:white;
+    cursor:pointer;
+    margin-right:5px;
 }
 </style>

@@ -126,7 +126,6 @@ export default {
             const ref = this
             var updatedFunds = 0
             const user = firebase.auth().currentUser.uid
-
             //* check funds
             axios.get(`https://ove-stock-trader.firebaseio.com/users/${user}/funds.json`)
                     .then(function (response) {
@@ -142,7 +141,6 @@ export default {
                         }
                     })
             this.showBuyModal = true
-
             //* dont have stock in portfolio
             console.log('logging current stock: ', this.currentStock)
             const order = {
@@ -170,6 +168,7 @@ export default {
                 firebase.database().ref(`users/${user}/portfolio/` + this.key).set(order);
                 console.log('hadde fra før')
             }
+            //* add to history
             const date = new Date()
             Object.assign(order, {timestamp: date})
             axios.post(`https://ove-stock-trader.firebaseio.com/users/${user}/history/.json`, order)
@@ -182,7 +181,7 @@ export default {
             const newStockAmount = this.oldQuantity - this.quantity
             //* invalid amount
             if ( newStockAmount < 0 || newStockAmount%1 != 0) {
-                console.log('invalid amount')
+                alert('Invalid Amount')
             }
             else {
                 var updatedFunds
@@ -207,7 +206,15 @@ export default {
                     }
                     firebase.database().ref(`users/${user}/funds/`).set(updatedFunds);
                 })
-                
+                //* add to history
+                const date = new Date()
+                const order = this.currentStock
+                Object.assign(order, {timestamp: date})
+                Object.assign(order, {quantity: this.quantity})
+                axios.post(`https://ove-stock-trader.firebaseio.com/users/${user}/history/.json`, order)
+                    .then(function (response) {
+                        console.log(response);
+                    })
             }
         },
     },
@@ -311,7 +318,7 @@ h2 {
     background:white;
     width:400px;
     height:150px;
-    border:1px solid rgb(124, 153, 177);
+    border:1px solid #1f2c3a;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -346,7 +353,8 @@ h2 {
     max-width:500px;
     margin:auto;
     margin-top: 55px;
-    border:1px solid rgb(206, 207, 207);
+        border:1px solid #1f2c3a;
+
     border-radius:3px;
     padding:18px;
     box-shadow: rgba(162, 162, 168, 0.2) 0px 7px 29px 0px;

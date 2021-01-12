@@ -3,12 +3,12 @@
         <nav class="header-nav">
             <a class="header-title" href="/">Stocktrader</a>
             <ul>
-                <li><a href="/">USD ${{ funds.toFixed(2) }} </a></li>
+                <li><a href="/">{{ funds | currency }} </a></li>
                 <li ><a href="/stocks">Stocks</a></li>
                 <!-- <li ><a href="/publicportfolios">Portfolios</a></li> -->
                 <li ><a href="/portfolio">My Portfolio</a></li>
                 <li ><a href="/news">News</a></li>
-                <li ><a href="/">About</a></li>            
+                <li ><a href="/">Profile</a></li>            
                 <li @click="logout"><a href="/login" >Logout</a></li>            
             </ul>
         </nav>
@@ -27,7 +27,8 @@ export default {
     },
     computed: {
         funds () {
-            return this.$store.getters.funds
+            var funds = this.$store.getters.funds
+            return funds
         }
     },
     methods: {
