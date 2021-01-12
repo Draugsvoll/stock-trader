@@ -211,6 +211,9 @@ export default {
                 ref.$store.dispatch('setFavourites', favStocks)
                 })
         },
+    },
+    created () {
+        this.$store.dispatch('getTopGainersStocks')
     }
 }
 
@@ -223,6 +226,7 @@ export default {
 .active {
     background-color: #16416e !important;
     color:white;
+    text-decoration: underline;
     border:1px solid rgb(5, 36, 122) !important;
 }
 .active:hover {

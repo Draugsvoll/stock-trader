@@ -1,4 +1,4 @@
-import { get500, getTopGainers, getTrending, getPortfolios, getNews, searchStock, getSingleStock} from '../../data/stocksApi'
+import { get500, getTopGainers, getTrending, getPortfolios, getNews, searchStock} from '../../data/stocksApi'
 
 const state = {
     chartData: [],
@@ -10,14 +10,10 @@ const state = {
     articles: [ {headline: 'This is a headline'} ]
 }
 
-//* initializing state
-var initStocks = getTopGainers()
-state.stocks = initStocks
+
 
 const mutations = {
-    'INIT_STOCKS' (state, stocks) {
-        state.stocks = stocks
-    },
+   
     'GET_500_STOCKS' (state) {
         state.stocks = get500()
     },
@@ -53,9 +49,6 @@ const mutations = {
 const actions = {   // aviable actions on this site
     buyStock: ({ commit }, order) => {
         commit('BUY_STOCK', order)  // commits 'BUY_STOCK' mutation defined in portfolio module
-    },
-    initStocks: ({ commit }) => {
-        commit('INIT_STOCKS', initStocks)
     },
     get500Stocks: ({ commit }) => {
         commit('GET_500_STOCKS')

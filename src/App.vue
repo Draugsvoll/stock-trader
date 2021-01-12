@@ -11,22 +11,18 @@
 
 
 <script>
-// import Header from "./components/Header"
 import Header2 from "./components/Header2";
 import axios from 'axios'
-//import axios from 'axios'
 
 export default {
   components: {
-    // appHeader: Header,
     appHeader2: Header2,
   },
   created() {
 
-  },//created
-};//default
+  },
+};
 </script>
-
 
 
 

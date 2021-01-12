@@ -3,6 +3,7 @@
         <h2>Welcome, <i>{{ user }}</i></h2>
         <img src="../assets/profile.png" alt="" width="120"> <br>
         <input type="file" @change="onFileSelected">
+        <button @click="onUpload">set image</button>
                                 <!-- apply the currency filter -->
         <p><b class="info">Available Funds:</b> <br>{{ funds | currency }}</p>
         <div class=""><b class="info">Info:<br> </b>Stocks, funds and trade history are saved
@@ -29,16 +30,29 @@
 
 <script scoped>
 import firebase from 'firebase'
+import axios from 'axios'
+
 export default {
     data () {
         return {
             user:'',
+            selectedFile: null
         }
     },
     methods: {
         onFileSelected (event) {
             console.log(event)
-        }
+            this.selectedFile = event.target.files[0]
+        },
+        onUpload() {
+            // var fd = new FormData()
+            // fd.append('image', this.selectedFile, this.selectedFile.name)
+            const string = 'ergij'
+            axios.post(`https://ove-stock-trader.firebaseio.com/users/avatar/.json`, string)
+                    .then(function (response) {
+                        console.log(response);
+                    })
+        },
     },
     computed: {
         funds() {
