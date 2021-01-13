@@ -1,9 +1,10 @@
 <template>
     <div class="box">
-        <h2>Welcome, <i>{{ user }}</i></h2>
-        <img src="../assets/profile.png" alt="" width="120"> <br>
-        <input type="file" @change="onFileSelected">
-        <button @click="onUpload">set image</button>
+        <h2>Welcome, <i>{{ user.email }}</i></h2>
+        <img v-bind:src="imageUrl" alt="" >
+        <img v-if="imageUrl == '../assets/profile.png' " src="../assets/profile.png" alt="" > <br>
+        <span>Upload Avatar</span> <br>
+        <input class="file" type="file" @change="onFileSelected" accept="image/*" >
                                 <!-- apply the currency filter -->
         <p><b class="info">Available Funds:</b> <br>{{ funds | currency }}</p>
         <div class=""><b class="info">Info:<br> </b>Stocks, funds and trade history are saved
@@ -35,33 +36,56 @@ import axios from 'axios'
 export default {
     data () {
         return {
+            email:'',
             user:'',
-            selectedFile: null
+            selectedFile: null,
+            imageUrl: ''
         }
     },
     methods: {
         onFileSelected (event) {
             console.log(event)
             this.selectedFile = event.target.files[0]
+            this.onUpload()
         },
         onUpload() {
-            // var fd = new FormData()
-            // fd.append('image', this.selectedFile, this.selectedFile.name)
-            const string = 'ergij'
-            axios.post(`https://ove-stock-trader.firebaseio.com/users/avatar/.json`, string)
-                    .then(function (response) {
-                        console.log(response);
-                    })
+            const image = this.selectedFile
+            firebase.storage().ref('users/' + this.user.uid + '/image' ).put(image).then(resp => {
+                this.setImage()
+            })
+        },
+        getImage() {
+            firebase.storage().ref('users/' + this.user.uid + '/image' ).getDownloadURL().then( resp => {
+                console.log(resp)
+                this.imageUrl = resp
+            }).catch( err => {
+                console.log(err)
+                this.imageUrl = '../assets/profile.png'
+            })
+        },
+        setImage() {
+            firebase.storage().ref('users/' + this.user.uid + '/image' ).getDownloadURL().then( resp => {
+                console.log(resp)
+                this.imageUrl = resp
+                // this.$router.go()
+            }).catch( err => {
+                console.log(err)
+            })
         },
     },
     computed: {
         funds() {
             return this.$store.getters.funds
         },
+        // imageUrl () {
+        //     const image = this.getImage()
+        //     return image
+        // }
     },
     created () {
-                const currentUser = firebase.auth().currentUser.email
-                this.user = currentUser
+            const currentUser = firebase.auth().currentUser
+            this.user = currentUser
+            this.getImage()
         },
 }
 </script>
@@ -70,6 +94,11 @@ export default {
 
 
 <style  scoped>
+span {
+    margin-right:5px;
+    font-size: 11px;
+
+}
 .box{
     margin: 0 auto;
     padding: 20px;
@@ -87,8 +116,11 @@ h2 {
     font-size: 0.95rem;
 }
 img {
-    margin:0;
-    margin-bottom:-25px;
-    margin-left:-15px;
+   max-width: 150px;
+   max-height: 150px;
+}
+input {
+    font-size: 11px;
+    width:50px;
 }
 </style>

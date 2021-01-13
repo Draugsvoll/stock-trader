@@ -4,7 +4,7 @@
             <a class="header-title" href="/">Stocktrader</a>
             <ul>
                 <li><a href="/">{{ funds | currency }} </a></li>
-                <li ><a href="/stocks">Stocks</a></li>
+                <li ><a href="/stocks">Buy/Sell</a></li>
                 <!-- <li ><a href="/publicportfolios">Portfolios</a></li> -->
                 <li ><a href="/portfolio">My Portfolio</a></li>
                 <li ><a href="/news">News</a></li>
@@ -60,7 +60,7 @@ export default {
  }
  header {
     font-size:0.85rem;
-    padding:1.25rem;
+    padding:1.35rem;
     background-color: #1f2c3a;
 }
 .header-title {

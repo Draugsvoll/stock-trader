@@ -22,6 +22,7 @@
                 <i @click="add" class="fas fa-heart icon" :class="{added: favourite }"></i>
                 <button class="notice" v-if="notice != null"> {{ notice }} </button>
                 <p class="smallName">You have {{ this.oldQuantity }} stocks. </p>
+                <button class="notice" v-if="notice != null"> {{ notice }} </button>
             </div>
         </div>
 
@@ -83,7 +84,7 @@ export default {
             return false
         },
         buyPrice () {
-            return this.stock.price.regularMarketPrice.raw*this.quantity
+            return this.stock.price.regularMarketPrice.raw * this.quantity
         },
     },
     methods: {
@@ -175,6 +176,7 @@ export default {
                     .then(function (response) {
                         console.log(response);
                     })
+            this.hideBuyModal()
         },
         sellStock2 () {
             const user = firebase.auth().currentUser.uid
@@ -329,6 +331,7 @@ h2 {
 }
 .modal-button {
     margin-right:10px;
+    padding:0.45rem 0.55rem;
 }
 .button-row {
     margin:10px auto;
@@ -353,8 +356,7 @@ h2 {
     max-width:500px;
     margin:auto;
     margin-top: 55px;
-        border:1px solid #1f2c3a;
-
+    border:1px solid #1f2c3a;
     border-radius:3px;
     padding:18px;
     box-shadow: rgba(162, 162, 168, 0.2) 0px 7px 29px 0px;
@@ -394,14 +396,13 @@ button {
     border-radius:5px;
     color:rgb(6, 6, 104);
     border:1px solid rgb(4, 4, 110);
-    background:rgb(5, 62, 128);
+    background:#2a4057;
     color:white;
     font-size:0.75rem;
     cursor:pointer;
     font-weight: 350;
 }
 button:hover {
-    background:rgb(14, 77, 148);
 }
 .line {
     margin:2px;

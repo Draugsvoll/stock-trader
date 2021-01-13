@@ -4,8 +4,8 @@
                 <img src="../assets/logo3.png" alt="" width="60">
             </div>
             <div class="form">
-                <input v-model="email" type="text" name="username" placeholder="Email" autofocus >
-                <input v-model="password" type="password" name="password" placeholder="Password">
+                <input v-model="email" type="text" name="username" placeholder="Email" autofocus required>
+                <input v-model="password" type="password" name="password" placeholder="Password" required>
                 <div class="btn">
                     <button @click="login">Login</button>
                     <button @click="signUp  ">Sign Up</button>
@@ -118,16 +118,16 @@ img {
 }
 input {
     margin: 0.5rem 0;
-    padding:0.3rem;
+    padding:0.4rem;
     width:250px;
     font-size:0.75rem;
 }
 button {
     margin:auto;
-    background-color: #1f2c3a;
+    background-color: #233850;
     border:none;
     font-size: 0.7rem;
-    padding:0.5rem;
+    padding:0.6rem;
     color:white;
     cursor:pointer;
     margin-right:5px;

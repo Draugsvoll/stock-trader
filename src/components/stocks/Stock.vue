@@ -61,6 +61,12 @@ export default {
     padding-left:5px;
     padding-right:5px;
 }
+.container:hover {
+    background: rgb(232, 236, 238);
+}
+.container:nth-child(odd):hover {
+    background: rgb(232, 236, 238);
+}
 .container:nth-child(odd) {
   background-color: rgb(245, 246, 247);
 }

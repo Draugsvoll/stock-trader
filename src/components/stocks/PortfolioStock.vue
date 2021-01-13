@@ -63,7 +63,12 @@ export default {
     /* border:1px solid purple; */
     color:rgb(3, 3, 46);
 }
-
+.container:hover {
+    background: rgb(232, 236, 238);
+}
+.container:nth-child(odd):hover {
+    background: rgb(232, 236, 238);
+}
 .container {
     border:1px solid rgb(214, 215, 216);
     border-top:none;

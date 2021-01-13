@@ -27,9 +27,9 @@
 
         <!-- STOCKS -->
         <div class="stock-container">
-            <transition-group name="slide" mode="in-out">
+            <!-- <transition-group name="slide" mode="in-out"> -->
                 <app-stock v-for="(stock, index) in stocks" :stock="stock" :key="index"></app-stock>
-            </transition-group>
+            <!-- </transition-group> -->
         </div>
 
     </div>
@@ -46,7 +46,7 @@ export default {
     data () {
         return {
             searchTerm: '',
-            type: 'Top Gainers',
+            type: 'Trending',
             sortedByChange: false,
             sortedByPrice: false,
             sortedByClose: false,
@@ -213,7 +213,7 @@ export default {
         },
     },
     created () {
-        this.$store.dispatch('getTopGainersStocks')
+        this.$store.dispatch('getTrendingStocks')
     }
 }
 

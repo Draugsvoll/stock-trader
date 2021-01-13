@@ -1,7 +1,7 @@
 <template>
     <div class="box">
 
-            <!-- CHARTS  -->
+            <!-- PIE CHART  -->
             <div class="charts">
                 <!-- PieChart -->
                 <GChart
@@ -26,7 +26,8 @@
            
          <!-- OPENING -->
         <p class="opening">Markets open around 9:30 a.m Eastern Time (usa), and 16:00 norwegian time</p>
-        <h2>Stocks</h2>
+        <h2 v-if="!emptyPortfolio">Stocks</h2>
+        <h2 v-if="emptyPortfolio">You have no stocks</h2>
 
         <!-- TAGS -->
         <div class="tags" v-if="stocks != '' ">
@@ -46,7 +47,8 @@
             </transition-group>
         </div>
 
-        <div class="column">
+        <!-- COLUMN CHART -->
+        <div v-if="!emptyPortfolio" class="column">
                 <!-- GainColumn -->
                 <GChart
                     type="ColumnChart"
@@ -56,7 +58,8 @@
         </div>
 
         <!-- PURCHASE HISTORY -->
-        <h2>Trading History</h2>
+        <h2 v-if="!emptyPortfolio">Trading History</h2>
+        <h2 v-if="emptyPortfolio">No trades have been made</h2>
         <div class="history" v-for="(purchase, index) in history" :key=purchase.id>
             <div class=history-tags v-if="index == 0">
                 <!-- tags -->
@@ -93,10 +96,15 @@ export default {
     data () {
         return {
             chartOptionsPie: {
-                title: 'Asset Allocation',
+                title:'Assets Allocation',
                 is3D: true,
                 'width':1000,
                 'height':450,
+                legend: {position: 'center', textStyle: {fontSize: 16}},
+                tooltip: {position: 'center', textStyle: {fontSize: 16}},
+                titleTextStyle: {
+                 fontSize: 20
+                }
             },
             chartOptionsColumn: {
                 'width':750,
@@ -112,6 +120,7 @@ export default {
             sortedByPrice: false,
             sortedByClose: false,
             sortedByLetter: false,
+            emptyPortfolio: false
         }
     },
     computed: {
@@ -220,6 +229,9 @@ export default {
               var chartData = [
                         ['Stocks', 'Value'],
                     ]
+              if ( newStocks.length == 0 ) {
+                  this.emptyPortfolio = true
+              }
               newStocks.forEach( stock => {
                   value = stock.price
                   value *= stock.quantity
