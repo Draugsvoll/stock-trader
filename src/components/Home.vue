@@ -96,8 +96,7 @@ export default {
 <style  scoped>
 span {
     margin-right:5px;
-    font-size: 11px;
-
+    font-size: 10.5px;
 }
 .box{
     margin: 0 auto;

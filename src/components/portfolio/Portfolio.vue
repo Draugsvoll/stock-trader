@@ -2,7 +2,7 @@
     <div class="box">
 
             <!-- PIE CHART  -->
-            <div class="charts">
+            <div v-if="chartData2 != null" class="charts">
                 <!-- PieChart -->
                 <GChart
                     type="PieChart"
@@ -35,8 +35,8 @@
                 <div class="tag" @click="sortByChange">Change</div>
                 <div class="tag" @click="sortByPrice">Market Price</div>
                 <div class="tag" @click="sortByClose">Prev. Close</div>
-                <div class="tag smaller">Quantity</div>
-                <div class="tag smaller">Gains</div>
+                <div class="tag smaller" @click="sortByQuantity">Quantity</div>
+                <div class="tag smaller" @click="sortByGains">Gains</div>
                 <div class="empty"><button>View</button></div>
         </div>
 
@@ -64,7 +64,7 @@
             <div class=history-tags v-if="index == 0">
                 <!-- tags -->
                 <div class="tags2" v-if="stocks != '' ">
-                    <div class="tag2 name" >Purchase History</div>
+                    <div class="tag2 name" >Purchase</div>
                     <div class="tag2" >Quantity</div>
                     <div class="tag2" >Price</div>
                     <div class="tag2" >Total Price</div>
@@ -99,7 +99,7 @@ export default {
                 title:'Assets Allocation',
                 is3D: true,
                 'width':1000,
-                'height':450,
+                'height':400,
                 legend: {position: 'center', textStyle: {fontSize: 16}},
                 tooltip: {position: 'center', textStyle: {fontSize: 16}},
                 titleTextStyle: {
@@ -107,7 +107,7 @@ export default {
                 }
             },
             chartOptionsColumn: {
-                'width':750,
+                'width':900,
                 'height':400,
                 title: 'Percentage Gains %'
             },
@@ -120,7 +120,9 @@ export default {
             sortedByPrice: false,
             sortedByClose: false,
             sortedByLetter: false,
-            emptyPortfolio: false
+            emptyPortfolio: false,
+            sortedByGains: false,
+            sortedByQuantity: false,
         }
     },
     computed: {
@@ -143,6 +145,42 @@ export default {
         }
     },
     methods: {
+        sortByQuantity () {
+            if ( this.sortedByQuantity == false ) {
+                const sortedByQuantity = this.stocks.sort( (a, b) => {
+                if ( a.quantity < b.quantity ) return 1
+                return -1
+                })
+                this.stocks = sortedByQuantity
+            } 
+            else {
+                const sortedByQuantity = this.stocks.sort( (a, b) => {
+                if ( a.quantity > b.quantity ) return 1
+                return -1
+                })     
+                this.stocks = sortedByQuantity
+            }
+            this.sortedByQuantity = !this.sortedByQuantity
+        },
+        sortByGains () {
+            if ( this.sortedByGains == false ) {
+                const sortedByGains = this.stocks.sort( (a, b) => {
+                a.gains = (a.change/a.price)*(100)
+                b.gains = (b.change/b.price)*(100)
+                if ( a.gains < b.gains )    return 1
+                return -1
+                })
+            } 
+            else {
+                const sortedByGains = this.stocks.sort( (a, b) => {
+                a.gains = (a.change/a.price)*(100)
+                b.gains = (b.change/b.price)*(100)
+                if ( a.gains >b.gains )    return 1
+                return -1
+                })
+            }
+            this.sortedByGains = !this.sortedByGains
+        },
         sortByChange () {
             if ( this.sortedByChange == false ) {
                 const sortedByChange = this.stocks.sort( (a, b) => {
@@ -218,14 +256,12 @@ export default {
         const ref = this
         var value = 0
         axios.get(`https://ove-stock-trader.firebaseio.com/users/${user}/portfolio.json`).then(response => {
-              console.log(response.data)
               const resp = response.data
               const newStocks = []
               for (let key in resp){
                 newStocks.push(resp[key])
               }
               this.stocks = newStocks
-              console.log('logging stocks from portfolio', newStocks)
               var chartData = [
                         ['Stocks', 'Value'],
                     ]
@@ -241,7 +277,6 @@ export default {
               })
               const funds = this.$store.getters.funds
               chartData.push(['Cash Balance', funds])
-              console.log(chartData)
               this.$store.dispatch('setChartData', chartData)
 
               //* get updated prices
@@ -258,25 +293,22 @@ export default {
                     'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8',
                     'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
                 }}
-                // axios.request(options).then(function (response) {
-                //     console.log(response.data.price.regularMarketPrice.raw);
-                //     stock.price = response.data.price.regularMarketPrice.raw
-                // }).catch(function (error) {
-                //     console.error(error);
-                // });
+                axios.request(options).then(function (response) {
+                    stock.price = response.data.price.regularMarketPrice.raw
+                }).catch(function (error) {
+                    console.error(error);
+                });
             })
             })
 
         //* get history
         var history = []
         axios.get(`https://ove-stock-trader.firebaseio.com/users/${user}/history.json`).then(resp => {
-            console.log(resp.data)
             resp = resp.data
             for (let key in resp){
                 history.push(resp[key])
             }
             ref.history = history
-            console.log('logger history: ', ref.history)
         })
   },    
     components: {
@@ -349,7 +381,7 @@ h3 {
 .headline {
     display: flex;
     margin:auto;
-    margin-top:-60px;
+    margin-top:-20px;
     z-index:1;
     width:750px;
     font-size:1rem;
@@ -421,21 +453,25 @@ h3 {
     width:100px;
     margin-left:0;
 }
+.tag:hover {
+    color:rgb(12, 35, 126);
+}
 .charts {
     max-width:1000px;
     margin:auto auto;
+    margin-top:50px;
     text-align: center;
     display: flex;
     flex-wrap: wrap;
 }
 span {
+    margin-right:8px;
 }
 .column {
-    width:700px;
     margin:auto;
     margin-top:50px;
 }
 .value {
-    font-size: 18px !important;
+    font-size: 14px !important;
 }
 </style>

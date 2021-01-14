@@ -56,11 +56,10 @@ export default {
     border:1px solid rgb(214, 215, 216);
     border-top:none;
     max-width:750px;
-    padding-top:9px;
-    padding-bottom:7px;
-    padding-left:5px;
-    padding-right:5px;
+    padding:10px;
+
 }
+
 .container:hover {
     background: rgb(232, 236, 238);
 }
@@ -90,22 +89,21 @@ export default {
 }
 .info {
     width:100px;
-    font-size: 0.75rem;
+    font-size: 13;
 }
 .name {
     width:175px;
     overflow: hidden;
-    font-size: 0.75rem;
+    font-size: 13;
 }
 button {
     border-radius:5px;
-    color:rgb(6, 6, 104);
+    color:white;
+    background:#16416e;
     border:1px solid rgb(4, 4, 110);
-    background:rgba(255,255,255, 0.1);
-    font-size:0.75rem;
+    font-size:12px;
     cursor:pointer;
-    padding:2px 6px;
-    font-weight: 350;
+    padding:5px 7px;
 }
 button:hover {
     background:rgb(5, 62, 128);

@@ -15,6 +15,7 @@
             <button class="search" @click="getSymbol" >Search</button>
         </div>
 
+        <p v-if="stocks != '' " class="blurred-info">You can sort by category</p>
         <!-- TAGS -->
         <div class="tags" v-if="stocks != '' ">
                 <div class="tag name" @click="sortByLetter">Name</div>
@@ -223,6 +224,13 @@ export default {
 * {
     /* border:1px solid black; */
 }
+.blurred-info {
+    color:grey;
+    font-size: 10px;
+    text-align: center;
+    margin-bottom:-30px;
+    margin-top:50px;
+}
 .active {
     background-color: #16416e !important;
     color:white;
@@ -272,7 +280,7 @@ h2 {
 }
 .tags {
     display: flex;
-    /* justify-content: center; */
+    cursor:pointer;
     text-align: left;
     max-width:750px;
     vertical-align: bottom;
@@ -287,6 +295,9 @@ h2 {
     height:fit-content;
     font-size:0.75rem;
 }
+.tag:hover {
+    color:rgb(12, 35, 126);
+}
 .name {
     width:175px !important;
 }
@@ -296,7 +307,7 @@ h2 {
     margin:25px auto;
 }
 .search {
-    background:#2b3f53;
+    background:#113861;
     border:none;
     color:white;
     font-size: 0.7rem;

@@ -65,6 +65,7 @@ export default {
 }
 .header-title {
     text-decoration: none; 
+    font-size: 1.1rem;
 }
 
 .header-nav {

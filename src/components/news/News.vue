@@ -27,7 +27,7 @@
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
                     <a href="#"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <!-- <a href="#"><i class="fab fa-youtube"></i></a> -->
                 </div>
         </ul>
         </nav>
@@ -51,8 +51,7 @@
             <app-article v-for="article in news" :article="article" :key="article.id"></app-article>
         </div>
     <div class="arrow" v-if="news != '' ">
-        <div > <a href="#"><i class="fas fa-long-arrow-alt-up fa-2x"></i></a> </div>
-        <div  class="top">Top</div>
+        <div > <a href="#"><i class="fas fa-long-arrow-alt-up "></i></a> </div>
     </div>
     </div>
 </template>
@@ -80,7 +79,7 @@ export default {
       }
     },
     mounted () {
-            this.$store.dispatch('getNews')
+            // this.$store.dispatch('getNews')
             document.body.addEventListener('scroll', this.handleScroll);
     }
 }
@@ -109,7 +108,7 @@ i {
     margin-left:3px;
 }
 .container {
-    margin-top:-50px;
+    /* margin-top:-50px; */
 }
 .news-container {
     margin: 200px auto;
@@ -124,14 +123,13 @@ i {
 /* NEW STUFF */
 .wrapper{
   height: 100%;
-  width: 300px;
+  width: 500px;
   position: relative;
 }
 .wrapper .menu-btn{
-  position: sticky;
-  left: 20px;
-  top: 10px;
-  background: #4a4a4a;
+  position:absolute;
+  left: -50px;
+  background-color: #1f2c3a;
   color: #fff;
   height: 45px;
   width: 45px;
@@ -145,11 +143,11 @@ i {
   transition: all 0.3s ease;
 }
 #btn:checked ~ .menu-btn{
-  left: 247px;
+  /* left: 247px; */
 }
 .wrapper .menu-btn i{
   position: absolute;
-  font-size: 23px;
+  font-size: 15px;
   transition: all 0.3s ease;
 }
 .wrapper .menu-btn i.fa-times{
@@ -165,9 +163,9 @@ i {
 }
 #sidebar{
   position: fixed;
-  background: #404040;
+  background-color: #1f2c3a;
   height: 100%;
-  width: 270px;
+  width: 170px;
   overflow: hidden;
   left: -270px;
   transition: all 0.3s ease;
@@ -178,21 +176,22 @@ i {
 #sidebar .title{
   line-height: 65px;
   text-align: center;
-  background: #333;
-  font-size: 25px;
+  background-color: #081524;
+  font-size: 18px;
   font-weight: 600;
   color: #f2f2f2;
   border-bottom: 1px solid #222;
+  margin-bottom:-20px;
 }
 #sidebar .list-items{
   position: relative;
-  background: #404040;
-  width: 100%;
+  background-color: #1f2c3a;
+  width: 175px;
+  padding-left:0px;
   height: 100%;
   list-style: none;
 }
 #sidebar .list-items li{
-  padding-left: 40px;
   line-height: 50px;
   border-top: 1px solid rgba(255,255,255,0.1);
   border-bottom: 1px solid #333;
@@ -207,26 +206,27 @@ i {
   border-top: none;
 }
 #sidebar .list-items li a{
+  padding-left:30px;
   color: #f2f2f2;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 12px;
   font-weight: 500;
-  height: 100%;
+  height: 45px;
   width: 100%;
   display: block;
 }
 #sidebar .list-items li a i{
-  margin-right: 20px;
+  margin-right: 15px;
 }
 #sidebar .list-items .icons{
-  width: 100%;
-  height: 40px;
+  width: 90%;
   text-align: center;
   position: absolute;
   line-height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top:10px;
 }
 #sidebar .list-items .icons a{
   height: 100%;
@@ -235,13 +235,14 @@ i {
   margin: 0 5px;
   font-size: 18px;
   color: #f2f2f2;
-  background: #4a4a4a;
+  background: #3c3c3f;
   border-radius: 5px;
   border: 1px solid #383838;
   transition: all 0.3s ease;
 }
 #sidebar .list-items .icons a:hover{
   background: #404040;
+  color:rgb(92, 104, 167);
 }
 .list-items .icons a:first-child{
   margin-left: 0px;
@@ -261,7 +262,7 @@ i {
   font-weight: 700;
 }
 .content p{
-  font-size: 40px;
+  font-size: 20px;
   font-weight: 700;
 }
 </style>>

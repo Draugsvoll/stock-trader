@@ -23,10 +23,6 @@ footer{
   color:white;
   min-height: 180px;
 }
-.column {
-  font-size: 10px !important;
-}
-
 .copyright {
     display: flex;
     justify-content: center;
@@ -44,14 +40,19 @@ footer{
   margin:4px;
   margin-left:0px;
   color:rgb(209, 213, 214);
+  font-size: 11px !important;
 }
 
 .footer-headline {
-  font-size: 14px !important; 
+  font-size: 15px !important; 
   margin-bottom:5px;
   margin-top:10px !important;
 }
 
+footer a {
+  text-decoration:none;
+  color:rgb(216, 223, 228);
+}
 .column {
     margin:18px;
 }

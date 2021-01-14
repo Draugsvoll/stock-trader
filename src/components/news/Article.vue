@@ -35,7 +35,7 @@ export default {
     box-shadow: rgba(162, 162, 168, 0.2) 0px 7px 29px 0px;
 }
 .headline {
-    font-size:24px;
+    font-size:22px;
     font-weight: bold;
     margin-bottom:40px;
     text-align: center;

@@ -92,7 +92,29 @@ export default {
             this.showBuyModal = false
         },
         buyDialogue () {
-            this.showBuyModal = true
+            //* check if valid quantity
+            if ( this.quantity % 1 != 0 || this.quantity < 1) {
+                alert ('Invalid amount of stocks')
+            }
+            else {
+                //* check funds
+            const ref = this
+            var updatedFunds = 0
+            const user = firebase.auth().currentUser.uid
+            axios.get(`https://ove-stock-trader.firebaseio.com/users/${user}/funds.json`)
+                    .then(function (response) {
+                        const funds = response.data
+                        const price = ref.stock.price.regularMarketPrice.raw * ref.quantity
+                        if (funds > price) {
+                            updatedFunds = funds - price
+                            firebase.database().ref(`users/${user}/funds/`).set(updatedFunds);
+                            ref.showBuyModal = true
+                        } 
+                        else {
+                            alert('Not enough funds')
+                        }
+                    })
+            }
         },
         add () {
             const user = firebase.auth().currentUser.uid
@@ -116,7 +138,6 @@ export default {
                     }
                 axios.post(`https://ove-stock-trader.firebaseio.com/users/${user}/favourites/.json`, favourite)
                     .then(function (response) {
-                        console.log(response);
                     })
                     this.favourite = true
                     this.notice = 'Added to Favourites'
@@ -127,23 +148,7 @@ export default {
             const ref = this
             var updatedFunds = 0
             const user = firebase.auth().currentUser.uid
-            //* check funds
-            axios.get(`https://ove-stock-trader.firebaseio.com/users/${user}/funds.json`)
-                    .then(function (response) {
-                        console.log('checking funds: ',response.data)
-                        const funds = response.data
-                        const price = ref.stock.price.regularMarketPrice.raw * ref.quantity
-                        console.log('logger prisen: ', ref.stock.price.regularMarketPrice.raw)
-                        console.log('logger quantity: ', ref.quantity)
-                        if (funds > price) {
-                            updatedFunds = funds - price
-                            console.log('you can afford, new funds are: ', updatedFunds)
-                            firebase.database().ref(`users/${user}/funds/`).set(updatedFunds);
-                        }
-                    })
-            this.showBuyModal = true
             //* dont have stock in portfolio
-            console.log('logging current stock: ', this.currentStock)
             const order = {
                         name: this.stock.quoteType.longName,
                         price: this.stock.price.regularMarketPrice.raw,
@@ -154,11 +159,8 @@ export default {
                     }
             if (this.currentStock.name == undefined) {
                 if (this.quantity % 1 == 0) {
-                    console.log(order)
-                    console.log(user)
                     axios.post(`https://ove-stock-trader.firebaseio.com/users/${user}/portfolio/.json`, order)
                     .then(function (response) {
-                        console.log(response);
                     })
                 }
             } 
@@ -167,14 +169,12 @@ export default {
                 const newStockAmount = this.oldQuantity + this.quantity
                 Object.assign(order, {quantity: newStockAmount})
                 firebase.database().ref(`users/${user}/portfolio/` + this.key).set(order);
-                console.log('hadde fra før')
             }
             //* add to history
             const date = new Date()
             Object.assign(order, {timestamp: date})
             axios.post(`https://ove-stock-trader.firebaseio.com/users/${user}/history/.json`, order)
                     .then(function (response) {
-                        console.log(response);
                     })
             this.hideBuyModal()
         },
@@ -182,7 +182,7 @@ export default {
             const user = firebase.auth().currentUser.uid
             const newStockAmount = this.oldQuantity - this.quantity
             //* invalid amount
-            if ( newStockAmount < 0 || newStockAmount%1 != 0) {
+            if ( newStockAmount < 0 || newStockAmount%1 != 0 || this.quantity < 1) {
                 alert('Invalid Amount')
             }
             else {
@@ -191,14 +191,11 @@ export default {
                  axios.get(`https://ove-stock-trader.firebaseio.com/users/${user}/funds.json`).then(resp => {
                     const funds = resp.data
                     updatedFunds = funds + this.buyPrice
-                    console.log('old funds: '. funds)
-                    console.log('updated funds: '. updatedFunds)
                     Object.assign(this.currentStock, {quantity: newStockAmount})
                     if ( newStockAmount < 1) {
                         var dbRef = firebase.database().ref(`users/${user}/portfolio/${ref.key}`);
                         dbRef.remove()
                         .then(function() {
-                            console.log("Remove succeeded.")
                         })
                         .catch(function(error) {
                             console.log("Remove failed: " + error.message)
@@ -215,7 +212,6 @@ export default {
                 Object.assign(order, {quantity: this.quantity})
                 axios.post(`https://ove-stock-trader.firebaseio.com/users/${user}/history/.json`, order)
                     .then(function (response) {
-                        console.log(response);
                     })
             }
         },
@@ -232,7 +228,6 @@ export default {
                 'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
             }}
             axios.request(options).then(function (response) {
-                console.log(response.data);
                 const stock = response.data
                 ref.stock = stock
             }).catch(function (error) {
@@ -251,11 +246,9 @@ export default {
               ref.portfolioStocks = portfolioStocks
               portfolioStocks.forEach( stock => {
                   if ( stock.symbol == this.symbol ) {
-                      console.log('fins i portfolio', stock.key)
                       ref.key = stock.key
                       ref.oldQuantity = parseInt(stock.quantity)
                       ref.currentStock = stock
-                      console.log('quantity: ', stock.quantity)
                   }
               })
             })
@@ -271,7 +264,6 @@ export default {
               ref.favouriteStocks = favouriteStocks
               favouriteStocks.forEach( stock => {
                   if ( stock.symbol == this.symbol ) {
-                      console.log('fins i favorites', stock.key)
                       ref.favourite = true
                   }
               })
