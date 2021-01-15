@@ -11,13 +11,14 @@
         <div class="title">Menu</div>
         <ul class="list-items">
         <li><a href="/portfolio"><i class="fas fa-address-book"></i>My Portfolio</a></li>
+        <li ><a href="/news" ><i class="fas fa-globe-asia"></i>News</a></li>
         <li><a href="/stocks"><i class="fas fa-sliders-h"></i>Buy & Sell</a></li>
         <li><a href="/"><i class="fas fa-home"></i>Home</a></li>
-        <li><a href="/"><i class="fas fa-cog"></i>Settings</a></li>
+        <li><a href="/"><i class="fas fa-cog"></i>Account</a></li>
         <!-- <li><a href="#"><i class="fas fa-stream"></i>Features</a></li> -->
-        <li><a href="#"><i class="fas fa-user"></i>About us</a></li>
+        <!-- <li><a href="#"><i class="fas fa-user"></i>About us</a></li> -->
         <li><a href="#"><i class="fas fa-envelope"></i>Contact us</a></li>
-        <li @click="logout"><a href="#" ><i class="fas fa-globe-asia"></i>Logout</a></li>
+        <li @click="logout"><a href="#" ><i class="fas fa-user"></i>Logout</a></li>
         <!-- <div class="icons">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
