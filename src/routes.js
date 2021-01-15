@@ -27,7 +27,7 @@ const router = new VueRouter ({
     { path: '/login', component: Login},
     { path: '/stocks', component: Stocks, meta: { requiresAuth: true }},
     { path: '/stocks/search', component: SearchStock, meta: { requiresAuth: true }},
-    { path: '/stocks/viewstock', component: ViewStock, meta: { requiresAuth: true }},
+    { path: '/viewstock', component: ViewStock, meta: { requiresAuth: true }},
 ]
 })
 

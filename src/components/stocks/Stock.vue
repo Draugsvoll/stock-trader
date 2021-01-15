@@ -39,7 +39,7 @@ export default {
             }
         },
         viewStock(stock) {
-           window.location.href = `/stocks/viewstock?symbol=${stock}`
+           window.location.href = `/viewstock?symbol=${stock}`
         },
     }
 }

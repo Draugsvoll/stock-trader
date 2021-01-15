@@ -125,7 +125,7 @@ export default {
 #sidebar .title{
   overflow: hidden;
   text-align: center;
-  padding:15px 0;
+  padding:20px 0;
   background-color: #081524;
   font-size: 12px;
   font-weight: 600;

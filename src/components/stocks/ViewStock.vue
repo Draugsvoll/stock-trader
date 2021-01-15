@@ -1,7 +1,6 @@
 <template>
-    <div class="container">
+    <div class="container1">
 
-        <app-nav></app-nav>
 
         <!-- BUY MODAL -->
         <div class="modal" v-if="showBuyModal">
@@ -26,6 +25,8 @@
                     <button class="modal-button" @click="hideSellModal">Cancel</button>
                 </div>
         </div>
+
+        <app-nav></app-nav>
 
         <!-- VIEW STOCK -->
         <div class="headline">
@@ -312,7 +313,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style css scoped>
 * {
 }
 .trade {
@@ -386,15 +387,13 @@ h2 {
     max-width: 500px;
     font-size: 0.7rem;
 }
-.container {
+.container1 {
     max-width:500px;
     margin:auto;
-    margin-top: 55px;
-    border:1px solid #1f2c3a;
-    border-radius:3px;
+    margin-top: 220px;
+    border-left:1px solid #1f2c3a3f;
     padding:18px;
-    box-shadow: rgba(162, 162, 168, 0.2) 0px 7px 29px 0px;
-
+    /* box-shadow: rgba(162, 162, 168, 0.2) 0px 7px 29px 0px; */
 }
 .numbers {
     display: flex;
