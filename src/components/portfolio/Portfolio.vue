@@ -79,7 +79,7 @@
                 <div class="info name"> {{ purchase.name }} </div>
                 <div class="info"> {{ purchase.quantity }} </div>
                 <div class="info"> {{ purchase.price }} </div>
-                <div class="info"> {{ purchase.price * purchase.quantity }} </div>
+                <div class="info"> {{ purchase.price.toFixed(2) * purchase.quantity.toFixed(2) }} </div>
                 <div class="info date"> {{ purchase.timestamp }} </div>
             </div>
         </div>
@@ -325,7 +325,7 @@ export default {
 </script>
 
 
-<style  scoped>
+<style scoped>
 * {
     /* border:1px solid black; */
 }
@@ -357,12 +357,6 @@ h2 {
     margin-top:25px;
     margin-bottom:-30px;
 }
-.info {
-    width:100px;
-    font-size: 12px !important;
-    padding:8px 0;
-    color: rgb(243, 240, 240);
-}
 .name {
     width:175px !important;
     overflow: hidden;
@@ -381,7 +375,11 @@ h3 {
 }
 .info {
     font-size: 12px;
-    color:rgb(29, 28, 28);
+    color:rgb(1, 2, 8);
+    width:100px;
+    padding:8px 0;
+    display: flex ;
+    align-items: center;
 }
 .headline {
     display: flex;
@@ -391,8 +389,6 @@ h3 {
     width:750px;
     font-size:1rem;
     justify-content: space-between;
-}
-.head {
 }
 .box {
     display: flex;
@@ -419,10 +415,10 @@ h3 {
     display: flex;
     padding-top: 9px;
     padding-bottom: 7px;
-    padding-left: 5px;
+    padding-left: 7px;
     padding-right: 5px;
 }
-.history:nth-child(even) {
+.history:nth-child(odd) {
   background-color: rgb(245, 246, 247);
 }
 
@@ -477,6 +473,6 @@ span {
     margin-top:50px;
 }
 .value {
-    font-size: 14px !important;
+    font-size: 16px !important;
 }
 </style>

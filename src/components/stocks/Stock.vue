@@ -90,6 +90,8 @@ export default {
 .info {
     width:100px;
     font-size: 13;
+    display: flex;
+    align-items: center;
 }
 .name {
     width:175px;

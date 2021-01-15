@@ -8,8 +8,7 @@
         <i class="fas fa-times"></i>
       </label> -->
       <nav id="sidebar">
-        <div class="title">
-        </div>
+        <div class="title">Menu</div>
         <ul class="list-items">
         <li><a href="/portfolio"><i class="fas fa-address-book"></i>My Portfolio</a></li>
         <li><a href="/stocks"><i class="fas fa-sliders-h"></i>Buy & Sell</a></li>
@@ -26,6 +25,7 @@
                     <a href="#"><i class="fab fa-youtube"></i></a>
         </div> -->
         </ul>
+        <div class="title hidden">Menu</div>
         </nav>
     </div>
    <!-- * side-menu -->
@@ -50,6 +50,9 @@ export default {
 <style css scoped>
 .container {
   z-index:1;
+}
+.hidden {
+  color:rgba(0,0,0,0) !important;
 }
 /* SIDE-MENU */
 /* SIDE-MENU */
@@ -97,20 +100,17 @@ export default {
 #sidebar{
   position: fixed;
   /* background-color: #0f61b8; */
-  height: 100%;
-  /* width: 170px; */
-  width:40px;
+  width:54px;
   overflow: hidden;
   left:0px;
-  top:0px;
+  top:135px;
   transition: all 0.4s ease;
 }
 #sidebar ul {
-    padding-top:100px;
-    background:#1a2633 !important;
+    background:#141e29 !important;
 }
 #sidebar a {
-  padding-left:13px !important;
+  padding-left:22px !important;
 }
 #sidebar i {
   margin-right:22px !important;
@@ -123,21 +123,19 @@ export default {
 }
 #sidebar .title{
   overflow: hidden;
-  line-height: 65px;
   text-align: center;
+  padding:15px 0;
   background-color: #081524;
-  font-size: 18px;
+  font-size: 12px;
   font-weight: 600;
   color: #f2f2f2;
   border-bottom: 1px solid #222;
-  margin-bottom:-10px;
 }
 #sidebar .list-items{
   position: relative;
   background-color: #1f2c3a;
   width: 175px;
-  padding-left:0px;
-  height: 100%;
+  padding:0;
   margin:0px;
   list-style: none;
 }

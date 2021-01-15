@@ -3,6 +3,7 @@
 
         <app-nav></app-nav>
 
+        <!-- BUY MODAL -->
         <div class="modal" v-if="showBuyModal">
                 <div class="modal-content">
                     Buy {{ this.quantity }} stocks of {{ stock.quoteType.longName }}? <br> <br>
@@ -14,17 +15,30 @@
                 </div>
         </div>
 
+        <!-- SELL MODAL  -->
+        <div class="modal" v-if="showSellModal">
+                <div class="modal-content">
+                    Sell {{ this.quantity }} stocks of {{ stock.quoteType.longName }}? <br> <br>
+                    Total price: {{ buyPrice.toFixed(2) }}$
+                </div>
+                <div class="button-row">
+                    <button class="modal-button" @click="sellStock2">Yes</button>
+                    <button class="modal-button" @click="hideSellModal">Cancel</button>
+                </div>
+        </div>
+
+        <!-- VIEW STOCK -->
         <div class="headline">
             <h2> {{ stock.quoteType.longName }} </h2>
             <div>
                 <p class="price"> ${{ stock.price.regularMarketPrice.raw.toFixed(2) }} </p>
                 <input type="number" v-model.number="quantity">
                 <button class="buy" @click="buyDialogue" >Buy</button>
-                <button class="sell" @click="sellStock2" >Sell</button>
+                <button class="sell" @click="sellDialogue" >Sell</button>
                 <i @click="add" class="fas fa-heart icon" :class="{added: favourite }"></i>
                 <button class="notice" v-if="notice != null"> {{ notice }} </button>
                 <p class="smallName">You have {{ this.oldQuantity }} stocks. </p>
-                <button class="notice" v-if="notice != null"> {{ notice }} </button>
+                <p v-if="trade" class="trade">Trade Succesful !</p>
             </div>
         </div>
 
@@ -61,7 +75,7 @@
 
 
 
-<script>
+<script scoped>
 import axios from 'axios'
 import database from '../../firebase'
 import firebase from 'firebase'
@@ -78,9 +92,11 @@ export default {
             oldQuantity: 0,
             key: '',
             showBuyModal: false,
+            showSellModal: false,
             currentStock: {},
             favourite: false,
             notice: null,
+            trade: null,
         }
     },
     components: {
@@ -98,13 +114,16 @@ export default {
         hideBuyModal () {
             this.showBuyModal = false
         },
+        hideSellModal () {
+            this.showSellModal = false
+        },
         buyDialogue () {
             //* check if valid quantity
             if ( this.quantity % 1 != 0 || this.quantity < 1) {
                 alert ('Invalid amount of stocks')
             }
             else {
-                //* check funds
+            //* check funds
             const ref = this
             var updatedFunds = 0
             const user = firebase.auth().currentUser.uid
@@ -121,6 +140,15 @@ export default {
                             alert('Not enough funds')
                         }
                     })
+            }
+        },
+        sellDialogue () {
+            //* check if valid quantity
+            if ( this.quantity % 1 != 0 || this.quantity < 1 || this.quantity > this.oldQuantity ) {
+                alert ('Invalid amount of stocks')
+            }
+            else {
+                this.showSellModal = true
             }
         },
         add () {
@@ -184,6 +212,8 @@ export default {
                     .then(function (response) {
                     })
             this.hideBuyModal()
+            this.trade = true
+            setTimeout(() => {  this.trade = false }, 2500);
         },
         sellStock2 () {
             const user = firebase.auth().currentUser.uid
@@ -220,6 +250,9 @@ export default {
                 axios.post(`https://ove-stock-trader.firebaseio.com/users/${user}/history/.json`, order)
                     .then(function (response) {
                     })
+                this.trade = true
+                setTimeout(() => {  this.trade = false }, 2500);
+                this.hideSellModal()
             }
         },
     },
@@ -282,7 +315,9 @@ export default {
 <style scoped>
 * {
 }
-
+.trade {
+    color:green;
+}
 input {
     width:75px;
     margin: auto 8px;

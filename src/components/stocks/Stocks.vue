@@ -316,14 +316,15 @@ h2 {
     color:white;
     font-size: 0.7rem;
     cursor:pointer;
-    padding:0.5rem 0.65rem;
+    padding:0.7rem 0.9rem;
     border-radius: 5px;
 }
 input {
     width:200px;
     border:none;
     border-bottom: 1px solid  #1f2c3a;
-    margin-right:10px;
+    margin-right:7px;
+    padding:0 5px;
 }
 * {
     color: rgb(19, 23, 48);
