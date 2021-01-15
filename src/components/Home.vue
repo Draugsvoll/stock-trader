@@ -1,6 +1,8 @@
 <template>
     <div class="box">
-        <h2>Welcome, <i>{{ user.email }}</i></h2>
+
+        <app-nav></app-nav>
+        <h2>Welcome, <i>{{ user.email }}</i></h2> 
         <img v-bind:src="imageUrl" alt="" >
         <img v-if="imageUrl == '../assets/profile.png' " src="../assets/profile.png" alt="" > <br>
         <span>Upload Avatar</span> <br>
@@ -33,6 +35,8 @@
 import firebase from 'firebase'
 import axios from 'axios'
 
+import Sidenav from '../components/Sidenav'
+
 export default {
     data () {
         return {
@@ -41,6 +45,9 @@ export default {
             selectedFile: null,
             imageUrl: ''
         }
+    },
+    components: {
+        appNav: Sidenav
     },
     methods: {
         onFileSelected (event) {
@@ -94,25 +101,37 @@ export default {
 
 
 <style  scoped>
+* {
+    border:1px solid rgba(0,0,0,0);
+    font-size:13px;
+}
+.logout {
+    display: inline-flex;
+}
 span {
     margin-right:5px;
-    font-size: 10.5px;
+    font-size: 11px;
 }
 .box{
-    margin: 0 auto;
+    margin: 30px auto 100px auto;
     padding: 20px;
     text-align: justify;
     width: 700px;
     color: rgb(15, 17, 31);
     font-size: 0.75rem;
-    margin-top: 20px;
     }
 h2 {
     margin:25px 0;
     margin-bottom:0;
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+i {
+    font-size: 1.3rem;
+    
 }
 .info {
-    font-size: 0.95rem;
+    font-size: 1.05rem;
 }
 img {
    max-width: 150px;

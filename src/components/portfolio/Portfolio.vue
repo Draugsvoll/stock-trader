@@ -1,6 +1,8 @@
 <template>
     <div class="box">
 
+            <app-nav></app-nav>
+
             <!-- PIE CHART  -->
             <div v-if="chartData2 != null" class="charts">
                 <!-- PieChart -->
@@ -89,6 +91,8 @@
 <script>
 import PortfolioStock from '../stocks/PortfolioStock'
 import axios from 'axios'
+import Sidenav from '../Sidenav'
+
 import firebase from 'firebase'
 import { GChart } from 'vue-google-charts'
 
@@ -314,6 +318,7 @@ export default {
     components: {
         appStock: PortfolioStock,
         GChart,
+        appNav: Sidenav
     }
 
 }

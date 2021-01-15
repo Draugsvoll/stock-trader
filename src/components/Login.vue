@@ -1,5 +1,6 @@
 <template>
     <div class="outer-container">
+        <h1 class="headline">Register / Login</h1>
             <div class="img">
                 <img src="../assets/logo3.png" alt="" width="60">
             </div>
@@ -78,6 +79,14 @@ export default {
 .testuser{
     color:black;
 }
+.test {
+    padding:4px;
+}
+.headline {
+    text-align: center;
+    font-weight: 400;
+    font-size: 26px;
+}
 .outer-container {
     padding-top:70px;
 }
@@ -114,12 +123,12 @@ export default {
     margin-bottom:-30px;
 }
 img {
-    margin:0 auto;
+    margin:18px auto 0px auto;
 }
 input {
     margin: 0.5rem 0;
     padding:0.4rem;
-    width:250px;
+    width:240px;
     font-size:0.75rem;
 }
 button {
@@ -127,7 +136,8 @@ button {
     background-color: #233850;
     border:none;
     font-size: 0.7rem;
-    padding:0.6rem;
+    padding:0.6rem 1.2rem;
+    border-radius: 4px;
     color:white;
     cursor:pointer;
     margin-right:5px;

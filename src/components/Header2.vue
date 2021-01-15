@@ -5,11 +5,9 @@
             <ul>
                 <li><a href="/">{{ funds | currency }} </a></li>
                 <li ><a href="/stocks">Buy/Sell</a></li>
-                <!-- <li ><a href="/publicportfolios">Portfolios</a></li> -->
                 <li ><a href="/portfolio">My Portfolio</a></li>
-                <li ><a href="/news">News</a></li>
-                <li ><a href="/">Profile</a></li>            
-                <li @click="logout"><a href="/login" >Logout</a></li>            
+                <!-- <li ><a href="/publicportfolios">Portfolios</a></li> -->
+                <!-- <li @click="logout"><a href="/login" >Logout</a></li>             -->
             </ul>
         </nav>
     </header>
@@ -62,10 +60,14 @@ export default {
     font-size:0.85rem;
     padding:1.35rem;
     background-color: #1f2c3a;
+    z-index:5;
 }
 .header-title {
     text-decoration: none; 
+    margin-left:32px;
     font-size: 1.1rem;
+    z-index:5;
+
 }
 
 .header-nav {

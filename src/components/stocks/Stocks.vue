@@ -1,6 +1,8 @@
 <template>
     <div class="box">
         
+        <app-nav></app-nav>
+
         <div class="btn-row">
             <button :class="{active: type=='Trending'}"  @click="getTrending">Trending</button>
             <button :class="{active: type=='Top Gainers'}" @click="getTopGainers">Top Gainers</button>
@@ -42,6 +44,7 @@
 import Stock from './Stock.vue'
 import axios from 'axios'
 import firebase from 'firebase'
+import Sidenav from '../Sidenav'
 
 export default {
     data () {
@@ -56,6 +59,7 @@ export default {
     },
     components: {
         appStock: Stock,
+        appNav: Sidenav,
     },
     computed: {    
         stocks() {

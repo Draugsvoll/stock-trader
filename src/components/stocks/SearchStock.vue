@@ -1,5 +1,6 @@
 <template>
     <div class="box">
+        
         <div class="btn-row">
             <button @click="getTrending">Trending</button>
             <button @click="getTopGainers">Top Gainers</button>

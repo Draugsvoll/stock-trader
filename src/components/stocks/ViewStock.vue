@@ -1,6 +1,8 @@
 <template>
     <div class="container">
 
+        <app-nav></app-nav>
+
         <div class="modal" v-if="showBuyModal">
                 <div class="modal-content">
                     Buy {{ this.quantity }} stocks of {{ stock.quoteType.longName }}? <br> <br>
@@ -64,6 +66,8 @@ import axios from 'axios'
 import database from '../../firebase'
 import firebase from 'firebase'
 
+import Sidenav from '../Sidenav'
+
 export default {
     data () {
         return {
@@ -78,6 +82,9 @@ export default {
             favourite: false,
             notice: null,
         }
+    },
+    components: {
+        appNav: Sidenav
     },
     computed: {
         validQuantity: function(){

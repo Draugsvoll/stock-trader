@@ -18,9 +18,6 @@ export default {
   components: {
     appHeader2: Header2,
   },
-  created() {
-
-  },
 };
 </script>
 

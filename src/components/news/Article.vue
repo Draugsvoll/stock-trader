@@ -37,11 +37,14 @@ export default {
 .headline {
     font-size:22px;
     font-weight: bold;
+    margin:auto;
     margin-bottom:40px;
     text-align: center;
+    max-width:700px;
 }
 .content {
-    max-width:800px;
+    max-width:600px;
+    margin:auto;
 }
 
 .content >>> figcaption {
@@ -54,7 +57,8 @@ export default {
     max-width: 600px;
     max-height:400px;
     padding:0;
-    margin:0;
+    margin:0 auto;
+    display: inline-flex;
     object-fit: contain;
 }
 
