@@ -40,7 +40,9 @@ html, body{
   margin-right: 50px;
   margin-bottom: 25px;
   font-size:0.8rem;
+
 }
+
 
 .footer {
   width: 100%;

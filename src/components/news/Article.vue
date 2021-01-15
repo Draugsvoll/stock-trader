@@ -28,14 +28,14 @@ export default {
 <style  scoped>
 .article {
     border-radius:3px;
-    border:1px solid #1f2c3a;
+    border:1px solid #1f2c3a46;
     margin:100px auto;
     padding: 50px;
     max-width:700px;
     box-shadow: rgba(162, 162, 168, 0.2) 0px 7px 29px 0px;
 }
 .headline {
-    font-size:22px;
+    font-size:21px;
     font-weight: bold;
     margin:auto;
     margin-bottom:40px;
@@ -51,7 +51,7 @@ export default {
     font-size: 0.6rem;
 }
 .content >>> p {
-    font-size: 0.75rem;
+    font-size: 13px;
 }
 .content >>> img {
     max-width: 600px;

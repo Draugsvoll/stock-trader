@@ -103,22 +103,23 @@ export default {
 <style  scoped>
 * {
     border:1px solid rgba(0,0,0,0);
-    font-size:13px;
+    font-size:14px;
 }
 .logout {
     display: inline-flex;
 }
 span {
     margin-right:5px;
-    font-size: 11px;
+    font-size: 13px;
 }
 .box{
+    border-left:1px solid grey;
     margin: 30px auto 100px auto;
-    padding: 20px;
+    padding:20px 0 35px 25px;
     text-align: justify;
     width: 700px;
     color: rgb(15, 17, 31);
-    font-size: 0.75rem;
+    font-size: 0.95rem;
     }
 h2 {
     margin:25px 0;
@@ -138,7 +139,7 @@ img {
    max-height: 150px;
 }
 input {
-    font-size: 11px;
-    width:50px;
+    font-size: 13px;
+    width:55px;
 }
 </style>

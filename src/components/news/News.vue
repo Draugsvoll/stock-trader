@@ -50,11 +50,12 @@ i {
     margin-left:3px;
 }
 .container {
-    /* margin-top:-50px; */
+    padding-top:2px;
 }
 .news-container {
     margin: 200px auto;
     max-width: 1000px;
+    min-height:2000px;
 }
 
 </style>>

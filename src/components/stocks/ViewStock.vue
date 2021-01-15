@@ -349,7 +349,7 @@ h2 {
     background:none !important;
 }
 .smallName {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
 }
 .modal {
     background:white;
@@ -379,13 +379,12 @@ h2 {
     max-width:500px;
     margin-bottom:25px;
     margin-top:20px;
-    font-size:0.7rem;
+    font-size:13px;
     font-family: Arial, Helvetica, sans-serif;
 }
 .info {
     margin:25px auto;
     max-width: 500px;
-    font-size: 0.7rem;
 }
 .container1 {
     max-width:500px;
@@ -406,11 +405,11 @@ h2 {
 }
 .tag {
     font-weight: bold;
-    font-size: 0.71rem;
+    font-size: 14px;
     width:100px;
 }
 .number {
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     width:200px;
 }
 .price {
@@ -439,6 +438,6 @@ button:hover {
 }
 .line {
     margin:2px;
-    font-size: 0.55rem;
+    font-size: 0.7rem;
 }
 </style>

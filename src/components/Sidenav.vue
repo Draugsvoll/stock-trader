@@ -10,11 +10,11 @@
       <nav id="sidebar">
         <div class="title">Menu</div>
         <ul class="list-items">
-        <li><a href="/portfolio"><i class="fas fa-address-book"></i>My Portfolio</a></li>
-        <li ><a href="/news" ><i class="fas fa-globe-asia"></i>News</a></li>
-        <li><a href="/stocks"><i class="fas fa-sliders-h"></i>Buy & Sell</a></li>
+        <li v-bind:class="{active: path == '/portfolio'}"><a href="/portfolio"><i class="fas fa-address-book"></i>My Portfolio</a></li>
+        <li v-bind:class="{active: path == '/news'}" ><a href="/news" ><i class="fas fa-globe-asia"></i>News</a></li>
+        <li v-bind:class="{active: path == '/stocks'}"><a href="/stocks"><i class="fas fa-sliders-h"></i>Buy & Sell</a></li>
         <li><a href="/"><i class="fas fa-home"></i>Home</a></li>
-        <li><a href="/"><i class="fas fa-cog"></i>Account</a></li>
+        <li v-bind:class="{active: path == '/'}"><a href="/"><i class="fas fa-cog"></i>Account</a></li>
         <!-- <li><a href="#"><i class="fas fa-stream"></i>Features</a></li> -->
         <!-- <li><a href="#"><i class="fas fa-user"></i>About us</a></li> -->
         <li><a href="#"><i class="fas fa-envelope"></i>Contact us</a></li>
@@ -37,6 +37,11 @@
 import firebase from 'firebase'
 
 export default {
+  computed: {
+    path () {
+        return this.$route.path
+    }
+  },
   methods: {
     logout () {
            firebase.auth().signOut()
@@ -45,10 +50,16 @@ export default {
             window.location.href = `/login`
        },
   },
+  created () {
+    console.log(this.path)
+  }
 }
 </script>
 
 <style css scoped>
+.active {
+    background-color: #1e475f !important;
+}
 .container {
   z-index:1;
 }
