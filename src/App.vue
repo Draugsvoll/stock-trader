@@ -40,10 +40,7 @@ html, body{
   margin-right: 50px;
   margin-bottom: 25px;
   font-size:0.8rem;
-
 }
-
-
 .footer {
   width: 100%;
   background-color: rgb(5 25 31);

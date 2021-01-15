@@ -111,7 +111,7 @@ export default {
                 }
             },
             chartOptionsColumn: {
-                'width':900,
+                'width':1000,
                 'height':400,
                 title: 'Percentage Gains %'
             },
