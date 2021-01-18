@@ -16,10 +16,10 @@
             <!-- VALUES -->
              <div class="headline">
                  <div class="head">
-                    <h3> <span class="value">Stocks:</span> {{ totalStockValue | currency }}</h3> 
+                    <h3> <span class="value">Stocks Value:</span> {{ totalStockValue | currency }}</h3> 
                  </div>
                  <div class="head">
-                    <h3><span class="value">Cash:</span> {{ funds | currency }}</h3>
+                    <h3><span class="value">Cash Balance:</span> {{ funds | currency }}</h3>
                  </div>
                 <div class="head">
                     <h3> <span class="value">Total Gains:</span> <span class="total-gains" :class="{green: totalGains > 0, red: totalGains < 0 }"> {{ totalGains | currency }}</span></h3>
@@ -102,13 +102,17 @@ export default {
             chartOptionsPie: {
                 title:'Asset Allocation',
                 is3D: true,
-                'width':1000,
-                'height':400,
-                legend: {position: 'center', textStyle: {fontSize: 16}},
-                tooltip: {position: 'center', textStyle: {fontSize: 16}},
+                    'width':1000,
+                    'height':400,
+                legend: 
+                    {position: 'labeled',
+                     textStyle: {fontSize: 12, color:'#032E52'}
+                     },
+                tooltip:
+                     {position: 'center', textStyle: {fontSize: 14}},
                 titleTextStyle: {
-                 fontSize: 20
-                }
+                    fontSize: 20
+                },
             },
             chartOptionsColumn: {
                 'width':1000,
@@ -456,7 +460,6 @@ h3 {
 .tag:hover {
     color:rgb(12, 35, 126);
     text-decoration: underline;
-
 }
 .charts {
     max-width:1000px;

@@ -20,6 +20,9 @@ html, body {
 i {
   cursor:pointer;
 }
+i:hover {
+color:rgb(100, 184, 218);
+}
 footer{
   background-color: #1f2c3a;
   color:white;

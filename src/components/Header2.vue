@@ -57,7 +57,7 @@ export default {
      color:white
  }
  header {
-    font-size:0.85rem;
+    font-size:0.95rem;
     padding:1.35rem;
     background-color: #1f2c3a;
     z-index:5;
@@ -65,7 +65,7 @@ export default {
 .header-title {
     text-decoration: none; 
     margin-left:32px;
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     z-index:5;
 }
 

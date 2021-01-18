@@ -1,6 +1,6 @@
 <template>
     <div class="outer-container">
-        <h1 class="headline">Register / Login</h1>
+        <!-- <h1 class="headline">Register / Login</h1> -->
             <div class="img">
                 <img src="../assets/logo3.png" alt="" width="60">
             </div>
@@ -98,16 +98,16 @@ export default {
     z-index: 9;
 }
 .testuser {
-    font-size: 0.7rem;
+    font-size: 12px;
 }
 .test {
     background:rgba(0,0,0,0);
     border:none;
     outline:none;
-    color: lightblue;
+    color: rgb(10, 65, 83);
     cursor:pointer;
     text-decoration: underline;
-    font-size: 0.65rem;
+    font-size: 12px;
 }
 .form {
     padding:4rem 6rem;
@@ -122,14 +122,18 @@ export default {
     width:60px;
     margin-bottom:-30px;
 }
+.btn {
+    margin-top:5px;
+}
 img {
-    margin:18px auto 0px auto;
+    margin:55px auto 0px auto;
 }
 input {
     margin: 0.5rem 0;
-    padding:0.4rem;
+    padding:0.5rem;
     width:240px;
     font-size:0.75rem;
+    font-style: italic;
 }
 button {
     margin:auto;
@@ -142,4 +146,5 @@ button {
     cursor:pointer;
     margin-right:5px;
 }
+
 </style>
