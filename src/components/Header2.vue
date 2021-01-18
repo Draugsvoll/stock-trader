@@ -66,7 +66,6 @@ export default {
     text-decoration: none; 
     margin-left:32px;
     font-size: 1.3rem;
-    font-weight:bold;
     font-style:italic;
     z-index:5;
 }
