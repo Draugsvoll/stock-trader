@@ -97,6 +97,8 @@ export default {
 .info {
     width:100px;
     font-size: 13px;
+    display: flex;
+    align-items: center;
 }
 .info:hover {
     color:rgb(12, 35, 126);

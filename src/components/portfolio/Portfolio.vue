@@ -100,7 +100,7 @@ export default {
     data () {
         return {
             chartOptionsPie: {
-                title:'Assets Allocation',
+                title:'Asset Allocation',
                 is3D: true,
                 'width':1000,
                 'height':400,
@@ -379,7 +379,6 @@ h3 {
     width:100px;
     padding:8px 0;
     display: flex ;
-    align-items: center;
 }
 .headline {
     display: flex;
@@ -456,6 +455,8 @@ h3 {
 }
 .tag:hover {
     color:rgb(12, 35, 126);
+    text-decoration: underline;
+
 }
 .charts {
     max-width:1000px;

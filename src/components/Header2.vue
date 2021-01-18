@@ -4,8 +4,8 @@
             <a class="header-title" href="/">Stocktrader</a>
             <ul>
                 <li><a href="/">{{ funds | currency }} </a></li>
-                <li ><a href="/stocks">Buy/Sell</a></li>
-                <li ><a href="/portfolio">My Portfolio</a></li>
+                <li ><a href="/stocks"><i class="fas fa-sliders-h"></i> Buy/Sell</a></li>
+                <li ><a href="/portfolio"><i class="fas fa-chart-pie"></i> My Portfolio</a></li>
                 <!-- <li ><a href="/publicportfolios">Portfolios</a></li> -->
                 <!-- <li @click="logout"><a href="/login" >Logout</a></li>             -->
             </ul>
@@ -65,9 +65,8 @@ export default {
 .header-title {
     text-decoration: none; 
     margin-left:32px;
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     z-index:5;
-
 }
 
 .header-nav {
@@ -94,5 +93,8 @@ li:hover {
     text-decoration: none;
     padding-right: 2rem;
     
+}
+i {
+    margin-right:5px;
 }
 </style>

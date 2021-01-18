@@ -10,7 +10,7 @@
       <nav id="sidebar">
         <div class="title">Menu</div>
         <ul class="list-items">
-        <li v-bind:class="{active: path == '/portfolio'}"><a href="/portfolio"><i class="fas fa-address-book"></i>My Portfolio</a></li>
+        <li v-bind:class="{active: path == '/portfolio'}"><a href="/portfolio"><i class="fas fa-chart-pie"></i>My Portfolio</a></li>
         <li v-bind:class="{active: path == '/news'}" ><a href="/news" ><i class="fas fa-globe-asia"></i>News</a></li>
         <li v-bind:class="{active: path == '/stocks'}"><a href="/stocks"><i class="fas fa-sliders-h"></i>Buy & Sell</a></li>
         <li><a href="/"><i class="fas fa-home"></i>Home</a></li>

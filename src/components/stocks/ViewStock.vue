@@ -390,7 +390,7 @@ h2 {
     max-width:500px;
     margin:auto;
     margin-top: 220px;
-    border-left:1px solid #1f2c3a3f;
+    border-left:1px solid #2c445e3f;
     padding:18px;
     /* box-shadow: rgba(162, 162, 168, 0.2) 0px 7px 29px 0px; */
 }

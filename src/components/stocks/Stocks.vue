@@ -259,7 +259,7 @@ export default {
     justify-content:stretch;
 }
 .btn-row button {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     padding:12px 0;
     border:none;
     border-bottom:1px solid black;
@@ -301,6 +301,7 @@ h2 {
 }
 .tag:hover {
     color:rgb(12, 35, 126);
+    text-decoration: underline;
 }
 .name {
     width:175px !important;
@@ -316,7 +317,7 @@ h2 {
     color:white;
     font-size: 0.7rem;
     cursor:pointer;
-    padding:0.7rem 0.9rem;
+    padding:0.7rem 1rem;
     border-radius: 5px;
 }
 input {
