@@ -128,7 +128,7 @@ export default {
   margin-right:22px !important;
 }
 #sidebar:hover{
-  width:160px;
+  width:170px;
 }
 #btn:checked ~ #sidebar{
   left: 0;

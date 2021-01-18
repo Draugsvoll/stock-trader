@@ -106,7 +106,7 @@ export default {
                     'height':400,
                 legend: 
                     {position: 'labeled',
-                     textStyle: {fontSize: 13, color:'#032E52'}
+                     textStyle: {fontSize: 14, color:'#032E52'}
                      },
                 tooltip:
                      {position: 'center', textStyle: {fontSize: 14}},

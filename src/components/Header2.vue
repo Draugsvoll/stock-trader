@@ -1,7 +1,7 @@
 <template>
      <header>
         <nav class="header-nav">
-            <a class="header-title" href="/">Stocktrader</a>
+            <a class="header-title" href="/">Stocktrader As</a>
             <ul>
                 <li><a href="/">{{ funds | currency }} </a></li>
                 <li ><a href="/stocks"><i class="fas fa-sliders-h"></i> Buy/Sell</a></li>
@@ -66,6 +66,8 @@ export default {
     text-decoration: none; 
     margin-left:32px;
     font-size: 1.3rem;
+    font-weight:bold;
+    font-style:italic;
     z-index:5;
 }
 
