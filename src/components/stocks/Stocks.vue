@@ -284,7 +284,6 @@ h2 {
 }
 .tags {
     display: flex;
-    cursor:pointer;
     text-align: left;
     max-width:750px;
     vertical-align: bottom;
@@ -292,10 +291,12 @@ h2 {
     margin:auto;
 }
 .tag {
+    cursor:pointer;
     display: flex;
     text-align: left;
     width:100px;
     margin-top:55px;
+    margin-bottom:4px;
     height:fit-content;
     font-size:0.75rem;
 }
@@ -312,20 +313,20 @@ h2 {
     margin:25px auto;
 }
 .search {
-    background-color: #1f2c3a;
+    background: #0b2847 !important;
     border:none;
     color:white;
     font-size: 0.7rem;
     cursor:pointer;
-    padding:0.7rem 1rem;
+    padding:0.7rem 1.2rem;
     border-radius: 5px;
 }
 input {
-    width:200px;
+    width:225px;
     border:none;
     border-bottom: 1px solid  #1f2c3a;
     margin-right:7px;
-    padding:0 5px;
+    padding:0px 10px;
 }
 * {
     color: rgb(19, 23, 48);
