@@ -421,6 +421,10 @@ h3 {
     padding-left: 7px;
     padding-right: 5px;
 }
+.history-container:hover {
+    background: rgb(232, 236, 238);
+
+}
 .history:nth-child(odd) {
   background-color: rgb(245, 246, 247);
 }

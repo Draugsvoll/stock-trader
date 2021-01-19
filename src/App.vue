@@ -28,7 +28,6 @@ export default {
     font-family: Roboto,Segoe UI,Helvetica Neue,Helvetica,Arial,sans-serif-light,sans-serif;
     outline: none;
 }
-
 html, body{
   height: 100%;
   padding:0;

@@ -312,7 +312,7 @@ h2 {
     margin:25px auto;
 }
 .search {
-    background:#113861;
+    background-color: #1f2c3a;
     border:none;
     color:white;
     font-size: 0.7rem;
