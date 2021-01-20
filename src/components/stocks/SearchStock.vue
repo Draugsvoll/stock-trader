@@ -77,7 +77,7 @@ export default {
             axios.request(options).then(function (response) {
                 results = response.data
                 const symbols = results.ResultSet.Result[0].symbol
-                console.log('from api: ', symbols)
+                // console.log('from api: ', symbols)
                 ref.getStock(symbols)
             }).catch(function (error) {
                 console.error(error);
@@ -96,12 +96,12 @@ export default {
             }};
             axios.request(options).then(function (response) {
                 const returnedStocks = response.data.quoteResponse.result
-                console.log(returnedStocks)
+                // console.log(returnedStocks)
                 // return array name+price of each stock
                 returnedStocks.forEach( stock => {
                     const newStock = { name: stock.shortName, price: stock.regularMarketPrice, change: stock.regularMarketChange, symbol: stock.symbol, prevClose: stock.regularMarketPreviousClose}
                     searchedStock.push(newStock)
-                    console.log('from get single stock: ', newStock.name)
+                    // console.log('from get single stock: ', newStock.name)
                 });
                 ref.searchedStock = searchedStock
             }).catch(function (error) {

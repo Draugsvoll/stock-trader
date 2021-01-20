@@ -3,7 +3,6 @@ html, body {
   height: 100%;
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-
 }
 * {
 }
@@ -33,8 +32,8 @@ footer{
 .copyright {
     display: flex;
     justify-content: center;
-    font-size: 0.6rem !important;
-    color:rgb(235, 241, 243) !important;
+    font-size: 0.75rem !important;
+    color:rgb(183, 188, 191);
     margin-top:10px;
     /* margin-bottom:55px; */
 }
@@ -60,7 +59,12 @@ footer{
 
 footer a {
   text-decoration:none;
-  color:rgb(216, 223, 228);
+  margin-bottom:15px;
+}
+a:hover {
+  /* cursor: pointer;
+  color:rgb(217, 224, 228); */
+
 }
 .column {
     margin:18px;

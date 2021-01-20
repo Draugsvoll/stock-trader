@@ -45,13 +45,14 @@ export default {
   methods: {
     logout () {
            firebase.auth().signOut()
-            .then(resp => console.log(resp))
+            .then(resp => 
+            console.log(resp))
             .catch(err => console.log(err))
             window.location.href = `/login`
        },
   },
   created () {
-    console.log(this.path)
+    // console.log(this.path)
   }
 }
 </script>

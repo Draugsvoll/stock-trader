@@ -44,7 +44,7 @@ export default {
               if ( funds == null) {
                    firebase.database().ref(`users/${user}/funds/`).set(10000);
                    funds = 10000
-                   console.log('funds fra header')
+                //    console.log('funds fra header')
               } 
               this.$store.dispatch('setFunds', funds)
             })

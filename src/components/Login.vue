@@ -35,7 +35,7 @@ export default {
         loginAsTest () {
             firebase.auth().signInWithEmailAndPassword('test_user@gmail.com', 'pass123')
                 .then( resp => {
-                    console.log(resp)
+                    // console.log(resp)
                     window.location.href = `/`
                 })
                 .catch( err => {
@@ -45,7 +45,7 @@ export default {
         signUp () {
             firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
                 .then(response => {
-                    console.log(response)
+                    // console.log(response)
                     window.location.href = `/`
                 })
                 .catch(function(error) {
@@ -57,7 +57,7 @@ export default {
         login () {
             firebase.auth().signInWithEmailAndPassword(this.email, this.password)
                 .then( resp => {
-                    console.log(resp)
+                    // console.log(resp)
                     window.location.href = `/`
                 })
                 .catch( err => {

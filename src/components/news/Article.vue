@@ -26,6 +26,7 @@ export default {
 
 
 <style  scoped>
+
 .article {
     border-radius:3px;
     border:1px solid #1f2c3a46;
@@ -35,7 +36,7 @@ export default {
     box-shadow: rgba(162, 162, 168, 0.2) 0px 7px 29px 0px;
 }
 .headline {
-    font-size:21px;
+    font-size:23px;
     font-weight: bold;
     margin:auto;
     margin-bottom:40px;
@@ -45,6 +46,9 @@ export default {
 .content {
     max-width:600px;
     margin:auto;
+}
+.content >>> h2 {
+    font-size: 16px !important;
 }
 
 .content >>> figcaption {
