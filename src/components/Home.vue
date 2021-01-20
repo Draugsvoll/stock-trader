@@ -115,7 +115,8 @@ span {
 .box{
     border-left:1px solid rgb(3, 31, 49);
     margin: 30px auto 100px auto;
-    padding:20px 0 35px 25px;
+    padding-left: 20px;
+    padding-bottom: 18px;
     text-align: justify;
     width: 700px;
     color: rgb(15, 17, 31);

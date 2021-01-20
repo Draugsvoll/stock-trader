@@ -1,7 +1,6 @@
 <template>
     <div class="container1">
 
-
         <!-- BUY MODAL -->
         <div class="modal" v-if="showBuyModal">
                 <div class="modal-content">
@@ -389,9 +388,10 @@ h2 {
 .container1 {
     max-width:500px;
     margin:auto;
-    margin-top: 220px;
-    border-left:1px solid rgb(3, 31, 49);
-    padding:18px 18px 5px 18px;
+    margin-top: 250px;
+    margin-bottom: 90px;
+    border-left:1px solid rgb(2, 24, 37);
+    padding-left:18px;
 }
 .numbers {
     display: flex;
