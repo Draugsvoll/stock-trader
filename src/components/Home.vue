@@ -113,7 +113,7 @@ span {
     font-size: 13px;
 }
 .box{
-    border-left:1px solid grey;
+    border-left:1px solid rgb(3, 31, 49);
     margin: 30px auto 100px auto;
     padding:20px 0 35px 25px;
     text-align: justify;

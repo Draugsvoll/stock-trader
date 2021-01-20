@@ -390,9 +390,8 @@ h2 {
     max-width:500px;
     margin:auto;
     margin-top: 220px;
-    border-left:1px solid #2c445e3f;
-    padding:18px;
-    /* box-shadow: rgba(162, 162, 168, 0.2) 0px 7px 29px 0px; */
+    border-left:1px solid rgb(3, 31, 49);
+    padding:18px 18px 5px 18px;
 }
 .numbers {
     display: flex;

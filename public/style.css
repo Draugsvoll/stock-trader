@@ -2,9 +2,10 @@
 html, body {
   height: 100%;
   margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+
 }
 * {
-  /* border:1px solid purple; */
 }
 .wrapper {
   min-height: 100%;

@@ -111,7 +111,7 @@ export default {
                 tooltip:
                      {position: 'center', textStyle: {fontSize: 14}},
                 titleTextStyle: {
-                    fontSize: 20
+                    fontSize: 20,
                 },
             },
             chartOptionsColumn: {
