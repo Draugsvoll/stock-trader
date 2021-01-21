@@ -64,6 +64,9 @@ export default {
                     alert('Wrong username/password' + err)
                 })
         }
+    },
+    created () {
+        // window.location.replace("http://www.w3schools.com")
     }
 }
 </script>

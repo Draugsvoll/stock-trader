@@ -63,7 +63,7 @@ export default {
         },
         getImage() {
             firebase.storage().ref('users/' + this.user.uid + '/image' ).getDownloadURL().then( resp => {
-                // console.log(resp)
+                console.log(resp)
                 this.imageUrl = resp
             }).catch( err => {
                 console.log(err)
@@ -72,7 +72,7 @@ export default {
         },
         setImage() {
             firebase.storage().ref('users/' + this.user.uid + '/image' ).getDownloadURL().then( resp => {
-                // console.log(resp)
+                console.log(resp)
                 this.imageUrl = resp
                 // this.$router.go()
             }).catch( err => {

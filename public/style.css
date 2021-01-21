@@ -33,7 +33,7 @@ footer{
     display: flex;
     justify-content: center;
     font-size: 0.75rem !important;
-    color:rgb(183, 188, 191);
+    color:rgb(206, 211, 214);
     margin-top:10px;
     /* margin-bottom:55px; */
 }
@@ -59,12 +59,11 @@ footer{
 
 footer a {
   text-decoration:none;
-  margin-bottom:15px;
+  margin-bottom:25px;
 }
 a:hover {
-  /* cursor: pointer;
-  color:rgb(217, 224, 228); */
-
+  cursor: pointer;
+  color:rgb(229, 235, 238);
 }
 .column {
     margin:18px;
