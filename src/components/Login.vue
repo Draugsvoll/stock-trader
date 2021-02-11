@@ -134,9 +134,13 @@ img {
 }
 input {
     margin: 0.5rem 0;
-    padding:0.55rem;
+    padding:0.5rem;
+    border:#17232f 1px solid;
     width:260px;
     font-size:0.85rem;
+    border-radius:3px;
+}
+::placeholder {
     font-style: italic;
 }
 button {
