@@ -2,7 +2,7 @@
     <div class="outer-container">
         <!-- <h1 class="headline">Register / Login</h1> -->
             <div class="img">
-                <img src="../assets/logo3.png" alt="" width="60">
+                <img src="../assets/logo4.png" alt="" width="220">
             </div>
             <div class="form">
                 <input v-model="email" type="text" name="username" placeholder="Email" autofocus required>
@@ -91,7 +91,7 @@ export default {
     font-size: 26px;
 }
 .outer-container {
-    padding-top:70px;
+    padding-top:90px;
 }
 .container {
     position:absolute;
@@ -129,12 +129,13 @@ export default {
     margin-top:5px;
 }
 img {
-    margin:55px auto 0px auto;
+   margin-left: -75px;
+    margin-bottom: -25px;
 }
 input {
     margin: 0.5rem 0;
     padding:0.5rem;
-    width:240px;
+    width:250px;
     font-size:0.75rem;
     font-style: italic;
 }

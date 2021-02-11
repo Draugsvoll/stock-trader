@@ -57,7 +57,7 @@ export default {
      color:white
  }
  header {
-    font-size:0.95rem;
+    font-size:1rem;
     padding:1.35rem;
     background-color: #1f2c3a;
     z-index:5;

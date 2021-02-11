@@ -74,12 +74,11 @@ export default {
 <style  scoped>
   .panel-body {
         display: inline !important;
-
     }
 
-    #stock {
+#stock {
     display: inline-flex !important;
-}
+    }
 #body-box {
     display: inline-flex;
     padding: 0;

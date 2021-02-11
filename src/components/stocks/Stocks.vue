@@ -259,7 +259,7 @@ export default {
     justify-content:stretch;
 }
 .btn-row button {
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     padding:12px 0;
     border:none;
     border-bottom:1px solid black;
@@ -316,7 +316,7 @@ h2 {
     background: #0b2847 !important;
     border:none;
     color:white;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     cursor:pointer;
     padding:0.7rem 1.2rem;
     border-radius: 5px;

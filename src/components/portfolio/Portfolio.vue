@@ -80,7 +80,7 @@
                 <div class="info"> {{ purchase.quantity }} </div>
                 <div class="info"> {{ purchase.price }} </div>
                 <div class="info"> {{ purchase.price.toFixed(2) * purchase.quantity.toFixed(2) }} </div>
-                <div class="info date"> {{ purchase.timestamp }} </div>
+                <div class="info date"> {{ purchase.timestamp.replace(/[TZ]/g, ' ').split('.').reverse().pop() }} </div>
             </div>
         </div>
 
@@ -314,8 +314,24 @@ export default {
         axios.get(`https://ove-stock-trader.firebaseio.com/users/${user}/history.json`).then(resp => {
             resp = resp.data
             for (let key in resp){
-                history.push(resp[key])
+                // if ( resp[key].timestamp ) {
+                //     timestamp = resp[key]
+                //     var date = resp[key].timestamp.replace('Z', ' ')  
+                //     var date2 = date.replace('T', ' ')  
+                //     var date3 = date2.split('.')  
+                //     var date4 = date3.splice('.', 1) 
+                //     var timestamp = { timestamp: 'prgjroi' }
+                //     history.push(timestamp)
+                // }             
+            history.push(resp[key])
             }
+            history.forEach( purchase => {
+                var date = purchase.timestamp
+                var date2 = date.replace('Z', ' ')
+                var date3 = date.replace('T', ' ')
+                var date4 = date3.replace('.', ' ')
+
+            })
             ref.history = history
         })
   },    
@@ -324,7 +340,6 @@ export default {
         GChart,
         appNav: Sidenav
     }
-
 }
 </script>
 
@@ -378,7 +393,7 @@ h3 {
     color:green;
 }
 .info {
-    font-size: 12px;
+    font-size: 14px;
     color:rgb(1, 2, 8);
     width:100px;
     padding:8px 0;
@@ -416,10 +431,7 @@ h3 {
     margin-top:50px;
     margin:auto;
     display: flex;
-    padding-top: 9px;
-    padding-bottom: 7px;
-    padding-left: 7px;
-    padding-right: 5px;
+    padding:11px 0px 11px 14px;
 }
 .history-container:hover {
     background: rgb(232, 236, 238);

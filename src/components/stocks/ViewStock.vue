@@ -321,6 +321,7 @@ export default {
 input {
     width:75px;
     margin: auto 8px;
+    font-size:17px;
 }
 h2 {
     margin:0;
@@ -348,7 +349,7 @@ h2 {
     background:none !important;
 }
 .smallName {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
 }
 .modal {
     background:white;
@@ -378,7 +379,7 @@ h2 {
     max-width:500px;
     margin-bottom:25px;
     margin-top:20px;
-    font-size:13px;
+    font-size:15px;
     font-family: Arial, Helvetica, sans-serif;
 }
 .info {
@@ -408,7 +409,7 @@ h2 {
     width:100px;
 }
 .number {
-    font-size: 0.85rem;
+    font-size: 1rem;
     width:200px;
 }
 .price {
@@ -429,7 +430,7 @@ button {
     border:1px solid rgb(4, 4, 110);
     background:#2a4057;
     color:white;
-    font-size:0.75rem;
+    font-size:1rem;
     cursor:pointer;
     font-weight: 350;
 }
@@ -437,6 +438,6 @@ button:hover {
 }
 .line {
     margin:2px;
-    font-size: 0.7rem;
+    font-size: 0.85rem;
 }
 </style>

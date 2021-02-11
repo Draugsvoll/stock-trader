@@ -56,8 +56,7 @@ export default {
     border:1px solid rgb(214, 215, 216);
     border-top:none;
     max-width:750px;
-    padding:10px;
-
+    padding:14px;
 }
 
 .container:hover {
@@ -89,14 +88,14 @@ export default {
 }
 .info {
     width:100px;
-    font-size: 13;
+    font-size: 14px;
     display: flex;
     align-items: center;
 }
 .name {
     width:175px;
     overflow: hidden;
-    font-size: 13;
+    font-size: 14px;
 }
 button {
     border-radius:5px;

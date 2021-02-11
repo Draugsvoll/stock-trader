@@ -68,7 +68,7 @@ export default {
     border:1px solid rgb(214, 215, 216);
     border-top:none;
     width:750px;
-    padding:10px;
+    padding:14px;
 }
 .container:hover {
     background: rgb(232, 236, 238);
@@ -95,7 +95,7 @@ export default {
 }
 .info {
     width:100px;
-    font-size: 13px;
+    font-size: 14px;
     display: flex;
     align-items: center;
 }
@@ -105,7 +105,7 @@ export default {
 .name {
     width:175px;
     overflow: hidden;
-    font-size: 13px;
+    font-size: 14px;
 }
 .container:nth-child(odd) {
   background-color: rgb(245, 246, 247);
