@@ -2,7 +2,7 @@
     <div class="outer-container">
         <!-- <h1 class="headline">Register / Login</h1> -->
             <div class="img">
-                <img src="../assets/logo4.png" alt="" width="220">
+                <img src="../assets/logo4.png" alt="" width="270">
             </div>
             <div class="form">
                 <input v-model="email" type="text" name="username" placeholder="Email" autofocus required>
@@ -129,21 +129,21 @@ export default {
     margin-top:5px;
 }
 img {
-   margin-left: -75px;
+    margin-left: -85px;
     margin-bottom: -25px;
 }
 input {
     margin: 0.5rem 0;
-    padding:0.5rem;
-    width:250px;
-    font-size:0.75rem;
+    padding:0.55rem;
+    width:260px;
+    font-size:0.85rem;
     font-style: italic;
 }
 button {
     margin:auto;
     background-color: #233850;
     border:none;
-    font-size: 0.7rem;
+    font-size: 0.85rem;
     padding:0.6rem 1.2rem;
     border-radius: 4px;
     color:white;
