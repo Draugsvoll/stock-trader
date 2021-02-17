@@ -28,9 +28,11 @@ footer{
   color:white;
   min-height: 180px;
   z-index:10;
+  color: #eef1f2;
 }
 .icons {
   font-size:25px;
+  color: #dae6ea;
 }
 .copyright {
     display: flex;
