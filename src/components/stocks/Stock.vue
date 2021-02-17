@@ -57,6 +57,7 @@ export default {
     border-top:none;
     max-width:750px;
     padding:14px;
+    padding-left:26px;
 }
 
 .container:hover {
