@@ -351,6 +351,7 @@ export default {
 
 h2 {
     margin:auto;
+    font-size: 22px;
     margin-top:75px;
 }
 .smaller {

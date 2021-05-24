@@ -1,6 +1,8 @@
 <template>
          <div class="container">
              <div class="article">
+                <!-- <div class="publisher">{{ article.publisher }}</div> -->
+                <!-- <div class="author"> {{ article.author }}</div> -->
                 <div class="headline"> {{ article.title }}</div>
                 <div class="content" v-html="article.content"></div>
              </div>
@@ -26,7 +28,9 @@ export default {
 
 
 <style  scoped>
-
+* {
+    font-family: 'arial';
+}
 .article {
     border-radius:3px;
     border:1px solid #1f2c3a46;
@@ -48,14 +52,14 @@ export default {
     margin:auto;
 }
 .content >>> h2 {
-    font-size: 16px !important;
+    font-size: 17px !important;
 }
 
 .content >>> figcaption {
     font-size: 0.6rem;
 }
 .content >>> p {
-    font-size: 13px;
+    font-size: 15px;
 }
 .content >>> img {
     max-width: 600px;
