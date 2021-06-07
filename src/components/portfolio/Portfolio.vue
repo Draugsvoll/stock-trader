@@ -429,14 +429,15 @@ h3 {
 }
 .history-tags {
     text-align: left;
-    margin-left:0;
+    margin-left:20px;
+    margin-bottom:5px;
 }
 .history-container {
     border:1px solid rgb(214, 215, 216);
     margin-top:50px;
     margin:auto;
     display: flex;
-    padding:14px 0px 14px 14px;
+    padding:14px 0px 14px 24px;
 }
 .history-container:hover {
     background: rgb(232, 236, 238);
@@ -451,7 +452,7 @@ h3 {
 }
 .empty{
     visibility: collapse;
-    margin-bottom: -40px;
+    margin-bottom: -40px
 }
 .tags {
     display: flex;
@@ -459,6 +460,7 @@ h3 {
     width:750px;
     margin:auto;
     margin-top:55px;
+    margin-bottom:5px;
 }
 .tags2 {
     display: flex;

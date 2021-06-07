@@ -68,7 +68,7 @@ export default {
     border:1px solid rgb(214, 215, 216);
     border-top:none;
     width:750px;
-    padding:17px 18px;
+    padding:15px 18px;
     padding-left:26px;
 
 }
@@ -118,7 +118,7 @@ export default {
     border-top:1px solid rgb(214, 215, 216);
 }
 button {
-    border-radius:5px;
+    border-radius:3px;
     color:white;
     background:#16416e;
     border:1px solid rgb(4, 4, 110);
