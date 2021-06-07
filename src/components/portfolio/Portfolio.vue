@@ -27,19 +27,19 @@
             </div>
            
          <!-- OPENING -->
-        <p class="opening">Markets open around 9:30 a.m Eastern Time (usa), and 16:00 norwegian time</p>
-        <h2 v-if="!emptyPortfolio">Stocks</h2>
+        <!-- <p class="opening">Markets open around 9:30 a.m Eastern Time (usa), and 16:00 norwegian time</p> -->
+        <h2 v-if="!emptyPortfolio">My Stocks</h2>
         <h2 v-if="emptyPortfolio">You have no stocks</h2>
 
         <!-- TAGS -->
         <div class="tags" v-if="stocks != '' ">
                 <div class="tag width" @click="sortByLetter">Name</div>
-                <div class="tag" @click="sortByChange">Change</div>
+                <div class="tag" @click="sortByChange">24h Change</div>
                 <div class="tag" @click="sortByPrice">Market Price</div>
                 <div class="tag" @click="sortByClose">Prev. Close</div>
                 <div class="tag smaller" @click="sortByQuantity">Quantity</div>
                 <div class="tag smaller" @click="sortByGains">Gains</div>
-                <div class="empty"><button>View</button></div>
+                <div class="empty"><button>Trade</button></div>
         </div>
 
         <!-- STOCKS  -->
@@ -71,7 +71,7 @@
                     <div class="tag2" >Price</div>
                     <div class="tag2" >Total Price</div>
                     <div class="tag2">Date</div>
-                    <div class="empty"><button>View</button></div>
+                    <div class="empty"><button>Trade</button></div>
                 </div>
             </div>
             <!-- PURCHASE HISTORY -->
@@ -106,18 +106,22 @@ export default {
                     'height':400,
                 legend: 
                     {position: 'labeled',
-                     textStyle: {fontSize: 14, color:'#032E52'}
+                     textStyle: {fontSize: 14, color:'black'}
                      },
                 tooltip:
                      {position: 'center', textStyle: {fontSize: 14}},
                 titleTextStyle: {
-                    fontSize: 20,
+                    fontSize: 22,
                 },
+
             },
             chartOptionsColumn: {
                 'width':1000,
                 'height':400,
-                title: 'Percentage Gains %'
+                title: 'Percentage Gains %',
+                titleTextStyle: {
+                    fontSize: 20,
+                },
             },
             totalGains: 0,
             stocks: [],
@@ -406,7 +410,7 @@ h3 {
     margin-top:-20px;
     z-index:1;
     width:750px;
-    font-size:1rem;
+    font-size:19px;
     justify-content: space-between;
 }
 .box {
@@ -432,13 +436,13 @@ h3 {
     margin-top:50px;
     margin:auto;
     display: flex;
-    padding:11px 0px 11px 14px;
+    padding:14px 0px 14px 14px;
 }
 .history-container:hover {
     background: rgb(232, 236, 238);
 
 }
-.history:nth-child(odd) {
+.history:nth-child(even) {
   background-color: rgb(245, 246, 247);
 }
 

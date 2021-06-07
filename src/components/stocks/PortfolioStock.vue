@@ -10,7 +10,7 @@
                 <div class="info smaller"> {{ stock.quantity }}</div>
                 <div class="info smaller" :class="{green: stock.change > 0, red: stock.change < 0 }"> {{ gains }}%</div>
                 <div class="info smaller"> {{ stock.symbol }}</div>
-                <div class="btn"><button @click="viewStock(stock.symbol)">View</button></div>
+                <div class="btn"><button @click="viewStock(stock.symbol)">Trade</button></div>
             </div>
             
          </div>
@@ -68,14 +68,16 @@ export default {
     border:1px solid rgb(214, 215, 216);
     border-top:none;
     width:750px;
-    padding:14px;
+    padding:17px 18px;
+    padding-left:26px;
+
 }
 .container:hover {
-    background: rgb(232, 236, 238);
+    background: rgb(217, 240, 252);
+
 }
 .container:nth-child(odd):hover {
-    background: rgb(232, 236, 238);
-
+    background: rgb(217, 240, 252);
 }
 .smaller {
     width:65px !important;
@@ -108,7 +110,9 @@ export default {
     font-size: 14px;
 }
 .container:nth-child(odd) {
-  background-color: rgb(245, 246, 247);
+  /* background-color: rgb(245, 246, 247); */
+    background: rgb(233, 241, 245); 
+
 }
 .container:nth-child(1) {
     border-top:1px solid rgb(214, 215, 216);
@@ -120,7 +124,8 @@ button {
     border:1px solid rgb(4, 4, 110);
     font-size:12px;
     cursor:pointer;
-    padding:5px 7px;
+    padding:7px 10px;
+
 }
 button:hover {
     background:rgb(5, 62, 128);

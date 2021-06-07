@@ -335,6 +335,7 @@ h2 {
     cursor:pointer;
     color:rgb(214, 208, 208);
     margin:5px;
+    font-size:22px;
 }
 .icon:hover {
         color:rgb(156, 183, 196);

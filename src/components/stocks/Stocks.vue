@@ -24,7 +24,7 @@
         type="text"
         v-model="searchTerm"
         autofocus
-        placeholder="Any stock.."
+        placeholder="Search stock.."
       />
       <button class="search" @click="getSymbol">Search</button>
     </div>
@@ -33,11 +33,11 @@
     <!-- TAGS -->
     <div class="tags" v-if="stocks != ''">
       <div class="tag name" @click="sortByLetter">Name</div>
-      <div class="tag" @click="sortByChange">Change</div>
+      <div class="tag" @click="sortByChange">24h Change</div>
       <div class="tag" @click="sortByPrice">Market Price</div>
       <div class="tag" @click="sortByClose">Prev. Close</div>
       <div class="tag">Symbol</div>
-      <div class="empty"><button>View</button></div>
+      <div class="empty"><button>Trade</button></div>
     </div>
 
     <!-- STOCKS -->
@@ -356,7 +356,6 @@ input {
   border: none;
   border-bottom: 1px solid #1f2c3a;
   margin-right: 7px;
-  padding: 0px 10px;
 }
 * {
   color: rgb(19, 23, 48);
