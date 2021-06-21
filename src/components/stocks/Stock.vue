@@ -64,8 +64,9 @@ export default {
     background: rgb(223, 234, 240);
 
 }
-.container:nth-child(odd):hover {
-    background: rgb(217, 240, 252);
+.container:hover {
+    /* background: rgb(217, 240, 252); */
+    background: rgb(217, 240, 252) !important;
 
 }
 .container:nth-child(odd) {
