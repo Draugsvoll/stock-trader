@@ -130,7 +130,7 @@ h2 {
 }
 i {
     font-size: 1.3rem;
-    
+    color:rgb(11, 214, 214);
 }
 .info {
     font-size: 1.05rem;
