@@ -3,7 +3,7 @@
 
             <div class="stock">
                 <div class="info name"> {{ stock.name }}</div>
-                <div class="info" :class="{green: stock.change > 0, red: stock.change < 0 }" > {{ stock.change.toFixed(2) }}$</div>
+                <div class="info" :class="{green: stock.change > 0, red: stock.change < 0 }" > <span class="green" v-if="stock.change>0">+</span> {{ stock.change.toFixed(2) }}$</div>
                 <div class="info"> {{ stock.price.toFixed(2) }}$</div>
                 <div class="info"> {{ stock.prevClose.toFixed(2) }}$</div>
                 <div class="info"> {{ stock.symbol }}</div>
@@ -57,6 +57,7 @@ export default {
 }
 
 .container:hover {
+    border-radius:var(--border-radius);
   background:var(--background-light-hover);
 }
 
@@ -66,7 +67,7 @@ export default {
 .container:nth-child(even) {
 }
 .container:nth-child(1) {
-    border-top:1px solid var(--background-dark);
+    border-top:none !important;
 }
 .green {
     color:green !important
@@ -80,7 +81,7 @@ export default {
 .stock {
     display: flex;
     text-align: left;
-    max-width:800px;
+    max-width:750px;
 }
 .info {
     width:100px;
@@ -97,14 +98,13 @@ export default {
 button {
     border-radius:5px;
     color:white;
-    background:var(--background-dark);
     border:none;
     font-size:12px;
     cursor:pointer;
     padding:7px 10px;
+    background:var(--background-dark);
 }
 button:hover {
-    background:rgb(5, 62, 128);
     color:white;
 }
 

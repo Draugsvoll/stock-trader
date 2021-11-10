@@ -255,6 +255,15 @@ export default {
 </script>
 
 <style scoped>
+.box {
+}
+.stock-container {
+  margin: auto;
+  background:var(--background-light);
+  width:825px;
+  border-radius:var(--border-radius);
+  padding:5px 0;
+}
 .blurred-info {
   color: grey;
   font-size: 10px;
@@ -263,16 +272,13 @@ export default {
   margin-top: 50px;
 }
 .active {
-  
+  background:var(--background-light) !important;
   text-decoration: underline;
+  color:white;
+
 }
 .active:hover {
   color: white !important;
-}
-.stock-container {
-  margin: auto;
-  background:var(--background-light);
-  width:800px;
 }
 .box {
   display: flex;
