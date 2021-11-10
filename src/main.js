@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 import firebase from 'firebase'
+import './assets/global.css'
+
 
 // vue-resources for Http-requests
 import VueResource from 'vue-resource'

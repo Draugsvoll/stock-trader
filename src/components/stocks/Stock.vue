@@ -48,37 +48,25 @@ export default {
 
 
 <style  scoped>
-*{
-    /* border:1px solid purple; */
-    color:rgb(3, 3, 46);
-}
 .container {
-    border:1px solid rgb(214, 215, 216);
-    border-top:none;
-    max-width:750px;
-    padding:15px 18px;
-    padding-left:26px;
+    border-top:1px solid var(--background-dark);
+    width:800px;
+    padding:15px 0px;
+    margin:0 10px;
+    /* padding-left:26px;    */
 }
 
 .container:hover {
-    background: rgb(223, 234, 240);
-
+  background:var(--background-light-hover);
 }
-.container:hover {
-    /* background: rgb(217, 240, 252); */
-    background: rgb(217, 240, 252) !important;
 
-}
 .container:nth-child(odd) {
-  /* background-color: rgb(245, 246, 247); */
-      background: rgb(233, 241, 245); 
 
 }
 .container:nth-child(even) {
-  /* background-color: rgb(245, 246, 247); */
 }
 .container:nth-child(1) {
-    border-top:1px solid rgb(214, 215, 216);
+    border-top:1px solid var(--background-dark);
 }
 .green {
     color:green !important
@@ -90,10 +78,9 @@ export default {
     background:grey;
 }
 .stock {
-    justify-content: center;
     display: flex;
     text-align: left;
-    max-width:750px;
+    max-width:800px;
 }
 .info {
     width:100px;
@@ -102,15 +89,16 @@ export default {
     align-items: center;
 }
 .name {
-    width:175px;
+    width:275px;
+    padding:0 8px;
     overflow: hidden;
-    font-size: 14px;
+    font-size: 13px;
 }
 button {
     border-radius:5px;
     color:white;
-    background:#16416e;
-    border:1px solid rgb(4, 4, 110);
+    background:var(--background-dark);
+    border:none;
     font-size:12px;
     cursor:pointer;
     padding:7px 10px;

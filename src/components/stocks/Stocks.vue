@@ -255,9 +255,6 @@ export default {
 </script>
 
 <style scoped>
-* {
-  /* border:1px solid black; */
-}
 .blurred-info {
   color: grey;
   font-size: 10px;
@@ -266,16 +263,16 @@ export default {
   margin-top: 50px;
 }
 .active {
-  background: #0b2847 !important;
-  color: white;
+  
   text-decoration: underline;
-  border: 1px solid rgb(5, 36, 122) !important;
 }
 .active:hover {
   color: white !important;
 }
 .stock-container {
   margin: auto;
+  background:var(--background-light);
+  width:800px;
 }
 .box {
   display: flex;
@@ -288,18 +285,19 @@ export default {
   display: flex;
   justify-content: stretch;
 }
+
 .btn-row button {
   font-size: 0.85rem;
   padding: 12px 0;
   border: none;
-  border-bottom: 1px solid black;
+  /* border-bottom: 1px solid black; */
   cursor: pointer;
   background: rgb(235, 237, 238);
   width: 110px;
 }
 .btn-row button:hover {
   color: rgb(4, 38, 90);
-  border-bottom: 1px solid rgb(2, 27, 65);
+  /* border-bottom: 1px solid rgb(2, 27, 65); */
   background: rgb(211, 215, 218);
 }
 ::placeholder {
@@ -315,7 +313,7 @@ h2 {
 .tags {
   display: flex;
   text-align: left;
-  max-width: 750px;
+  width: 800px;
   vertical-align: bottom;
   height: fit-content;
   margin: auto;
@@ -329,13 +327,15 @@ h2 {
   margin-bottom: 4px;
   height: fit-content;
   font-size: 0.75rem;
+  color: rgb(34, 57, 150);
+
 }
 .tag:hover {
-  color: rgb(12, 35, 126);
+  color: rgb(34, 57, 150);
   text-decoration: underline;
 }
 .name {
-  width: 175px !important;
+  width: 275px !important;
 }
 .searchfield {
   display: flex;
@@ -343,7 +343,8 @@ h2 {
   margin: 25px auto;
 }
 .search {
-  background: #0b2847 !important;
+  /* background: #0b2847 !important; */
+  background-color: #1f2c3a;
   border: none;
   color: white;
   font-size: 0.8rem;

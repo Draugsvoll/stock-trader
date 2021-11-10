@@ -1,0 +1,15 @@
+:root {
+	/* --primary-color: rgba(11, 18, 25, 0.75);
+	--secondary-color: rgba(11, 18, 25, 0.52);
+	--background-color: rgb(10 45 61 / 90%);
+	--border-radius:5px;
+	--border-border: 1px solid rgb(17 37 68 / 96%);
+	--longAnswer-width:810px; */
+
+	--background-dark: #171b26;
+	--background-light: #293143;
+	--background-light-hover: #394156;
+
+	--border-light: rgb(48, 50, 56);
+
+  }

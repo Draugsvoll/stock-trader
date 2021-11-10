@@ -381,7 +381,7 @@ h2 {
     margin-bottom:25px;
     margin-top:20px;
     font-size:15px;
-    font-family: Arial, Helvetica, sans-serif;
+    /* font-family: Arial, Helvetica, sans-serif; */
 }
 .info {
     margin:25px auto;

@@ -4,7 +4,7 @@
                 <!-- <div class="publisher">{{ article.publisher }}</div> -->
                 <!-- <div class="author"> {{ article.author }}</div> -->
                 <div class="headline"> {{ article.title }}</div>
-                <div class="content" v-html="article.content"></div>
+                <div class="content" >{{article }}</div>
              </div>
          </div>
 </template>
@@ -21,6 +21,8 @@ export default {
     },
     methods: { 
         
+    },
+    mounted () {
     }
 }
 </script>
@@ -29,7 +31,7 @@ export default {
 
 <style  scoped>
 * {
-    font-family: 'arial';
+    /* font-family: 'arial'; */
 }
 .article {
     border-radius:3px;

@@ -25,12 +25,14 @@ export default {
 
 <style>
 * {
-    font-family: Roboto,Segoe UI,Helvetica Neue,Helvetica,Arial,sans-serif-light,sans-serif;
     outline: none;
+  color:white;
+  box-sizing: border-box;
 }
 html, body{
   height: 100%;
   padding:0;
+  background:var(--background-dark);
 }
 
 .page-container {
@@ -42,8 +44,6 @@ html, body{
 }
 .footer {
   width: 100%;
-  background-color: rgb(5 25 31);
-  color: white;
   text-align: center;
   height: 20rem;
 }
