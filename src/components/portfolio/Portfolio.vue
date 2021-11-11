@@ -1,40 +1,43 @@
 <template>
     <div class="box">
 
+            <p class="headline">My Portfolio</p>
+
+            <!-- ASSETS -->
+            <div class="assets">
+                <div class="asset-card">
+                    <p class="sum" >{{ totalStockValue + funds | currency }}</p> 
+                    <p > Total assets   </p> 
+                </div>
+                <div class="asset-card">
+                    <p class="sum" > {{ totalStockValue | currency }}</p> 
+                    <p class="value">Stocks</p> 
+                </div>
+                <div class="asset-card">
+                    <p class="sum" > {{ funds | currency }}</p> 
+                    <p class="value">Cash Balance</p> 
+                </div>
+                <div class="asset-card">
+                    <p  class="sum"  :class="{green: totalGains > 0, red: totalGains < 0 }"> {{ totalGains | currency }}</p>
+                    <p class="value">Total Gains</p> 
+                </div>
+            </div>
+
             <app-nav></app-nav>
 
             <!-- PIE CHART  -->
             <div v-if="chartData2 != null" class="charts" id="pie-chart">
-                <p class="total-assets"> <span >Total Assets:</span> {{ totalStockValue + funds | currency }}</p> 
-
-                <!-- PieChart -->
-                <GChart
-                    type="PieChart"
-                    :data="chartData2"
-                    :options="chartOptionsPie"
-                />
-                <!-- ASSETS -->
-                <div class="headline">
-                    <div class="head">
-                    </div>
-                    <div class="head">
-                        <h3> <span class="value">Stocks Value:</span> {{ totalStockValue | currency }}</h3> 
-                    </div>
-                    <div class="head">
-                        <h3><span class="value">Cash Balance:</span> {{ funds | currency }}</h3>
-                    </div>
-                    <div class="head">
-                        <h3> <span class="value">Total Gains:</span> <span class="total-gains" :class="{green: totalGains > 0, red: totalGains < 0 }"> {{ totalGains | currency }}</span></h3>
-                    </div>
-                </div>
+            <GChart
+                type="PieChart"
+                :data="chartData2"
+                :options="chartOptionsPie"
+            />
             </div>
 
-           
-         <!-- OPENING -->
-        <!-- <p class="opening">Markets open around 9:30 a.m Eastern Time (usa), and 16:00 norwegian time</p> -->
+            
+
         <h2 v-if="!emptyPortfolio">My Stocks</h2>
         <h2 v-if="emptyPortfolio">You have no stocks</h2>
-
         <!-- TAGS -->
         <div class="tags" v-if="stocks != '' ">
                 <div class="tag width" @click="sortByLetter">Name</div>
@@ -105,7 +108,7 @@ export default {
         return {
             // PIE-CHART
             chartOptionsPie: {
-                title:' ',
+                title:'Asset Allocation ',
                 backgroundColor:'#293143',
                 is3D: true,
                     'width':850,
@@ -360,31 +363,51 @@ export default {
 
 
 <style scoped>
-
+.headline {
+    font-size:35px;
+    text-align: center;
+    margin:50px
+}
+.box {
+    max-width:900px;
+    display: flex;
+    padding-top:50px;
+    flex-direction: column;
+    justify-content: center;
+    margin:0 auto;
+}
 #pie-chart {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin:auto auto;
-    margin-top:200px;
+    margin:35px auto;
     width:900px;
     padding:5px;
+    padding-top:25px;
     background:var(--background-light);
     border-radius: var(--border-radius);
 }
-/* h3 {
-    margin:0;
-    text-align: center;
-    font-size: 20px;
-} */
-.total-assets {
-    font-size: 22px;
-    margin-top:25px;
-    margin-left:25px;
+.assets {
+    display: flex;
+    justify-content: space-between;
 }
-span {
-    font-weight: bold;
-    font-size:17px;
+.asset-card {
+    background:var(--background-light);
+    width:200px;
+    padding:17px;
+    border-radius: var(--border-radius);
+}
+.sum {
+    font-size: 24px;
+}
+p {
+    margin:5px;
+}
+.green {
+    color:green;
+}
+.red {
+    color:red;
 }
 
 </style>
