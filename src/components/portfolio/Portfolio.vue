@@ -4,27 +4,31 @@
             <app-nav></app-nav>
 
             <!-- PIE CHART  -->
-            <div v-if="chartData2 != null" class="charts">
+            <div v-if="chartData2 != null" class="charts" id="pie-chart">
+                <p class="total-assets"> <span >Total Assets:</span> {{ totalStockValue + funds | currency }}</p> 
+
                 <!-- PieChart -->
                 <GChart
                     type="PieChart"
                     :data="chartData2"
                     :options="chartOptionsPie"
                 />
-            </div>
-
-            <!-- VALUES -->
-             <div class="headline">
-                 <div class="head">
-                    <h3> <span class="value">Stocks Value:</span> {{ totalStockValue | currency }}</h3> 
-                 </div>
-                 <div class="head">
-                    <h3><span class="value">Cash Balance:</span> {{ funds | currency }}</h3>
-                 </div>
-                <div class="head">
-                    <h3> <span class="value">Total Gains:</span> <span class="total-gains" :class="{green: totalGains > 0, red: totalGains < 0 }"> {{ totalGains | currency }}</span></h3>
+                <!-- ASSETS -->
+                <div class="headline">
+                    <div class="head">
+                    </div>
+                    <div class="head">
+                        <h3> <span class="value">Stocks Value:</span> {{ totalStockValue | currency }}</h3> 
+                    </div>
+                    <div class="head">
+                        <h3><span class="value">Cash Balance:</span> {{ funds | currency }}</h3>
+                    </div>
+                    <div class="head">
+                        <h3> <span class="value">Total Gains:</span> <span class="total-gains" :class="{green: totalGains > 0, red: totalGains < 0 }"> {{ totalGains | currency }}</span></h3>
+                    </div>
                 </div>
             </div>
+
            
          <!-- OPENING -->
         <!-- <p class="opening">Markets open around 9:30 a.m Eastern Time (usa), and 16:00 norwegian time</p> -->
@@ -99,22 +103,27 @@ import { GChart } from 'vue-google-charts'
 export default {
     data () {
         return {
+            // PIE-CHART
             chartOptionsPie: {
-                title:'Asset Allocation',
+                title:' ',
+                backgroundColor:'#293143',
                 is3D: true,
-                    'width':1000,
-                    'height':400,
+                    'width':850,
+                    'height':300,
                 legend: 
                     {position: 'labeled',
-                     textStyle: {fontSize: 14, color:'black'}
+                     textStyle: {fontSize: 14, color:'white'}
                      },
                 tooltip:
-                     {position: 'center', textStyle: {fontSize: 14}},
+                     {position: 'center', textStyle: {fontSize: 14}, color:'white'},
                 titleTextStyle: {
                     fontSize: 22,
+                    color:'white',
                 },
 
             },
+
+            // COLUMN CHART
             chartOptionsColumn: {
                 'width':1000,
                 'height':400,
@@ -123,6 +132,8 @@ export default {
                     fontSize: 20,
                 },
             },
+
+            // DATA
             totalGains: 0,
             stocks: [],
             data: [],
@@ -349,157 +360,31 @@ export default {
 
 
 <style scoped>
-* {
-    /* border:1px solid black; */
-}
 
-h2 {
-    margin:auto;
-    font-size: 22px;
-    margin-top:75px;
-}
-.smaller {
-    width:65px !important;
-} 
-.green {
-    color:green;
-}
-.red {
-    color:red;
-}
-.date {
-    width:175px !important;
-}
-.width {
-    width:175px !important;
-}
-.opening {
-    width:750px;
-    font-size: 0.55rem;
-    margin:auto;
-    z-index:1;
-    margin-top:25px;
-    margin-bottom:-30px;
-}
-.name {
-    width:175px !important;
-    overflow: hidden;
-}
-*{
-    color: rgb(19, 23, 48);
-    /* border:1px solid black; */
-}
-h3 {
-    margin:5px;
-    font-weight: 400;
-    display: flex;
-}
-.green {
-    color:green;
-}
-.info {
-    font-size: 14px;
-    color:rgb(1, 2, 8);
-    width:100px;
-    padding:8px 0;
-    display: flex ;
-}
-.headline {
-    display: flex;
-    margin:auto;
-    margin-top:-20px;
-    z-index:1;
-    width:750px;
-    font-size:19px;
-    justify-content: space-between;
-}
-.box {
+#pie-chart {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-bottom: 100px;
-}
-.stock-container {
-    margin:auto;
-}
-.history {
-    text-align: left;
-    width:750px;
-    margin:auto;
-}
-.history-tags {
-    text-align: left;
-    margin-left:20px;
-    margin-bottom:5px;
-}
-.history-container {
-    border:1px solid rgb(214, 215, 216);
-    margin-top:50px;
-    margin:auto;
-    display: flex;
-    padding:14px 0px 14px 24px;
-}
-.history-container:hover {
-    background: rgb(232, 236, 238);
-
-}
-.history:nth-child(even) {
-  background-color: rgb(245, 246, 247);
-}
-
-.history-container:nth-child(1) {
-  border-top:none;
-}
-.empty{
-    visibility: collapse;
-    margin-bottom: -40px
-}
-.tags {
-    display: flex;
-    text-align: left;
-    width:750px;
-    margin:auto;
-    margin-top:55px;
-    margin-bottom:5px;
-}
-.tags2 {
-    display: flex;
-    text-align: left;
-    width:750px;
-    margin:auto;
-    margin-top:55px;
-    margin-left:5px;
-}
-.tag {
-    font-size:0.75rem;
-    width:100px;
-    cursor:pointer;
-}
-.tag2 {
-    font-size:0.75rem;
-    width:100px;
-    margin-left:0;
-}
-.tag:hover {
-    color:rgb(12, 35, 126);
-    text-decoration: underline;
-}
-.charts {
-    max-width:1000px;
     margin:auto auto;
-    margin-top:50px;
+    margin-top:200px;
+    width:900px;
+    padding:5px;
+    background:var(--background-light);
+    border-radius: var(--border-radius);
+}
+/* h3 {
+    margin:0;
     text-align: center;
-    display: flex;
-    flex-wrap: wrap;
+    font-size: 20px;
+} */
+.total-assets {
+    font-size: 22px;
+    margin-top:25px;
+    margin-left:25px;
 }
 span {
-    margin-right:8px;
+    font-weight: bold;
+    font-size:17px;
 }
-.column {
-    margin:auto;
-    margin-top:50px;
-}
-.value {
-    font-size: 16px !important;
-}
+
 </style>
