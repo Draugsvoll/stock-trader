@@ -53,14 +53,13 @@ export function getSingleStock (searchTerm) {
 //* GET S&P 500
 export function get500 () {
     var newStocks = []
-    const apiStocks = 'AMD, IBM, AAPL, TSLA, AMZN, MMM, CCL, KMX, CAT, IRM, SJM, ORLY, ORCL, VRSK, WYNN, ZBRA, UAL, UPS, ZTS, BA, BWA, DISCA, FTNT'
     const options = {
-    method: 'GET',
-    url: 'https://rapidapi.p.rapidapi.com/market/get-quotes',
-    params: {region: 'US', symbols: apiStocks},
-    headers: {
-        'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8',
-        'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
+        method: 'GET',
+        url: 'https://yh-finance.p.rapidapi.com/market/v2/get-quotes',
+        params: {region: 'US', symbols: 'AAPL, MSFT, AMZN, TSLA, GOOGL, FB, GOOG, NVDA, JPM, JNJ, UNH, HD, BAC, PG, MA, DIS, ADBE, NFLX, PYPL, CRM, XOM, CMCSA, PFE'},
+        headers: {
+          'x-rapidapi-host': 'yh-finance.p.rapidapi.com',
+          'x-rapidapi-key': '1660860218msh9ed4fea2bd1c6bep1a1c59jsnfe88dd4d5712'
     }};
     axios.request(options).then(function (response) {
         const returnedStocks = response.data.quoteResponse.result
@@ -111,8 +110,8 @@ export function getTrending () {
     url: 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-trending-tickers',
     params: {region: 'US'},
     headers: {
-        'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8',
-        'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
+        'x-rapidapi-host': 'yh-finance.p.rapidapi.com',
+        'x-rapidapi-key': '1660860218msh9ed4fea2bd1c6bep1a1c59jsnfe88dd4d5712'
     }
     };
 
@@ -161,15 +160,16 @@ export function getNews () {
     var articles = []
     const options = {
         method: 'GET',
-        url: 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/news/list',
-        params: {category: 'generalnews', region: 'US'},
+        url: 'https://yh-finance.p.rapidapi.com/news/v2/get-details',
+        params: {uuid: '9803606d-a324-3864-83a8-2bd621e6ccbd', region: 'US'},
         headers: {
-          'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8',
-          'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
+            'x-rapidapi-host': 'yh-finance.p.rapidapi.com',
+            'x-rapidapi-key': '1660860218msh9ed4fea2bd1c6bep1a1c59jsnfe88dd4d5712'
         }
       };
       
       axios.request(options).then(function (response) {
+          console.log(response.data)
           console.log(response.data.items.result);
           response.data.items.result.forEach( article => {
               const newArticle = { author: article.author, title: article.title, content: article.content}

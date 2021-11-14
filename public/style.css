@@ -3,7 +3,7 @@ html, body {
   height: 100%;
   margin: 0;
   /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important; */
-  font-family: sans-serif !important;
+  font-family: 'Roboto', sans-serif;
 }
 * {
 }
@@ -22,7 +22,7 @@ i {
   cursor:pointer;
 }
 i:hover {
-color:rgb(100, 184, 218);
+color:var(--primary-color);
 }
 footer{
   background:var(--background-light);

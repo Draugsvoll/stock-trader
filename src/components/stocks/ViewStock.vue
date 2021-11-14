@@ -1,16 +1,97 @@
 <template>
     <div class="container1">
 
+        <!-- VIEW STOCK -->
+        <div class="intro">
+            <h2 class="headline"> {{ stock.quoteType.longName }}
+                    <span> <i @click="add" class="fas fa-heart icon" :class="{added: favourite }"></i></span> </h2> 
+                    <div> <button class="notice" > testing{{ notice }} </button></div>
+        </div>
+            <div>
+                <p class="price"> ${{ stock.price.regularMarketPrice.raw.toFixed(2) }} </p>
+                <!-- <p class="smallName">You have {{ this.oldQuantity }} {{stock.symbol}} Stocks. </p> -->
+            </div>
+
+        <!-- STOCK INFO -->
+        <div class="info-container">
+            <!-- STATISTICS -->
+            <div class="numbers">
+                <div class="number" ><div class="tag">Daily Volume</div> {{ stock.price.averageDailyVolume10Day.longFmt }} </div>
+                <div class="number" ><div class="tag">Market Cap</div> {{ stock.price.marketCap.fmt }} </div>
+                <div class="number" ><div class="tag">50 Day AVG</div> ${{ stock.summaryDetail.fiftyDayAverage.fmt }} </div>
+                <div class="number" ><div class="tag">52 Week High</div> ${{ stock.summaryDetail.fiftyTwoWeekHigh.fmt }} </div>
+                <div class="number" ><div class="tag">Volume</div> {{ stock.summaryDetail.volume.fmt }} </div>
+            </div>
+            <!-- INFO -->
+           
+
+        </div>
+
+
+        <!-- BUY-SELL CONTAINER -->
+        <div class="buy-sell-container">
+            <!-- BUY-BOX -->
+            <div class="buy">
+                <div>
+                    <p class="action-label"><span class="green">Buy </span>{{stock.symbol}} </p> 
+                    <p class="funds">Available funds: <b class="green ">${{funds.toFixed(0)}} </b>  </p>
+                </div>
+                <p class="price2">Price ${{ stock.price.regularMarketPrice.raw.toFixed(2) }}</p>
+                <div class="input-container">
+                    <span>Amount</span>
+                    <input type="number" v-model="toBuy" placeholder="" value="1" min="1">
+                </div>
+                <div class="input-container total-price">
+                    <span>Total Price $</span>
+                    <input type="number" placeholder="Total Price" :value="toBuyTotalPrice" min="1" style="pointer-events: none">
+                </div>
+                <button class="buy-btn">Buy</button>
+            </div>
+            <!-- SELL-BOX -->
+            <div class="sell">
+                <div>
+                    <p class="action-label"><span class="red">Sell </span>{{ stock.symbol}} </p> 
+                    <p class="funds">Stocks to sell: <b class="green"> {{oldQuantity}} </b>  </p>
+                </div>
+                <p class="price2">Price ${{ stock.price.regularMarketPrice.raw.toFixed(2) }}</p>
+                <div class="input-container">
+                    <span>Amount</span>
+                    <input v-model="toSell" type="number" placeholder="" value="1" min="1" :max="oldQuantity">
+                </div>
+                <div class="input-container total-price">
+                    <span>Profit $</span>
+                    <input type="number" :value="toSellTotalPrice" min="0" style="pointer-events: none">
+                </div>
+                <button class="sell-btn">Sell</button>
+            </div>
+        </div>
+
+    <!-- STOCK SUMMARY -->
+    <h2>About {{stock.quoteType.longName}} </h2>
+    <div class="summary"> {{ stock.assetProfile.longBusinessSummary }}</div>
+    <div class="info">
+        <div> <p class="line">{{ stock.assetProfile.country }}, {{ stock.assetProfile.city }} </p> </div>
+        <div> <p class="line">{{ stock.assetProfile.address1 }} </p> </div>
+        <div> <p class="line">{{ stock.assetProfile.industry }} </p> </div>
+        <div> <p class="line">Employees: {{ stock.assetProfile.fullTimeEmployees }} </p>  </div>
+        <div> <p class="line">{{ stock.assetProfile.website }}  </p> </div>
+        <div> <p class="line"> {{ stock.assetProfile.adress1 }}</p>  </div>
+        <div> <p class="line"> Phone: {{ stock.assetProfile.phone }}</p>  </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
         <!-- BUY MODAL -->
         <div class="modal" v-if="showBuyModal">
-                <div class="modal-content">
-                    Buy {{ this.quantity }} stocks of {{ stock.quoteType.longName }}? <br> <br>
-                    Total price: {{ buyPrice.toFixed(2) }}$
-                </div>
-                <div class="button-row">
-                    <button class="modal-button" @click="buyStock">Yes</button>
-                    <button class="modal-button" @click="hideBuyModal">Cancel</button>
-                </div>
+                
         </div>
 
         <!-- SELL MODAL  -->
@@ -27,48 +108,14 @@
 
         <app-nav></app-nav>
 
-        <!-- VIEW STOCK -->
-        <div class="headline">
-            <h2> {{ stock.quoteType.longName }} </h2>
-            <div>
-                <p class="price"> ${{ stock.price.regularMarketPrice.raw.toFixed(2) }} </p>
-                <input type="number" v-model.number="quantity">
-                <button class="buy" @click="buyDialogue" >Buy</button>
-                <button class="sell" @click="sellDialogue" >Sell</button>
-                <i @click="add" class="fas fa-heart icon" :class="{added: favourite }"></i>
-                <button class="notice" v-if="notice != null"> {{ notice }} </button>
-                <p class="smallName">You have {{ this.oldQuantity }} stocks. </p>
-                <p v-if="trade" class="trade">Trade Succesful !</p>
-            </div>
-        </div>
-
-        <div class="tags">
-            <div class="tag">Daily Volume</div>
-            <div class="tag">Market Cap</div>
-            <div class="tag">50 Day AVG</div>
-            <div class="tag">52 Week High</div>
-            <div class="tag">Volume</div>
-        </div>
-
-        <div class="numbers">
-            <div class="number" > {{ stock.price.averageDailyVolume10Day.longFmt }} </div>
-            <div class="number" > {{ stock.price.marketCap.fmt }} </div>
-            <div class="number" > ${{ stock.summaryDetail.fiftyDayAverage.fmt }} </div>
-            <div class="number" > ${{ stock.summaryDetail.fiftyTwoWeekHigh.fmt }} </div>
-            <div class="number" > {{ stock.summaryDetail.volume.fmt }} </div>
-        </div>
         
-        <!-- INFO -->
-        <div class="info">
-            <div class="summary"> {{ stock.assetProfile.longBusinessSummary }}</div>
-            <div> <p class="line">{{ stock.assetProfile.country }}, {{ stock.assetProfile.city }} </p> </div>
-            <div> <p class="line">{{ stock.assetProfile.address1 }} </p> </div>
-            <div> <p class="line">{{ stock.assetProfile.industry }} </p> </div>
-            <div> <p class="line">Employees: {{ stock.assetProfile.fullTimeEmployees }} </p>  </div>
-            <div> <p class="line">{{ stock.assetProfile.website }}  </p> </div>
-            <div> <p class="line"> {{ stock.assetProfile.adress1 }}</p>  </div>
-            <div> <p class="line"> Phone: {{ stock.assetProfile.phone }}</p>  </div>
-        </div>
+
+        
+
+        
+        
+       
+
         
     </div>
 </template>
@@ -97,10 +144,13 @@ export default {
             favourite: false,
             notice: null,
             trade: null,
+            funds:0,
+            toSell:1,
+            toBuy:1,
         }
     },
     components: {
-        appNav: Sidenav
+        // appNav: Sidenav
     },
     computed: {
         validQuantity: function(){
@@ -108,6 +158,12 @@ export default {
         },
         buyPrice () {
             return this.stock.price.regularMarketPrice.raw * this.quantity
+        },
+        toSellTotalPrice () {
+            return (this.stock.price.regularMarketPrice.raw * this.toSell).toFixed(2)
+        },
+        toBuyTotalPrice () {
+            return (this.stock.price.regularMarketPrice.raw * this.toBuy).toFixed(2)
         },
     },
     methods: {
@@ -264,11 +320,12 @@ export default {
             url: 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-profile',
             params: {symbol: this.symbol, region: 'US'},
             headers: {
-                'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8',
-                'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
+                'x-rapidapi-host': 'yh-finance.p.rapidapi.com',
+                'x-rapidapi-key': '1660860218msh9ed4fea2bd1c6bep1a1c59jsnfe88dd4d5712'
             }}
             axios.request(options).then(function (response) {
                 const stock = response.data
+                console.log(stock)
                 ref.stock = stock
             }).catch(function (error) {
                 console.error(error);
@@ -308,20 +365,115 @@ export default {
                   }
               })
             })
+             //* check funds
+             var ref2 = this
+            axios.get(`https://ove-stock-trader.firebaseio.com/users/${user}/funds.json`)
+                    .then(function (response) {
+                        const funds = response.data
+                        ref2.funds = funds
+                    })
     }// created
 }
 </script>
 
 <style css scoped>
-* {
+.headline {
+    font-size:18px;
 }
-.trade {
-    color:green;
+.buy-sell-container {
+    display: flex;
+    width:900px;
+    justify-content: space-between;
+    border:1px solid grey;
+    border-radius:3px;
+}
+.buy, .sell {
+    display: flex;
+    flex-direction: column;
+    width:49%;
+}
+.buy > div, .sell > div {
+    display:flex;
+}
+.funds {
+    width:50%;
+    text-align: right;
+}
+.action-label {
+    width:50%;
+}
+.buy-btn {
+    background:var(--green);
+}
+.sell-btn {
+    background:var(--red);
+}
+button {
+    margin:5px 0;
+}
+.green {
+    color:var(--green);
+    font-weight: bold;
+}
+.red {
+    color:var(--red);
+    font-weight: bold;
+}
+b {
+    margin:0;
 }
 input {
-    width:75px;
-    margin: auto 8px;
     font-size:17px;
+    background:rgba(0,0,0,0);
+    border:none;
+    border-bottom:1px solid grey;
+    width:100%;
+    text-align:right;
+    height:50px;
+    margin:2px 0;
+}
+.total-price input {
+    padding-right:20px;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {
+    margin-left:20px;
+    opacity: 1;
+    height:50px;
+}
+.total-price input[type=number]::-webkit-inner-spin-button,
+.total-price input[type=number]::-webkit-outer-spin-button {
+    display:none;
+}
+.info-container{
+    display: flex;
+    justify-content: space-between;
+    padding:25px;
+    background:var(--background-light);
+    border-radius:var(--border-radius);
+}
+.info-container > div{
+}
+.numbers {
+    display:flex;
+}
+.number {
+    font-size: 1rem;
+}
+.info {
+    width:600px;
+}
+
+
+
+
+.input-container {
+    position:relative;
+}
+.input-container span {
+    position:absolute;
+    bottom:10px;
+    color:grey;
 }
 h2 {
     margin:0;
@@ -329,21 +481,23 @@ h2 {
     font-weight: 500;
 }
 .added {
-    color:rgb(55, 57, 179) !important;
+    color:var(--red) !important;
 }
 .icon {
     cursor:pointer;
-    color:rgb(214, 208, 208);
+    color:grey;
     margin:5px;
     font-size:22px;
 }
 .icon:hover {
-        color:rgb(156, 183, 196);
 }
 .notice {
     background:rgba(0,0,0,0);
     border:none;
-    color:rgb(55, 57, 179);
+    color:var(--primary-color);
+    display:inline-block;
+    margin:8px;
+    padding:0;
 }
 .notice:hover {
      color:rgb(55, 57, 179) !important;
@@ -372,33 +526,21 @@ h2 {
 .button-row {
     margin:10px auto;
 }
-.headline {
+.intro {
     display: flex;
-    flex-direction: column;
 }
 .summary {
-    max-width:500px;
     margin-bottom:25px;
     margin-top:20px;
     font-size:15px;
-    /* font-family: Arial, Helvetica, sans-serif; */
 }
-.info {
-    margin:25px auto;
-    max-width: 500px;
-}
+
 .container1 {
-    max-width:500px;
     margin:auto;
-    margin-top: 250px;
     margin-bottom: 90px;
-    border-left:1px solid rgb(2, 24, 37);
-    padding-left:18px;
+    width:900px;
 }
-.numbers {
-    display: flex;
-    max-width:500px;
-}
+
 .tags {
     margin-top:10px;
     display:flex;
@@ -409,14 +551,19 @@ h2 {
     font-size: 14px;
     width:100px;
 }
-.number {
-    font-size: 1rem;
-    width:200px;
-}
+
 .price {
     display:inline;
     margin: auto auto;
-    font-size: 1.5rem;
+    font-size: 28px;
+    margin-left:0;
+    font-weight: 400;
+    vertical-align: middle;
+}
+.price2 {
+    display:inline;
+    margin: auto auto;
+    font-size: 18px;
     margin-left:0;
     font-weight: 400;
     vertical-align: middle;
@@ -424,18 +571,24 @@ h2 {
 .buy, .sell {
     margin:10px 2px;
     padding:6px 15px;
+    width:44%;
 }
 button {
     border-radius:5px;
-    color:rgb(6, 6, 104);
-    border:1px solid rgb(4, 4, 110);
-    background:#2a4057;
+    border:none;
+    background:var(--background-light);
     color:white;
-    font-size:1rem;
+    font-size:15px;
     cursor:pointer;
     font-weight: 350;
+    padding:10px;
+    margin:15px 0;
 }
-button:hover {
+.sell-btn:hover {
+    background:var(--red-hover);
+}
+.buy-btn:hover {
+    background:var(--green-hover);
 }
 .line {
     margin:2px;

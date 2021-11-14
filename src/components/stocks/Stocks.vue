@@ -2,21 +2,8 @@
   <div class="box">
     <app-nav></app-nav>
 
-    <div class="btn-row">
-      <button :class="{ active: type == 'Top Gainers' }" @click="getTopGainers">
-        Top Gainers
-      </button>
-      <button :class="{ active: type == 'Trending' }" @click="getTrending">
-        Trending
-      </button>
-      <button :class="{ active: type == 'S&P 500' }" @click="get500Stocks">
-        S&P 500
-      </button>
-      <button :class="{ active: type == 'Favourites' }" @click="getFavourites">
-        Favourites
-      </button>
-      <!-- <button @click="getPortfolios">Portfolios</button> -->
-    </div>
+    <p class="headline">Live Market Watch</p>
+    <p class=header>Top stocks by category</p>
 
     <!-- SEARCH-FIELD -->
     <div class="searchfield">
@@ -24,14 +11,30 @@
         type="text"
         v-model="searchTerm"
         autofocus
-        placeholder="Search stock.."
+        placeholder="Search.."
       />
       <button class="search" @click="getSymbol">Search</button>
     </div>
 
-    <p v-if="stocks != ''" class="blurred-info">You can sort by category</p>
+    <div class="btn-row">
+      <button :class="{ active: type == 'S&P 500' }" @click="get500Stocks">
+        S&P 500
+      </button>
+      <button :class="{ active: type == 'Top Gainers' }" @click="getTopGainers">
+        Top Gainers
+      </button>
+      <button :class="{ active: type == 'Trending' }" @click="getTrending">
+        Trending
+      </button>
+      <button :class="{ active: type == 'Favourites' }" @click="getFavourites">
+        Favourites
+      </button>
+      <!-- <button @click="getPortfolios">Portfolios</button> -->
+    </div>
+
+    <!-- <p v-if="stocks != ''" class="blurred-info">You can sort by category</p> -->
     <!-- TAGS -->
-    <div class="tags" v-if="stocks != ''">
+    <div class="tags" >
       <div class="tag name" @click="sortByLetter">Name</div>
       <div class="tag" @click="sortByChange">24h Change</div>
       <div class="tag" @click="sortByPrice">Market Price</div>
@@ -40,15 +43,17 @@
       <div class="empty"><button>Trade</button></div>
     </div>
 
+
     <!-- STOCKS -->
     <div class="stock-container">
-      <!-- <transition-group name="slide" mode="in-out"> -->
+    <div class="loader" v-if="stocks == ''" ></div>
+      <transition-group name="slide" mode="in-out">
       <app-stock
         v-for="(stock, index) in stocks"
         :stock="stock"
         :key="index"
       ></app-stock>
-      <!-- </transition-group> -->
+      </transition-group>
     </div>
   </div>
 </template>
@@ -65,7 +70,7 @@ export default {
   data() {
     return {
       searchTerm: "",
-      type: "Top Gainers",
+      type: "S&P 500",
       sortedByChange: false,
       sortedByPrice: false,
       sortedByClose: false,
@@ -229,6 +234,7 @@ export default {
     getFavourites() {
       //* get portfolio
       this.type = "Favourites";
+      this.$store.dispatch("resetStocks");
       var favStocks = [];
       const user = firebase.auth().currentUser.uid;
       var value = 0;
@@ -249,36 +255,60 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch("getTopGainersStocks");
+    this.$store.dispatch("get500Stocks");
   },
 };
 </script>
 
 <style scoped>
-.box {
+.loader {
+   border: 5px solid #f3f3f3; /* Light grey */
+  border-top: 5px solid #0d4a72; /* Blue */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin-top:35px;
+  position:absolute;
+  right:47%;
+  background: rgba(0,0,0,0);
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.headline {
+  text-align: center;
+  font-size:32px;
+  margin:75px auto 0 auto;
+}
+.header {
+text-align: center;
+  font-size:15px;
+  margin: 10px auto;
 }
 .stock-container {
   margin: auto;
   background:var(--background-light);
-  width:825px;
+  width:850px;
   border-radius:var(--border-radius);
-  padding:5px 0;
+  border-top-right-radius: 0;
+    border-top-left-radius: 0;
 }
 .blurred-info {
   color: grey;
   font-size: 10px;
   text-align: center;
-  margin-bottom: -30px;
-  margin-top: 50px;
+  margin-top: 30px;
+  margin-bottom:20px;
 }
 .active {
-  background:var(--background-light) !important;
-  text-decoration: underline;
-  color:white;
+  color:black !important;
+  background: rgb(211, 215, 218) !important;
 
 }
 .active:hover {
-  color: white !important;
+  background: rgb(211, 215, 218);
 }
 .box {
   display: flex;
@@ -286,24 +316,29 @@ export default {
   margin-bottom: 100px;
 }
 .btn-row {
-  margin: 25px auto;
-  margin-top: 50px;
+  margin:0 auto;
   display: flex;
-  justify-content: stretch;
+  border-bottom:1px solid rgba(0,0,0,0);
+  justify-content: space-between;
+  width:850px;
 }
 
 .btn-row button {
   font-size: 0.85rem;
-  padding: 12px 0;
+  padding: 14px 0;
   border: none;
-  /* border-bottom: 1px solid black; */
   cursor: pointer;
-  background: rgb(235, 237, 238);
-  width: 110px;
+  width: 208px;
+  margin-top:0 auto;
+  /* border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius); */
+    border-top-left-radius: 13px;
+  border-top-right-radius: 13px;
+  background: var(--background-light);
+  color:white;
 }
 .btn-row button:hover {
   color: rgb(4, 38, 90);
-  /* border-bottom: 1px solid rgb(2, 27, 65); */
   background: rgb(211, 215, 218);
 }
 ::placeholder {
@@ -318,39 +353,41 @@ h2 {
 }
 .tags {
   display: flex;
+  align-items: center;
   text-align: left;
-  width: 800px;
+  width: 850px;
   vertical-align: bottom;
   height: fit-content;
   margin: auto;
+  padding:12px;
+  padding-left:24px;
+  background:var(--background-grey);
+  /* border-top-right-radius: var(--border-radius);
+  border-top-left-radius: var(--border-radius); */
 }
 .tag {
+  color:white;
   cursor: pointer;
   display: flex;
   text-align: left;
   width: 100px;
-  margin-top: 55px;
-  margin-bottom: 4px;
   height: fit-content;
   font-size: 0.75rem;
-  color: rgb(34, 57, 150);
-
 }
 .tag:hover {
-  color: rgb(34, 57, 150);
   text-decoration: underline;
 }
 .name {
   width: 275px !important;
+  padding-left:5px;
 }
 .searchfield {
   display: flex;
   justify-content: center;
-  margin: 25px auto;
+  margin: 50px auto;
 }
 .search {
-  /* background: #0b2847 !important; */
-  background-color: #1f2c3a;
+  background:var(--background-light);
   border: none;
   color: white;
   font-size: 0.8rem;
@@ -358,14 +395,17 @@ h2 {
   padding: 0.7rem 1.2rem;
   border-radius: 5px;
 }
-input {
-  width: 225px;
-  border: none;
-  border-bottom: 1px solid #1f2c3a;
-  margin-right: 7px;
+.search:hover {
+  background:var(--background-light-hover);
+
 }
-* {
-  color: rgb(19, 23, 48);
+input {
+  caret-color:white;
+  width: 215px;
+  border: none;
+  border-bottom: 1px solid var(--background-light-hover);
+  margin-right: 7px;
+  background:rgba(0,0,0,0);
 }
 .empty {
   visibility: hidden;
@@ -373,15 +413,15 @@ input {
 
 /* SLIDES */
 .slide-enter-active {
-  animation: slide-in 250ms ease-out forwards;
+  animation: slide-in 450ms ease-out forwards;
 }
 .slide-leave-active {
-  animation: slide-out 0ms ease-out forwards;
+  animation: slide-out 450ms ease-out forwards;
 }
 @keyframes slide-in {
   from {
-    transform: translateY(100px);
-    opacity: 0.2;
+    transform: translateY(200px);
+    opacity: 0.1;
   }
   to {
     transform: translateY(0);
@@ -390,11 +430,11 @@ input {
 }
 @keyframes slide-out {
   from {
-    transform: translateY(0);
+    transform: translateY(0px);
     opacity: 1;
   }
   to {
-    transform: translateY(0);
+    transform: translateY(0px);
     opacity: 0;
   }
 }

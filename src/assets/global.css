@@ -1,14 +1,17 @@
 :root {
-	/* --primary-color: rgba(11, 18, 25, 0.75);
-	--secondary-color: rgba(11, 18, 25, 0.52);
-	--background-color: rgb(10 45 61 / 90%);
-	--border-radius:5px;
-	--border-border: 1px solid rgb(17 37 68 / 96%);
-	--longAnswer-width:810px; */
+	--primary-color: #51c6c2;
+	--primary-color-hover: #beebe3;
+	
+	--background-dark: #1d212e;
+	--background-grey: #2a3038;
+	--background-light: #263047;
+	--background-light-hover: #2f374e;
 
-	--background-dark: #171b26;
-	--background-light: #293143;
-	--background-light-hover: #394156;
+	--red:#d33333;
+	--red-hover:#df4848;
+	--green:#24ae64;
+	--green-hover:#38c67a;
 
 	--border-radius:8px;
+	--stock-padding:13px;
   }

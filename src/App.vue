@@ -12,6 +12,7 @@
 
 <script>
 import Header2 from "./components/Header2";
+import globalElements from "./globalElements.vue"
 import axios from 'axios'
 
 export default {
@@ -22,8 +23,8 @@ export default {
 </script>
 
 
-
 <style>
+
 * {
     outline: none;
   color:white;
@@ -41,6 +42,7 @@ html, body{
   margin-right: 50px;
   margin-bottom: 25px;
   font-size:0.8rem;
+  padding-bottom:75px;
 }
 .footer {
   width: 100%;

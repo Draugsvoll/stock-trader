@@ -59,25 +59,17 @@ export default {
 
 
 <style  scoped>
-*{
-    /* border:1px solid purple; */
-    color:rgb(3, 3, 46);
-}
-
 .container {
-    border:1px solid rgb(214, 215, 216);
-    border-top:none;
-    width:750px;
-    padding:15px 18px;
-    padding-left:26px;
-
+    border-top:1px solid var(--background-dark);
+    padding:var(--stock-padding) 0px;
+    margin:0 10px;
 }
 .container:hover {
-    background: rgb(217, 240, 252);
-
+border-radius:var(--border-radius);
+  background:var(--background-light-hover);
 }
-.container:nth-child(odd):hover {
-    background: rgb(217, 240, 252);
+.container:nth-child(1) {
+    border-top:none !important;
 }
 .smaller {
     width:65px !important;
@@ -101,36 +93,25 @@ export default {
     display: flex;
     align-items: center;
 }
-.info:hover {
-    color:rgb(12, 35, 126);
-}
+
 .name {
-    width:175px;
+    width:275px;
+    padding:0 8px;
     overflow: hidden;
-    font-size: 14px;
+    font-size: 13px;
 }
 .container:nth-child(odd) {
-  /* background-color: rgb(245, 246, 247); */
-    background: rgb(233, 241, 245); 
-
 }
 .container:nth-child(1) {
-    border-top:1px solid rgb(214, 215, 216);
 }
 button {
-    border-radius:3px;
+  border-radius:5px;
     color:white;
-    background:#16416e;
-    border:1px solid rgb(4, 4, 110);
+    border:none;
     font-size:12px;
     cursor:pointer;
     padding:7px 10px;
-
+    background:var(--background-dark);
 }
-button:hover {
-    background:rgb(5, 62, 128);
-    color:white;
-}
-
 
 </style>

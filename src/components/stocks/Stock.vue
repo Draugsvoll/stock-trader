@@ -50,24 +50,21 @@ export default {
 <style  scoped>
 .container {
     border-top:1px solid var(--background-dark);
-    width:800px;
-    padding:15px 0px;
-    margin:0 10px;
-    /* padding-left:26px;    */
+    padding:var(--stock-padding) 15px;
+    padding-left:25px;
 }
 
 .container:hover {
     border-radius:var(--border-radius);
   background:var(--background-light-hover);
 }
-
 .container:nth-child(odd) {
 
 }
 .container:nth-child(even) {
 }
 .container:nth-child(1) {
-    border-top:none !important;
+    
 }
 .green {
     color:green !important
@@ -103,9 +100,11 @@ button {
     cursor:pointer;
     padding:7px 10px;
     background:var(--background-dark);
+    
 }
 button:hover {
-    color:white;
+        background:var(--background-light);
+
 }
 
 </style>

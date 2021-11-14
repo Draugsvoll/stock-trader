@@ -1,32 +1,22 @@
 <template>
     <div class="container">
-          <!-- * side-menu -->
+      
+    <!-- * side-menu -->
     <div class="wrapper">
       <input type="checkbox" id="btn" hidden>
-      <!-- <label for="btn" class="menu-btn">
-        <i class="fas fa-bars"></i>
-        <i class="fas fa-times"></i>
-      </label> -->
-      <nav id="sidebar">
-        <div class="title">Menu</div>
-        <ul class="list-items">
-        <li v-bind:class="{active: path == '/portfolio'}"><a href="/portfolio"><i class="fas fa-chart-pie"></i>My Portfolio</a></li>
-        <li v-bind:class="{active: path == '/news'}" ><a href="/news" ><i class="fas fa-globe-asia"></i>News</a></li>
-        <li v-bind:class="{active: path == '/stocks'}"><a href="/stocks"><i class="fas fa-sliders-h"></i>Buy & Sell</a></li>
-        <li><a href="/"><i class="fas fa-home"></i>Home</a></li>
-        <li v-bind:class="{active: path == '/'}"><a href="/"><i class="fas fa-cog"></i>Account</a></li>
-        <!-- <li><a href="#"><i class="fas fa-stream"></i>Features</a></li> -->
-        <!-- <li><a href="#"><i class="fas fa-user"></i>About us</a></li> -->
-        <li><a href="#"><i class="fas fa-envelope"></i>Contact us</a></li>
-        <li @click="logout"><a href="#" ><i class="fas fa-user"></i>Logout</a></li>
-        <!-- <div class="icons">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-        </div> -->
-        </ul>
-        <div class="title hidden">Menu</div>
+     
+        <nav id="sidebar">
+          <div class="title">Menu</div>
+            <ul class="list-items">
+                <li v-bind:class="{active: path == '/portfolio'}"><a href="/portfolio"><i class="fas fa-chart-pie"></i>My Portfolio</a></li>
+                <!-- <li v-bind:class="{active: path == '/news'}" ><a href="/news" ><i class="fas fa-globe-asia"></i>News</a></li> -->
+                <li v-bind:class="{active: path == '/stocks'}"><a href="/stocks"><i class="fas fa-sliders-h"></i>Buy & Sell</a></li>
+                <li><a href="/"><i class="fas fa-home"></i>Home</a></li>
+                <li v-bind:class="{active: path == '/'}"><a href="/"><i class="fas fa-cog"></i>Account</a></li>
+                <li><a href="#"><i class="fas fa-envelope"></i>Contact us</a></li>
+                <li @click="logout"><a href="#" ><i class="fas fa-user"></i>Logout</a></li>
+            </ul>
+          <div class="title hidden">Menu</div>
         </nav>
     </div>
    <!-- * side-menu -->
@@ -59,7 +49,7 @@ export default {
 
 <style css scoped>
 .active {
-    background-color: #1e475f !important;
+      background-color: #112942;
 }
 .container {
   z-index:1;
@@ -67,18 +57,19 @@ export default {
 .hidden {
   color:rgba(0,0,0,0) !important;
 }
-/* SIDE-MENU */
-/* SIDE-MENU */
+
+
+
 /* SIDE-MENU */
 .wrapper{
   height: 100%;
   width: 500px;
   position: relative;
+  letter-spacing: 1px;
 }
 .wrapper .menu-btn{
   position:absolute;
   left: -50px;
-  background-color: #1f2c3a;
   color: #fff;
   height: 45px;
   width: 45px;
@@ -110,10 +101,11 @@ export default {
   opacity: 0;
   transform: rotate(180deg);
 }
+
+/* CLOSED */
 #sidebar{
   position: fixed;
-  /* background-color: #0f61b8; */
-  width:54px;
+  width:64px;
   overflow: hidden;
   left:0px;
   top:135px;
@@ -123,13 +115,13 @@ export default {
     background:#141e29 !important;
 }
 #sidebar a {
-  padding-left:22px !important;
 }
 #sidebar i {
   margin-right:22px !important;
 }
+/* OPEN */
 #sidebar:hover{
-  width:160px;
+  width:180px;
 }
 #btn:checked ~ #sidebar{
   left: 0;
@@ -146,8 +138,7 @@ export default {
 }
 #sidebar .list-items{
   position: relative;
-  background-color: #1f2c3a;
-  width: 175px;
+  width: 180px;
   padding:0;
   margin:0px;
   list-style: none;
@@ -198,13 +189,11 @@ export default {
   margin: 0 5px;
   font-size: 18px;
   color: #f2f2f2;
-  background: #3c3c3f;
   border-radius: 5px;
   border: 1px solid #383838;
   transition: all 0.15s ease;
 }
 #sidebar .list-items .icons a:hover{
-  background: #404040;
   color:rgb(92, 104, 167);
 }
 .list-items .icons a:first-child{

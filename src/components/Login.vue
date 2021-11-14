@@ -1,20 +1,58 @@
 <template>
     <div class="outer-container">
-        <!-- <h1 class="headline">Register / Login</h1> -->
-            <div class="img">
-                <img src="../assets/logo4.png" alt="" width="270">
+        <div ref="overlay" class="overlay"></div>
+        
+        <div class="intro">
+            <h1 class="headline">Stocktrader-X</h1>
+            <p class="sub-header">A better way to trade stocks.</p>
+
+        </div>
+
+        <div class="card-container">
+            <div class="card left">
+                <p class="card-title">
+                    Create User
+                </p>
+                <i class="fas fa-user-circle logo"></i>
+                <ul>
+                    <li>Create Account</li>
+                    <li>Trade stocks </li>
+                    <li>Track personal portfolio </li>
+                </ul>
+                <button @click="openSignup()" class="signup">Sign Up</button>
             </div>
-            <div class="form">
-                <input v-model="email" type="text" name="username" placeholder="Email" autofocus required>
-                <input v-model="password" type="password" name="password" placeholder="Password" required>
-                <div class="btn">
-                    <button @click="login">Login</button>
-                    <button @click="signUp  ">Sign Up</button>
-                </div>
-                <div> 
-                    <p class="testuser">Continue as<button class="test" @click="loginAsTest">Test User</button></p> 
-                </div>
+
+            <div class="card right">
+                <p class="card-title">
+                    Login As Guest
+                </p>
+                <i class="fas fa-user-secret logo"></i>
+                <ul>
+                    <li>No registration needed</li>
+                    <li>Trade stocks instantly</li>
+                    <li>Track portfolio</li>
+                </ul>
+                <button class="login" @click="loginAsTest()">Login</button>
             </div>
+
+        </div>
+
+        <a class="text" @click="openLogin()">I have an account</a>
+
+        <!-- LOGIN FORM -->
+        <div ref="form" class="form">
+            <p v-if="newUser == true"  class="form-title">Sign Up</p>
+            <p v-else class="form-title">Login</p>
+            <input ref="email" class="form-" v-model="email" type="text" name="username" placeholder="Email" autofocus required>
+            <input v-model="password" type="password" name="password" placeholder="Password" required>
+            <div class="btn">
+                <button v-if="newUser == true"  @click="signUp">Sign Up</button>
+                <button v-else  @click="login">Login</button>
+            </div>
+            <p class="close" @click="closeForm()">Back</p>
+        </div>
+
+    <!-- container -->
     </div>
     
 </template>
@@ -27,6 +65,7 @@ export default {
     name: 'Login',
     data () {
         return {
+            newUser: false,
             email: '',
             password: '',
         }
@@ -63,7 +102,23 @@ export default {
                 .catch( err => {
                     alert('Wrong username/password' + err)
                 })
-        }
+        },
+        openLogin() {
+            this.newUser = false
+            this.$refs.form.style.display = 'block'
+            this.$refs.overlay.style.display = 'block'
+            this.$refs.email.focus()
+        },
+        openSignup() {
+            this.newUser = true
+            this.$refs.form.style.display = 'block'
+            this.$refs.overlay.style.display = 'block'
+            this.$refs.email.focus()
+        },
+        closeForm() {
+            this.$refs.form.style.display = 'none'
+            this.$refs.overlay.style.display = 'none'
+        },
     },
     created () {
         // window.location.replace("http://www.w3schools.com")
@@ -73,25 +128,96 @@ export default {
 
 
 <style scoped>
-/* .logo {
-    background-image: url('../../assets/logo.png');
-} */
-* {
-    /* border:1px solid black; */
+
+a {
+    transition:0.25s;
 }
-.testuser{
-    color:black;
-}
-.test {
-    padding:4px;
-}
-.headline {
-    text-align: center;
-    font-weight: 400;
-    font-size: 26px;
+.overlay {
+    position:absolute;
+    width:100vw;
+    max-width:100%;
+    height:100vh;
+    background:rgba(0,0,0,0.6);
+    padding:0;
+    margin:0;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    display:none;
 }
 .outer-container {
-    padding-top:90px;
+    padding-top:50px;
+}
+.intro {
+    width:fit-content;
+    margin:0 auto;
+}
+.headline {
+    color:var(--primary-color);
+    font-weight: 400;
+    font-size: 25px;
+    letter-spacing: 1px;
+    text-align: center;
+    margin:5px auto;
+}
+.sub-header{
+    font-size: 28px;
+    margin:0;
+    font-weight: 100;
+}
+.text {
+    display:block;
+    font-size: 17px;
+    text-align: center;
+    margin:0 auto;
+    letter-spacing: 1px;
+    color:var(--primary-color);
+}
+.text:hover {
+    /* color:var(--primary-color-hover); */
+    color:white;
+}
+.card-container {
+    display:flex;
+    justify-content:space-between;
+    width:900px;
+    margin:50px auto;
+}
+.card{
+    width:400px;
+    background:var(--background-light);
+    border-radius: var(--border-radius);
+    padding:25px;
+    letter-spacing: 1px;
+    transition:0.35s;
+    border-left:2px solid var(--primary-color);
+}
+.card:hover {
+    background:var(--background-light-hover);
+}
+.card-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 500;
+    margin:0;
+}
+ul {
+    width:230px;
+    margin:25px auto;    
+}
+li {
+    margin:10px auto;
+    font-size: 14px;
+}
+.logo {
+    color:rgb(199, 225, 231);
+    font-size: 80px;
+    margin:15px auto;
+    margin-bottom:0;
+    width:100%;
+    text-align: center;
+    cursor:text;
 }
 .container {
     position:absolute;
@@ -100,59 +226,95 @@ export default {
     background-size: cover;
     z-index: 9;
 }
-.testuser {
-    font-size: 12px;
-}
-.test {
-    background:rgba(0,0,0,0);
-    border:none;
-    outline:none;
-    color: rgb(10, 65, 83);
-    cursor:pointer;
-    text-decoration: underline;
-    font-size: 12px;
-}
 .form {
-    padding:4rem 6rem;
-    width:250px;
-    margin:0 auto;
+    position:absolute;
+    top:0;
+    bottom:0;
+    left: 0; 
+    right: 0; 
+    margin:auto;
+    width: fit-content;
+    height:fit-content;
+
+    padding:45px 65px;
     display: flex;
     flex-direction: column;
-    background: rgba(0,0,0,0);
+    background: var(--background-grey);
+    border-left:2px solid var(--primary-color);
+    border-radius: var(--border-radius);
+
+    display: none;
 }
-.img {
-    margin:auto;
-    width:60px;
-    margin-bottom:-30px;
+.form-title {
+    text-align: center;
+    font-size: 24px;
+    margin-top:0;
+    color: var(--primary-color);
+}
+.close {
+    font-size: 10px;
+    font-weight:lighter;
+    text-align: center;
+    margin-top:15px;
+    margin-bottom:0px;
+    cursor:pointer;
+    color:var(--primary-color);
+    text-decoration: underline;
+}
+.close:hover {
+    color:white;
 }
 .btn {
-    margin-top:5px;
+    margin-top:30px;
+    margin-bottom:10px;
+    display:flex;
+    justify-content:space-between;
 }
-img {
-    margin-left: -85px;
-    margin-bottom: -25px;
+.btn button {
+    margin:0 auto;
 }
+
 input {
-    margin: 0.5rem 0;
+    margin: 1rem 0;
     padding:0.5rem;
-    border:#17232f 1px solid;
     width:260px;
+    border:none;
+    border-bottom:1px solid var(--background-light-hover);
     font-size:0.85rem;
     border-radius:3px;
+    background:var(--background-light-hover);
+    display:block;
 }
 ::placeholder {
     font-style: italic;
+    color:rgba(172, 172, 172, 0.735);
+    padding-left:1px;
 }
 button {
-    margin:auto;
-    background-color: #233850;
+    display:block;
+    margin:0 auto;
+    background-color: var(--primary-color);
     border:none;
     font-size: 0.85rem;
     padding:0.6rem 1.2rem;
     border-radius: 4px;
     color:white;
     cursor:pointer;
-    margin-right:5px;
+    transition: 0.2s;
+    width:115px;
 }
-
+.signup {
+    background:rgba(0,0,0,0);
+    border:2px solid var(--primary-color);
+}
+.signup:hover {
+    background:var(--primary-color);
+}
+.login:hover {
+    background:rgba(0,0,0,0);
+    border:2px solid var(--primary-color);
+}
+.login {
+    border:2px solid rgba(0,0,0,0);
+}
 </style>

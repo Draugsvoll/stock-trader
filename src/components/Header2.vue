@@ -1,11 +1,12 @@
 <template>
      <header>
         <nav class="header-nav">
-            <a class="header-title" href="/">Stocktrader As</a>
+            <a class="header-title" href="/">Stocktrader-X</a>
             <ul>
                 <li><a href="/">{{ funds | currency }} </a></li>
-                <li ><a href="/stocks"><i class="fas fa-sliders-h"></i> Buy/Sell</a></li>
-                <li ><a href="/portfolio"><i class="fas fa-chart-pie"></i> My Portfolio</a></li>
+                <li ><a href="/stocks"><i class="fas fa-sliders-h"></i>Buy/Sell</a></li>
+                <li ><a href="/portfolio"><i class="fas fa-chart-pie"></i>Portfolio</a></li>
+                <li ><a href="/"><i class="far fa-user-circle"></i>Account</a></li>
                 <!-- <li ><a href="/publicportfolios">Portfolios</a></li> -->
                 <!-- <li @click="logout"><a href="/login" >Logout</a></li>             -->
             </ul>
@@ -58,7 +59,7 @@ export default {
  }
  header {
     font-size:1rem;
-    padding:1.35rem;
+    padding:1.5rem;
     background:var(--background-light);
     z-index:5;
 }
@@ -66,10 +67,13 @@ export default {
     text-decoration: none; 
     margin-left:32px;
     font-size: 1.3rem;
-    font-style:italic;
     z-index:5;
-}
 
+}
+.header-title:hover {
+    color:var(--primary-color);
+
+}
 .header-nav {
     display: flex;
     flex-wrap: wrap;
@@ -89,6 +93,12 @@ export default {
 }
 li:hover {
     text-decoration: underline;
+    color:var(--primary-color) !important;
+
+}
+li a:hover {
+    color:var(--primary-color) !important;
+
 }
 .header-nav li a {
     text-decoration: none;

@@ -30,9 +30,6 @@ export default {
 
 
 <style  scoped>
-* {
-    /* font-family: 'arial'; */
-}
 .article {
     border-radius:3px;
     border:1px solid #1f2c3a46;

@@ -35,21 +35,18 @@
             </div>
 
             
-
-        <h2 v-if="!emptyPortfolio">My Stocks</h2>
-        <h2 v-if="emptyPortfolio">You have no stocks</h2>
+        <!-- STOCKS  -->
+        <p class="header" v-if="!emptyPortfolio">My Stocks</p>
+        <p class="header" v-if="emptyPortfolio">You have no stocks</p>
         <!-- TAGS -->
-        <div class="tags" v-if="stocks != '' ">
-                <div class="tag width" @click="sortByLetter">Name</div>
+        <div class="tags" v-if="stocks != ''" >
+                <div class="tag name" @click="sortByLetter">Name</div>
                 <div class="tag" @click="sortByChange">24h Change</div>
                 <div class="tag" @click="sortByPrice">Market Price</div>
                 <div class="tag" @click="sortByClose">Prev. Close</div>
                 <div class="tag smaller" @click="sortByQuantity">Quantity</div>
                 <div class="tag smaller" @click="sortByGains">Gains</div>
-                <div class="empty"><button>Trade</button></div>
         </div>
-
-        <!-- STOCKS  -->
         <div class="stock-container">
             <transition-group name="slide" mode="in-out">
                 <app-stock v-for="(stock, index) in stocks" :stock="stock" :key="index"></app-stock>
@@ -66,29 +63,31 @@
                 />
         </div>
 
-        <!-- PURCHASE HISTORY -->
-        <h2 v-if="!emptyPortfolio">Trading History</h2>
-        <h2 v-if="emptyPortfolio">No trades have been made</h2>
-        <div class="history" v-for="(purchase, index) in history" :key=purchase.id>
-            <div class=history-tags v-if="index == 0">
-                <!-- tags -->
-                <div class="tags2" v-if="stocks != '' ">
-                    <div class="tag2 name" >Purchase</div>
-                    <div class="tag2" >Quantity</div>
-                    <div class="tag2" >Price</div>
-                    <div class="tag2" >Total Price</div>
-                    <div class="tag2">Date</div>
-                    <div class="empty"><button>Trade</button></div>
+         <!-- PURCHASE HISTORY -->
+        <p class="header" v-if="!emptyPortfolio">Transaction History</p>
+        <p class="header" v-if="emptyPortfolio">No trades have been made</p>
+        <div class="history-box">
+            <div class="" v-for="(purchase, index) in history" :key=purchase.id>
+                <div class=history-tags v-if="index == 0">
+                    <!-- tags -->
+                    <div class="tags2" v-if="stocks != ''">
+                        <div class="tag2 name" >Purchase</div>
+                        <div class="tag2" >Quantity</div>
+                        <div class="tag2" >Price</div>
+                        <div class="tag2" >Total Price</div>
+                        <div class="tag2">Date</div>
+                    </div>
+                </div>
+                <!-- PURCHASE HISTORY -->
+                <div class="history-container">
+                    <div class="info name"> {{ purchase.name }} </div>
+                    <div class="info"> {{ purchase.quantity }} </div>
+                    <div class="info"> {{ purchase.price }} </div>
+                    <div class="info"> {{ purchase.price.toFixed(2) * purchase.quantity.toFixed(2) }} </div>
+                    <div class="info date"> {{ purchase.timestamp.replace(/[TZ]/g, ' ').split('.').reverse().pop() }} </div>
                 </div>
             </div>
-            <!-- PURCHASE HISTORY -->
-            <div class="history-container">
-                <div class="info name"> {{ purchase.name }} </div>
-                <div class="info"> {{ purchase.quantity }} </div>
-                <div class="info"> {{ purchase.price }} </div>
-                <div class="info"> {{ purchase.price.toFixed(2) * purchase.quantity.toFixed(2) }} </div>
-                <div class="info date"> {{ purchase.timestamp.replace(/[TZ]/g, ' ').split('.').reverse().pop() }} </div>
-            </div>
+
         </div>
 
     </div>
@@ -123,19 +122,23 @@ export default {
                     fontSize: 22,
                     color:'white',
                 },
-
             },
-
             // COLUMN CHART
             chartOptionsColumn: {
-                'width':1000,
-                'height':400,
                 title: 'Percentage Gains %',
+                backgroundColor:'#293143',
+                'width':850,
+                'height':400,
+                'fill':'red',
                 titleTextStyle: {
-                    fontSize: 20,
+                    fontSize: 22,
+                    color:'white',
                 },
+                legend: 
+                    {position: 'labeled', textStyle: {fontSize: 14, color:'white'}},
+                tooltip:
+                     {position: 'center', textStyle: {fontSize: 14}, color:'white'},
             },
-
             // DATA
             totalGains: 0,
             stocks: [],
@@ -316,8 +319,8 @@ export default {
                 url: 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/get-detail',
                 params: {symbol: symbol, region: 'US'},
                 headers: {
-                    'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8',
-                    'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
+                    'x-rapidapi-host': 'yh-finance.p.rapidapi.com',
+                    'x-rapidapi-key': '1660860218msh9ed4fea2bd1c6bep1a1c59jsnfe88dd4d5712'
                 }}
                 axios.request(options).then(function (response) {
                     stock.price = response.data.price.regularMarketPrice.raw
@@ -364,14 +367,20 @@ export default {
 
 <style scoped>
 .headline {
-    font-size:35px;
+    font-size:32px;
     text-align: center;
-    margin:50px
+    margin:80px;
+    margin-bottom:45px;
+}
+.header {
+    font-size:28px;
+    text-align: center;
+    margin:60px;
+    margin-bottom:30px;
 }
 .box {
     max-width:900px;
     display: flex;
-    padding-top:50px;
     flex-direction: column;
     justify-content: center;
     margin:0 auto;
@@ -381,11 +390,27 @@ export default {
     flex-direction: column;
     justify-content: center;
     margin:35px auto;
+    margin-bottom:0;
     width:900px;
     padding:5px;
     padding-top:25px;
     background:var(--background-light);
-    border-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+    border-left:2px solid var(--primary-color);
+}
+.column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin:100px auto;
+    margin-bottom:0;
+    width:900px;
+    padding:5px;
+    background:var(--background-light);
+    border-top-right-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+    border-left:2px solid var(--primary-color);
 }
 .assets {
     display: flex;
@@ -395,7 +420,9 @@ export default {
     background:var(--background-light);
     width:200px;
     padding:17px;
-    border-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+    border-left:2px solid var(--primary-color);
 }
 .sum {
     font-size: 24px;
@@ -408,6 +435,106 @@ p {
 }
 .red {
     color:red;
+}
+.container {
+    margin:0;
+    padding-left:15px;
+}
+
+.stock-container {
+  background:var(--background-light);
+  border-radius:var(--border-radius);
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.tags {
+    width:900px;
+    display: flex;
+    text-align: left;
+    padding-left:15px;
+    background:var(--background-grey);
+    padding:15px;
+     border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+}
+.tag {
+  cursor: pointer;
+  display: flex;
+  text-align: left;
+  width: 100px;
+  margin-bottom: 4px;
+  height: fit-content;
+  font-size: 0.75rem;
+}
+.tag2.name {
+    padding-left:20px;
+}
+.date {
+    width:300px !important;
+}
+.name {
+  width: 275px !important;
+  padding-left:5px;
+}
+
+/* HISTORY */
+.history-box {
+    margin:0 auto;
+    padding:0;
+    border-bottom-left-radius: var(--border-radius) !important;
+    border-bottom-right-radius: var(--border-radius);
+}
+.info {
+    font-size: 14px;
+    width:100px;
+    display: flex ;
+    align-items: center;
+}
+.history-tags {
+    text-align: left;
+    padding:5px;
+    background:var(--background-grey);
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+}
+.history-container {
+    background:var(--background-light);
+    border-top:1px solid var(--background-dark);
+    border-bottom:1px solid var(--background-dark);
+    margin-top:50px;
+    margin:auto;
+    width:900px;
+    display: flex;
+    padding:20px;
+    padding-left:24px;
+}
+.history-container:hover {
+    background:var(--background-light-hover);
+}
+.history-container:nth-child(1) {
+  border-top:none;
+}
+
+.tags2 {
+    display: flex;
+    text-align: left;
+    margin:auto;
+    padding:10px;
+    padding-left:5px;
+}
+.tag {
+    font-size:0.75rem;
+    width:100px;
+    cursor:pointer;
+}
+.tag2 {
+    font-size:0.75rem;
+    width:100px;
+    margin-left:0;
+}
+.tag:hover {
+    /* color:rgb(12, 35, 126); */
+    text-decoration: underline;
 }
 
 </style>
