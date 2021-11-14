@@ -13,19 +13,16 @@
             </div>
 
         <!-- STOCK INFO -->
-        <div class="info-container">
             <!-- STATISTICS -->
             <div class="numbers">
-                <div class="number" ><div class="tag">Daily Volume</div> {{ stock.price.averageDailyVolume10Day.longFmt }} </div>
-                <div class="number" ><div class="tag">Market Cap</div> {{ stock.price.marketCap.fmt }} </div>
-                <div class="number" ><div class="tag">50 Day AVG</div> ${{ stock.summaryDetail.fiftyDayAverage.fmt }} </div>
-                <div class="number" ><div class="tag">52 Week High</div> ${{ stock.summaryDetail.fiftyTwoWeekHigh.fmt }} </div>
-                <div class="number" ><div class="tag">Volume</div> {{ stock.summaryDetail.volume.fmt }} </div>
+                <div class="number" 
+                    id="number-first" ><div class="tag">Daily Volume</div> <span class="tag-price">${{ stock.price.averageDailyVolume10Day.longFmt }} </span>  </div>
+                <div class="number" ><div class="tag">Market Cap</div> <span class="tag-price">${{ stock.price.marketCap.fmt }}  </span> </div>
+                <div class="number" ><div class="tag">50 Day AVG</div> <span class="tag-price">${{ stock.summaryDetail.fiftyDayAverage.fmt }} </span>  </div>
+                <div class="number" ><div class="tag">52 Week High</div> <span class="tag-price"> ${{ stock.summaryDetail.fiftyTwoWeekHigh.fmt }}</span>  </div>
+                <div class="number" ><div class="tag">Volume</div> <span class="tag-price"> ${{ stock.summaryDetail.volume.fmt }}</span>  </div>
             </div>
             <!-- INFO -->
-           
-
-        </div>
 
 
         <!-- BUY-SELL CONTAINER -->
@@ -377,6 +374,7 @@ export default {
 </script>
 
 <style css scoped>
+
 .headline {
     font-size:18px;
 }
@@ -384,7 +382,7 @@ export default {
     display: flex;
     width:900px;
     justify-content: space-between;
-    border:1px solid grey;
+    border:2px solid var(--background-grey);
     border-radius:3px;
 }
 .buy, .sell {
@@ -456,9 +454,16 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .numbers {
     display:flex;
+    justify-content: space-between;
 }
+
 .number {
     font-size: 1rem;
+    width: 140px;
+    border-top: 2px solid var(--background-grey);
+    border-bottom: 2px solid var(--background-grey);
+    margin: 15px 0px;
+    padding: 5px;
 }
 .info {
     width:600px;
@@ -528,6 +533,8 @@ h2 {
 }
 .intro {
     display: flex;
+    margin:20px auto;
+    justify-content: center;
 }
 .summary {
     margin-bottom:25px;
@@ -547,18 +554,20 @@ h2 {
     flex-wrap: wrap;
 }
 .tag {
-    font-weight: bold;
-    font-size: 14px;
+    font-size: 15px;
     width:100px;
+    margin-bottom:8px;
+}
+.tag-price {
+    font-weight: bold;
+    font-size:18px;
 }
 
 .price {
-    display:inline;
-    margin: auto auto;
+    text-align: center;
     font-size: 28px;
-    margin-left:0;
+    margin:0;
     font-weight: 400;
-    vertical-align: middle;
 }
 .price2 {
     display:inline;
