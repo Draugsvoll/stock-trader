@@ -41,7 +41,7 @@ export function getSingleStock (searchTerm) {
         returnedStocks.forEach( stock => {
             const newStock = { name: stock.shortName, price: stock.regularMarketPrice, change: stock.regularMarketChange, symbol: stock.symbol, prevClose: stock.regularMarketPreviousClose}
             newStocks.push(newStock)
-            console.log('from get single stock: ', newStock.name)
+            // console.log('from get single stock: ', newStock.name)
         });
         return newStocks
     }).catch(function (error) {

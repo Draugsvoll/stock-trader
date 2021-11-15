@@ -50,7 +50,7 @@ export default {
                 this.positions = positions
        }, // get portfolio
        viewStock (symbol) {
-           console.log('view stock', symbol)
+        //    console.log('view stock', symbol)
        },
        testApi () {
            const options = {

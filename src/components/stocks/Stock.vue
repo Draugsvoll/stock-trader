@@ -67,10 +67,10 @@ export default {
     
 }
 .green {
-    color:green !important
+    color:var(--green);
 }
 .red {
-    color:red !important
+    color:var(--red);
 }
 .grey {
     background:grey;

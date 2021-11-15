@@ -12,6 +12,7 @@
         v-model="searchTerm"
         autofocus
         placeholder="Search.."
+        @keyup.enter="getStockSymbol"
       />
       <button class="search" @click="getStockSymbol">Search</button>
     </div>
@@ -195,49 +196,35 @@ export default {
         });
     },
     getStock(symbol) {
-      console.log('hei')
       const ref = this;
       var searchedStock = [];
 
       const options = {
         method: 'GET',
         url: 'https://yh-finance.p.rapidapi.com/stock/v2/get-summary',
-        params: {symbol: 'AMRN', region: 'US'},
+        params: {symbol: symbol, region: 'US'},
         headers: {
           'x-rapidapi-host': 'yh-finance.p.rapidapi.com',
           'x-rapidapi-key': '1660860218msh9ed4fea2bd1c6bep1a1c59jsnfe88dd4d5712'
         }};
       axios.request(options).then(function (response) {
         const data = response.data;
-        console.log(data);
+        // console.log(data);
         const newStock = {
           name: data.quoteType.shortName,
           symbol: data.quoteType.symbol,
           price: data.price.regularMarketPrice.raw,
-          change: 50,
+          change: data.price.regularMarketChangePercent.raw*100,
           prevClose: data.price.regularMarketPreviousClose.raw
         }
-        console.log("from get single stock: ", newStock)
+        // console.log("from get single stock: ", newStock)
         ref.$store.dispatch("getSearchedStock", newStock);
       }).catch(function (error) {
         console.error(error);
       });
-
-      // #asd
-
-
-      // const newStock = {
-      //   name: stock.shortName,
-      //   price: stock.regularMarketPrice,
-      //   change: stock.regularMarketChange,
-      //   symbol: stock.symbol,
-      //   prevClose: stock.regularMarketPreviousClose,
-      // }
-
-
-
     },
     getStockSymbol () {
+      this.$store.dispatch("resetStocks");
       const ref = this
       const options = {
         method: 'GET',
@@ -250,14 +237,14 @@ export default {
       axios.request(options).then(function (response) {
         console.log(response.data.quotes[0]);
         let symbol = response.data.quotes[0].symbol
-        console.log(symbol)
+        // console.log(symbol)
         ref.getStock(symbol);
       }).catch(function (error) {
         console.error(error);
       });
     },
+    //* get portfolio
     getFavourites() {
-      //* get portfolio
       this.type = "Favourites";
       this.$store.dispatch("resetStocks");
       var favStocks = [];
@@ -274,7 +261,7 @@ export default {
           for (let key in resp) {
             favStocks.push(resp[key]);
           }
-          console.log("logging stocks from favourites", favStocks);
+          // console.log("logging stocks from favourites", favStocks);
           ref.$store.dispatch("setFavourites", favStocks);
         });
     },
