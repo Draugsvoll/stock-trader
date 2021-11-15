@@ -26,6 +26,7 @@
             <app-nav></app-nav>
 
             <!-- PIE CHART  -->
+            <p class="header">Asset Allocation</p>
             <div v-if="chartData2 != null" class="charts" id="pie-chart">
             <GChart
                 type="PieChart"
@@ -54,6 +55,7 @@
         </div>
 
         <!-- COLUMN CHART -->
+        <p class="header">Gains Tracked</p>
         <div v-if="!emptyPortfolio" class="column">
                 <!-- GainColumn -->
                 <GChart
@@ -67,7 +69,7 @@
         <p class="header" v-if="!emptyPortfolio">Transaction History</p>
         <p class="header" v-if="emptyPortfolio">No trades have been made</p>
         <div class="history-box">
-            <div class="" v-for="(purchase, index) in history" :key=purchase.id>
+            <div class="asd" v-for="(purchase, index) in history" :key=purchase.id>
                 <div class=history-tags v-if="index == 0">
                     <!-- tags -->
                     <div class="tags2" v-if="stocks != ''">
@@ -107,8 +109,8 @@ export default {
         return {
             // PIE-CHART
             chartOptionsPie: {
-                title:'Asset Allocation ',
-                backgroundColor:'#293143',
+                title:'',
+                backgroundColor:'#263047',
                 is3D: true,
                     'width':850,
                     'height':300,
@@ -126,7 +128,7 @@ export default {
             // COLUMN CHART
             chartOptionsColumn: {
                 title: 'Percentage Gains %',
-                backgroundColor:'#293143',
+                backgroundColor:'#263047',
                 'width':850,
                 'height':400,
                 'fill':'red',
@@ -370,13 +372,13 @@ export default {
     font-size:32px;
     text-align: center;
     margin:80px;
-    margin-bottom:45px;
+    margin-bottom:30px;
 }
 .header {
     font-size:28px;
     text-align: center;
     margin:60px;
-    margin-bottom:30px;
+    margin-bottom:20px;
 }
 .box {
     max-width:900px;
@@ -389,11 +391,8 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin:35px auto;
-    margin-bottom:0;
+    margin:0px auto;
     width:900px;
-    padding:5px;
-    padding-top:25px;
     background:var(--background-light);
     border-top-right-radius: var(--border-radius);
     border-bottom-right-radius: var(--border-radius);
@@ -403,7 +402,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin:100px auto;
+    margin:0 auto;
     margin-bottom:0;
     width:900px;
     padding:5px;
@@ -431,10 +430,10 @@ p {
     margin:5px;
 }
 .green {
-    color:green;
+    color:var(--green);
 }
 .red {
-    color:red;
+    color:var(--red);
 }
 .container {
     margin:0;
@@ -451,9 +450,8 @@ p {
     width:900px;
     display: flex;
     text-align: left;
-    padding-left:15px;
-    background:var(--background-grey);
     padding:15px;
+    background:var(--background-grey);
      border-top-left-radius: var(--border-radius);
     border-top-right-radius: var(--border-radius);
 }
@@ -462,7 +460,6 @@ p {
   display: flex;
   text-align: left;
   width: 100px;
-  margin-bottom: 4px;
   height: fit-content;
   font-size: 0.75rem;
 }
@@ -480,7 +477,6 @@ p {
 /* HISTORY */
 .history-box {
     margin:0 auto;
-    padding:0;
     border-bottom-left-radius: var(--border-radius) !important;
     border-bottom-right-radius: var(--border-radius);
 }
@@ -508,6 +504,10 @@ p {
     padding:20px;
     padding-left:24px;
 }
+.asd:last-child .history-container {
+    border-bottom-right-radius: var(--border-radius);
+    border-bottom-left-radius: var(--border-radius);
+}
 .history-container:hover {
     background:var(--background-light-hover);
 }
@@ -533,7 +533,6 @@ p {
     margin-left:0;
 }
 .tag:hover {
-    /* color:rgb(12, 35, 126); */
     text-decoration: underline;
 }
 
