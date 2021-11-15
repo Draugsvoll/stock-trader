@@ -44,6 +44,9 @@ const mutations = {
     'SET_FAVS' (state, favourites) {
         state.stocks = favourites
     },
+    'SET_SEARCHED_STOCK' (state, newStock) {
+        state.stocks = [newStock]
+    },
 }
 
 const actions = {   // aviable actions on this site
@@ -83,7 +86,11 @@ const actions = {   // aviable actions on this site
     },
     setFavourites: ({ commit }, favourites ) => {
         commit('SET_FAVS', favourites)
-    }
+    },
+    getSearchedStock: ({ commit }, newStock ) => {
+        commit('SET_SEARCHED_STOCK', newStock)
+    },
+    
 }
 
 const getters = {

@@ -13,7 +13,7 @@
         autofocus
         placeholder="Search.."
       />
-      <button class="search" @click="getSymbol">Search</button>
+      <button class="search" @click="getStockSymbol">Search</button>
     </div>
 
     <div class="btn-row">
@@ -27,7 +27,7 @@
         Trending
       </button>
       <button :class="{ active: type == 'Favourites' }" @click="getFavourites">
-        Favourites
+        My Favourites
       </button>
       <!-- <button @click="getPortfolios">Portfolios</button> -->
     </div>
@@ -195,41 +195,66 @@ export default {
         });
     },
     getStock(symbol) {
+      console.log('hei')
       const ref = this;
       var searchedStock = [];
+
       const options = {
-        method: "GET",
-        url: "https://rapidapi.p.rapidapi.com/market/get-quotes",
-        params: { region: "US", symbols: symbol },
+        method: 'GET',
+        url: 'https://yh-finance.p.rapidapi.com/stock/v2/get-summary',
+        params: {symbol: 'AMRN', region: 'US'},
         headers: {
-          "x-rapidapi-key":
-            "624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8",
-          "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
-        },
-      };
-      axios
-        .request(options)
-        .then(function (response) {
-          const returnedStocks = response.data.quoteResponse.result;
-          console.log(returnedStocks);
-          // return array name+price of each stock
-          returnedStocks.forEach((stock) => {
-            const newStock = {
-              name: stock.shortName,
-              price: stock.regularMarketPrice,
-              change: stock.regularMarketChange,
-              symbol: stock.symbol,
-              prevClose: stock.regularMarketPreviousClose,
-            };
-            // searchedStock.push(newStock)
-            ref.stocks.unshift(newStock);
-            console.log("from get single stock: ", newStock.name);
-          });
-          ref.searchedStock = searchedStock;
-        })
-        .catch(function (error) {
-          console.error(error);
-        });
+          'x-rapidapi-host': 'yh-finance.p.rapidapi.com',
+          'x-rapidapi-key': '1660860218msh9ed4fea2bd1c6bep1a1c59jsnfe88dd4d5712'
+        }};
+      axios.request(options).then(function (response) {
+        const data = response.data;
+        console.log(data);
+        const newStock = {
+          name: data.quoteType.shortName,
+          symbol: data.quoteType.symbol,
+          price: data.price.regularMarketPrice.raw,
+          change: 50,
+          prevClose: data.price.regularMarketPreviousClose.raw
+        }
+        console.log("from get single stock: ", newStock)
+        ref.$store.dispatch("getSearchedStock", newStock);
+      }).catch(function (error) {
+        console.error(error);
+      });
+
+      // #asd
+
+
+      // const newStock = {
+      //   name: stock.shortName,
+      //   price: stock.regularMarketPrice,
+      //   change: stock.regularMarketChange,
+      //   symbol: stock.symbol,
+      //   prevClose: stock.regularMarketPreviousClose,
+      // }
+
+
+
+    },
+    getStockSymbol () {
+      const ref = this
+      const options = {
+        method: 'GET',
+        url: 'https://yh-finance.p.rapidapi.com/auto-complete',
+        params: {q: this.searchTerm, region: 'US'},
+        headers: {
+          'x-rapidapi-host': 'yh-finance.p.rapidapi.com',
+          'x-rapidapi-key': '1660860218msh9ed4fea2bd1c6bep1a1c59jsnfe88dd4d5712'
+        }};
+      axios.request(options).then(function (response) {
+        console.log(response.data.quotes[0]);
+        let symbol = response.data.quotes[0].symbol
+        console.log(symbol)
+        ref.getStock(symbol);
+      }).catch(function (error) {
+        console.error(error);
+      });
     },
     getFavourites() {
       //* get portfolio
@@ -255,15 +280,15 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch("get500Stocks");
+    // this.$store.dispatch("get500Stocks");
   },
 };
 </script>
 
 <style scoped>
 .loader {
-   border: 5px solid #f3f3f3; /* Light grey */
-  border-top: 5px solid #0d4a72; /* Blue */
+   border: 5px solid #f3f3f3; 
+  border-top: 5px solid #234d8b;
   border-radius: 50%;
   width: 50px;
   height: 50px;
@@ -271,7 +296,7 @@ export default {
   margin-top:35px;
   position:absolute;
   right:47%;
-  background: rgba(0,0,0,0);
+  /* background: rgba(0,0,0,0); */
 }
 @keyframes spin {
   0% { transform: rotate(0deg); }
@@ -283,9 +308,9 @@ export default {
   margin:75px auto 0 auto;
 }
 .header {
-text-align: center;
+  text-align: center;
   font-size:15px;
-  margin: 10px auto;
+  margin: 5px auto;
 }
 .stock-container {
   margin: auto;
@@ -304,8 +329,7 @@ text-align: center;
 }
 .active {
   color:black !important;
-  background: rgb(211, 215, 218) !important;
-
+  background: rgb(201, 207, 211) !important;
 }
 .active:hover {
   background: rgb(211, 215, 218);
@@ -330,12 +354,14 @@ text-align: center;
   cursor: pointer;
   width: 208px;
   margin-top:0 auto;
-  /* border-top-left-radius: var(--border-radius);
-  border-top-right-radius: var(--border-radius); */
-    border-top-left-radius: 13px;
-  border-top-right-radius: 13px;
-  background: var(--background-light);
+  background: #373e41d4;
   color:white;
+}
+.btn-row button:last-child {
+  border-top-right-radius: var(--border-radius);
+}
+.btn-row button:nth-child(1) {
+  border-top-left-radius: var(--border-radius);
 }
 .btn-row button:hover {
   color: rgb(4, 38, 90);
@@ -343,6 +369,7 @@ text-align: center;
 }
 ::placeholder {
   color: rgb(177, 185, 194);
+  padding-left:2px;
 }
 h2 {
   display: flex;
@@ -405,8 +432,11 @@ input {
   border: none;
   border-bottom: 1px solid var(--background-light-hover);
   margin-right: 7px;
-  background:rgba(0,0,0,0);
+  background:var(--background-grey);
+  border-radius: var(--border-radius);
+  padding-left:10px;
 }
+
 .empty {
   visibility: hidden;
 }
