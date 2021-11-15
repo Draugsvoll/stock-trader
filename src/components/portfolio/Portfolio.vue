@@ -394,8 +394,7 @@ export default {
     margin:0px auto;
     width:900px;
     background:var(--background-light);
-    border-top-right-radius: var(--border-radius);
-    border-bottom-right-radius: var(--border-radius);
+    border-radius: var(--border-radius);
     border-left:2px solid var(--primary-color);
 }
 .column {
@@ -407,8 +406,7 @@ export default {
     width:900px;
     padding:5px;
     background:var(--background-light);
-    border-top-right-radius: var(--border-radius);
-    border-bottom-right-radius: var(--border-radius);
+    border-radius: var(--border-radius);
     border-left:2px solid var(--primary-color);
 }
 .assets {
@@ -419,8 +417,7 @@ export default {
     background:var(--background-light);
     width:200px;
     padding:17px;
-    border-top-right-radius: var(--border-radius);
-    border-bottom-right-radius: var(--border-radius);
+    border-radius: var(--border-radius);
     border-left:2px solid var(--primary-color);
 }
 .sum {

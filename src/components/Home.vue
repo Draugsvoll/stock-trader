@@ -3,34 +3,41 @@
 
         <p class="headline">My Account</p>
 
+        <!-- CARD -->
         <div class="card">
             <app-nav></app-nav>
             <!-- <img v-bind:src="imageUrl" alt="" > -->
             <div class="user">
-                <img v-if="imageUrl == '../assets/profile.png' " src="../assets/profile.png" alt="" > 
-                <span class="email"><i>{{ user.email }}</i></span> 
+                <div class="">
+                    <div class="img-container">
+                        <img v-if="imageUrl == '../assets/profile.png' " src="../assets/profile.png" alt="" > 
+                        <input class="file" type="file" @change="onFileSelected" accept="image/*" >
+                    </div>
+                    <span class="email"><i>{{ user.email }}</i></span> 
+                </div>
                 <div class="funds">
                     <p> <span class="sum">{{ funds | currency }}</span> </p> 
                     <p class="sum-text">Available Funds</p>
                 </div>
             </div>
-            <input class="file" type="file" @change="onFileSelected" accept="image/*" >
-            <button @click="logout" class="logout">Logout</button>
-
         </div>
 
-            <div class=" card">
-                    <p class="header">Terms & Conditions</p>
-                    <p class="text">
-                      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
-                      standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make 
-                      a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-                       remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing 
-                       Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
-                        of Lorem Ipsum.
-                    </p>
 
-            </div>
+        <!-- CARD -->
+        <div class=" card card2">
+                <p class="header">Terms & Conditions</p>
+                <div class="line"></div>
+                <p class="text">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
+                    standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make 
+                    a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
+                    remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing 
+                    Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
+                    of Lorem Ipsum.
+                </p>
+
+        </div>
+        <button @click="logout" class="logout">Logout</button>
 
     </div>
 </template>
@@ -41,9 +48,7 @@
 <script scoped>
 import firebase from 'firebase'
 import axios from 'axios'
-
 import Sidenav from '../components/Sidenav'
-
 export default {
     data () {
         return {
@@ -122,17 +127,32 @@ export default {
     line-height: 1.1rem;
 }
 .card {
-    padding:23px 50px;
     margin:25px auto;
     line-height: 1.2rem;
+}
+.card2 {
+    margin-top:70px;
+    width:600px;
+}
+.line {
+    border-top:2px solid var(--background-dark);
+    width:170px;
+    margin:0 auto;
+    margin-top:10px;
+    margin-bottom:-15px;
 }
 .user {
     display:flex;
     align-items: center;
+    width:600px;
+    margin:0 auto;
+}
+.user > div {
+    width:50%;
 }
 .funds {
-    margin-left:200px;
     margin-top:30px;
+    text-align:center;
 }
 .headline {
     text-align: center;
@@ -151,8 +171,8 @@ span {
     font-size: 13px;
 }
 .email {
-    margin-top:0;
-    margin-left:-25px;
+    text-align: center;
+    display:block;
 }
 .logout {
     background:var(--primary-color);
@@ -160,11 +180,10 @@ span {
     padding:0.6rem 1.2rem;
     border-radius: 4px;
     display:block;
-    margin:0px auto;
+    margin:40px auto;
     cursor:pointer;
     border:2px solid rgba(0,0,0,0);
     transition:0.25s;
-
 }
 .logout:hover {
     background:rgba(0,0,0,0);
@@ -172,14 +191,12 @@ span {
 }
 .box{
     border-left:2px solid var(--primary-color);
-    /* border-bottom-right-radius: var(--border-radius);
-    border-top-right-radius: var(--border-radius); */
     border-radius: var(--border-radius);
     margin: 0px auto;
     margin-top:75px;
     text-align: justify;
-    padding:25px;
-    width: 900px;
+    padding:10px;
+    width: 800px;
     font-size: 0.95rem;
     background:var(--background-light);
     }
@@ -211,16 +228,22 @@ i {
 .info {
     font-size: 1.05rem;
 }
+.img-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 img {
    width: 150px;
    max-width: fit-content;
    display:inline-block;
-   margin:-10px 0 -30px -35px;
+   margin:-10px 0 -30px 0px;
 }
 input {
     font-size: 13px;
     width:55px;
-    margin-bottom:45px;
-    margin-left:15px;
+    display:inline-block;
+    margin-left:-30px;
+    margin-top:15px;
 }
 </style>

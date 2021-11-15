@@ -292,11 +292,10 @@ export default {
   border-radius: 50%;
   width: 50px;
   height: 50px;
-  animation: spin 1s linear infinite;
-  margin-top:35px;
+  animation: spin 0.75s linear infinite;
+  margin-top:55px;
   position:absolute;
-  right:47%;
-  /* background: rgba(0,0,0,0); */
+  right:48%;
 }
 @keyframes spin {
   0% { transform: rotate(0deg); }
@@ -349,7 +348,7 @@ export default {
 
 .btn-row button {
   font-size: 0.85rem;
-  padding: 14px 0;
+  padding: 12px 0;
   border: none;
   cursor: pointer;
   width: 208px;
@@ -386,11 +385,9 @@ h2 {
   vertical-align: bottom;
   height: fit-content;
   margin: auto;
-  padding:12px;
+  padding:10px;
   padding-left:24px;
   background:var(--background-grey);
-  /* border-top-right-radius: var(--border-radius);
-  border-top-left-radius: var(--border-radius); */
 }
 .tag {
   color:white;
@@ -430,7 +427,6 @@ input {
   caret-color:white;
   width: 215px;
   border: none;
-  border-bottom: 1px solid var(--background-light-hover);
   margin-right: 7px;
   background:var(--background-grey);
   border-radius: var(--border-radius);
