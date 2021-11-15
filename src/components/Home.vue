@@ -135,16 +135,17 @@ export default {
     width:600px;
 }
 .line {
-    border-top:2px solid var(--background-dark);
+    border-top:3px solid var(--background-dark);
+    border-radius: 8px;
     width:170px;
     margin:0 auto;
-    margin-top:10px;
-    margin-bottom:-15px;
+    margin-top:15px;
+    margin-bottom:-5px;
 }
 .user {
     display:flex;
     align-items: center;
-    width:600px;
+    width:650px;
     margin:0 auto;
 }
 .user > div {
@@ -164,7 +165,6 @@ export default {
     font-size: 25px;
     margin-bottom:10px;
     text-align: center;
-    font-weight: 600;
 }
 span {
     margin-right:5px;
@@ -180,7 +180,7 @@ span {
     padding:0.6rem 1.2rem;
     border-radius: 4px;
     display:block;
-    margin:40px auto;
+    margin:25px auto;
     cursor:pointer;
     border:2px solid rgba(0,0,0,0);
     transition:0.25s;
@@ -195,8 +195,8 @@ span {
     margin: 0px auto;
     margin-top:75px;
     text-align: justify;
-    padding:10px;
-    width: 800px;
+    padding:22px;
+    width: 750px;
     font-size: 0.95rem;
     background:var(--background-light);
     }
@@ -214,7 +214,7 @@ p {
     max-width:700px;
 }
 .sum {
-    font-size: 30px;
+    font-size: 27px;
     margin-right:0;
 }
 .sum-text {

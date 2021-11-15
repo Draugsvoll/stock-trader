@@ -380,15 +380,15 @@ export default {
     display: flex;
     flex-direction: column;
     margin:50px auto;
-    margin-bottom:40px;
+    margin-bottom:30px;
     width: fit-content;
 }
 .headline {
     letter-spacing: 1px;
-    font-size: 30px;
+    font-size: 28px;
 }
 .stockname {
-    font-size: 40px;
+    font-size: 32px;
 }
 .icon-container {
     margin-top:5px;
@@ -477,7 +477,7 @@ input[type=number]::-webkit-outer-spin-button {
 .numbers {
     display:flex;
     justify-content: space-between;
-    margin:30px auto;
+    margin:10px auto;
 }
 
 .number {
