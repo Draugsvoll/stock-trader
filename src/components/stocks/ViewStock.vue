@@ -6,8 +6,7 @@
             <h2 class="headline stockname">{{ stock.quoteType.longName }}</h2>
             <h2 class="headline"> {{ stock.price.regularMarketPrice.raw.toFixed(2) | currency }} 
                 <span class="price price-change" :class="{green: stock.price.regularMarketChange.raw > 0, red: stock.price.regularMarketChange.raw < 0 }"> 
-                    <span v-if="stock.price.regularMarketChange.raw > 0" class="green up-or-down">+</span> 
-                    <span v-if="stock.price.regularMarketChange.raw < 0" class="red up-or-down">-</span> 
+                    <span v-if="stock.price.regularMarketChange.raw > 0" class="green up">+</span> 
                         {{ stock.price.regularMarketChangePercent.fmt }} Today 
                 </span> 
             </h2>
@@ -420,8 +419,9 @@ export default {
 .stockname {
     font-size: 32px;
 }
-.up-or-down {
+.up {
     margin-right:-5px;
+    font-weight: 200 !important;
 }
 .icon-container {
     margin-top:5px;
