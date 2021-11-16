@@ -5,14 +5,15 @@
         <div class="intro">
             <h2 class="headline stockname">{{ stock.quoteType.longName }}</h2>
             <h2 class="headline"> {{ stock.price.regularMarketPrice.raw.toFixed(2) | currency }} 
-                <span class="price price-change"  
-                    :class="{green: stock.price.regularMarketChange.raw > 0, 
-                    red: stock.price.regularMarketChange.raw < 0 }"> {{ stock.price.regularMarketChangePercent.fmt }} Today 
+                <span class="price price-change" :class="{green: stock.price.regularMarketChange.raw > 0, red: stock.price.regularMarketChange.raw < 0 }"> 
+                    <span v-if="stock.price.regularMarketChange.raw > 0" class="green up-or-down">+</span> 
+                    <span v-if="stock.price.regularMarketChange.raw < 0" class="red up-or-down">-</span> 
+                        {{ stock.price.regularMarketChangePercent.fmt }} Today 
                 </span> 
             </h2>
             <span class="icon-container"> <i @click="add" class="fas fa-heart icon" :class="{added: favourite }"></i>
-                <span v-if="favourite" class="add-to-favourite"> Following</span>
-                <span v-if="!favourite" class="add-to-favourite"> Not following</span>
+                <span v-if="favourite" class="add-to-favourite"> In Favourites</span>
+                <span v-if="!favourite" class="add-to-favourite"> Not in favourites</span>
             </span >
         </div>
 
@@ -137,6 +138,7 @@ export default {
             quantity: 1,
             oldQuantity: 0,
             key: '',
+            favKey:'',
             showBuyModal: false,
             showSellModal: false,
             currentStock: {},
@@ -209,14 +211,40 @@ export default {
         add () {
             const user = firebase.auth().currentUser.uid
             const ref = this
-            //* remove favourite
+
+            //* remove if favourite
             if ( this.favourite ) {
-                var dbRef = firebase.database().ref(`users/${user}/favourites/${ref.key}`);
-                dbRef.remove()
-                this.favourite = false
-                this.notice = 'Removed from Favourites'
-                setTimeout(() => {  this.notice = null }, 2500);
+                ref.favKey = ''
+                // * get stock.key so we can remove it
+                axios.get(`https://ove-stock-trader.firebaseio.com/users/${user}/favourites.json`).then(resp => {
+                    console.log('DATABASE: ', resp.data)
+                    resp = resp.data
+                    const favouriteStocks = []
+                    for (let key in resp){
+                        Object.assign(resp[key], {key: key})
+                        favouriteStocks.push(resp[key])
+                    }
+                    ref.favouriteStocks = favouriteStocks
+                    favouriteStocks.forEach( stock => {
+                        if ( stock.symbol == this.symbol ) {
+                            ref.favKey = stock.key
+                        }
+                    })
+                })
+                setTimeout(() => {
+                    console.log('trying to remove, key is: ', ref.favKey)
+                    //* empty key deletes every child
+                    if (this.favKey.length > 3 ) {
+                        var dbRef = firebase.database().ref(`users/${user}/favourites/${ref.favKey}`);
+                        dbRef.remove()
+                        this.favourite = false
+                        this.notice = 'Removed from Favourites'
+                        setTimeout(() => {  this.notice = null }, 2500);
+                    }
+                }, 500)
+
             } 
+
             //* add favourite
             else {
                     const favourite = {
@@ -333,20 +361,20 @@ export default {
             //* Check if stock in portfolio
             const user = firebase.auth().currentUser.uid
             axios.get(`https://ove-stock-trader.firebaseio.com/users/${user}/portfolio.json`).then(resp => {
-              resp = resp.data
-              const portfolioStocks = []
-              for (let key in resp){
+                resp = resp.data
+                const portfolioStocks = []
+                for (let key in resp){
                 Object.assign(resp[key], {key: key})
                 portfolioStocks.push(resp[key])
-              }
-              ref.portfolioStocks = portfolioStocks
-              portfolioStocks.forEach( stock => {
-                  if ( stock.symbol == this.symbol ) {
-                      ref.key = stock.key
-                      ref.oldQuantity = parseInt(stock.quantity)
-                      ref.currentStock = stock
-                  }
-              })
+                }
+                ref.portfolioStocks = portfolioStocks
+                portfolioStocks.forEach( stock => {
+                    if ( stock.symbol == this.symbol ) {
+                        ref.key = stock.key
+                        ref.oldQuantity = parseInt(stock.quantity)
+                        ref.currentStock = stock
+                    }
+                })
             })
 
             //* check if in favourites
@@ -361,6 +389,7 @@ export default {
               favouriteStocks.forEach( stock => {
                   if ( stock.symbol == this.symbol ) {
                       ref.favourite = true
+                      ref.favKey = stock.key
                   }
               })
             })
@@ -381,6 +410,7 @@ export default {
     flex-direction: column;
     margin:50px auto;
     margin-bottom:30px;
+    margin-left:0;
     width: fit-content;
 }
 .headline {
@@ -389,6 +419,9 @@ export default {
 }
 .stockname {
     font-size: 32px;
+}
+.up-or-down {
+    margin-right:-5px;
 }
 .icon-container {
     margin-top:5px;
