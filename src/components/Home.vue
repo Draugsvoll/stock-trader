@@ -212,6 +212,8 @@ p {
 .text {
     margin:20px auto;
     max-width:700px;
+    letter-spacing: 1px;
+    font-weight: 100;
 }
 .sum {
     font-size: 27px;

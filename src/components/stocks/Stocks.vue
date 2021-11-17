@@ -273,6 +273,8 @@ export default {
 </script>
 
 <style scoped>
+* {
+}
 .loader {
    border: 5px solid #f3f3f3; 
   border-top: 5px solid #234d8b;
@@ -292,6 +294,8 @@ export default {
   text-align: center;
   font-size:32px;
   margin:75px auto 0 auto;
+  letter-spacing: 1px;
+
 }
 .header {
   text-align: center;
@@ -331,6 +335,7 @@ export default {
   border-bottom:1px solid rgba(0,0,0,0);
   justify-content: space-between;
   width:850px;
+
 }
 
 .btn-row button {
@@ -342,6 +347,8 @@ export default {
   margin-top:0 auto;
   background: #373e41d4;
   color:white;
+  letter-spacing: 1px;
+
 }
 .btn-row button:last-child {
   border-top-right-radius: var(--border-radius);
@@ -375,6 +382,7 @@ h2 {
   padding:10px;
   padding-left:24px;
   background:var(--background-grey);
+  
 }
 .tag {
   color:white;

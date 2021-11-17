@@ -99,6 +99,8 @@ border-radius:var(--border-radius);
     padding:0 8px;
     overflow: hidden;
     font-size: 13px;
+  letter-spacing: 1px;
+
 }
 .container:nth-child(odd) {
 }

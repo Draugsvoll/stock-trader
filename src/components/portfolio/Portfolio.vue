@@ -85,7 +85,7 @@
                     <div class="info name"> {{ purchase.name }} </div>
                     <div class="info"> {{ purchase.quantity }} </div>
                     <div class="info"> {{ purchase.price }} </div>
-                    <div class="info"> {{ purchase.price.toFixed(2) * purchase.quantity.toFixed(2) }} </div>
+                    <div class="info"> {{ (purchase.price * purchase.quantity).toFixed(2) }} </div>
                     <div class="info date"> {{ purchase.timestamp.replace(/[TZ]/g, ' ').split('.').reverse().pop() }} </div>
                 </div>
             </div>
@@ -318,7 +318,7 @@ export default {
                 ref.totalGains += (stock.change * stock.quantity)
                 const options = {
                 method: 'GET',
-                url: 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/get-detail',
+                url: 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-summary',
                 params: {symbol: symbol, region: 'US'},
                 headers: {
                     'x-rapidapi-host': 'yh-finance.p.rapidapi.com',
@@ -346,7 +346,7 @@ export default {
                 //     var timestamp = { timestamp: 'prgjroi' }
                 //     history.push(timestamp)
                 // }             
-            history.push(resp[key])
+            history.unshift(resp[key])
             }
             history.forEach( purchase => {
                 var date = purchase.timestamp
@@ -373,12 +373,16 @@ export default {
     text-align: center;
     margin:80px;
     margin-bottom:30px;
+  letter-spacing: 1px;
+
 }
 .header {
     font-size:28px;
     text-align: center;
     margin:60px;
     margin-bottom:20px;
+  letter-spacing: 1px;
+
 }
 .box {
     max-width:900px;
@@ -459,6 +463,9 @@ p {
   width: 100px;
   height: fit-content;
   font-size: 0.75rem;
+}
+.tag.smaller {
+    width:65px;
 }
 .tag2.name {
     padding-left:20px;

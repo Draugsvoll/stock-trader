@@ -4,13 +4,13 @@
         <!-- INTRO -->
         <div class="intro">
             <h2 class="headline stockname">{{ stock.quoteType.longName }}</h2>
-            <h2 class="headline"> {{ stock.price.regularMarketPrice.raw.toFixed(2) | currency }} 
+            <h2 class="headline"> {{ stock.price.regularMarketPrice.raw | currency }} 
                 <span class="price price-change" :class="{green: stock.price.regularMarketChange.raw > 0, red: stock.price.regularMarketChange.raw < 0 }"> 
                     <span v-if="stock.price.regularMarketChange.raw > 0" class="green up">+</span> 
                         {{ stock.price.regularMarketChangePercent.fmt }} Today 
                 </span> 
             </h2>
-            <span class="icon-container"> <i @click="add" class="fas fa-heart icon" :class="{added: favourite }"></i>
+            <span class="icon-container"> <i @click="add" class="fas fa-star" :class="{added: favourite }"></i>
                 <span v-if="favourite" class="add-to-favourite"> In Favourites</span>
                 <span v-if="!favourite" class="add-to-favourite"> Not in favourites</span>
             </span >
@@ -27,95 +27,92 @@
         </div>
 
         <!-- BUY-SELL CONTAINER -->
-            <!-- <p class="smallName">You have {{ this.oldQuantity }} {{stock.symbol}} Stocks. </p> -->
         <div class="buy-sell-container">
             <!-- BUY-BOX -->
             <div class="buy">
                 <div>
-                    <p class="action-label"><span class="green">Buy </span>{{stock.symbol}} </p> 
-                    <p class="funds">Available funds: <b class="green ">${{funds.toFixed(0)}} </b>  </p>
+                    <p class="action-label"><span class="green">Buy </span> {{stock.symbol}} </p> 
+                    <p class="funds">Available Funds: <span class="green ">{{funds | currency}} </span>  </p>
                 </div>
-                <p class="price2">Price ${{ stock.price.regularMarketPrice.raw.toFixed(2) }}</p>
+                <p class="price2">Price: {{ stock.price.regularMarketPrice.raw | currency }}</p>
                 <div class="input-container">
                     <span>Amount</span>
-                    <input type="number" v-model="toBuy" placeholder="" value="1" min="1">
+                    <input class="input" type="number" v-model="toBuy" placeholder="" value="1" min="1">
                 </div>
                 <div class="input-container total-price">
                     <span>Total Price $</span>
                     <input type="number" placeholder="Total Price" :value="toBuyTotalPrice" min="1" style="pointer-events: none">
                 </div>
-                <button class="buy-btn">Buy</button>
+                <button @click="buyDialogue" class="buy-btn">Buy</button>
             </div>
             <!-- SELL-BOX -->
             <div class="sell">
                 <div>
-                    <p class="action-label"><span class="red">Sell </span>{{ stock.symbol}} </p> 
+                    <p class="action-label"><span class="red">Sell </span> {{ stock.symbol}} </p> 
                     <p class="funds">You have {{oldQuantity}} {{ stock.symbol}} stocks  </p>
                 </div>
-                <p class="price2">Price ${{ stock.price.regularMarketPrice.raw.toFixed(2) }}</p>
+                <p class="price2">Price: {{ stock.price.regularMarketPrice.raw | currency  }}</p>
                 <div class="input-container">
                     <span>Amount</span>
-                    <input v-model="toSell" type="number" placeholder="" value="1" min="1" :max="oldQuantity">
+                    <input class="input" v-model="toSell" type="number" placeholder="" value="1" min="1" :max="oldQuantity">
                 </div>
                 <div class="input-container total-price">
                     <span>Profit $</span>
                     <input type="number" :value="toSellTotalPrice" min="0" style="pointer-events: none">
                 </div>
-                <button class="sell-btn">Sell</button>
+                <button  @click="sellDialogue" class="sell-btn">Sell</button>
             </div>
         </div>
 
     <!-- STOCK SUMMARY -->
-    <h2>About {{stock.quoteType.longName}} </h2>
-    <div class="summary"> {{ stock.assetProfile.longBusinessSummary }}</div>
-    <div class="info">
-        <div> <p class="line">{{ stock.assetProfile.country }}, {{ stock.assetProfile.city }} </p> </div>
-        <div> <p class="line">{{ stock.assetProfile.address1 }} </p> </div>
-        <div> <p class="line">{{ stock.assetProfile.industry }} </p> </div>
-        <div> <p class="line">Employees: {{ stock.assetProfile.fullTimeEmployees }} </p>  </div>
-        <div> <p class="line">{{ stock.assetProfile.website }}  </p> </div>
-        <div> <p class="line"> {{ stock.assetProfile.adress1 }}</p>  </div>
-        <div> <p class="line"> Phone: {{ stock.assetProfile.phone }}</p>  </div>
+    <div class="summary-card">
+        <h2 class="header">About {{stock.quoteType.longName}} </h2>
+        <div class="summary"> {{ stock.assetProfile.longBusinessSummary }}</div>
+        <div class="info">
+            <div> <p class="line">{{ stock.assetProfile.country }}, {{ stock.assetProfile.city }} </p> </div>
+            <div> <p class="line">{{ stock.assetProfile.address1 }} </p> </div>
+            <div> <p class="line">{{ stock.assetProfile.industry }} </p> </div>
+            <div> <p class="line">Employees: {{ stock.assetProfile.fullTimeEmployees }} </p>  </div>
+            <div> <p class="line">{{ stock.assetProfile.website }}  </p> </div>
+            <div> <p class="line"> {{ stock.assetProfile.adress1 }}</p>  </div>
+            <div> <p class="line"> Phone: {{ stock.assetProfile.phone }}</p>  </div>
+        </div>
+
     </div>
 
 
 
 
-
-
-
-
-
-
-
-        <!-- BUY MODAL -->
-        <div class="modal" v-if="showBuyModal">
-                
+    <!-- BUY MODAL -->
+    <div class="modal" v-if="showBuyModal">
+        <div class="modal-content">
+            <p class="buy-text">
+                Buy {{ this.toBuy }} stocks of {{ stock.quoteType.longName }}? <br> <br>
+            </p>
+            Total price: {{ buyPrice | currency }}
         </div>
-
-        <!-- SELL MODAL  -->
-        <div class="modal" v-if="showSellModal">
-                <div class="modal-content">
-                    Sell {{ this.quantity }} stocks of {{ stock.quoteType.longName }}? <br> <br>
-                    Total price: {{ buyPrice.toFixed(2) }}$
-                </div>
-                <div class="button-row">
-                    <button class="modal-button" @click="sellStock2">Yes</button>
-                    <button class="modal-button" @click="hideSellModal">Cancel</button>
-                </div>
+        <div class="button-row">
+            <button class="modal-button btn-buy" @click="buyStock">Yes</button>
+            <button class="modal-button btn-cancel" @click="hideBuyModal">Cancel</button>
         </div>
+    </div>
 
-        <app-nav></app-nav>
+    <!-- SELL MODAL  -->
+    <div class="modal" v-if="showSellModal">
+            <div class="modal-content">
+            <p class="buy-text">
+                Sell {{ this.toSell }} stocks of {{ stock.quoteType.longName }}? <br> <br>
+            </p>
+            Total price: {{ sellPrice | currency }}
+        </div>
+        <div class="button-row">
+            <button class="modal-button btn-buy" @click="sellStock2">Yes</button>
+            <button class="modal-button btn-cancel" @click="hideSellModal">Cancel</button>
+        </div>
+    </div>
 
-        
+    <app-nav></app-nav>
 
-        
-
-        
-        
-       
-
-        
     </div>
 </template>
 
@@ -150,14 +147,17 @@ export default {
         }
     },
     components: {
-        // appNav: Sidenav
+        appNav: Sidenav
     },
     computed: {
         validQuantity: function(){
             return false
         },
         buyPrice () {
-            return this.stock.price.regularMarketPrice.raw * this.quantity
+            return this.stock.price.regularMarketPrice.raw * this.toBuy
+        },
+        sellPrice () {
+            return this.stock.price.regularMarketPrice.raw * this.toSell
         },
         toSellTotalPrice () {
             return (this.stock.price.regularMarketPrice.raw * this.toSell).toFixed(2)
@@ -174,8 +174,9 @@ export default {
             this.showSellModal = false
         },
         buyDialogue () {
+            this.toBuy = parseInt(this.toBuy)
             //* check if valid quantity
-            if ( this.quantity % 1 != 0 || this.quantity < 1) {
+            if ( this.toBuy % 1 != 0 || this.toBuy < 1) {
                 alert ('Invalid amount of stocks')
             }
             else {
@@ -183,13 +184,15 @@ export default {
             const ref = this
             var updatedFunds = 0
             const user = firebase.auth().currentUser.uid
+            console.log('quantity: ', this.toBuy, typeof this.toBuy)
             axios.get(`https://ove-stock-trader.firebaseio.com/users/${user}/funds.json`)
                     .then(function (response) {
                         const funds = response.data
-                        const price = ref.stock.price.regularMarketPrice.raw * ref.quantity
+                        const price = ref.stock.price.regularMarketPrice.raw * ref.toBuy
                         if (funds > price) {
                             updatedFunds = funds - price
                             firebase.database().ref(`users/${user}/funds/`).set(updatedFunds);
+                            //* show buy dialogue
                             ref.showBuyModal = true
                         } 
                         else {
@@ -200,7 +203,7 @@ export default {
         },
         sellDialogue () {
             //* check if valid quantity
-            if ( this.quantity % 1 != 0 || this.quantity < 1 || this.quantity > this.oldQuantity ) {
+            if ( this.toSell % 1 != 0 || this.toSell < 1 || this.toSell > this.oldQuantity ) {
                 alert ('Invalid amount of stocks')
             }
             else {
@@ -269,13 +272,13 @@ export default {
             const order = {
                         name: this.stock.quoteType.longName,
                         price: this.stock.price.regularMarketPrice.raw,
-                        quantity: this.quantity,
+                        quantity: this.toBuy,
                         symbol: this.stock.symbol,
                         prevClose: this.stock.price.regularMarketPreviousClose.raw,
                         change: this.stock.price.regularMarketChange.raw,
-                    }
+            }
             if (this.currentStock.name == undefined) {
-                if (this.quantity % 1 == 0) {
+                if (this.toBuy % 1 == 0) {
                     axios.post(`https://ove-stock-trader.firebaseio.com/users/${user}/portfolio/.json`, order)
                     .then(function (response) {
                     })
@@ -283,7 +286,7 @@ export default {
             } 
             //* already have the stock
             else {
-                const newStockAmount = this.oldQuantity + this.quantity
+                const newStockAmount = this.oldQuantity + this.toBuy
                 Object.assign(order, {quantity: newStockAmount})
                 firebase.database().ref(`users/${user}/portfolio/` + this.key).set(order);
             }
@@ -298,10 +301,11 @@ export default {
             setTimeout(() => {  this.trade = false }, 2500);
         },
         sellStock2 () {
+            this.toSell = parseInt(this.toSell)
             const user = firebase.auth().currentUser.uid
-            const newStockAmount = this.oldQuantity - this.quantity
+            const newStockAmount = this.oldQuantity - this.toSell
             //* invalid amount
-            if ( newStockAmount < 0 || newStockAmount%1 != 0 || this.quantity < 1) {
+            if ( newStockAmount < 0 || newStockAmount%1 != 0 || this.toSell < 1) {
                 alert('Invalid Amount')
             }
             else {
@@ -328,7 +332,7 @@ export default {
                 const date = new Date()
                 const order = this.currentStock
                 Object.assign(order, {timestamp: date})
-                Object.assign(order, {quantity: this.quantity})
+                Object.assign(order, {quantity: this.toSell})
                 axios.post(`https://ove-stock-trader.firebaseio.com/users/${user}/history/.json`, order)
                     .then(function (response) {
                     })
@@ -408,7 +412,7 @@ export default {
     display: flex;
     flex-direction: column;
     margin:50px auto;
-    margin-bottom:30px;
+    margin-bottom:15px;
     margin-left:0;
     width: fit-content;
 }
@@ -417,7 +421,7 @@ export default {
     font-size: 28px;
 }
 .stockname {
-    font-size: 32px;
+    font-size: 30px;
 }
 .up {
     margin-right:-5px;
@@ -425,6 +429,14 @@ export default {
 }
 .icon-container {
     margin-top:5px;
+    font-size:20px;
+}
+i {
+    color:grey;
+}
+i:hover {
+    color:rgb(165, 165, 165);
+
 }
 .add-to-favourite {
     font-size: 12px;
@@ -434,19 +446,21 @@ export default {
     display: flex;
     width:900px;
     justify-content: space-between;
-    /* border:2px solid var(--background-grey); */
+    margin-top:10px;
+    margin-bottom:10px;
     border-radius:3px;
 }
 .buy, .sell {
     display: flex;
     flex-direction: column;
     width:49%;
+    border-radius: var(--border-radius);
 }
 .buy > div, .sell > div {
     display:flex;
 }
 .funds {
-    width:50%;
+    width:60%;
     text-align: right;
     font-size: 15px;
 }
@@ -466,11 +480,9 @@ button {
 }
 .green {
     color:var(--green) !important;
-    font-weight: bold;
 }
 .red {
     color:var(--red) !important;
-    font-weight: bold;
 }
 b {
     margin:0;
@@ -491,8 +503,10 @@ input {
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button {
     margin-left:20px;
-    opacity: 1;
+    margin-right:-2px;
+    opacity: 0.35;
     height:50px;
+    padding-bottom:7px;
 }
 .total-price input[type=number]::-webkit-inner-spin-button,
 .total-price input[type=number]::-webkit-outer-spin-button {
@@ -510,7 +524,7 @@ input[type=number]::-webkit-outer-spin-button {
 .numbers {
     display:flex;
     justify-content: space-between;
-    margin:10px auto;
+    margin:0px auto;
 }
 
 .number {
@@ -519,7 +533,7 @@ input[type=number]::-webkit-outer-spin-button {
     border-top: 2px solid var(--background-grey);
     border-bottom: 2px solid var(--background-grey);
     margin: 15px 0px;
-    padding: 5px;
+    padding:8px 5px;
 }
 .info {
     width:600px;
@@ -531,18 +545,31 @@ input[type=number]::-webkit-outer-spin-button {
 .input-container {
     position:relative;
 }
+.input {
+    transition: 0.25s;
+    background:rgba(0, 0, 0, 0.2);
+    border-top-left-radius: var(--border-radius);
+    height:45px;
+    margin-top:10px;
+}
+.input:focus {
+    border-bottom:1px solid rgb(226, 236, 236);
+}
 .input-container span {
     position:absolute;
     bottom:10px;
     color:grey;
+    margin-left:7px;
 }
 h2 {
     margin:0;
     padding:0;
     font-weight: 500;
 }
+
 .added {
-    color:var(--red) !important;
+    color:var(--primary-color) !important;
+    /* color:var(--red) !important; */
 }
 .icon {
     cursor:pointer;
@@ -573,30 +600,78 @@ h2 {
     margin-right:110px;
 }
 .modal {
-    background:white;
-    width:400px;
-    height:150px;
-    border:1px solid #1f2c3a;
-    border-radius: 5px;
+    position:absolute;
+    top:0;
+    bottom:0;
+    left: 0; 
+    right: 0; 
+    margin:auto;
+    width: fit-content;
+    height:fit-content;
+
+    padding:45px 65px;
     display: flex;
     flex-direction: column;
-    position: absolute;
+    background: var(--background-grey);
+    border-left:2px solid var(--primary-color);
+    border-radius: var(--border-radius);
 }
 .modal-content {
     margin:25px auto;
+    text-align: center;
+    font-size:18px;
+}
+.buy-text {
+    text-align: center;
+    font-size: 22px;
+    margin-top:0;
 }
 .modal-button {
-    margin-right:10px;
-    padding:0.45rem 0.55rem;
+    display:inline-block;
+    margin:0 10px;
+    background-color: var(--primary-color);
+    border:none;
+    font-size: 0.85rem;
+    padding:0.6rem 1.2rem;
+    border-radius: 4px;
+    color:white;
+    cursor:pointer;
+    transition: 0.2s;
+    width:115px;
+    border:2px solid rgba(0,0,0,0);
+}
+
+.btn-cancel {
+    background:rgba(0,0,0,0);
+    border:2px solid var(--red);
+    border-radius: 4px;
+    }
+.btn-cancel:hover {
+    background:var(--red);
+    border-radius: 4px;
 }
 .button-row {
     margin:10px auto;
 }
-
+.header {
+    font-size:25px;
+    font-weight: 100;
+    color:var(--primary-color);
+}
+.summary-card {
+    margin:30px auto;
+    background:var(--background-light);
+    padding:25px 35px;
+    border-radius: var(--border-radius);
+    border-left:1px solid var(--primary-color);
+}
 .summary {
-    margin-bottom:25px;
-    margin-top:20px;
-    font-size:15px;
+    margin:30px auto;
+    font-size:14px;
+    font-weight: 100;
+    text-align: justify;
+    letter-spacing: 1px;
+   
 }
 
 .container1 {
@@ -669,5 +744,7 @@ button {
 .line {
     margin:2px;
     font-size: 0.85rem;
+    color:rgb(186, 186, 186);
 }
+
 </style>

@@ -3,7 +3,7 @@
 	--primary-color-hover: #beebe3;
 	
 	--background-dark: #1d212e;
-	--background-grey: #2a3038;
+	--background-grey: #2d333b;
 	--background-light: #263047;
 	--background-light-hover: #2f374e;
 
@@ -13,5 +13,5 @@
 	--green-hover:#38c67a;
 
 	--border-radius:8px;
-	--stock-padding:13px;
+	--stock-padding:14px;
   }

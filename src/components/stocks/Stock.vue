@@ -52,6 +52,7 @@ export default {
     border-top:1px solid var(--background-dark);
     padding:var(--stock-padding) 15px;
     padding-left:25px;
+
 }
 
 .container:hover {
@@ -91,6 +92,8 @@ export default {
     padding:0 8px;
     overflow: hidden;
     font-size: 13px;
+    letter-spacing: 1px;
+
 }
 button {
     border-radius:5px;
