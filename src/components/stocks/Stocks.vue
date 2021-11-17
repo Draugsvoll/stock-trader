@@ -267,7 +267,7 @@ export default {
     },
   },
   created() {
-    // this.$store.dispatch("get500Stocks");
+    this.$store.dispatch("get500Stocks");
   },
 };
 </script>

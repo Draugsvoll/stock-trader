@@ -1,4 +1,0 @@
-
-/news
-/viewstock
-side-menu

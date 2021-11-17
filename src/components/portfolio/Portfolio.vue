@@ -128,18 +128,25 @@ export default {
             // COLUMN CHART
             chartOptionsColumn: {
                 title: 'Percentage Gains %',
+                tooltip: {trigger: 'both'},
+                selectionMode: 'multiple',
+                colors: ['#247bae'],
+                hAxis: {
+                    textStyle:{color: 'white'}
+                },
                 backgroundColor:'#263047',
                 'width':850,
                 'height':400,
-                'fill':'red',
+                bar: {
+                    // max-width
+                    groupWidth: 95,
+                },
                 titleTextStyle: {
                     fontSize: 22,
                     color:'white',
                 },
                 legend: 
                     {position: 'labeled', textStyle: {fontSize: 14, color:'white'}},
-                tooltip:
-                     {position: 'center', textStyle: {fontSize: 14}, color:'white'},
             },
             // DATA
             totalGains: 0,
@@ -306,9 +313,11 @@ export default {
                   value = parseFloat(value)
                   chartData.push([stock.name, value])
               })
-              const funds = this.$store.getters.funds
-              chartData.push(['Cash Balance', funds])
-              this.$store.dispatch('setChartData', chartData)
+              setTimeout(() => {
+                  const funds = this.$store.getters.funds
+                  this.$store.dispatch('setChartData', chartData)
+                  chartData.push(['Cash Balance', funds])
+                }, 200)
 
               //* get updated prices
               var totalStockValue = 0

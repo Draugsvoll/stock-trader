@@ -1,6 +1,11 @@
 <template>
     <div class="container1">
 
+        <div class="trade-succesful" v-if="tradeSuccesful" >
+            <i class="far fa-check-circle checkmark"></i>
+            Trade Successful! 
+        </div>
+
         <!-- INTRO -->
         <div class="intro">
             <h2 class="headline stockname">{{ stock.quoteType.longName }}</h2>
@@ -64,54 +69,52 @@
             </div>
         </div>
 
-    <!-- STOCK SUMMARY -->
-    <div class="summary-card">
-        <h2 class="header">About {{stock.quoteType.longName}} </h2>
-        <div class="summary"> {{ stock.assetProfile.longBusinessSummary }}</div>
-        <div class="info">
-            <div> <p class="line">{{ stock.assetProfile.country }}, {{ stock.assetProfile.city }} </p> </div>
-            <div> <p class="line">{{ stock.assetProfile.address1 }} </p> </div>
-            <div> <p class="line">{{ stock.assetProfile.industry }} </p> </div>
-            <div> <p class="line">Employees: {{ stock.assetProfile.fullTimeEmployees }} </p>  </div>
-            <div> <p class="line">{{ stock.assetProfile.website }}  </p> </div>
-            <div> <p class="line"> {{ stock.assetProfile.adress1 }}</p>  </div>
-            <div> <p class="line"> Phone: {{ stock.assetProfile.phone }}</p>  </div>
+        <!-- STOCK SUMMARY -->
+        <div class="summary-card">
+            <h2 class="header">About {{stock.quoteType.longName}} </h2>
+            <div class="summary"> {{ stock.assetProfile.longBusinessSummary }}</div>
+            <div class="info">
+                <div> <p class="line">{{ stock.assetProfile.country }}, {{ stock.assetProfile.city }} </p> </div>
+                <div> <p class="line">{{ stock.assetProfile.address1 }} </p> </div>
+                <div> <p class="line">{{ stock.assetProfile.industry }} </p> </div>
+                <div> <p class="line">Employees: {{ stock.assetProfile.fullTimeEmployees }} </p>  </div>
+                <div> <p class="line">{{ stock.assetProfile.website }}  </p> </div>
+                <div> <p class="line"> {{ stock.assetProfile.adress1 }}</p>  </div>
+                <div> <p class="line"> Phone: {{ stock.assetProfile.phone }}</p>  </div>
+            </div>
+
         </div>
 
-    </div>
 
-
-
-
-    <!-- BUY MODAL -->
-    <div class="modal" v-if="showBuyModal">
-        <div class="modal-content">
-            <p class="buy-text">
-                Buy {{ this.toBuy }} stocks of {{ stock.quoteType.longName }}? <br> <br>
-            </p>
-            Total price: {{ buyPrice | currency }}
-        </div>
-        <div class="button-row">
-            <button class="modal-button btn-buy" @click="buyStock">Yes</button>
-            <button class="modal-button btn-cancel" @click="hideBuyModal">Cancel</button>
-        </div>
-    </div>
-
-    <!-- SELL MODAL  -->
-    <div class="modal" v-if="showSellModal">
+        <!-- BUY MODAL -->
+        <div class="modal" v-if="showBuyModal">
             <div class="modal-content">
-            <p class="buy-text">
-                Sell {{ this.toSell }} stocks of {{ stock.quoteType.longName }}? <br> <br>
-            </p>
-            Total price: {{ sellPrice | currency }}
+                <p class="buy-text">
+                    Buy {{ this.toBuy }} stocks of {{ stock.quoteType.longName }}? <br> <br>
+                </p>
+                Total price: {{ buyPrice | currency }}
+            </div>
+            <div class="button-row">
+                <button class="modal-button btn-buy" @click="buyStock">Yes</button>
+                <button class="modal-button btn-cancel" @click="hideBuyModal">Cancel</button>
+            </div>
         </div>
-        <div class="button-row">
-            <button class="modal-button btn-buy" @click="sellStock2">Yes</button>
-            <button class="modal-button btn-cancel" @click="hideSellModal">Cancel</button>
-        </div>
-    </div>
 
-    <app-nav></app-nav>
+        <!-- SELL MODAL  -->
+        <div class="modal" v-if="showSellModal">
+                <div class="modal-content">
+                <p class="buy-text">
+                    Sell {{ this.toSell }} stocks of {{ stock.quoteType.longName }}? <br> <br>
+                </p>
+                Total price: {{ sellPrice | currency }}
+            </div>
+            <div class="button-row">
+                <button class="modal-button btn-buy" @click="sellStock2">Yes</button>
+                <button class="modal-button btn-cancel" @click="hideSellModal">Cancel</button>
+            </div>
+        </div>
+
+        <app-nav></app-nav>
 
     </div>
 </template>
@@ -144,6 +147,7 @@ export default {
             funds:0,
             toSell:1,
             toBuy:1,
+            tradeSuccesful: false
         }
     },
     components: {
@@ -297,6 +301,11 @@ export default {
                     .then(function (response) {
                     })
             this.hideBuyModal()
+            this.tradeSuccesful = true
+            setTimeout(() => {  
+                this.tradeSuccesful = false 
+                window.location.reload();
+            }, 2500);
             this.trade = true
             setTimeout(() => {  this.trade = false }, 2500);
         },
@@ -336,6 +345,11 @@ export default {
                 axios.post(`https://ove-stock-trader.firebaseio.com/users/${user}/history/.json`, order)
                     .then(function (response) {
                     })
+                this.tradeSuccesful = true
+                setTimeout(() => {  
+                    this.tradeSuccesful = false 
+                    window.location.reload();
+                }, 2500);
                 this.trade = true
                 setTimeout(() => {  this.trade = false }, 2500);
                 this.hideSellModal()
@@ -609,7 +623,7 @@ h2 {
     width: fit-content;
     height:fit-content;
 
-    padding:45px 65px;
+    padding:45px 60px;
     display: flex;
     flex-direction: column;
     background: var(--background-grey);
@@ -660,6 +674,7 @@ h2 {
 }
 .summary-card {
     margin:30px auto;
+    margin-bottom:175px;
     background:var(--background-light);
     padding:25px 35px;
     border-radius: var(--border-radius);
@@ -671,7 +686,6 @@ h2 {
     font-weight: 100;
     text-align: justify;
     letter-spacing: 1px;
-   
 }
 
 .container1 {
@@ -746,5 +760,31 @@ button {
     font-size: 0.85rem;
     color:rgb(186, 186, 186);
 }
+.trade-succesful {
+    position:absolute;
+    top:0;
+    bottom:0;
+    left: 0; 
+    right: 0; 
+    margin:auto;
+    width: 310px;
+    height:fit-content;
+    font-size:18px;
+    color:var(--primary-color);
+    text-align: center;
 
+    padding:50px;
+    display: flex;
+    flex-direction: column;
+    background: var(--background-grey);
+    border-left:2px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    z-index:99;
+}
+.checkmark {
+    font-size: 35px;
+    margin:0 auto;
+    margin-bottom:15px;
+    color:var(--primary-color);
+}
 </style>
