@@ -47,7 +47,7 @@
                 <div class="tag" @click="sortByClose">Prev. Close</div>
                 <div class="tag smaller" @click="sortByQuantity">Quantity</div>
                 <div class="tag smaller" @click="sortByGains">Gains</div>
-        </div>
+        </div>  
         <div class="stock-container">
             <transition-group name="slide" mode="in-out">
                 <app-stock v-for="(stock, index) in stocks" :stock="stock" :key="index"></app-stock>
@@ -55,7 +55,7 @@
         </div>
 
         <!-- COLUMN CHART -->
-        <p class="header">Gains Tracked</p>
+        <p class="header" v-if="stocks != ''"  >Gains Tracker %</p>
         <div v-if="!emptyPortfolio" class="column">
                 <!-- GainColumn -->
                 <GChart
@@ -67,7 +67,7 @@
 
          <!-- PURCHASE HISTORY -->
         <p class="header" v-if="!emptyPortfolio">Transaction History</p>
-        <p class="header" v-if="emptyPortfolio">No trades have been made</p>
+        <p class="header" v-if="emptyPortfolio">No transactions have been made</p>
         <div class="history-box">
             <div class="asd" v-for="(purchase, index) in history" :key=purchase.id>
                 <div class=history-tags v-if="index == 0">

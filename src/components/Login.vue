@@ -29,8 +29,8 @@
                 <i class="fas fa-user-secret logo"></i>
                 <ul>
                     <li>No registration needed</li>
+                    <li>Pre-defined portfolio</li>
                     <li>Trade stocks instantly</li>
-                    <li>Track portfolio</li>
                 </ul>
                 <button class="login" @click="loginAsTest()">Login</button>
             </div>

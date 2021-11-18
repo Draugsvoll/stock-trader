@@ -6,30 +6,39 @@
             Trade Successful! 
         </div>
 
-        <!-- INTRO -->
-        <div class="intro">
-            <h2 class="headline stockname">{{ stock.quoteType.longName }}</h2>
-            <h2 class="headline"> {{ stock.price.regularMarketPrice.raw | currency }} 
-                <span class="price price-change" :class="{green: stock.price.regularMarketChange.raw > 0, red: stock.price.regularMarketChange.raw < 0 }"> 
-                    <span v-if="stock.price.regularMarketChange.raw > 0" class="green up">+</span> 
-                        {{ stock.price.regularMarketChangePercent.fmt }} Today 
-                </span> 
-            </h2>
-            <span class="icon-container"> <i @click="add" class="fas fa-star" :class="{added: favourite }"></i>
-                <span v-if="favourite" class="add-to-favourite"> In Favourites</span>
-                <span v-if="!favourite" class="add-to-favourite"> Not in favourites</span>
-            </span >
+        <div class="top-content">
+            <!-- INTRO -->
+            <div class="intro">
+                <h2 class="headline stockname">{{ stock.quoteType.longName }}</h2>
+                <h2 class="headline"> {{ stock.price.regularMarketPrice.raw | currency }} 
+                    <span class="price price-change" :class="{green: stock.price.regularMarketChange.raw > 0, red: stock.price.regularMarketChange.raw < 0 }"> 
+                        <span v-if="stock.price.regularMarketChange.raw > 0" class="green up">+</span> 
+                            {{ stock.price.regularMarketChangePercent.fmt }} Today 
+                    </span> 
+                </h2>
+                <span class="icon-container"> <i @click="add" class="fas fa-star" :class="{added: favourite }"></i>
+                    <span v-if="favourite" class="add-to-favourite"> In Favourites</span>
+                    <span v-if="!favourite" class="add-to-favourite"> Not in favourites</span>
+                </span >
+            </div>
+
+            <!-- asd  -->
+            <!-- STATISTICS -->
+            <div class="numbers-container">
+                <div class="numbers">
+                    <div class="number" ><div class="tag">Market Cap</div> <span class="tag-price">${{ stock.price.marketCap.fmt }}  </span> </div>
+                    <div class="number" ><div class="tag">PE/Ratio</div> <span class="tag-price">${{ stock.summaryDetail.forwardPE.raw }} </span>  </div>
+                    <div class="number" ><div class="tag">Daily Volume</div> <span class="tag-price">${{ stock.price.averageDailyVolume10Day.longFmt }} </span>  </div>
+                </div>
+                <div class="numbers">
+                    <div class="number" ><div class="tag">50 Day AVG</div> <span class="tag-price">${{ stock.summaryDetail.fiftyDayAverage.fmt }} </span>  </div>
+                    <div class="number" ><div class="tag">52 Week High</div> <span class="tag-price"> ${{ stock.summaryDetail.fiftyTwoWeekHigh.fmt }}</span>  </div>
+                    <div class="number" ><div class="tag">Volume</div> <span class="tag-price"> ${{ stock.summaryDetail.volume.fmt }}</span>  </div>
+                </div>
+            </div>
+
         </div>
 
-        <!-- STATISTICS -->
-        <div class="numbers">
-            <div class="number" 
-                id="number-first" ><div class="tag">Daily Volume</div> <span class="tag-price">${{ stock.price.averageDailyVolume10Day.longFmt }} </span>  </div>
-            <div class="number" ><div class="tag">Market Cap</div> <span class="tag-price">${{ stock.price.marketCap.fmt }}  </span> </div>
-            <div class="number" ><div class="tag">50 Day AVG</div> <span class="tag-price">${{ stock.summaryDetail.fiftyDayAverage.fmt }} </span>  </div>
-            <div class="number" ><div class="tag">52 Week High</div> <span class="tag-price"> ${{ stock.summaryDetail.fiftyTwoWeekHigh.fmt }}</span>  </div>
-            <div class="number" ><div class="tag">Volume</div> <span class="tag-price"> ${{ stock.summaryDetail.volume.fmt }}</span>  </div>
-        </div>
 
         <!-- BUY-SELL CONTAINER -->
         <div class="buy-sell-container">
@@ -369,7 +378,7 @@ export default {
             }}
             axios.request(options).then(function (response) {
                 const stock = response.data
-                console.log(stock)
+                console.log('the stock ', stock)
                 ref.stock = stock
             }).catch(function (error) {
                 console.error(error);
@@ -422,13 +431,16 @@ export default {
 </script>
 
 <style css scoped>
+/* asd  */
+.top-content {
+    display:flex;
+    margin-top:50px;
+}
 .intro {
     display: flex;
     flex-direction: column;
-    margin:50px auto;
-    margin-bottom:15px;
     margin-left:0;
-    width: fit-content;
+    width:405px;
 }
 .headline {
     letter-spacing: 1px;
@@ -463,6 +475,7 @@ i:hover {
     margin-top:10px;
     margin-bottom:10px;
     border-radius:3px;
+    
 }
 .buy, .sell {
     display: flex;
@@ -535,26 +548,27 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .info-container > div{
 }
+.numbers-container {
+    width: 405px;
+    margin-left: auto;
+}
+
 .numbers {
     display:flex;
+    margin:0px;
+    margin-left:auto;
     justify-content: space-between;
-    margin:0px auto;
 }
-
 .number {
+    display:flex;
+    flex-direction: column;
     font-size: 1rem;
-    width: 140px;
+    width:120px;
     border-top: 2px solid var(--background-grey);
     border-bottom: 2px solid var(--background-grey);
-    margin: 15px 0px;
-    padding:8px 5px;
+    padding:4px 3px;
+    margin-bottom:10px;
 }
-.info {
-    width:600px;
-}
-
-
-
 
 .input-container {
     position:relative;
@@ -614,6 +628,8 @@ h2 {
     margin-right:110px;
 }
 .modal {
+    /* transition-delay: 0.3s;
+    transition: 0.7s; */
     position:absolute;
     top:0;
     bottom:0;
@@ -668,7 +684,7 @@ h2 {
     margin:10px auto;
 }
 .header {
-    font-size:25px;
+    font-size:30px;
     font-weight: 100;
     color:var(--primary-color);
 }
@@ -676,7 +692,7 @@ h2 {
     margin:30px auto;
     margin-bottom:175px;
     background:var(--background-light);
-    padding:25px 35px;
+    padding:35px 45px;
     border-radius: var(--border-radius);
     border-left:1px solid var(--primary-color);
 }
@@ -702,11 +718,11 @@ h2 {
 .tag {
     font-size: 15px;
     width:100px;
-    margin-bottom:8px;
+    margin-bottom:3px;
 }
 .tag-price {
-    font-weight: bold;
-    font-size:18px;
+    letter-spacing: 1px;
+    font-size:19px;
 }
 
 .price {
@@ -735,7 +751,7 @@ h2 {
 .buy, .sell {
     margin:15px 2px;
     padding:10px 15px;
-    width:44%;
+    width:45%;
     border:2px solid var(--background-grey);
 }
 button {
@@ -761,6 +777,8 @@ button {
     color:rgb(186, 186, 186);
 }
 .trade-succesful {
+    transition-delay: 0.3s;
+    transition: 0.7s;
     position:absolute;
     top:0;
     bottom:0;
