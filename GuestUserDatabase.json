@@ -1,0 +1,173 @@
+{
+  "favourites" : {
+    "-MoeQD9CK0ZjR6NrYuJj" : {
+      "change" : 29.684937,
+      "name" : "Tesla, Inc.",
+      "prevClose" : 1013.39,
+      "price" : 1043.075,
+      "symbol" : "TSLA"
+    },
+    "-MoeQS65gKKfrvPLl2_5" : {
+      "change" : 9.969898,
+      "name" : "Lucid Group, Inc.",
+      "prevClose" : 44.88,
+      "price" : 54.8499,
+      "symbol" : "LCID"
+    },
+    "-MoeRM6sKfbFuMFKS0ZB" : {
+      "change" : 0.035100013,
+      "name" : "Razer Inc.",
+      "prevClose" : 0.3249,
+      "price" : 0.36,
+      "symbol" : "RAZFF"
+    },
+    "-MoiZmRwtcYbG52b00zY" : {
+      "change" : 22.170166,
+      "name" : "Amazon.com, Inc.",
+      "prevClose" : 3540.7,
+      "price" : 3562.87,
+      "symbol" : "AMZN"
+    },
+    "-MooLVMUYEhQcg12V-rk" : {
+      "change" : 3.899994,
+      "name" : "Apple Inc.",
+      "prevClose" : 153.49,
+      "price" : 157.39,
+      "symbol" : "AAPL"
+    }
+  },
+  "funds" : 4486.807500000003,
+  "history" : {
+    "-MQpyGdSh6ciUFFnScjY" : {
+      "change" : -68.83002,
+      "name" : "Tesla, Inc.",
+      "prevClose" : 880.02,
+      "price" : 811.19,
+      "quantity" : 2,
+      "symbol" : "TSLA",
+      "timestamp" : "2021-01-12T09:41:51.615Z"
+    },
+    "-MQq3e5PJpOu6tEdGEl3" : {
+      "change" : 3.17,
+      "name" : "Churchill Capital Corp IV",
+      "prevClose" : 10.03,
+      "price" : 13.2,
+      "quantity" : 1,
+      "symbol" : "CCIV",
+      "timestamp" : "2021-01-12T10:09:44.625Z"
+    },
+    "-MQq4_66yG0WVG5xic03" : {
+      "change" : 5.4799995,
+      "key" : "-MQQdQNvCJXencSmu12n",
+      "name" : "Change Healthcare Inc.",
+      "prevClose" : 18.24,
+      "price" : 23.72,
+      "quantity" : 9,
+      "symbol" : "CHNG",
+      "timestamp" : "2021-01-12T10:13:46.346Z"
+    },
+    "-MQq4yXGfAURgPqYyBlz" : {
+      "change" : 5.4799995,
+      "key" : "-MQQdQNvCJXencSmu12n",
+      "name" : "Change Healthcare Inc.",
+      "prevClose" : 18.24,
+      "price" : 23.72,
+      "quantity" : 2,
+      "symbol" : "CHNG",
+      "timestamp" : "2021-01-12T10:15:30.485Z"
+    },
+    "-MQq5HX17jLh6piKsWtD" : {
+      "change" : -68.83002,
+      "key" : "-MQpyGdTgoojpEwfU6mT",
+      "name" : "Tesla, Inc.",
+      "prevClose" : 880.02,
+      "price" : 811.19,
+      "quantity" : 0,
+      "symbol" : "TSLA",
+      "timestamp" : "2021-01-12T10:16:52.387Z"
+    },
+    "-MQq5IMcD0KnZv5A3atQ" : {
+      "change" : -68.83002,
+      "key" : "-MQpyGdTgoojpEwfU6mT",
+      "name" : "Tesla, Inc.",
+      "prevClose" : 880.02,
+      "price" : 811.19,
+      "quantity" : -2,
+      "symbol" : "TSLA",
+      "timestamp" : "2021-01-12T10:16:55.963Z"
+    },
+    "-MR6Lq7PZtkiYlFxGG4A" : {
+      "change" : 5.4799995,
+      "key" : "-MQQdQNvCJXencSmu12n",
+      "name" : "Change Healthcare Inc.",
+      "prevClose" : 18.24,
+      "price" : 23.72,
+      "quantity" : 1,
+      "symbol" : "CHNG",
+      "timestamp" : "2021-01-15T18:42:44.928Z"
+    },
+    "-MS46UUSnv7WHnb4xAaa" : {
+      "change" : -4.184204,
+      "name" : "Tesla, Inc.",
+      "prevClose" : 883.09,
+      "price" : 878.9058,
+      "quantity" : 9,
+      "symbol" : "TSLA",
+      "timestamp" : "2021-01-27T18:32:07.393Z"
+    },
+    "-Moj2FAWjq4zu5oa4ois" : {
+      "change" : 6.799999,
+      "name" : "On Holding AG",
+      "prevClose" : 45.61,
+      "price" : 52.41,
+      "quantity" : "3",
+      "symbol" : "ONON",
+      "timestamp" : "2021-11-17T17:58:40.835Z"
+    },
+    "-Moj8PEwxuDSQFpXH8uV" : {
+      "change" : 8.98,
+      "name" : "On Holding AG",
+      "prevClose" : 45.61,
+      "price" : 54.59,
+      "quantity" : 20,
+      "symbol" : "ONON",
+      "timestamp" : "2021-11-17T18:25:34.561Z"
+    }
+  },
+  "portfolio" : {
+    "-MQpyGdTgoojpEwfU6mT" : {
+      "change" : -4.184204,
+      "key" : "-MQpyGdTgoojpEwfU6mT",
+      "name" : "Tesla, Inc.",
+      "prevClose" : 883.09,
+      "price" : 878.9058,
+      "quantity" : 1,
+      "symbol" : "TSLA"
+    },
+    "-MR-Sapt4rsipCkOaR6X" : {
+      "change" : 11.5,
+      "key" : "-MR-Sapt4rsipCkOaR6X",
+      "name" : "GameStop Corp.",
+      "prevClose" : 19.95,
+      "price" : 31.45,
+      "quantity" : 4,
+      "symbol" : "GME"
+    },
+    "-ModnufQ3wdyVV84G8aQ" : {
+      "change" : -0.29499817,
+      "name" : "The Coca-Cola Company",
+      "prevClose" : 56.62,
+      "price" : 56.325,
+      "quantity" : 1,
+      "symbol" : "KO"
+    },
+    "-Moj2FA_4wPhz_AFr67-" : {
+      "change" : 6.5099983,
+      "name" : "On Holding AG",
+      "prevClose" : 45.61,
+      "price" : 52.12,
+      "quantity" : 21,
+      "symbol" : "ONON"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+:root {
+	--primary-color: #51c6c2;
+	--primary-color-hover: #beebe3;
+	
+	--background-dark: #1d212e;
+	--background-dark2: #252831;
+	--background-grey: #2d333b;
+	--background-light: #263047;
+	--background-light-hover: #2f374e;
+
+	--red:#d33333;
+	--red-hover:#df4848;
+	--green:#24ae64;
+	--green-hover:#38c67a;
+
+	--green-dim:#24ae6493;
+	--red-dim:#d333339c;
+
+	--border-radius:6px;
+	--stock-padding:16px;
+  }
