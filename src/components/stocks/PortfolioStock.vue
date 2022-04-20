@@ -4,9 +4,9 @@
             <div class="stock">
                 <div class="info name"> {{ stock.name }}</div>
                 <!-- <div class="info"> {{ gains.toFixed(2) }}%</div> -->
+                <div class="info"> {{ stock.price | currency }}</div>
                 <div class="info" :class="{green: stock.change > 0, red: stock.change < 0 }" > {{ stock.change.toFixed(2) }}$</div>
-                <div class="info"> {{ stock.price.toFixed(2) }}$</div>
-                <div class="info"> {{ stock.prevClose.toFixed(2) }}$</div>
+                <div class="info"> {{ stock.prevClose | currency }}</div>
                 <div class="info smaller"> {{ stock.quantity }}</div>
                 <div class="info smaller" :class="{green: stock.change > 0, red: stock.change < 0 }"> {{ gains }}%</div>
                 <div class="info smaller"> {{ stock.symbol }}</div>
@@ -91,14 +91,15 @@ border-radius:var(--border-radius);
     font-size: 14px;
     display: flex;
     align-items: center;
+    font-weight: 300;
 }
 
 .name {
     width:275px;
     padding:0 8px;
     overflow: hidden;
-    font-size: 14px;
-    letter-spacing: 0.05rem;
+    font-size: 15px;
+    font-weight: 500;
 }
 .container:nth-child(odd) {
 }
@@ -110,7 +111,7 @@ button {
     border:none;
     font-size:12px;
     cursor:pointer;
-    padding:7px 10px;
+    padding:10px 17px;
     background:var(--background-dark);
 }
 

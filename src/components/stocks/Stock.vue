@@ -3,9 +3,9 @@
 
             <div class="stock">
                 <div class="info name" @click="viewStock(stock.symbol)"> {{ stock.name }}</div>
+                <div class="info"> {{ stock.price | currency }}</div>
                 <div class="info" :class="{green: stock.change > 0, red: stock.change < 0 }" > <span class="green" v-if="stock.change>0">+</span> {{ stock.change.toFixed(2) }}$</div>
-                <div class="info"> {{ stock.price.toFixed(2) }}$</div>
-                <div class="info"> {{ stock.prevClose.toFixed(2) }}$</div>
+                <div class="info"> {{ stock.prevClose | currency }}</div>
                 <div class="info"> {{ stock.symbol }}</div>
                 <div class="btn"><button @click="viewStock(stock.symbol)">Trade</button></div>
             </div>
@@ -86,14 +86,15 @@ export default {
     font-size: 14px;
     display: flex;
     align-items: center;
+    font-weight: 300;
 }
 .name {
     width:275px;
     padding:0 8px;
     overflow: hidden;
     cursor:pointer;
-    font-size: 14px;
-    letter-spacing: 0.05rem;
+    font-size: 15px;
+    font-weight: 500;
 }
 button {
     border-radius:5px;
@@ -101,7 +102,7 @@ button {
     border:none;
     font-size:12px;
     cursor:pointer;
-    padding:7px 10px;
+    padding:10px 17px;
     background:var(--background-dark);
     
 }

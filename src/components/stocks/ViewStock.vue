@@ -16,9 +16,9 @@
                             <span class="icon-container"> <i @click="add" class="fas fa-star" :class="{added: favourite }"></i>
                                 <span v-if="favourite" class="add-to-favourite"> In Favourites</span>
                                 <span v-if="!favourite" class="add-to-favourite"> Not in favourites</span>
+                                <p class="data-error" v-if="!(stock.summaryDetail.forwardPE.raw)">Stock is lacking price-data.</p>
                             </span >
                         </div>
-                        <p class="data-error" v-if="!(stock.summaryDetail.forwardPE.raw)">Stock is lacking price-data.</p>
                     </div>
                     <!-- STATISTICS -->
                     <div class="numbers-container">
@@ -500,14 +500,13 @@ export default {
         // style charts 
         const chartEl = document.getElementsByClassName('tv-lightweight-charts')
         chartEl[0].style.position = "absolute"
-        chartEl[0].style.top = "290px"
+        chartEl[0].style.border = "none"
+        chartEl[0].style.top = "297px"
         chartEl[0].style.left = "0px"
         chartEl[0].style.right = "0px"
         chartEl[0].style.marginLeft = "auto"
         chartEl[0].style.marginRight = "auto"
         chartEl[0].style.width = "900px" // same height here as when defined
-        chartEl[0].style.borderTopRightRadius = "5px"
-        chartEl[0].style.borderTopLeftRadius = "5px"
         chartEl[0].style.visibility = "hidden"
 
         //* FETCH PRICE DATA
@@ -562,13 +561,20 @@ export default {
 .data-error {
     font-size:15px;
     margin:0;
+    margin-left:10px;
     font-weight: 300;
     color:var(--red);
+    display:inline-block;
 }
 .container2 {
     display:flex;
-    padding-left:5px;
-    padding-right:5px;
+    padding:12px;
+    padding-top:15px;
+    padding-bottom:11px;
+    background:rgb(19 27 37);
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+
 }
 .testDiv {
     width:300px;
@@ -592,9 +598,8 @@ export default {
     background: rgb(19 27 37);
     border-bottom-left-radius:var(--border-radius);
     border-bottom-right-radius:var(--border-radius);
-    margin-top:469px;
-    padding:15px 0;
-    padding-bottom:10px;
+    margin-top:450px;
+    padding:10px 0;
 }
 .top-content {
     display:flex;
@@ -616,12 +621,12 @@ export default {
 
 }
 .stockname {
-    font-size: 32px;
-    margin-top:3px;
+    font-size: 31px;
+    margin-top:-6px;
 }
 .stockprice {
     margin-top:2px;
-    font-size:30px;
+    font-size:29px;
 }
 .up {
     margin-right:-5px;

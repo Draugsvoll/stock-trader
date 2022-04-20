@@ -11,7 +11,7 @@ import './assets/global.css'
 
 // a global filter
 Vue.filter('currency', (value) => {
-  return '$' + value.toLocaleString( undefined, { maximumFractionDigits: 2 })
+  return '$' + value.toLocaleString( undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })
 })
 
 let app = ''

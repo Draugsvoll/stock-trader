@@ -42,8 +42,8 @@
         <!-- TAGS -->
         <div class="tags" v-if="stocks != ''" >
                 <div class="tag name" @click="sortByLetter">Name</div>
-                <div class="tag" @click="sortByChange">24h Change</div>
                 <div class="tag" @click="sortByPrice">Market Price</div>
+                <div class="tag" @click="sortByChange">24h Change</div>
                 <div class="tag" @click="sortByClose">Prev. Close</div>
                 <div class="tag smaller" @click="sortByQuantity">Quantity</div>
                 <div class="tag smaller" @click="sortByGains">Gains</div>
@@ -55,7 +55,7 @@
         </div>
 
         <!-- COLUMN CHART -->
-        <p class="header" v-if="stocks != ''"  >Gains Tracker </p>
+        <p class="header" v-if="stocks != ''"  >Percentage Gains </p>
         <div v-if="!emptyPortfolio" class="column">
                 <!-- GainColumn -->
                 <GChart
@@ -84,8 +84,8 @@
                 <div class="history-container">
                     <div class="info name"> {{ purchase.name }} </div>
                     <div class="info"> {{ purchase.quantity }} </div>
-                    <div class="info"> {{ purchase.price }} </div>
-                    <div class="info"> {{ (purchase.price * purchase.quantity).toFixed(2) }} </div>
+                    <div class="info"> {{ purchase.price | currency }} </div>
+                    <div class="info"> {{ (purchase.price * purchase.quantity) | currency }} </div>
                     <div class="info date"> {{ purchase.timestamp.replace(/[TZ]/g, ' ').split('.').reverse().pop() }} </div>
                 </div>
             </div>
@@ -127,7 +127,7 @@ export default {
             },
             // COLUMN CHART
             chartOptionsColumn: {
-                title: 'Percentage Gains %',
+                title: '',
                 tooltip: {trigger: 'both'},
                 selectionMode: 'multiple',
                 colors: ['rgb(32, 111, 158)'],
@@ -525,7 +525,7 @@ p {
     margin:auto;
     width:900px;
     display: flex;
-    padding:20px;
+    padding:23px;
     padding-left:24px;
 }
 .asd:last-child .history-container {

@@ -37,8 +37,8 @@
     <!-- TAGS -->
     <div class="tags" >
       <div class="tag name" @click="sortByLetter">Name</div>
-      <div class="tag" @click="sortByChange">24h Change</div>
       <div class="tag" @click="sortByPrice">Market Price</div>
+      <div class="tag" @click="sortByChange">24h Change</div>
       <div class="tag" @click="sortByClose">Prev. Close</div>
       <div class="tag">Symbol</div>
       <div class="empty"><button>Trade</button></div>
