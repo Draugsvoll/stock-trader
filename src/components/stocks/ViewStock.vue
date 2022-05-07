@@ -17,6 +17,7 @@
                                 <span v-if="favourite" class="add-to-favourite"> In Favourites</span>
                                 <span v-if="!favourite" class="add-to-favourite"> Not in favourites</span>
                                 <p class="data-error" v-if="!(stock.summaryDetail.forwardPE.raw)">Stock is lacking price-data.</p>
+                                <p class="data-error" v-if="renderError"> Error rendering.</p>
                             </span >
                         </div>
                     </div>
@@ -24,7 +25,7 @@
                     <div class="numbers-container">
                         <div class="numbers">
                             <div class="number" ><div class="tag">Market Cap</div> <span class="tag-price">${{ stock.price.marketCap.fmt }}  </span> </div>
-                            <div class="number" ><div class="tag">PE/Ratio</div> <span v-if="stock.summaryDetail.forwardPE.raw" class="tag-price">${{ stock.summaryDetail.forwardPE.raw.toFixed(2) }}  </span>  </div>
+                            <div class="number" ><div class="tag">PE/Ratio</div> <span v-if="stock.summaryDetail.forwardPE.raw" class="tag-price">{{ stock.summaryDetail.forwardPE.raw.toFixed(2) }}  </span>  </div>
                             <div class="number" ><div class="tag">Daily Volume</div> <span class="tag-price">${{ stock.price.averageDailyVolume10Day.longFmt }} </span>  </div>
                         </div>
                         <div class="numbers">
@@ -104,7 +105,7 @@
         <div ref="buyModal" class="modal" v-if="showBuyModal">
             <div class="modal-content">
                 <p class="buy-text" >
-                    Buy {{ this.toBuy }} stocks of {{ stock.quoteType.longName }}? <br> <br>
+                    Buy {{ this.toBuy }} stocks of <span class="modal-stockname">{{ stock.quoteType.longName }}</span> ? <br> <br>
                 </p>
                 Total price: {{ buyPrice | currency }}
             </div>
@@ -118,7 +119,7 @@
         <div class="modal" v-if="showSellModal">
                 <div class="modal-content">
                 <p class="buy-text">
-                    Sell {{ this.toSell }} stocks of {{ stock.quoteType.longName }}? <br> <br>
+                    Sell {{ this.toSell }} stocks of <span class="modal-stockname">{{ stock.quoteType.longName }}</span> ? <br> <br>
                 </p>
                 Total price: {{ sellPrice | currency }}
             </div>
@@ -162,7 +163,8 @@ export default {
             funds:0,
             toSell:1,
             toBuy:1,
-            tradeSuccesful: false
+            tradeSuccesful: false,
+            renderError: false,
         }
     },
     components: {
@@ -228,6 +230,8 @@ export default {
             }
             else {
                 this.showSellModal = true
+                let el = this.$refs.topOfSite
+                el.scrollIntoView({behavior: 'smooth'});
             }
         },
         add () {
@@ -385,7 +389,7 @@ export default {
             }}
             axios.request(options).then(function (response) {
                 const stock = response.data
-                // console.log('the stock ', stock)
+                console.log('the stock ', stock)
                 ref.stock = stock
             }).catch(function (error) {
                 console.error(error);
@@ -501,7 +505,7 @@ export default {
         const chartEl = document.getElementsByClassName('tv-lightweight-charts')
         chartEl[0].style.position = "absolute"
         chartEl[0].style.border = "none"
-        chartEl[0].style.top = "297px"
+        chartEl[0].style.top = "299px"
         chartEl[0].style.left = "0px"
         chartEl[0].style.right = "0px"
         chartEl[0].style.marginLeft = "auto"
@@ -526,8 +530,6 @@ export default {
         axios.request(options).then(function (response) {
             timeStamps = response.data.chart.result[0].timestamp
             priceData = response.data.chart.result[0].indicators.quote[0].close
-            // console.log('timestamps ', timeStamps)
-            // console.log('prices ', priceData)
             // format timestamps
             timeStamps.forEach( timestamp => {
                 timeStampsFormatted.push(new Date(timestamp * 1000).toLocaleString().split(',')[0].split('.'))
@@ -549,6 +551,8 @@ export default {
             chartEl[0].style.visibility = "visible"
         }).catch(function (error) {
             console.error(error);
+            ref.renderError = true
+            chartEl[0].style.visibility = "visible"
         })
         // end fetch price data
 
@@ -558,6 +562,9 @@ export default {
 </script>
 
 <style css scoped>
+* {
+    transition:0.2s;
+}
 .data-error {
     font-size:15px;
     margin:0;
@@ -569,8 +576,8 @@ export default {
 .container2 {
     display:flex;
     padding:12px;
-    padding-top:15px;
-    padding-bottom:11px;
+    padding-top:18px;
+    padding-bottom:13px;
     background:rgb(19 27 37);
     border-top-left-radius: var(--border-radius);
     border-top-right-radius: var(--border-radius);
@@ -612,21 +619,26 @@ export default {
     width: fit-content;
     height: fit-content;
     margin: 0 0;
+    margin-left:4px;
+    margin-top:2px;
     max-width: 405px;
+    margin-left:5px;
 }
 .headline {
-    letter-spacing: 1px;
+    letter-spacing: 0.02rem;
     font-size: 28px;
     font-weight: 300;
 
 }
 .stockname {
-    font-size: 31px;
+    font-size: 28px;
+    /* font-weight: 400; */
     margin-top:-6px;
 }
 .stockprice {
     margin-top:2px;
-    font-size:29px;
+    font-size:24px;
+    font-weight: 400;
 }
 .up {
     margin-right:-5px;
@@ -638,6 +650,7 @@ export default {
 }
 i {
     color:grey;
+    transition:0.2s;
 }
 i:hover {
     color:rgb(165, 165, 165);
@@ -713,7 +726,13 @@ input[type=number]::-webkit-outer-spin-button {
     margin-right:-2px;
     opacity: 0.35;
     height:50px;
+
+    -moz-margin-left:20px;
+    -moz-margin-right:-2px;
+    -moz-opacity: 0.35;
+    -moz-height:50px;
 }
+
 .total-price input[type=number]::-webkit-inner-spin-button,
 .total-price input[type=number]::-webkit-outer-spin-button {
     display:none;
@@ -744,7 +763,7 @@ input[type=number]::-webkit-outer-spin-button {
     flex-direction: column;
     font-size: 1rem;
     width:120px;
-    border-top:1px solid #51c6c2ea;
+    border-top:1px solid var(--primary-color);
     border-bottom:1px solid #51c6c2ea;
     padding:4px 3px;
     margin-bottom:7px;
@@ -835,8 +854,11 @@ h2 {
     display: flex;
     flex-direction: column;
     background: var(--background-grey);
-    border-left:2px solid var(--primary-color);
+    border-left:1px solid var(--primary-color);
     border-radius: var(--border-radius);
+}
+.modal-stockname {
+    color:var(--primary-color);
 }
 .modal-content {
     margin:25px auto;
@@ -845,7 +867,7 @@ h2 {
 }
 .buy-text {
     text-align: center;
-    font-size: 22px;
+    font-size: 18px;
     margin-top:0;
 }
 .modal-button {
@@ -861,8 +883,12 @@ h2 {
     transition: 0.2s;
     width:115px;
     border:2px solid rgba(0,0,0,0);
+    font-weight: 400;
 }
-
+.btn-buy:hover {
+    background:rgba(0,0,0,0);
+    border:2px solid var(--primary-color);
+}
 .btn-cancel {
     background:rgba(0,0,0,0);
     border:2px solid var(--red);
@@ -894,7 +920,7 @@ h2 {
     font-size:14px;
     font-weight: 100;
     text-align: justify;
-    letter-spacing: 1px;
+    /* letter-spacing: 1px; */
 }
 
 .container1 {
@@ -910,13 +936,13 @@ h2 {
     flex-wrap: wrap;
 }
 .tag {
-    font-size: 14px;
+    font-size: 13px;
     width:100px;
     margin-bottom:1px;
     color:rgb(175, 175, 175);
 }
 .tag-price {
-    letter-spacing: 1px;
+    /* letter-spacing: 1px; */
     font-size:17px;
 }
 .price {
