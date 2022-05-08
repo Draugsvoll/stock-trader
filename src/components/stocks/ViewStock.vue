@@ -628,7 +628,6 @@ export default {
     letter-spacing: 0.02rem;
     font-size: 28px;
     font-weight: 300;
-
 }
 .stockname {
     font-size: 28px;

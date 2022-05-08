@@ -212,7 +212,7 @@ p {
 .text {
     margin:20px auto;
     max-width:700px;
-    letter-spacing: 1px;
+    letter-spacing: 0.05rem;
     font-weight: 100;
 }
 .sum {

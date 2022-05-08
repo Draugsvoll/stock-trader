@@ -510,6 +510,10 @@ p {
     display: flex ;
     align-items: center;
 }
+.date {
+    font-weight: 300;
+    color: rgb(240, 240, 240);
+}
 .history-tags {
     text-align: left;
     padding:5px;

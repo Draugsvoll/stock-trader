@@ -11,7 +11,7 @@
         <div class="card-container">
             <div class="card left">
                 <p class="card-title">
-                    Create User
+                    Create Account
                 </p>
                 <i class="fas fa-user-circle logo"></i>
                 <ul>
@@ -164,6 +164,7 @@ a {
 .sub-header{
     font-size: 28px;
     margin:0;
+    margin-top:15px;
     font-weight: 100;
 }
 .text {
@@ -171,7 +172,7 @@ a {
     font-size: 17px;
     text-align: center;
     margin:0 auto;
-    letter-spacing: 1px;
+    letter-spacing: 0.05rem;
     color:var(--primary-color);
 }
 .text:hover {
@@ -198,8 +199,8 @@ a {
 }
 .card-title {
     text-align: center;
-    font-size: 22px;
-    font-weight: 500;
+    font-size: 23px;
+    font-weight: 300;
     margin:0;
 }
 ul {
@@ -212,7 +213,7 @@ li {
 }
 .logo {
     color:rgb(199, 225, 231);
-    font-size: 80px;
+    font-size: 70px;
     margin:15px auto;
     margin-bottom:0;
     width:100%;

@@ -9,7 +9,7 @@
                 <div class="info"> {{ stock.prevClose | currency }}</div>
                 <div class="info smaller"> {{ stock.quantity }}</div>
                 <div class="info smaller" :class="{green: stock.change > 0, red: stock.change < 0 }"> {{ gains }}%</div>
-                <div class="info smaller"> {{ stock.symbol }}</div>
+                <div class="info smaller ticker"> {{ stock.symbol }}</div>
                 <div class="btn"><button @click="viewStock(stock.symbol)">Trade</button></div>
             </div>
             
@@ -91,9 +91,12 @@ border-radius:var(--border-radius);
     font-size: 14px;
     display: flex;
     align-items: center;
-    font-weight: 300;
+    font-weight: 400;
 }
-
+.ticker {
+    font-size: 13px;
+    margin-top:2px;
+}
 .name {
     width:275px;
     padding:0 8px;
@@ -114,5 +117,7 @@ button {
     padding:10px 17px;
     background:var(--background-dark);
 }
-
+button:hover {
+    background:var(--background-light);
+}
 </style>
