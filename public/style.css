@@ -54,7 +54,7 @@ footer{
   margin:4px;
   margin-left:0px;
   color:rgb(244, 244, 244);
-  font-size: 13.5px !important;
+  font-size: 13px !important;
 }
 
 .footer-headline {
@@ -72,7 +72,7 @@ a:hover {
   color:rgb(229, 235, 238);
 }
 .column {
-    margin:18px;
+    margin:15px;
 }
 
 @media only screen and (max-width: 605px) {

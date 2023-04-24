@@ -5,7 +5,7 @@
 	--background-dark: #20242f;
 	--background-dark2: #252831;
 	--background-grey: #2d333b;
-	--background-light: #263047;
+	--background-light: #283146;
 	--background-light-hover: #2f374e;
 
 	--red:#d33333;
@@ -16,6 +16,6 @@
 	--green-dim:#24ae6493;
 	--red-dim:#d333339c;
 
-	--border-radius:6px;
+	--border-radius:4px;
 	--stock-padding:13px;
   }

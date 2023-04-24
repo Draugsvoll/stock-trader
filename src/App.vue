@@ -53,7 +53,9 @@ html, body{
 }
 .copyright {
     font-size:0.7rem;
-
+}
+.copyright a {
+  color:rgb(228, 223, 223);
 }
 .footer-headline {
   font-size: 0.8rem;

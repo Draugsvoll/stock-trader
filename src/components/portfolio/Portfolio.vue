@@ -110,7 +110,7 @@ export default {
             // PIE-CHART
             chartOptionsPie: {
                 title:'',
-                backgroundColor:'#263047',
+                backgroundColor:'transparent',
                 is3D: true,
                     'width':850,
                     'height':300,
@@ -137,7 +137,7 @@ export default {
                 vAxis: {
                     textStyle:{color: 'white'}
                 },
-                backgroundColor:'#263047',
+                backgroundColor:'transparent',
                 'width':850,
                 'height':400,
                 bar: {
@@ -416,7 +416,6 @@ export default {
     width:900px;
     background:var(--background-light);
     border-radius: var(--border-radius);
-    border-left:2px solid var(--primary-color);
 }
 .column {
     display: flex;
@@ -428,7 +427,6 @@ export default {
     padding:5px;
     background:var(--background-light);
     border-radius: var(--border-radius);
-    border-left:2px solid var(--primary-color);
 }
 .assets {
     display: flex;

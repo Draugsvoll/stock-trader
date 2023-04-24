@@ -134,7 +134,7 @@ export default {
   overflow: hidden;
   text-align: center;
   padding:20px 0;
-  background-color: #081524;
+  background-color: #0a1828;
   font-size: 12px;
   font-weight: 600;
   color: #f2f2f2;
