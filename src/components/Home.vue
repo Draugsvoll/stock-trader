@@ -162,7 +162,7 @@ export default {
 }
 .header {
     color:var(--primary-color);
-    font-size: 25px;
+    font-size: 21px;
     margin-bottom:10px;
     text-align: center;
 }
@@ -214,6 +214,8 @@ p {
     max-width:700px;
     letter-spacing: 0.05rem;
     font-weight: 100;
+    font-size: 0.87rem;
+    line-height:1.1;
 }
 .sum {
     font-size: 27px;

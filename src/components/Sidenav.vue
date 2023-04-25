@@ -134,11 +134,10 @@ export default {
   overflow: hidden;
   text-align: center;
   padding:20px 0;
-  background-color: #0a1828;
+  background-color: var(--background-light);
   font-size: 12px;
   font-weight: 600;
   color: #f2f2f2;
-  border-bottom: 1px solid #222;
 }
 #sidebar .list-items{
   position: relative;

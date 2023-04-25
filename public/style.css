@@ -49,12 +49,13 @@ footer{
     justify-content: space-evenly;
     width:100%;
     flex-wrap: wrap;
+    letter-spacing:0.01rem;
 }
 .link {
-  margin:4px;
+  margin:2px;
   margin-left:0px;
   color:rgb(244, 244, 244);
-  font-size: 13px !important;
+  font-size: 0.77rem !important;
 }
 
 .footer-headline {

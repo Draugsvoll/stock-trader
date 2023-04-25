@@ -59,7 +59,7 @@ export default {
  }
  header {
     font-size:1rem;
-    padding:1.2rem;
+    padding:1.35rem;
     background:var(--background-light);
     z-index:5;
 }

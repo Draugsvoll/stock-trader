@@ -7,7 +7,7 @@
             <div class="assets">
                 <div class="asset-card">
                     <p class="sum" >{{ totalStockValue + funds | currency }}</p> 
-                    <p > Total assets   </p> 
+                    <p class="value"> Total assets   </p> 
                 </div>
                 <div class="asset-card">
                     <p class="sum" > {{ totalStockValue | currency }}</p> 
@@ -385,6 +385,11 @@ export default {
 
 
 <style scoped>
+.value {
+    color:rgb(234, 230, 230);
+    font-size: 0.9rem;
+    margin-top:6px;
+}
 .headline {
     font-size:32px;
     text-align: center;
@@ -440,7 +445,6 @@ export default {
     border-left:2px solid var(--primary-color);
 }
 .asset-card > p {
-    font-size:15px;
 }
 .sum {
     font-size: 24px !important;
