@@ -24,7 +24,7 @@
 
             <div class="card right">
                 <p class="card-title">
-                    Login As Guest
+                    Guest User
                 </p>
                 <i class="fas fa-user-secret logo"></i>
                 <ul>
@@ -75,7 +75,7 @@ export default {
             firebase.auth().signInWithEmailAndPassword('test_user@gmail.com', 'pass123')
                 .then( resp => {
                     // console.log(resp)
-                    window.location.href = `/`
+                    window.location.href = `/portfolio`
                 })
                 .catch( err => {
                     alert('Wrong username/password' + err)
@@ -97,7 +97,7 @@ export default {
             firebase.auth().signInWithEmailAndPassword(this.email, this.password)
                 .then( resp => {
                     // console.log(resp)
-                    window.location.href = `/`
+                    window.location.href = `/portfolio`
                 })
                 .catch( err => {
                     alert('Wrong username/password' + err)
@@ -199,8 +199,8 @@ a {
 }
 .card-title {
     text-align: center;
-    font-size: 23px;
-    font-weight: 300;
+    font-size: 17px;
+    font-weight: 400;
     margin:0;
 }
 ul {
@@ -208,8 +208,8 @@ ul {
     margin:25px auto;    
 }
 li {
-    margin:10px auto;
-    font-size: 14px;
+    margin:0.55rem auto;
+    font-size: 0.85rem;
 }
 .logo {
     color:rgb(199, 225, 231);
@@ -296,13 +296,15 @@ button {
     margin:0 auto;
     background-color: var(--primary-color);
     border:none;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     padding:0.6rem 1.2rem;
     border-radius: 4px;
     color:white;
     cursor:pointer;
     transition: 0.2s;
     width:115px;
+    letter-spacing: 0.06rem;
+    font-weight: 600;
 }
 .signup {
     background:rgba(0,0,0,0);
@@ -317,5 +319,10 @@ button {
 }
 .login {
     border:2px solid rgba(0,0,0,0);
+}
+@media screen and (min-height: 1050px) {
+    .outer-container {
+        padding-top:16vh;
+    }
 }
 </style>

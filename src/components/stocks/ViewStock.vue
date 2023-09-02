@@ -87,7 +87,7 @@
 
         <!-- STOCK SUMMARY -->
         <div class="summary-card">
-            <h2 class="header">About {{stock.quoteType.longName}} </h2>
+            <h2 class="header">{{stock.quoteType.longName}} </h2>
             <div class="summary"> {{ stock.assetProfile.longBusinessSummary }}</div>
             <div class="info">
                 <div> <p class="line">{{ stock.assetProfile.country }}, {{ stock.assetProfile.city }} </p> </div>
@@ -385,7 +385,7 @@ export default {
             params: {symbol: this.symbol, region: 'US'},
             headers: {
                 'x-rapidapi-host': 'yh-finance.p.rapidapi.com',
-                'x-rapidapi-key': '1660860218msh9ed4fea2bd1c6bep1a1c59jsnfe88dd4d5712'
+                'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8'
             }}
             axios.request(options).then(function (response) {
                 const stock = response.data
@@ -525,7 +525,7 @@ export default {
         params: {interval: '1d', symbol: ref.symbol, range: '1y', region: 'US'},
         headers: {
             'x-rapidapi-host': 'yh-finance.p.rapidapi.com',
-            'x-rapidapi-key': '1660860218msh9ed4fea2bd1c6bep1a1c59jsnfe88dd4d5712'
+            'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8'
         }}
         axios.request(options).then(function (response) {
             timeStamps = response.data.chart.result[0].timestamp
@@ -988,8 +988,8 @@ button {
 }
 .line {
     margin:2px;
-    font-size: 0.85rem;
-    color:rgb(186, 186, 186);
+    font-size: 0.78rem;
+    color:rgb(206, 206, 206);
 }
 .trade-succesful {
     transition-delay: 0.3s;

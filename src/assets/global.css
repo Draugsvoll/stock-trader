@@ -2,11 +2,11 @@
 	--primary-color: #51c6c2;
 	--primary-color-hover: #beebe3;
 	
-	--background-dark: #20242f;
+	--background-dark: #1e222e;
 	--background-dark2: #252831;
 	--background-grey: #2d333b;
-	--background-light: #2a364d;
-	--background-light-hover: #273247;
+	--background-light: #242f43;
+	--background-light-hover: rgb(39, 50, 70);
 
 	--red:#d33333;
 	--red-hover:#df4848;
@@ -17,5 +17,5 @@
 	--red-dim:#d333339c;
 
 	--border-radius:4px;
-	--stock-padding:13px;
+	--stock-padding:14px;
   }

@@ -205,7 +205,7 @@ export default {
         params: {symbol: symbol, region: 'US'},
         headers: {
           'x-rapidapi-host': 'yh-finance.p.rapidapi.com',
-          'x-rapidapi-key': '1660860218msh9ed4fea2bd1c6bep1a1c59jsnfe88dd4d5712'
+          'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8'
         }};
       axios.request(options).then(function (response) {
         const data = response.data;
@@ -232,7 +232,7 @@ export default {
         params: {q: this.searchTerm, region: 'US'},
         headers: {
           'x-rapidapi-host': 'yh-finance.p.rapidapi.com',
-          'x-rapidapi-key': '1660860218msh9ed4fea2bd1c6bep1a1c59jsnfe88dd4d5712'
+          'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8'
         }};
       axios.request(options).then(function (response) {
         console.log(response.data.quotes[0]);
@@ -339,7 +339,7 @@ export default {
 }
 .btn-row button {
   font-size: 0.87rem;
-  padding: 12px 0;
+  padding: 0.83rem 0;
   border: none;
   cursor: pointer;
   width: 208px;
@@ -347,6 +347,7 @@ export default {
   background: #373e41d4;
   color:white;
   letter-spacing: 1px;
+  transition: all 0.15s;
 }
 .btn-row button:last-child {
   border-top-right-radius: var(--border-radius);

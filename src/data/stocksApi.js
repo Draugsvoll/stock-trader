@@ -59,7 +59,7 @@ export function get500 () {
         params: {region: 'US', symbols: 'AAPL, MSFT, AMZN, TSLA, GOOGL, FB, GOOG, NVDA, JPM, JNJ, UNH, HD, BAC, PG, MA, DIS, ADBE, NFLX, PYPL, CRM, XOM, CMCSA, PFE'},
         headers: {
           'x-rapidapi-host': 'yh-finance.p.rapidapi.com',
-          'x-rapidapi-key': '1660860218msh9ed4fea2bd1c6bep1a1c59jsnfe88dd4d5712'
+          'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8'
     }};
     axios.request(options).then(function (response) {
         const returnedStocks = response.data.quoteResponse.result
@@ -111,7 +111,7 @@ export function getTrending () {
     params: {region: 'US'},
     headers: {
         'x-rapidapi-host': 'yh-finance.p.rapidapi.com',
-        'x-rapidapi-key': '1660860218msh9ed4fea2bd1c6bep1a1c59jsnfe88dd4d5712'
+        'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8'
     }
     };
 
@@ -164,7 +164,7 @@ export function getNews () {
         params: {uuid: '9803606d-a324-3864-83a8-2bd621e6ccbd', region: 'US'},
         headers: {
             'x-rapidapi-host': 'yh-finance.p.rapidapi.com',
-            'x-rapidapi-key': '1660860218msh9ed4fea2bd1c6bep1a1c59jsnfe88dd4d5712'
+            'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8'
         }
       };
       
