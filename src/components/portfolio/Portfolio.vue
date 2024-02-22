@@ -386,9 +386,10 @@ export default {
 
 <style scoped>
 .value {
-    color:rgb(234, 230, 230);
-    font-size: 0.9rem;
+    color:rgb(243, 242, 242);
+    font-size: 0.85rem;
     margin-top:6px;
+    letter-spacing: var(--letter-spacing-small);
 }
 .headline {
     font-size:32px;

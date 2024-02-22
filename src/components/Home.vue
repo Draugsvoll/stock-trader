@@ -193,7 +193,7 @@ span {
     border-left:2px solid var(--primary-color);
     border-radius: var(--border-radius);
     margin: 0px auto;
-    margin-top:75px;
+    margin-top:13vh;
     text-align: justify;
     padding:22px;
     width: 750px;
