@@ -59,9 +59,10 @@ export default {
  }
  header {
     font-size:1rem;
-    padding:1.4rem;
+    padding:1.5rem;
     background:var(--background-light);
     z-index:5;
+    letter-spacing: var(--letter-spacing-small);
 }
 .header-title {
     text-decoration: none; 

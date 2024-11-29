@@ -412,6 +412,7 @@ h2 {
   cursor: pointer;
   padding: 0.7rem 1.2rem;
   border-radius: 5px;
+  letter-spacing: var(--letter-spacing-small);
 }
 .search:hover {
   background:var(--background-light-hover);

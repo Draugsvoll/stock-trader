@@ -188,7 +188,8 @@ a {
 .card{
     width:400px;
     background:var(--background-light);
-    border-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
     padding:25px;
     letter-spacing: 1px;
     transition:0.35s;

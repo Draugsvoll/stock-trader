@@ -109,7 +109,7 @@ export default {
   width:64px;
   overflow: hidden;
   left:0px;
-  top:135px;
+  top:20vh;
   transition: all 0.4s ease;
   border-top-right-radius: var(--border-radius);
   border-bottom-right-radius: var(--border-radius);

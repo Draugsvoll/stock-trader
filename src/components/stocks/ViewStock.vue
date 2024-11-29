@@ -17,7 +17,7 @@
                                 <span v-if="favourite" class="add-to-favourite"> In Favourites</span>
                                 <span v-if="!favourite" class="add-to-favourite"> Not in favourites</span>
                                 <p class="data-error" v-if="!(stock.summaryDetail.forwardPE.raw)">Stock is lacking price-data.</p>
-                                <p class="data-error" v-if="renderError"> Error rendering.</p>
+                                <p class="data-error" v-if="renderError"> Error rendering price graph.</p>
                             </span >
                         </div>
                     </div>
@@ -441,7 +441,7 @@ export default {
             width: 900,
             height: 450,
             layout: {
-                backgroundColor: 'rgba(0, 0, 0, 0.45)',
+                backgroundColor: '#111318',
                 textColor: '#d1d4dc',
             },
             rightPriceScale: {
@@ -575,13 +575,13 @@ export default {
 }
 .container2 {
     display:flex;
-    padding:12px;
-    padding-top:18px;
-    padding-bottom:13px;
-    background:rgb(19 27 37);
+    padding:14px;
+    padding-top:24px;
+    padding-bottom:0px;
+    background: #111318;
     border-top-left-radius: var(--border-radius);
     border-top-right-radius: var(--border-radius);
-
+    letter-spacing: var(--letter-spacing-small);
 }
 .testDiv {
     width:300px;
@@ -623,9 +623,9 @@ export default {
     margin-top:2px;
     max-width: 405px;
     margin-left:5px;
+    letter-spacing: var(--letter-spacing-small);
 }
 .headline {
-    letter-spacing: 0.02rem;
     font-size: 28px;
     font-weight: 300;
 }
@@ -731,6 +731,15 @@ input[type=number]::-webkit-outer-spin-button {
     -moz-opacity: 0.35;
     -moz-height:50px;
 }
+input[type="number"] {
+    -moz-appearance: textfield; /* Hides the spin buttons in Firefox */
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none; /* Hides the spin buttons in WebKit-based browsers like Chrome, Brave, Edge */
+    margin: 0; /* Removes additional margin */
+}
 
 .total-price input[type=number]::-webkit-inner-spin-button,
 .total-price input[type=number]::-webkit-outer-spin-button {
@@ -765,7 +774,7 @@ input[type=number]::-webkit-outer-spin-button {
     border-top:1px solid var(--primary-color);
     border-bottom:1px solid #51c6c2ea;
     padding:4px 3px;
-    margin-bottom:7px;
+    margin-bottom:11px;
 }
 
 .input-container {
@@ -780,6 +789,7 @@ input {
     font-size:16px;
     width:100%;
     text-align:right;
+    padding-right: 1rem;
 }
 .buy .input:hover {
     border:1px solid var(--green-dim);
@@ -909,6 +919,7 @@ h2 {
     margin:80px auto;
     margin-bottom:175px;
     background: rgb(19 27 37);
+    letter-spacing: var(--letter-spacing-small);
 
     padding:35px 45px;
     border-radius: var(--border-radius);
@@ -916,7 +927,8 @@ h2 {
 }
 .summary {
     margin:30px auto;
-    font-size:14px;
+    line-height: 1.3;
+    font-size: 0.95rem;
     font-weight: 100;
     text-align: justify;
     /* letter-spacing: 1px; */
@@ -988,7 +1000,7 @@ button {
 }
 .line {
     margin:2px;
-    font-size: 0.78rem;
+    font-size: 0.82rem;
     color:rgb(206, 206, 206);
 }
 .trade-succesful {
