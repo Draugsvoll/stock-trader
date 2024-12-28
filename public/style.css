@@ -35,6 +35,10 @@ footer{
   font-size:25px;
   color: white;
 }
+.icons a {
+  pointer-events: none;
+}
+
 .copyright {
     display: flex;
     justify-content: center;

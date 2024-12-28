@@ -12,7 +12,6 @@
 
 <script>
 import Header2 from "./components/Header2";
-import axios from 'axios'
 
 export default {
   components: {
@@ -37,6 +36,7 @@ html, body{
 
 .page-container {
   min-height: 350px;
+  min-height: 90vh;
   margin-left: 50px;
   margin-right: 50px;
   margin-bottom: 25px;
@@ -55,7 +55,10 @@ html, body{
     font-size:0.7rem;
 }
 .copyright a {
-  color:rgb(225, 219, 219);
+  color:rgb(187, 185, 185);
+}
+.copyright a:hover {
+  filter:brightness(1.15);
 }
 .footer-headline {
   font-size: 0.8rem;

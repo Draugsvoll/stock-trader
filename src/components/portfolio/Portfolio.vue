@@ -386,9 +386,10 @@ export default {
 
 <style scoped>
 .value {
-    color:rgb(234, 230, 230);
-    font-size: 0.9rem;
+    color:rgb(243, 242, 242);
+    font-size: 0.85rem;
     margin-top:6px;
+    letter-spacing: var(--letter-spacing-small);
 }
 .headline {
     font-size:32px;
@@ -441,7 +442,8 @@ export default {
     background:var(--background-light);
     width:200px;
     padding:17px;
-    border-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
     border-left:2px solid var(--primary-color);
 }
 .asset-card > p {
